@@ -48,6 +48,7 @@
 		631AF3EC2C4FC82E00DFD63C /* VremeniUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VremeniUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		631AF3F02C4FC82E00DFD63C /* VremeniUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VremeniUITests.swift; sourceTree = "<group>"; };
 		631AF3F22C4FC82E00DFD63C /* VremeniUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VremeniUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		631AF3FF2C4FD6E800DFD63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +99,7 @@
 		631AF3CF2C4FC82C00DFD63C /* Vremeni */ = {
 			isa = PBXGroup;
 			children = (
+				631AF3FF2C4FD6E800DFD63C /* Info.plist */,
 				631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */,
 				631AF3D22C4FC82C00DFD63C /* ContentView.swift */,
 				631AF3D42C4FC82D00DFD63C /* Assets.xcassets */,
@@ -433,6 +435,7 @@
 				DEVELOPMENT_TEAM = ZFH6DW7S4P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Vremeni/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -467,6 +470,7 @@
 				DEVELOPMENT_TEAM = ZFH6DW7S4P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Vremeni/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
