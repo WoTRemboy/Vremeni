@@ -1,0 +1,614 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		631AF3D12C4FC82C00DFD63C /* VremeniApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */; };
+		631AF3D32C4FC82C00DFD63C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3D22C4FC82C00DFD63C /* ContentView.swift */; };
+		631AF3D52C4FC82D00DFD63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 631AF3D42C4FC82D00DFD63C /* Assets.xcassets */; };
+		631AF3D82C4FC82D00DFD63C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 631AF3D72C4FC82D00DFD63C /* Preview Assets.xcassets */; };
+		631AF3DA2C4FC82D00DFD63C /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3D92C4FC82D00DFD63C /* Persistence.swift */; };
+		631AF3DD2C4FC82D00DFD63C /* Vremeni.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3DB2C4FC82D00DFD63C /* Vremeni.xcdatamodeld */; };
+		631AF3E72C4FC82E00DFD63C /* VremeniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3E62C4FC82E00DFD63C /* VremeniTests.swift */; };
+		631AF3F12C4FC82E00DFD63C /* VremeniUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3F02C4FC82E00DFD63C /* VremeniUITests.swift */; };
+		631AF3F32C4FC82E00DFD63C /* VremeniUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3F22C4FC82E00DFD63C /* VremeniUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		631AF3E32C4FC82E00DFD63C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 631AF3C52C4FC82B00DFD63C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 631AF3CC2C4FC82C00DFD63C;
+			remoteInfo = Vremeni;
+		};
+		631AF3ED2C4FC82E00DFD63C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 631AF3C52C4FC82B00DFD63C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 631AF3CC2C4FC82C00DFD63C;
+			remoteInfo = Vremeni;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		631AF3CD2C4FC82C00DFD63C /* Vremeni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vremeni.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VremeniApp.swift; sourceTree = "<group>"; };
+		631AF3D22C4FC82C00DFD63C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		631AF3D42C4FC82D00DFD63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		631AF3D72C4FC82D00DFD63C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		631AF3D92C4FC82D00DFD63C /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		631AF3DC2C4FC82D00DFD63C /* Vremeni.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vremeni.xcdatamodel; sourceTree = "<group>"; };
+		631AF3E22C4FC82E00DFD63C /* VremeniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VremeniTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		631AF3E62C4FC82E00DFD63C /* VremeniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VremeniTests.swift; sourceTree = "<group>"; };
+		631AF3EC2C4FC82E00DFD63C /* VremeniUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VremeniUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		631AF3F02C4FC82E00DFD63C /* VremeniUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VremeniUITests.swift; sourceTree = "<group>"; };
+		631AF3F22C4FC82E00DFD63C /* VremeniUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VremeniUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		631AF3CA2C4FC82C00DFD63C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		631AF3DF2C4FC82E00DFD63C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		631AF3E92C4FC82E00DFD63C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		631AF3C42C4FC82B00DFD63C = {
+			isa = PBXGroup;
+			children = (
+				631AF3CF2C4FC82C00DFD63C /* Vremeni */,
+				631AF3E52C4FC82E00DFD63C /* VremeniTests */,
+				631AF3EF2C4FC82E00DFD63C /* VremeniUITests */,
+				631AF3CE2C4FC82C00DFD63C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		631AF3CE2C4FC82C00DFD63C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				631AF3CD2C4FC82C00DFD63C /* Vremeni.app */,
+				631AF3E22C4FC82E00DFD63C /* VremeniTests.xctest */,
+				631AF3EC2C4FC82E00DFD63C /* VremeniUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		631AF3CF2C4FC82C00DFD63C /* Vremeni */ = {
+			isa = PBXGroup;
+			children = (
+				631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */,
+				631AF3D22C4FC82C00DFD63C /* ContentView.swift */,
+				631AF3D42C4FC82D00DFD63C /* Assets.xcassets */,
+				631AF3D92C4FC82D00DFD63C /* Persistence.swift */,
+				631AF3DB2C4FC82D00DFD63C /* Vremeni.xcdatamodeld */,
+				631AF3D62C4FC82D00DFD63C /* Preview Content */,
+			);
+			path = Vremeni;
+			sourceTree = "<group>";
+		};
+		631AF3D62C4FC82D00DFD63C /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				631AF3D72C4FC82D00DFD63C /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		631AF3E52C4FC82E00DFD63C /* VremeniTests */ = {
+			isa = PBXGroup;
+			children = (
+				631AF3E62C4FC82E00DFD63C /* VremeniTests.swift */,
+			);
+			path = VremeniTests;
+			sourceTree = "<group>";
+		};
+		631AF3EF2C4FC82E00DFD63C /* VremeniUITests */ = {
+			isa = PBXGroup;
+			children = (
+				631AF3F02C4FC82E00DFD63C /* VremeniUITests.swift */,
+				631AF3F22C4FC82E00DFD63C /* VremeniUITestsLaunchTests.swift */,
+			);
+			path = VremeniUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		631AF3CC2C4FC82C00DFD63C /* Vremeni */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 631AF3F62C4FC82E00DFD63C /* Build configuration list for PBXNativeTarget "Vremeni" */;
+			buildPhases = (
+				631AF3C92C4FC82C00DFD63C /* Sources */,
+				631AF3CA2C4FC82C00DFD63C /* Frameworks */,
+				631AF3CB2C4FC82C00DFD63C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Vremeni;
+			productName = Vremeni;
+			productReference = 631AF3CD2C4FC82C00DFD63C /* Vremeni.app */;
+			productType = "com.apple.product-type.application";
+		};
+		631AF3E12C4FC82E00DFD63C /* VremeniTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 631AF3F92C4FC82E00DFD63C /* Build configuration list for PBXNativeTarget "VremeniTests" */;
+			buildPhases = (
+				631AF3DE2C4FC82E00DFD63C /* Sources */,
+				631AF3DF2C4FC82E00DFD63C /* Frameworks */,
+				631AF3E02C4FC82E00DFD63C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				631AF3E42C4FC82E00DFD63C /* PBXTargetDependency */,
+			);
+			name = VremeniTests;
+			productName = VremeniTests;
+			productReference = 631AF3E22C4FC82E00DFD63C /* VremeniTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		631AF3EB2C4FC82E00DFD63C /* VremeniUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 631AF3FC2C4FC82E00DFD63C /* Build configuration list for PBXNativeTarget "VremeniUITests" */;
+			buildPhases = (
+				631AF3E82C4FC82E00DFD63C /* Sources */,
+				631AF3E92C4FC82E00DFD63C /* Frameworks */,
+				631AF3EA2C4FC82E00DFD63C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				631AF3EE2C4FC82E00DFD63C /* PBXTargetDependency */,
+			);
+			name = VremeniUITests;
+			productName = VremeniUITests;
+			productReference = 631AF3EC2C4FC82E00DFD63C /* VremeniUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		631AF3C52C4FC82B00DFD63C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					631AF3CC2C4FC82C00DFD63C = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					631AF3E12C4FC82E00DFD63C = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 631AF3CC2C4FC82C00DFD63C;
+					};
+					631AF3EB2C4FC82E00DFD63C = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 631AF3CC2C4FC82C00DFD63C;
+					};
+				};
+			};
+			buildConfigurationList = 631AF3C82C4FC82B00DFD63C /* Build configuration list for PBXProject "Vremeni" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 631AF3C42C4FC82B00DFD63C;
+			productRefGroup = 631AF3CE2C4FC82C00DFD63C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				631AF3CC2C4FC82C00DFD63C /* Vremeni */,
+				631AF3E12C4FC82E00DFD63C /* VremeniTests */,
+				631AF3EB2C4FC82E00DFD63C /* VremeniUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		631AF3CB2C4FC82C00DFD63C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				631AF3D82C4FC82D00DFD63C /* Preview Assets.xcassets in Resources */,
+				631AF3D52C4FC82D00DFD63C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		631AF3E02C4FC82E00DFD63C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		631AF3EA2C4FC82E00DFD63C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		631AF3C92C4FC82C00DFD63C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				631AF3DA2C4FC82D00DFD63C /* Persistence.swift in Sources */,
+				631AF3D32C4FC82C00DFD63C /* ContentView.swift in Sources */,
+				631AF3DD2C4FC82D00DFD63C /* Vremeni.xcdatamodeld in Sources */,
+				631AF3D12C4FC82C00DFD63C /* VremeniApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		631AF3DE2C4FC82E00DFD63C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				631AF3E72C4FC82E00DFD63C /* VremeniTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		631AF3E82C4FC82E00DFD63C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				631AF3F12C4FC82E00DFD63C /* VremeniUITests.swift in Sources */,
+				631AF3F32C4FC82E00DFD63C /* VremeniUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		631AF3E42C4FC82E00DFD63C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 631AF3CC2C4FC82C00DFD63C /* Vremeni */;
+			targetProxy = 631AF3E32C4FC82E00DFD63C /* PBXContainerItemProxy */;
+		};
+		631AF3EE2C4FC82E00DFD63C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 631AF3CC2C4FC82C00DFD63C /* Vremeni */;
+			targetProxy = 631AF3ED2C4FC82E00DFD63C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		631AF3F42C4FC82E00DFD63C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		631AF3F52C4FC82E00DFD63C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		631AF3F72C4FC82E00DFD63C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Vremeni/Preview Content\"";
+				DEVELOPMENT_TEAM = ZFH6DW7S4P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		631AF3F82C4FC82E00DFD63C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Vremeni/Preview Content\"";
+				DEVELOPMENT_TEAM = ZFH6DW7S4P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		631AF3FA2C4FC82E00DFD63C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZFH6DW7S4P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.remby.VremeniTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vremeni.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Vremeni";
+			};
+			name = Debug;
+		};
+		631AF3FB2C4FC82E00DFD63C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZFH6DW7S4P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.remby.VremeniTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vremeni.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Vremeni";
+			};
+			name = Release;
+		};
+		631AF3FD2C4FC82E00DFD63C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZFH6DW7S4P;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.remby.VremeniUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Vremeni;
+			};
+			name = Debug;
+		};
+		631AF3FE2C4FC82E00DFD63C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZFH6DW7S4P;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.remby.VremeniUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Vremeni;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		631AF3C82C4FC82B00DFD63C /* Build configuration list for PBXProject "Vremeni" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				631AF3F42C4FC82E00DFD63C /* Debug */,
+				631AF3F52C4FC82E00DFD63C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		631AF3F62C4FC82E00DFD63C /* Build configuration list for PBXNativeTarget "Vremeni" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				631AF3F72C4FC82E00DFD63C /* Debug */,
+				631AF3F82C4FC82E00DFD63C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		631AF3F92C4FC82E00DFD63C /* Build configuration list for PBXNativeTarget "VremeniTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				631AF3FA2C4FC82E00DFD63C /* Debug */,
+				631AF3FB2C4FC82E00DFD63C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		631AF3FC2C4FC82E00DFD63C /* Build configuration list for PBXNativeTarget "VremeniUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				631AF3FD2C4FC82E00DFD63C /* Debug */,
+				631AF3FE2C4FC82E00DFD63C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		631AF3DB2C4FC82D00DFD63C /* Vremeni.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				631AF3DC2C4FC82D00DFD63C /* Vremeni.xcdatamodel */,
+			);
+			currentVersion = 631AF3DC2C4FC82D00DFD63C /* Vremeni.xcdatamodel */;
+			path = Vremeni.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 631AF3C52C4FC82B00DFD63C /* Project object */;
+}
