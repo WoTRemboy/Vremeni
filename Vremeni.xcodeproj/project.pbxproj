@@ -16,6 +16,14 @@
 		631AF3E72C4FC82E00DFD63C /* VremeniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3E62C4FC82E00DFD63C /* VremeniTests.swift */; };
 		631AF3F12C4FC82E00DFD63C /* VremeniUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3F02C4FC82E00DFD63C /* VremeniUITests.swift */; };
 		631AF3F32C4FC82E00DFD63C /* VremeniUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3F22C4FC82E00DFD63C /* VremeniUITestsLaunchTests.swift */; };
+		631AF4092C516EC100DFD63C /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4082C516EC100DFD63C /* FontExtension.swift */; };
+		631AF40B2C516ECF00DFD63C /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF40A2C516ECF00DFD63C /* ColorExtension.swift */; };
+		631AF40D2C516EDD00DFD63C /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF40C2C516EDD00DFD63C /* ImageExtension.swift */; };
+		631AF40F2C516EF000DFD63C /* Lables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF40E2C516EF000DFD63C /* Lables.swift */; };
+		631AF4112C516F0000DFD63C /* DateFormats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4102C516F0000DFD63C /* DateFormats.swift */; };
+		631AF4132C5176BA00DFD63C /* ShopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4122C5176BA00DFD63C /* ShopViewModel.swift */; };
+		631AF4152C5176D400DFD63C /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4142C5176D400DFD63C /* ShopView.swift */; };
+		631AF4172C5176DE00DFD63C /* ShopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4162C5176DE00DFD63C /* ShopModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +56,15 @@
 		631AF3EC2C4FC82E00DFD63C /* VremeniUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VremeniUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		631AF3F02C4FC82E00DFD63C /* VremeniUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VremeniUITests.swift; sourceTree = "<group>"; };
 		631AF3F22C4FC82E00DFD63C /* VremeniUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VremeniUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		631AF3FF2C4FD6E800DFD63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		631AF3FF2C4FD6E800DFD63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		631AF4082C516EC100DFD63C /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
+		631AF40A2C516ECF00DFD63C /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		631AF40C2C516EDD00DFD63C /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
+		631AF40E2C516EF000DFD63C /* Lables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lables.swift; sourceTree = "<group>"; };
+		631AF4102C516F0000DFD63C /* DateFormats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormats.swift; sourceTree = "<group>"; };
+		631AF4122C5176BA00DFD63C /* ShopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewModel.swift; sourceTree = "<group>"; };
+		631AF4142C5176D400DFD63C /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
+		631AF4162C5176DE00DFD63C /* ShopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +115,13 @@
 		631AF3CF2C4FC82C00DFD63C /* Vremeni */ = {
 			isa = PBXGroup;
 			children = (
-				631AF3FF2C4FD6E800DFD63C /* Info.plist */,
-				631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */,
-				631AF3D22C4FC82C00DFD63C /* ContentView.swift */,
-				631AF3D42C4FC82D00DFD63C /* Assets.xcassets */,
-				631AF3D92C4FC82D00DFD63C /* Persistence.swift */,
-				631AF3DB2C4FC82D00DFD63C /* Vremeni.xcdatamodeld */,
+				631AF4002C516CDC00DFD63C /* Application */,
+				631AF4012C516CE800DFD63C /* ShopModule */,
+				631AF4052C516D4600DFD63C /* DataBase */,
+				631AF4072C516E7E00DFD63C /* Extensions */,
+				631AF4062C516E4100DFD63C /* SupportFiles */,
 				631AF3D62C4FC82D00DFD63C /* Preview Content */,
+				631AF3FF2C4FD6E800DFD63C /* Info.plist */,
 			);
 			path = Vremeni;
 			sourceTree = "<group>";
@@ -133,6 +149,78 @@
 				631AF3F22C4FC82E00DFD63C /* VremeniUITestsLaunchTests.swift */,
 			);
 			path = VremeniUITests;
+			sourceTree = "<group>";
+		};
+		631AF4002C516CDC00DFD63C /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		631AF4012C516CE800DFD63C /* ShopModule */ = {
+			isa = PBXGroup;
+			children = (
+				631AF4022C516D0100DFD63C /* Model */,
+				631AF4042C516D1000DFD63C /* View */,
+				631AF4032C516D0800DFD63C /* ViewModel */,
+			);
+			path = ShopModule;
+			sourceTree = "<group>";
+		};
+		631AF4022C516D0100DFD63C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				631AF4162C5176DE00DFD63C /* ShopModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		631AF4032C516D0800DFD63C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				631AF4122C5176BA00DFD63C /* ShopViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		631AF4042C516D1000DFD63C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				631AF3D22C4FC82C00DFD63C /* ContentView.swift */,
+				631AF4142C5176D400DFD63C /* ShopView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		631AF4052C516D4600DFD63C /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				631AF3D92C4FC82D00DFD63C /* Persistence.swift */,
+				631AF3DB2C4FC82D00DFD63C /* Vremeni.xcdatamodeld */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		631AF4062C516E4100DFD63C /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				631AF3D42C4FC82D00DFD63C /* Assets.xcassets */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		631AF4072C516E7E00DFD63C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				631AF4082C516EC100DFD63C /* FontExtension.swift */,
+				631AF40A2C516ECF00DFD63C /* ColorExtension.swift */,
+				631AF40C2C516EDD00DFD63C /* ImageExtension.swift */,
+				631AF40E2C516EF000DFD63C /* Lables.swift */,
+				631AF4102C516F0000DFD63C /* DateFormats.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,9 +353,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				631AF4112C516F0000DFD63C /* DateFormats.swift in Sources */,
+				631AF4092C516EC100DFD63C /* FontExtension.swift in Sources */,
 				631AF3DA2C4FC82D00DFD63C /* Persistence.swift in Sources */,
+				631AF40F2C516EF000DFD63C /* Lables.swift in Sources */,
+				631AF4132C5176BA00DFD63C /* ShopViewModel.swift in Sources */,
+				631AF4172C5176DE00DFD63C /* ShopModel.swift in Sources */,
 				631AF3D32C4FC82C00DFD63C /* ContentView.swift in Sources */,
+				631AF40D2C516EDD00DFD63C /* ImageExtension.swift in Sources */,
+				631AF40B2C516ECF00DFD63C /* ColorExtension.swift in Sources */,
 				631AF3DD2C4FC82D00DFD63C /* Vremeni.xcdatamodeld in Sources */,
+				631AF4152C5176D400DFD63C /* ShopView.swift in Sources */,
 				631AF3D12C4FC82C00DFD63C /* VremeniApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
