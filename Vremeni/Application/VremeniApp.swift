@@ -13,8 +13,8 @@ struct VremeniApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            ShopView()
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

@@ -8,5 +8,7 @@
 import SwiftUI
 
 extension Image {
-    
+    enum ShopPage {
+        static let vCoin = Image("VCoin")
+    }
 }

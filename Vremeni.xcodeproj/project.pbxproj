@@ -24,6 +24,10 @@
 		631AF4132C5176BA00DFD63C /* ShopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4122C5176BA00DFD63C /* ShopViewModel.swift */; };
 		631AF4152C5176D400DFD63C /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4142C5176D400DFD63C /* ShopView.swift */; };
 		631AF4172C5176DE00DFD63C /* ShopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4162C5176DE00DFD63C /* ShopModel.swift */; };
+		631AF4192C517F7900DFD63C /* ShopViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4182C517F7900DFD63C /* ShopViewGridCell.swift */; };
+		631AF41F2C5250AF00DFD63C /* MachineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF41E2C5250AF00DFD63C /* MachineView.swift */; };
+		631AF4212C5250BB00DFD63C /* InventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4202C5250BB00DFD63C /* InventoryView.swift */; };
+		631AF4232C5250C400DFD63C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4222C5250C400DFD63C /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +69,10 @@
 		631AF4122C5176BA00DFD63C /* ShopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewModel.swift; sourceTree = "<group>"; };
 		631AF4142C5176D400DFD63C /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
 		631AF4162C5176DE00DFD63C /* ShopModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopModel.swift; sourceTree = "<group>"; };
+		631AF4182C517F7900DFD63C /* ShopViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewGridCell.swift; sourceTree = "<group>"; };
+		631AF41E2C5250AF00DFD63C /* MachineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineView.swift; sourceTree = "<group>"; };
+		631AF4202C5250BB00DFD63C /* InventoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryView.swift; sourceTree = "<group>"; };
+		631AF4222C5250C400DFD63C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,9 @@
 			children = (
 				631AF4002C516CDC00DFD63C /* Application */,
 				631AF4012C516CE800DFD63C /* ShopModule */,
+				631AF41B2C52504C00DFD63C /* MachineModule */,
+				631AF41C2C52507400DFD63C /* InventoryModule */,
+				631AF41D2C52509000DFD63C /* ProfileModule */,
 				631AF4052C516D4600DFD63C /* DataBase */,
 				631AF4072C516E7E00DFD63C /* Extensions */,
 				631AF4062C516E4100DFD63C /* SupportFiles */,
@@ -190,6 +201,7 @@
 			children = (
 				631AF3D22C4FC82C00DFD63C /* ContentView.swift */,
 				631AF4142C5176D400DFD63C /* ShopView.swift */,
+				631AF4182C517F7900DFD63C /* ShopViewGridCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -221,6 +233,30 @@
 				631AF4102C516F0000DFD63C /* DateFormats.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		631AF41B2C52504C00DFD63C /* MachineModule */ = {
+			isa = PBXGroup;
+			children = (
+				631AF41E2C5250AF00DFD63C /* MachineView.swift */,
+			);
+			path = MachineModule;
+			sourceTree = "<group>";
+		};
+		631AF41C2C52507400DFD63C /* InventoryModule */ = {
+			isa = PBXGroup;
+			children = (
+				631AF4202C5250BB00DFD63C /* InventoryView.swift */,
+			);
+			path = InventoryModule;
+			sourceTree = "<group>";
+		};
+		631AF41D2C52509000DFD63C /* ProfileModule */ = {
+			isa = PBXGroup;
+			children = (
+				631AF4222C5250C400DFD63C /* ProfileView.swift */,
+			);
+			path = ProfileModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -353,11 +389,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				631AF41F2C5250AF00DFD63C /* MachineView.swift in Sources */,
 				631AF4112C516F0000DFD63C /* DateFormats.swift in Sources */,
 				631AF4092C516EC100DFD63C /* FontExtension.swift in Sources */,
 				631AF3DA2C4FC82D00DFD63C /* Persistence.swift in Sources */,
 				631AF40F2C516EF000DFD63C /* Lables.swift in Sources */,
+				631AF4192C517F7900DFD63C /* ShopViewGridCell.swift in Sources */,
+				631AF4212C5250BB00DFD63C /* InventoryView.swift in Sources */,
 				631AF4132C5176BA00DFD63C /* ShopViewModel.swift in Sources */,
+				631AF4232C5250C400DFD63C /* ProfileView.swift in Sources */,
 				631AF4172C5176DE00DFD63C /* ShopModel.swift in Sources */,
 				631AF3D32C4FC82C00DFD63C /* ContentView.swift in Sources */,
 				631AF40D2C516EDD00DFD63C /* ImageExtension.swift in Sources */,
