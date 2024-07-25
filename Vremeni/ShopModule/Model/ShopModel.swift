@@ -14,14 +14,16 @@ struct ConsumableItem: Identifiable {
     let image: String
     let price: Int
     let added: Date
+    let target: Date
     
     static internal func itemMockConfig(name: String, price: Int) -> ConsumableItem {
         let name = name
         let image = "\(price).square"
         let price = price
         let added = Date.now
+        let target = added.addingTimeInterval(TimeInterval(price * 60))
         
-        return ConsumableItem(name: name, image: image, price: price, added: added)
+        return ConsumableItem(name: name, image: image, price: price, added: added, target: target)
     }
     
     static internal func itemsMockConfig() -> [ConsumableItem] {

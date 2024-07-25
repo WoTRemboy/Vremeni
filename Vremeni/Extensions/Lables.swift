@@ -16,6 +16,7 @@ final class Texts {
     
     enum MachinePage {
         static let title = "Machine"
+        static let progress = "Progress"
     }
     
     enum InventoryPage {

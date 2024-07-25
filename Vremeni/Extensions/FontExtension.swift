@@ -17,7 +17,7 @@ extension Font {
     }
     
     static func title() -> Font? {
-        Font.system(size: 20, weight: .bold)
+        Font.system(size: 20, weight: .medium)
     }
     
     static func headline() -> Font? {
