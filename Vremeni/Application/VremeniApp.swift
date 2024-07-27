@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct VremeniApp: App {
-    let persistenceController = PersistenceController.shared
 
+    @StateObject private var dataController = DataController()
+    
     var body: some Scene {
         WindowGroup {
             ShopView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }

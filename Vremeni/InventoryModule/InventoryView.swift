@@ -11,7 +11,7 @@ struct InventoryView: View {
     var body: some View {
         Text(Texts.InventoryPage.title)
             .tabItem {
-                Image(systemName: "amplifier")
+                Image.TabBar.inventory
                 Text(Texts.InventoryPage.title)
             }
     }

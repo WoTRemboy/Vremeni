@@ -16,8 +16,8 @@ final class MachineViewModel: ObservableObject {
     private let updateInterval: TimeInterval = 1.0
     private let targetPercent: CGFloat = 100
     
-    internal func percentTimeElapsed(from addedDate: Date, to targetDate: Date, currentDate: Date = Date()) {
-        let addedTime = addedDate.timeIntervalSince1970
+    internal func percentTimeElapsed(from startedTime: Date, to targetDate: Date, currentDate: Date = Date()) {
+        let addedTime = startedTime.timeIntervalSince1970
         let totalTime = targetDate.timeIntervalSinceNow
         let elapsedTime = currentDate.timeIntervalSince1970
         

@@ -14,16 +14,23 @@ struct ConsumableItem: Identifiable {
     let image: String
     let price: Int
     let added: Date
+    let started: Date
     let target: Date
+    var ready: Bool
+    
+    mutating func toggleReady() {
+        ready.toggle()
+    }
     
     static internal func itemMockConfig(name: String, price: Int) -> ConsumableItem {
         let name = name
         let image = "\(price).square"
         let price = price
         let added = Date.now
+        let started = Date.now
         let target = added.addingTimeInterval(TimeInterval(price * 60))
         
-        return ConsumableItem(name: name, image: image, price: price, added: added, target: target)
+        return ConsumableItem(name: name, image: image, price: price, added: added, started: started, target: target, ready: false)
     }
     
     static internal func itemsMockConfig() -> [ConsumableItem] {

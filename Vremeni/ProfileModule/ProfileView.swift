@@ -11,7 +11,7 @@ struct ProfileView: View {
     var body: some View {
         Text(Texts.ProfilePage.title)
             .tabItem {
-                Image(systemName: "person")
+                Image.TabBar.profile
                 Text(Texts.ProfilePage.title)
             }
     }

@@ -9,9 +9,11 @@ import SwiftUI
 
 struct ShopView: View {
     
-    let spacing: CGFloat = 16
-    let items = ConsumableItem.itemsMockConfig()
-    @State private var itemsInRows = 2
+    @Environment(\.managedObjectContext) var context
+    @StateObject private var viewModel = ShopViewModel()
+    
+    private let spacing: CGFloat = 16
+    private let itemsInRows = 2
     
     var body: some View {
         let columns = Array(
@@ -22,8 +24,13 @@ struct ShopView: View {
             NavigationStack {
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: spacing) {
-                        ForEach(items) { item in
+                        ForEach(viewModel.items) { item in
                             ShopViewGridCell(item: item)
+                                .onTapGesture {
+                                    withAnimation(.snappy) {
+                                        viewModel.pickShopItem(context: context, item: item)
+                                    }
+                                }
                         }
                     }
                     .padding(.horizontal)
@@ -33,7 +40,7 @@ struct ShopView: View {
                 .background(Color.BackColors.backDefault)
             }
             .tabItem {
-                Image(systemName: "creditcard.and.123")
+                Image.TabBar.shop
                 Text(Texts.ShopPage.title)
             }
             MachineView()
