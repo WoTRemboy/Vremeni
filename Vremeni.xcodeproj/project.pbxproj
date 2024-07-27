@@ -31,8 +31,7 @@
 		631AF42C2C5259EC00DFD63C /* MachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */; };
 		631AF4302C5273B300DFD63C /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF42F2C5273B300DFD63C /* ProgressBar.swift */; };
 		63FD7D8F2C55744B008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7D8C2C5571A0008487DD /* VremeniConsumableModel.xcdatamodeld */; };
-		63FD7D902C557499008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7D8C2C5571A0008487DD /* VremeniConsumableModel.xcdatamodeld */; };
-		63FD7D912C55749A008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7D8C2C5571A0008487DD /* VremeniConsumableModel.xcdatamodeld */; };
+		63FD7D952C557704008487DD /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7D932C557704008487DD /* Item+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +80,7 @@
 		631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineViewGridCell.swift; sourceTree = "<group>"; };
 		631AF42F2C5273B300DFD63C /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		63FD7D8D2C5571A0008487DD /* VremeniConsumableModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VremeniConsumableModel.xcdatamodel; sourceTree = "<group>"; };
+		63FD7D932C557704008487DD /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +216,7 @@
 		631AF4052C516D4600DFD63C /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
+				63FD7D932C557704008487DD /* Item+CoreDataProperties.swift */,
 				63FD7D8C2C5571A0008487DD /* VremeniConsumableModel.xcdatamodeld */,
 				6314C8452C540CD9009F5CAC /* DataController.swift */,
 			);
@@ -428,6 +429,7 @@
 				631AF4112C516F0000DFD63C /* DateFormats.swift in Sources */,
 				631AF42A2C5256CF00DFD63C /* MachineViewModel.swift in Sources */,
 				631AF4092C516EC100DFD63C /* FontExtension.swift in Sources */,
+				63FD7D952C557704008487DD /* Item+CoreDataProperties.swift in Sources */,
 				631AF40F2C516EF000DFD63C /* Lables.swift in Sources */,
 				631AF4192C517F7900DFD63C /* ShopViewGridCell.swift in Sources */,
 				631AF4212C5250BB00DFD63C /* InventoryView.swift in Sources */,
@@ -451,7 +453,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				631AF3E72C4FC82E00DFD63C /* VremeniTests.swift in Sources */,
-				63FD7D902C557499008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,7 +461,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				631AF3F12C4FC82E00DFD63C /* VremeniUITests.swift in Sources */,
-				63FD7D912C55749A008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */,
 				631AF3F32C4FC82E00DFD63C /* VremeniUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
