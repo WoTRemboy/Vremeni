@@ -10,7 +10,7 @@ import CoreData
 
 final class DataController: ObservableObject {
     
-    internal let container = NSPersistentContainer(name: "VremeniItemModel")
+    internal let container = NSPersistentContainer(name: "VremeniConsumableModel")
     
     init() {
         container.loadPersistentStores { description, error in
