@@ -30,8 +30,8 @@
 		631AF42A2C5256CF00DFD63C /* MachineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4292C5256CF00DFD63C /* MachineViewModel.swift */; };
 		631AF42C2C5259EC00DFD63C /* MachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */; };
 		631AF4302C5273B300DFD63C /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF42F2C5273B300DFD63C /* ProgressBar.swift */; };
-		63FD7D8F2C55744B008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7D8C2C5571A0008487DD /* VremeniConsumableModel.xcdatamodeld */; };
 		63FD7D952C557704008487DD /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7D932C557704008487DD /* Item+CoreDataProperties.swift */; };
+		63FD7D9B2C557A02008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7D992C557A02008487DD /* VremeniConsumableModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,8 +79,8 @@
 		631AF4292C5256CF00DFD63C /* MachineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineViewModel.swift; sourceTree = "<group>"; };
 		631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineViewGridCell.swift; sourceTree = "<group>"; };
 		631AF42F2C5273B300DFD63C /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
-		63FD7D8D2C5571A0008487DD /* VremeniConsumableModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VremeniConsumableModel.xcdatamodel; sourceTree = "<group>"; };
 		63FD7D932C557704008487DD /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		63FD7D9A2C557A02008487DD /* VremeniConsumableModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VremeniConsumableModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,7 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				63FD7D932C557704008487DD /* Item+CoreDataProperties.swift */,
-				63FD7D8C2C5571A0008487DD /* VremeniConsumableModel.xcdatamodeld */,
+				63FD7D992C557A02008487DD /* VremeniConsumableModel.xcdatamodeld */,
 				6314C8452C540CD9009F5CAC /* DataController.swift */,
 			);
 			path = DataBase;
@@ -438,9 +438,9 @@
 				6314C8462C540CD9009F5CAC /* DataController.swift in Sources */,
 				631AF4232C5250C400DFD63C /* ProfileView.swift in Sources */,
 				631AF4172C5176DE00DFD63C /* ShopModel.swift in Sources */,
-				63FD7D8F2C55744B008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */,
 				631AF40D2C516EDD00DFD63C /* ImageExtension.swift in Sources */,
 				631AF40B2C516ECF00DFD63C /* ColorExtension.swift in Sources */,
+				63FD7D9B2C557A02008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */,
 				631AF4262C5256A300DFD63C /* MachineModel.swift in Sources */,
 				631AF4152C5176D400DFD63C /* ShopView.swift in Sources */,
 				631AF4302C5273B300DFD63C /* ProgressBar.swift in Sources */,
@@ -788,14 +788,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		63FD7D8C2C5571A0008487DD /* VremeniConsumableModel.xcdatamodeld */ = {
+		63FD7D992C557A02008487DD /* VremeniConsumableModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				63FD7D8D2C5571A0008487DD /* VremeniConsumableModel.xcdatamodel */,
+				63FD7D9A2C557A02008487DD /* VremeniConsumableModel.xcdatamodel */,
 			);
-			currentVersion = 63FD7D8D2C5571A0008487DD /* VremeniConsumableModel.xcdatamodel */;
+			currentVersion = 63FD7D9A2C557A02008487DD /* VremeniConsumableModel.xcdatamodel */;
 			name = VremeniConsumableModel.xcdatamodeld;
-			path = "/Users/wotremboy/Documents/iOS Projects/Vremeni/Vremeni/DataBase/VremeniConsumableModel.xcdatamodeld";
+			path = /Users/wotremboy/Downloads/VremeniConsumableModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
