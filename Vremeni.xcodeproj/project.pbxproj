@@ -30,7 +30,9 @@
 		631AF42A2C5256CF00DFD63C /* MachineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4292C5256CF00DFD63C /* MachineViewModel.swift */; };
 		631AF42C2C5259EC00DFD63C /* MachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */; };
 		631AF4302C5273B300DFD63C /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF42F2C5273B300DFD63C /* ProgressBar.swift */; };
-		63FD7D8E2C5571A0008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7D8C2C5571A0008487DD /* VremeniConsumableModel.xcdatamodeld */; };
+		63FD7D8F2C55744B008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7D8C2C5571A0008487DD /* VremeniConsumableModel.xcdatamodeld */; };
+		63FD7D902C557499008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7D8C2C5571A0008487DD /* VremeniConsumableModel.xcdatamodeld */; };
+		63FD7D912C55749A008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7D8C2C5571A0008487DD /* VremeniConsumableModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -434,9 +436,9 @@
 				6314C8462C540CD9009F5CAC /* DataController.swift in Sources */,
 				631AF4232C5250C400DFD63C /* ProfileView.swift in Sources */,
 				631AF4172C5176DE00DFD63C /* ShopModel.swift in Sources */,
+				63FD7D8F2C55744B008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */,
 				631AF40D2C516EDD00DFD63C /* ImageExtension.swift in Sources */,
 				631AF40B2C516ECF00DFD63C /* ColorExtension.swift in Sources */,
-				63FD7D8E2C5571A0008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */,
 				631AF4262C5256A300DFD63C /* MachineModel.swift in Sources */,
 				631AF4152C5176D400DFD63C /* ShopView.swift in Sources */,
 				631AF4302C5273B300DFD63C /* ProgressBar.swift in Sources */,
@@ -449,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				631AF3E72C4FC82E00DFD63C /* VremeniTests.swift in Sources */,
+				63FD7D902C557499008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +460,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				631AF3F12C4FC82E00DFD63C /* VremeniUITests.swift in Sources */,
+				63FD7D912C55749A008487DD /* VremeniConsumableModel.xcdatamodeld in Sources */,
 				631AF3F32C4FC82E00DFD63C /* VremeniUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
