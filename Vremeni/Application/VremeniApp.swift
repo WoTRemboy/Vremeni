@@ -6,16 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct VremeniApp: App {
-
-    @StateObject private var dataController = DataController()
-    
     var body: some Scene {
         WindowGroup {
             ShopView()
-                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
+        .modelContainer(for: ConsumableItem.self)
     }
 }

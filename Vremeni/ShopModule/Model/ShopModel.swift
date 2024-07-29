@@ -6,20 +6,38 @@
 //
 
 import Foundation
-import SwiftUI
+import SwiftData
 
-struct ConsumableItem: Identifiable {
+@Model
+final class ConsumableItem: Identifiable {
     let id = UUID()
     let name: String
     let image: String
     let price: Int
     let added: Date
-    let started: Date
+    var started: Date
     let target: Date
     var ready: Bool
     
-    mutating func toggleReady() {
+    init(name: String, image: String, price: Int, added: Date, started: Date, target: Date, ready: Bool = false) {
+        self.name = name
+        self.image = image
+        self.price = price
+        self.added = added
+        self.started = started
+        self.target = target
+        self.ready = ready
+    }
+}
+
+extension ConsumableItem {
+    
+    internal func readyToggle() {
         ready.toggle()
+    }
+    
+    internal func setStartTime() {
+        started = .now
     }
     
     static internal func itemMockConfig(name: String, price: Int) -> ConsumableItem {
@@ -30,7 +48,7 @@ struct ConsumableItem: Identifiable {
         let started = Date.now
         let target = added.addingTimeInterval(TimeInterval(price * 60))
         
-        return ConsumableItem(name: name, image: image, price: price, added: added, started: started, target: target, ready: false)
+        return ConsumableItem(name: name, image: image, price: price, added: added, started: started, target: target)
     }
     
     static internal func itemsMockConfig() -> [ConsumableItem] {
