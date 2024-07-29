@@ -13,31 +13,28 @@ final class MachineViewModel: ObservableObject {
     @Published private(set) var percent: CGFloat = 0
     @Published private(set) var timer = Timer()
     
-    private let updateInterval: TimeInterval = 1.0
+    private let updateInterval: TimeInterval = 0.3
     private let targetPercent: CGFloat = 100
     
-    internal func percentTimeElapsed(from startedTime: Date, to targetDate: Date, currentDate: Date = Date()) {
-        let addedTime = startedTime.timeIntervalSince1970
-        let totalTime = targetDate.timeIntervalSinceNow
-        let elapsedTime = currentDate.timeIntervalSince1970
+    internal func percentTimeElapsed(for item: ConsumableItem) {
+        let totalTime = item.target.timeIntervalSince(item.started)
+        let currentTime = Date().timeIntervalSince(item.started)
         
-        let percent = (elapsedTime - addedTime) / totalTime * 100
+        let percent = currentTime / totalTime * 100
         if percent < targetPercent {
-            self.percent = (elapsedTime - addedTime) / totalTime * 100
+            self.percent = percent
         } else {
             self.percent = targetPercent
+            item.readyToggle()
         }
     }
     
-    internal func startProgress(from added: Date, to target: Date) {
+    internal func startProgress(for item: ConsumableItem) {
         timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { timer in
             if self.percent < self.targetPercent {
-                let timeDifference = Calendar.current.dateComponents([.hour, .minute, .second], from: .now, to: target)
-                print(timeDifference, target)
-                
-                withAnimation {
-                    self.percentTimeElapsed(from: added, to: target)
-                }
+                let timeDifference = Calendar.current.dateComponents([.hour, .minute, .second], from: .now, to: item.target)
+                print(timeDifference, item.target)
+                self.percentTimeElapsed(for: item)
             } else {
                 timer.invalidate()
             }

@@ -15,11 +15,11 @@ final class ConsumableItem: Identifiable {
     let image: String
     let price: Int
     let added: Date
-    let started: Date
+    var started: Date
     let target: Date
     var ready: Bool
     
-    init(name: String, image: String, price: Int, added: Date, started: Date, target: Date, ready: Bool) {
+    init(name: String, image: String, price: Int, added: Date, started: Date, target: Date, ready: Bool = false) {
         self.name = name
         self.image = image
         self.price = price
@@ -32,8 +32,12 @@ final class ConsumableItem: Identifiable {
 
 extension ConsumableItem {
     
-    func toggleReady() {
+    internal func readyToggle() {
         ready.toggle()
+    }
+    
+    internal func setStartTime() {
+        started = .now
     }
     
     static internal func itemMockConfig(name: String, price: Int) -> ConsumableItem {
@@ -44,7 +48,7 @@ extension ConsumableItem {
         let started = Date.now
         let target = added.addingTimeInterval(TimeInterval(price * 60))
         
-        return ConsumableItem(name: name, image: image, price: price, added: added, started: started, target: target, ready: false)
+        return ConsumableItem(name: name, image: image, price: price, added: added, started: started, target: target)
     }
     
     static internal func itemsMockConfig() -> [ConsumableItem] {

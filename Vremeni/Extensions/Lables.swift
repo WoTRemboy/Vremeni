@@ -12,11 +12,13 @@ final class Texts {
     
     enum ShopPage {
         static let title = "Fair"
+        static let addItem = "Add Sample"
     }
     
     enum MachinePage {
         static let title = "Machine"
         static let progress = "Progress"
+        static let completed = "Completed"
     }
     
     enum InventoryPage {

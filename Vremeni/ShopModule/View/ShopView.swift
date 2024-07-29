@@ -39,6 +39,12 @@ struct ShopView: View {
                 .navigationTitle(Texts.Common.title)
                 .navigationBarTitleDisplayMode(.inline)
                 .background(Color.BackColors.backDefault)
+//                .toolbar {
+//                    Button("Add Samples", systemImage: "plus") {
+//
+//                    }
+//                }
+                
             }
             .tabItem {
                 Image.TabBar.shop

@@ -29,6 +29,8 @@
 		631AF42A2C5256CF00DFD63C /* MachineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4292C5256CF00DFD63C /* MachineViewModel.swift */; };
 		631AF42C2C5259EC00DFD63C /* MachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */; };
 		631AF4302C5273B300DFD63C /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF42F2C5273B300DFD63C /* ProgressBar.swift */; };
+		63FD7DE02C57F9EE008487DD /* InventoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7DDF2C57F9EE008487DD /* InventoryModel.swift */; };
+		63FD7DE22C57FA12008487DD /* InventoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7DE12C57FA12008487DD /* InventoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		631AF4292C5256CF00DFD63C /* MachineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineViewModel.swift; sourceTree = "<group>"; };
 		631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineViewGridCell.swift; sourceTree = "<group>"; };
 		631AF42F2C5273B300DFD63C /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		63FD7DDF2C57F9EE008487DD /* InventoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryModel.swift; sourceTree = "<group>"; };
+		63FD7DE12C57FA12008487DD /* InventoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,7 +251,9 @@
 		631AF41C2C52507400DFD63C /* InventoryModule */ = {
 			isa = PBXGroup;
 			children = (
-				631AF4202C5250BB00DFD63C /* InventoryView.swift */,
+				63FD7DDC2C57F9B8008487DD /* Model */,
+				63FD7DDD2C57F9C1008487DD /* View */,
+				63FD7DDE2C57F9C5008487DD /* ViewModel */,
 			);
 			path = InventoryModule;
 			sourceTree = "<group>";
@@ -282,6 +288,30 @@
 			isa = PBXGroup;
 			children = (
 				631AF4292C5256CF00DFD63C /* MachineViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		63FD7DDC2C57F9B8008487DD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				63FD7DDF2C57F9EE008487DD /* InventoryModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		63FD7DDD2C57F9C1008487DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				631AF4202C5250BB00DFD63C /* InventoryView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		63FD7DDE2C57F9C5008487DD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				63FD7DE12C57FA12008487DD /* InventoryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -418,8 +448,10 @@
 			files = (
 				631AF41F2C5250AF00DFD63C /* MachineView.swift in Sources */,
 				631AF4112C516F0000DFD63C /* DateFormats.swift in Sources */,
+				63FD7DE02C57F9EE008487DD /* InventoryModel.swift in Sources */,
 				631AF42A2C5256CF00DFD63C /* MachineViewModel.swift in Sources */,
 				631AF4092C516EC100DFD63C /* FontExtension.swift in Sources */,
+				63FD7DE22C57FA12008487DD /* InventoryViewModel.swift in Sources */,
 				631AF40F2C516EF000DFD63C /* Lables.swift in Sources */,
 				631AF4192C517F7900DFD63C /* ShopViewGridCell.swift in Sources */,
 				631AF4212C5250BB00DFD63C /* InventoryView.swift in Sources */,
@@ -610,7 +642,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -645,7 +677,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

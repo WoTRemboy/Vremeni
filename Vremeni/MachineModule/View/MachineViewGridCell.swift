@@ -12,7 +12,6 @@ struct MachineViewGridCell: View {
     @StateObject private var viewModel = MachineViewModel()
     
     private let item: ConsumableItem
-    private let updateInterval: TimeInterval = 1.0
     
     init(item: ConsumableItem) {
         self.item = item
@@ -25,13 +24,16 @@ struct MachineViewGridCell: View {
                     .padding([.top, .leading])
                     .frame(width: reader.size.width, alignment: .leading)
                 
-                ProgressBar(width: reader.size.width - 32, percent: viewModel.percent)
+                ProgressBar(width: reader.size.width - 32,
+                            percent: item.ready ? 100 : viewModel.percent,
+                            ready: item.ready)
                     .padding(.bottom)
+                // to be changed
                     .onAppear(perform: {
-                        viewModel.startProgress(from: item.added, to: item.target)
+                        !item.ready ? viewModel.startProgress(for: item) : nil
                     })
                     .onDisappear(perform: {
-                        viewModel.stopProgress()
+                        !item.ready ? viewModel.stopProgress() : nil
                     })
             }
             .background(Color.BackColors.backElevated)

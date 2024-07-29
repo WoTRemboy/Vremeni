@@ -1,5 +1,5 @@
 //
-//  MachineView.swift
+//  InventoryView.swift
 //  Vremeni
 //
 //  Created by Roman Tverdokhleb on 25.07.2024.
@@ -8,9 +8,9 @@
 import SwiftUI
 import SwiftData
 
-struct MachineView: View {
+struct InventoryView: View {
     
-    @Query(filter: #Predicate { !$0.ready }, sort: \ConsumableItem.started) private var items: [ConsumableItem]
+    @Query(filter: #Predicate { $0.ready }, sort: \ConsumableItem.target) private var items: [ConsumableItem]
     
     private let spacing: CGFloat = 16
     private let itemsInRows = 1
@@ -34,12 +34,12 @@ struct MachineView: View {
             .background(Color.BackColors.backDefault)
         }
         .tabItem {
-            Image.TabBar.machine
-            Text(Texts.MachinePage.title)
+            Image.TabBar.inventory
+            Text(Texts.InventoryPage.title)
         }
     }
 }
 
 #Preview {
-    MachineView()
+    InventoryView()
 }

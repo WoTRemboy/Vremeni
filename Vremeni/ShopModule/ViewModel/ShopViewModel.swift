@@ -13,6 +13,7 @@ final class ShopViewModel: ObservableObject {
     @Published private(set) var items = ConsumableItem.itemsMockConfig()
     
     internal func pickItem(item: ConsumableItem, context: ModelContext) {
+        item.setStartTime()
         context.insert(item)
         items.removeAll { $0.id == item.id }
     }
