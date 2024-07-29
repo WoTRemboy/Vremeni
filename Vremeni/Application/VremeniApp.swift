@@ -10,10 +10,20 @@ import SwiftData
 
 @main
 struct VremeniApp: App {
+    let container: ModelContainer
+    
     var body: some Scene {
         WindowGroup {
-            ShopView()
+            ShopView(modelContext: container.mainContext)
         }
-        .modelContainer(for: ConsumableItem.self)
+        .modelContainer(container)
+    }
+    
+    init() {
+        do {
+            container = try ModelContainer(for: ConsumableItem.self)
+        } catch {
+            fatalError("Failed to create ModelContainer for ConsumableItem.")
+        }
     }
 }
