@@ -6,9 +6,10 @@
 //
 
 import Foundation
-import SwiftUI
+import SwiftData
 
-struct ConsumableItem: Identifiable {
+@Model
+final class ConsumableItem: Identifiable {
     let id = UUID()
     let name: String
     let image: String
@@ -18,7 +19,20 @@ struct ConsumableItem: Identifiable {
     let target: Date
     var ready: Bool
     
-    mutating func toggleReady() {
+    init(name: String, image: String, price: Int, added: Date, started: Date, target: Date, ready: Bool) {
+        self.name = name
+        self.image = image
+        self.price = price
+        self.added = added
+        self.started = started
+        self.target = target
+        self.ready = ready
+    }
+}
+
+extension ConsumableItem {
+    
+    func toggleReady() {
         ready.toggle()
     }
     

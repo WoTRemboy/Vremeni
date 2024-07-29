@@ -9,10 +9,8 @@ import SwiftUI
 
 struct MachineView: View {
     
-    @Environment(\.managedObjectContext) var context
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Item.started, ascending: true)]) var items: FetchedResults<Item>
-    
     private let spacing: CGFloat = 16
+    private let items = ConsumableItem.itemsMockConfig()
     private let itemsInRows = 1
     
     var body: some View {
