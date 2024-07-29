@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MachineView: View {
     
+    @Query private var items: [ConsumableItem]
+    
     private let spacing: CGFloat = 16
-    private let items = ConsumableItem.itemsMockConfig()
     private let itemsInRows = 1
     
     var body: some View {

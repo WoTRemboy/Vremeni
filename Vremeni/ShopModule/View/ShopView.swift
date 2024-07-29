@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ShopView: View {
     
+    @Environment(\.modelContext) private var modelContext
     @StateObject private var viewModel = ShopViewModel()
     
     private let spacing: CGFloat = 16
@@ -25,6 +27,11 @@ struct ShopView: View {
                     LazyVGrid(columns: columns, spacing: spacing) {
                         ForEach(viewModel.items) { item in
                             ShopViewGridCell(item: item)
+                                .onTapGesture {
+                                    withAnimation(.snappy) {
+                                        viewModel.pickItem(item: item, context: modelContext)
+                                    }
+                                }
                         }
                     }
                     .padding(.horizontal)

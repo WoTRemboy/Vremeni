@@ -6,10 +6,15 @@
 //
 
 import Foundation
-import CoreData
+import SwiftData
 
 final class ShopViewModel: ObservableObject {
     
     @Published private(set) var items = ConsumableItem.itemsMockConfig()
+    
+    internal func pickItem(item: ConsumableItem, context: ModelContext) {
+        context.insert(item)
+        items.removeAll { $0.id == item.id }
+    }
     
 }
