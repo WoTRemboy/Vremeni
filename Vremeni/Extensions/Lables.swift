@@ -24,7 +24,7 @@ final class Texts {
     enum ShopPage {
         static let title = "Fair"
         static let addItem = "Add Sample"
-        static let addToMachine = "Add to Machine"
+        static let addToMachine = "Add"
     }
     
     enum MachinePage {
