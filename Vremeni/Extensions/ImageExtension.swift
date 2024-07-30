@@ -12,6 +12,17 @@ extension Image {
         static let vCoin = Image("VCoin")
     }
     
+    enum Rarity {
+        static let common = Image("RarityCommon")
+        static let uncommon = Image("RarityUncommon")
+        static let rare = Image("RarityRare")
+        static let epic = Image("RarityEpic")
+        static let legendary = Image("RarityLegendary")
+        static let mythic = Image("RarityMythic")
+        static let exotic  = Image("RarityExotic")
+        static let transcendent = Image("RarityTranscendent")
+    }
+    
     enum TabBar {
         static let shop = Image(systemName: "creditcard.and.123")
         static let machine = Image(systemName: "clock.arrow.2.circlepath")

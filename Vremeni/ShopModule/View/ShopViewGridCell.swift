@@ -23,10 +23,9 @@ struct ShopViewGridCell: View {
                 itemImage
                     .frame(width: reader.size.width)
                 itemName
-                    .frame(width: reader.size.width, alignment: .leading)
+                    .frame(width: reader.size.width, height: 25, alignment: .leading)
                 priceView
                     .frame(width: reader.size.width, height: 17, alignment: .leading)
-                
                 buttons
                     .frame(width: reader.size.width, height: 40, alignment: .leading)
             }
@@ -43,9 +42,16 @@ struct ShopViewGridCell: View {
     }
     
     private var itemName: some View {
-        Text(item.name)
-            .font(.body())
-            .foregroundStyle(Color.labelPrimary)
+        LazyHStack(spacing: 5) {
+            Rarity.rarityToImage(rarity: item.rarity)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 25)
+            
+            Text(item.name)
+                .font(.body())
+                .foregroundStyle(Color.labelPrimary)
+        }
     }
     
     private var priceView: some View {
@@ -54,6 +60,7 @@ struct ShopViewGridCell: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 17)
+                .padding(.leading, 3.8)
             
             Text(String(item.price))
                 .font(.body())
@@ -63,7 +70,7 @@ struct ShopViewGridCell: View {
     
     private var buttons: some View {
         HStack(spacing: 0) {
-            Button("Add to Machine") {
+            Button(Texts.ShopPage.addToMachine) {
                 withAnimation(.snappy) {
                     viewModel.pickItem(item: item)
                 }
