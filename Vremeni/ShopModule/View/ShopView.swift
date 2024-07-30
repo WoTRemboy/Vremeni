@@ -30,12 +30,7 @@ struct ShopView: View {
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: spacing) {
                         ForEach(viewModel.items) { item in
-                            ShopViewGridCell(item: item)
-                                .onTapGesture {
-                                    withAnimation(.snappy) {
-                                        viewModel.pickItem(item: item)
-                                    }
-                                }
+                            ShopViewGridCell(item: item, viewModel: viewModel)
                         }
                     }
                     .padding(.horizontal)
@@ -45,7 +40,9 @@ struct ShopView: View {
                 .background(Color.BackColors.backDefault)
                 .toolbar {
                     Button(Texts.ShopPage.addItem, systemImage: "plus") {
-                        viewModel.addSamples()
+                        withAnimation(.snappy) {
+                            viewModel.addSamples()
+                        }
                     }
                 }
                 
