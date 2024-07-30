@@ -26,6 +26,15 @@ extension ShopView {
             fetchData()
         }
         
+        internal func findIndex(for item: ConsumableItem) -> Int {
+            items.firstIndex(of: item) ?? -1
+        }
+        
+        internal func deleteItem(item: ConsumableItem) {
+            modelContext.delete(item)
+            fetchData()
+        }
+        
         internal func addSamples() {
             let items = [ConsumableItem.itemMockConfig(name: "One Hour", price: 1),
                          ConsumableItem.itemMockConfig(name: "Three Hours", price: 3),
@@ -38,7 +47,7 @@ extension ShopView {
         
         private func fetchData() {
             do {
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { !$0.inProgress }, sortBy: [SortDescriptor(\.price)])
+                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { !$0.inProgress && !$0.ready }, sortBy: [SortDescriptor(\.price), SortDescriptor(\.added)])
                 items = try modelContext.fetch(descriptor)
             } catch {
                 print("Fetch failed")
