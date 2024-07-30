@@ -31,7 +31,7 @@ extension ShopView {
         }
         
         internal func saveItem(_ created: ConsumableItem) {
-            let item = ConsumableItem.itemMockConfig(name: created.name, price: created.price)
+            let item = ConsumableItem.itemMockConfig(name: created.name, price: created.price, rarity: created.rarity)
             modelContext.insert(item)
             fetchData()
         }
