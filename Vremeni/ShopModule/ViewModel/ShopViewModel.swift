@@ -30,6 +30,12 @@ extension ShopView {
             items.firstIndex(of: item) ?? -1
         }
         
+        internal func saveItem(_ created: ConsumableItem) {
+            let item = ConsumableItem.itemMockConfig(name: created.name, price: created.price)
+            modelContext.insert(item)
+            fetchData()
+        }
+        
         internal func deleteItem(item: ConsumableItem) {
             modelContext.delete(item)
             fetchData()

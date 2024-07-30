@@ -27,6 +27,25 @@ final class Texts {
         static let addToMachine = "Add"
     }
     
+    enum ItemCreatePage {
+        static let title = "New Item"
+        static let cancel = "Cancel"
+        static let save = "Save"
+        
+        static let price = "Price"
+        static let minPrice = "1"
+        static let maxPrice = "50"
+        static let total = "Total"
+        
+        static let general = "General"
+        static let name = "Name"
+        static let rarity = "Rarity"
+        static let valuation = "Valuation"
+        static let turnover = "Turnover (Soon)"
+        static let receiveRules = "Receive rules"
+        static let applicationRules = "Application rules"
+    }
+    
     enum MachinePage {
         static let title = "Machine"
         static let progress = "Progress"
