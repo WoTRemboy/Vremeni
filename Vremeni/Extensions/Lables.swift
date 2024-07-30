@@ -10,9 +10,21 @@ final class Texts {
         static let title = "Vremeni"
     }
     
+    enum Rarity {
+        static let common = "Common"
+        static let uncommon = "Uncommon"
+        static let rare = "Rare"
+        static let epic = "Epic"
+        static let legendary = "Legendary"
+        static let mythic = "Mythic"
+        static let transcendent = "Transcendent"
+        static let exotic = "Exotic"
+    }
+    
     enum ShopPage {
         static let title = "Fair"
         static let addItem = "Add Sample"
+        static let addToMachine = "Add"
     }
     
     enum MachinePage {

@@ -23,15 +23,15 @@ struct ShopViewGridCell: View {
                 itemImage
                     .frame(width: reader.size.width)
                 itemName
-                    .frame(width: reader.size.width, alignment: .leading)
+                    .frame(width: reader.size.width, height: 25, alignment: .leading)
                 priceView
                     .frame(width: reader.size.width, height: 17, alignment: .leading)
-                
                 buttons
                     .frame(width: reader.size.width, height: 40, alignment: .leading)
+                    .padding(.top, 8)
             }
         }
-        .frame(height: 260)
+        .frame(height: 275)
     }
     
     private var itemImage: some View {
@@ -43,17 +43,25 @@ struct ShopViewGridCell: View {
     }
     
     private var itemName: some View {
-        Text(item.name)
-            .font(.body())
-            .foregroundStyle(Color.labelPrimary)
+        HStack(spacing: 5) {
+            Rarity.rarityToImage(rarity: item.rarity)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 25)
+            
+            Text(item.name)
+                .font(.body())
+                .foregroundStyle(Color.labelPrimary)
+        }
     }
     
     private var priceView: some View {
-        LazyHStack(spacing: 5) {
+        HStack(spacing: 5) {
             Image(.vCoin)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 17)
+                .padding(.leading, 3.8)
             
             Text(String(item.price))
                 .font(.body())
@@ -62,24 +70,40 @@ struct ShopViewGridCell: View {
     }
     
     private var buttons: some View {
-        HStack(spacing: 0) {
-            Button("Add to Machine") {
+        HStack(spacing: 5) {
+            Button(action: {
                 withAnimation(.snappy) {
                     viewModel.pickItem(item: item)
                 }
+            }) {
+                Text(Texts.ShopPage.addToMachine)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
+            .frame(height: 40)
+            .foregroundStyle(Color.orange)
+            .minimumScaleFactor(0.4)
+            .buttonStyle(.bordered)
+            .tint(Color.orange)
             
             Spacer()
-            Button(String(), systemImage: "trash") {
+            Button(action: {
                 withAnimation(.snappy) {
                     viewModel.deleteItem(item: item)
                 }
+            }) {
+                Image(systemName: "trash")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
+            .frame(width: 40, height: 40)
+            .padding(.trailing, 4)
             .foregroundColor(Color.red)
+            .buttonStyle(.bordered)
+            .tint(Color.red)
+            
         }
     }
 }
 
 //#Preview {
-//    ShopViewGridCell(item: ConsumableItem.itemMockConfig(name: "One Hour", price: 1))
+//    ShopViewGridCell(item: ConsumableItem.itemMockConfig(name: "One Hour", price: 1), viewModel: ShopView.ShopViewModel())
 //}

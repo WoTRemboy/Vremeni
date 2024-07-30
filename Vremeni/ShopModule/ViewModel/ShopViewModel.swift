@@ -36,9 +36,9 @@ extension ShopView {
         }
         
         internal func addSamples() {
-            let items = [ConsumableItem.itemMockConfig(name: "One Hour", price: 1),
-                         ConsumableItem.itemMockConfig(name: "Three Hours", price: 3),
-                         ConsumableItem.itemMockConfig(name: "Five Hours", price: 5)]
+            let items = [ConsumableItem.itemMockConfig(name: "One Minute", price: 1),
+                         ConsumableItem.itemMockConfig(name: "Three Minutes", price: 3, rarity: .uncommon),
+                         ConsumableItem.itemMockConfig(name: "Five Minutes", price: 5, rarity: .rare)]
             for item in items {
                 modelContext.insert(item)
             }
