@@ -10,7 +10,7 @@ import SwiftData
 
 struct MachineView: View {
     
-    @Query(filter: #Predicate { !$0.ready }, sort: \ConsumableItem.started) private var items: [ConsumableItem]
+    @Query(filter: #Predicate { $0.inProgress }, sort: \ConsumableItem.started) private var items: [ConsumableItem]
     
     private let spacing: CGFloat = 16
     private let itemsInRows = 1

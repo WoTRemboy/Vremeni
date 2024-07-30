@@ -10,11 +10,15 @@ import SwiftData
 
 struct ShopView: View {
     
-    @Environment(\.modelContext) private var modelContext
-    @StateObject private var viewModel = ShopViewModel()
+    @State private var viewModel: ShopViewModel
     
     private let spacing: CGFloat = 16
     private let itemsInRows = 2
+    
+    init(modelContext: ModelContext) {
+        let viewModel = ShopViewModel(modelContext: modelContext)
+        _viewModel = State(initialValue: viewModel)
+    }
     
     var body: some View {
         let columns = Array(
@@ -29,7 +33,7 @@ struct ShopView: View {
                             ShopViewGridCell(item: item)
                                 .onTapGesture {
                                     withAnimation(.snappy) {
-                                        viewModel.pickItem(item: item, context: modelContext)
+                                        viewModel.pickItem(item: item)
                                     }
                                 }
                         }
@@ -39,11 +43,11 @@ struct ShopView: View {
                 .navigationTitle(Texts.Common.title)
                 .navigationBarTitleDisplayMode(.inline)
                 .background(Color.BackColors.backDefault)
-//                .toolbar {
-//                    Button("Add Samples", systemImage: "plus") {
-//
-//                    }
-//                }
+                .toolbar {
+                    Button(Texts.ShopPage.addItem, systemImage: "plus") {
+                        viewModel.addSamples()
+                    }
+                }
                 
             }
             .tabItem {
@@ -57,6 +61,6 @@ struct ShopView: View {
     }
 }
 
-#Preview {
-    ShopView()
-}
+//#Preview {
+//    ShopView()
+//}

@@ -14,7 +14,7 @@ struct ProgressBar: View {
     private let percent: CGFloat
     private let ready: Bool
     
-    init(width: CGFloat = 200, height: CGFloat = 20, percent: CGFloat = 60, ready: Bool = false) {
+    init(width: CGFloat = 200, height: CGFloat = 20, percent: CGFloat = 0, ready: Bool = false) {
         self.width = width
         self.height = height
         self.percent = percent

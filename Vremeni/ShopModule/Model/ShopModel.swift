@@ -16,16 +16,18 @@ final class ConsumableItem: Identifiable {
     let price: Int
     let added: Date
     var started: Date
-    let target: Date
+    var target: Date
+    var inProgress: Bool
     var ready: Bool
     
-    init(name: String, image: String, price: Int, added: Date, started: Date, target: Date, ready: Bool = false) {
+    init(name: String, image: String, price: Int, added: Date, started: Date, target: Date, inProgress: Bool = false, ready: Bool = false) {
         self.name = name
         self.image = image
         self.price = price
         self.added = added
         self.started = started
         self.target = target
+        self.inProgress = inProgress
         self.ready = ready
     }
 }
@@ -33,11 +35,18 @@ final class ConsumableItem: Identifiable {
 extension ConsumableItem {
     
     internal func readyToggle() {
-        ready.toggle()
+        ready = true
+        inProgress = false
     }
     
-    internal func setStartTime() {
+    internal func progressToggle() {
+        ready = false
+        inProgress = true
+    }
+    
+    internal func setMachineTime() {
         started = .now
+        target = .now.addingTimeInterval(TimeInterval(price * 60))
     }
     
     static internal func itemMockConfig(name: String, price: Int) -> ConsumableItem {
@@ -49,18 +58,5 @@ extension ConsumableItem {
         let target = added.addingTimeInterval(TimeInterval(price * 60))
         
         return ConsumableItem(name: name, image: image, price: price, added: added, started: started, target: target)
-    }
-    
-    static internal func itemsMockConfig() -> [ConsumableItem] {
-        let items = [itemMockConfig(name: "One Hour", price: 1),
-                     itemMockConfig(name: "Two Hours", price: 2),
-                     itemMockConfig(name: "Three Hours", price: 3),
-                     itemMockConfig(name: "Five Hours", price: 5),
-                     itemMockConfig(name: "Eight Hours", price: 8),
-                     itemMockConfig(name: "Twelve Hours", price: 12),
-                     itemMockConfig(name: "Eighteen Hours", price: 18),
-                     itemMockConfig(name: "Twenty Four Hours", price: 24)
-        ]
-        return items
     }
 }
