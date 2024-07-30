@@ -11,6 +11,7 @@ import SwiftData
 struct ShopView: View {
     
     @State private var viewModel: ShopViewModel
+    @State private var showingAddItemSheet = false
     
     private let spacing: CGFloat = 16
     private let itemsInRows = 2
@@ -39,10 +40,17 @@ struct ShopView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .background(Color.BackColors.backDefault)
                 .toolbar {
-                    Button(Texts.ShopPage.addItem, systemImage: "plus") {
+                    Button(Texts.ShopPage.addItem, systemImage: "rectangle.stack.badge.plus") {
                         withAnimation(.snappy) {
                             viewModel.addSamples()
                         }
+                    }
+                    
+                    Button(Texts.ShopPage.addItem, systemImage: "plus") {
+                        showingAddItemSheet.toggle()
+                    }
+                    .sheet(isPresented: $showingAddItemSheet) {
+                        ConsumableItemCreate(viewModel: viewModel)
                     }
                 }
                 
@@ -58,6 +66,13 @@ struct ShopView: View {
     }
 }
 
-//#Preview {
-//    ShopView()
-//}
+#Preview {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        return ShopView(modelContext: modelContext)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
+}

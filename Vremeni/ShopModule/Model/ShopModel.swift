@@ -16,7 +16,7 @@ final class ConsumableItem: Identifiable {
     var id = UUID()
     var name: String
     var image: String
-    var price: Int
+    var price: Float
     var rarity: Rarity
     var added: Date
     var started: Date
@@ -24,7 +24,7 @@ final class ConsumableItem: Identifiable {
     var inProgress: Bool
     var ready: Bool
     
-    init(name: String, image: String, price: Int, rarity: Rarity = .common, added: Date, started: Date, target: Date, inProgress: Bool = false, ready: Bool = false) {
+    init(name: String, image: String, price: Float, rarity: Rarity = .common, added: Date, started: Date, target: Date, inProgress: Bool = false, ready: Bool = false) {
         self.name = name
         self.image = image
         self.price = price
@@ -53,9 +53,9 @@ extension ConsumableItem {
         target = .now.addingTimeInterval(TimeInterval(price * 60))
     }
     
-    static internal func itemMockConfig(name: String, price: Int, rarity: Rarity = .common) -> ConsumableItem {
+    static internal func itemMockConfig(name: String, price: Float, rarity: Rarity = .common) -> ConsumableItem {
         let name = name
-        let image = "\(price).square"
+        let image = "\(Int(price)).square"
         let price = price
         let rarity = rarity
         let added = Date.now
@@ -68,7 +68,7 @@ extension ConsumableItem {
 
 // MARK: - Rarity
 
-enum Rarity: String, Codable {
+enum Rarity: String, Codable, Identifiable {
     case common = "Common"
     case uncommon = "Uncommon"
     case rare = "Rare"
@@ -77,6 +77,12 @@ enum Rarity: String, Codable {
     case mythic = "Mythic"
     case transcendent = "Transcendent"
     case exotic = "Exotic"
+    
+    var id: Self { self }
+    
+    static var allCases: [Rarity] {
+        return [.common, .uncommon, .rare, .epic, .legendary, .mythic, .transcendent, .exotic]
+    }
     
     static func rarityToImage(rarity: Rarity) -> Image {
         switch rarity {
