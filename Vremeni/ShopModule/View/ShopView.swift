@@ -58,6 +58,14 @@ struct ShopView: View {
     }
 }
 
-//#Preview {
-//    ShopView()
-//}
+#Preview {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
+        return ShopView(modelContext: modelContext)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
+}

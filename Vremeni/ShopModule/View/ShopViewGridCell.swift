@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ShopViewGridCell: View {
     
@@ -95,7 +96,7 @@ struct ShopViewGridCell: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
             .frame(width: 40, height: 40)
-            .padding(.trailing, 4)
+            .padding(.trailing, 5)
             .foregroundColor(Color.red)
             .buttonStyle(.bordered)
             .tint(Color.red)
@@ -104,6 +105,16 @@ struct ShopViewGridCell: View {
     }
 }
 
-//#Preview {
-//    ShopViewGridCell(item: ConsumableItem.itemMockConfig(name: "One Hour", price: 1), viewModel: ShopView.ShopViewModel())
-//}
+#Preview {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        
+        let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
+        let example = ConsumableItem.itemMockConfig(name: "One Hour", price: 1)
+        return ShopViewGridCell(item: example, viewModel: viewModel)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
+}
