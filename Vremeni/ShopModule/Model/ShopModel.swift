@@ -15,6 +15,7 @@ import SwiftData
 final class ConsumableItem: Identifiable {
     var id = UUID()
     var name: String
+    var itemDescription: String
     var image: String
     var price: Float
     var rarity: Rarity
@@ -24,8 +25,9 @@ final class ConsumableItem: Identifiable {
     var inProgress: Bool
     var ready: Bool
     
-    init(name: String, image: String, price: Float, rarity: Rarity = .common, added: Date, started: Date, target: Date, inProgress: Bool = false, ready: Bool = false) {
+    init(name: String, itemDescription: String, image: String, price: Float, rarity: Rarity = .common, added: Date, started: Date, target: Date, inProgress: Bool = false, ready: Bool = false) {
         self.name = name
+        self.itemDescription = itemDescription
         self.image = image
         self.price = price
         self.rarity = rarity
@@ -53,8 +55,9 @@ extension ConsumableItem {
         target = .now.addingTimeInterval(TimeInterval(price * 60))
     }
     
-    static internal func itemMockConfig(name: String, price: Float, rarity: Rarity = .common) -> ConsumableItem {
+    static internal func itemMockConfig(name: String, description: String = String(), price: Float, rarity: Rarity = .common) -> ConsumableItem {
         let name = name
+        let description = description
         let image = "\(Int(price)).square"
         let price = price
         let rarity = rarity
@@ -62,7 +65,7 @@ extension ConsumableItem {
         let started = Date.now
         let target = added.addingTimeInterval(TimeInterval(price * 60))
         
-        return ConsumableItem(name: name, image: image, price: price, rarity: rarity, added: added, started: started, target: target)
+        return ConsumableItem(name: name, itemDescription: description, image: image, price: price, rarity: rarity, added: added, started: started, target: target)
     }
 }
 

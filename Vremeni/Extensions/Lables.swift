@@ -39,6 +39,7 @@ final class Texts {
         
         static let general = "General"
         static let name = "Name"
+        static let description = "Description"
         static let rarity = "Rarity"
         static let valuation = "Valuation"
         static let turnover = "Turnover (Soon)"

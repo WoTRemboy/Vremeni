@@ -65,7 +65,7 @@ struct ShopViewGridCell: View {
                 .padding(.leading, 3.8)
             
             Text(String(Int(item.price)))
-                .font(.body())
+                .font(.headline())
                 .foregroundStyle(Color.labelPrimary)
         }
     }

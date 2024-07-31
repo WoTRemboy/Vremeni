@@ -25,11 +25,12 @@ struct ConsumableItemCreate: View {
             Form {
                 Section(Texts.ItemCreatePage.general) {
                     TextField(Texts.ItemCreatePage.name, text: $item.name)
-                    priceSlider
+                    TextField(Texts.ItemCreatePage.description, text: $item.itemDescription, axis: .vertical)
                 }
                 
                 Section(Texts.ItemCreatePage.valuation) {
                     picker
+                    Slider(value: $item.price, in: 1...50, step: 1)
                     totalPriceView
                 }
                 
@@ -55,19 +56,6 @@ struct ConsumableItemCreate: View {
                     }
                     .disabled(item.name.isEmpty)
                 }
-            }
-        }
-    }
-    
-    private var priceSlider: some View {
-        VStack(spacing: 5) {
-            Text(Texts.ItemCreatePage.price)
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Slider(value: $item.price, in: 1...50, step: 1)
-            HStack {
-                Text(Texts.ItemCreatePage.minPrice)
-                Spacer()
-                Text(Texts.ItemCreatePage.maxPrice)
             }
         }
     }
@@ -99,14 +87,16 @@ struct ConsumableItemCreate: View {
     }
 }
 
-//#Preview {
-//    do {
-//        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-//        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
-//        let example = ConsumableItem.itemMockConfig(name: "One Minute", price: 10, rarity: .common)
-//        return ConsumableItemCreate(item: example)
-//            .modelContainer(container)
-//    } catch {
-//        fatalError("Failed to create model container.")
-//    }
-//}
+#Preview {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
+        
+        return ConsumableItemCreate(viewModel: viewModel)
+            .modelContainer(container)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
+}
