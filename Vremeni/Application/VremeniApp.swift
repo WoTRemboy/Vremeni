@@ -6,16 +6,24 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct VremeniApp: App {
-
-    @StateObject private var dataController = DataController()
+    let container: ModelContainer
     
     var body: some Scene {
         WindowGroup {
-            ShopView()
-                .environment(\.managedObjectContext, dataController.container.viewContext)
+            ShopView(modelContext: container.mainContext)
+        }
+        .modelContainer(container)
+    }
+    
+    init() {
+        do {
+            container = try ModelContainer(for: ConsumableItem.self)
+        } catch {
+            fatalError("Failed to create ModelContainer for ConsumableItem.")
         }
     }
 }

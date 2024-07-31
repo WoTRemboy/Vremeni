@@ -6,26 +6,69 @@
 //
 
 import Foundation
-import CoreData
+import SwiftData
 
-final class ShopViewModel: ObservableObject {
+extension ShopView {
     
-    @Published private(set) var items = ConsumableItem.itemsMockConfig()
-    
-    internal func pickShopItem(context: NSManagedObjectContext, item: ConsumableItem) {
-        let newItem = Item(context: context)
-        newItem.id = UUID()
-        newItem.name = item.name
-        newItem.image = item.image
-        newItem.price = Int64(item.price)
-        newItem.added = item.added
-        newItem.started = Date.now
-        newItem.target = item.target
-        newItem.ready = item.ready
+    @Observable
+    final class ShopViewModel {
+        private var modelContext: ModelContext
+        private(set) var items = [ConsumableItem]()
         
-        try? context.save()
+        init(modelContext: ModelContext) {
+            self.modelContext = modelContext
+            fetchData()
+        }
+                
+        internal func pickItem(item: ConsumableItem) {
+            item.setMachineTime()
+            item.progressToggle()
+            fetchData()
+        }
         
-        items.removeAll { $0.id == item.id }
+        internal func findIndex(for item: ConsumableItem) -> Int {
+            items.firstIndex(of: item) ?? -1
+        }
+        
+        internal func saveItem(_ created: ConsumableItem) {
+            let item = ConsumableItem.itemMockConfig(name: created.name, description: created.itemDescription, price: created.price, rarity: created.rarity)
+            modelContext.insert(item)
+            fetchData()
+        }
+        
+        internal func deleteItem(item: ConsumableItem) {
+            modelContext.delete(item)
+            fetchData()
+        }
+        
+        internal func addSamples() {
+            let items = [ConsumableItem.itemMockConfig(name: "One Minute",
+                                                       description: "One minute is a whole 60 seconds!",
+                                                       price: 1),
+                         
+                         ConsumableItem.itemMockConfig(name: "Three Minutes",
+                                                       description: "Three minutes is a whole 180 seconds!",
+                                                       price: 3,
+                                                       rarity: .uncommon),
+                         
+                         ConsumableItem.itemMockConfig(name: "Five Minutes",
+                                                       description: "Five minutes is a whole 300 seconds!",
+                                                       price: 5,
+                                                       rarity: .rare)]
+            for item in items {
+                modelContext.insert(item)
+            }
+            fetchData()
+        }
+        
+        private func fetchData() {
+            do {
+                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { !$0.inProgress && !$0.ready }, sortBy: [SortDescriptor(\.price), SortDescriptor(\.added)])
+                items = try modelContext.fetch(descriptor)
+            } catch {
+                print("Fetch failed")
+            }
+        }
+        
     }
-    
 }

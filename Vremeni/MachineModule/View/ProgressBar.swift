@@ -12,13 +12,13 @@ struct ProgressBar: View {
     private let width: CGFloat
     private let height: CGFloat
     private let percent: CGFloat
-    private let color: Color
+    private let ready: Bool
     
-    init(width: CGFloat = 200, height: CGFloat = 20, percent: CGFloat = 60, color: Color = Color.orange) {
+    init(width: CGFloat = 200, height: CGFloat = 20, percent: CGFloat = 0, ready: Bool = false) {
         self.width = width
         self.height = height
         self.percent = percent
-        self.color = color
+        self.ready = ready
     }
     
     var body: some View {
@@ -30,7 +30,7 @@ struct ProgressBar: View {
     
     private var timeProgressLabel: some View {
         HStack {
-            Text("\(Texts.MachinePage.progress): \(Int(percent))%")
+            Text(ready ? "\(Texts.MachinePage.completed)" : "\(Texts.MachinePage.progress): \(Int(percent))%")
                 .padding(.leading)
             Spacer()
         }
@@ -46,11 +46,12 @@ struct ProgressBar: View {
             
             RoundedRectangle(cornerRadius: height, style: .continuous)
                 .frame(width: percent * multiplier, height: height)
-                .foregroundStyle(color)
+                .foregroundStyle(ready ? Color.green : Color.orange)
+                .animation(.linear, value: percent)
         }
     }
 }
 
 #Preview {
-    ProgressBar()
+    ProgressBar(ready: false)
 }
