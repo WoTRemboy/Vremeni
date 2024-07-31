@@ -61,6 +61,8 @@ final class Texts {
     
     enum ProfilePage {
         static let title = "Profile"
+        static let version = "Version"
+        static let release = "release"
     }
     
     enum TotalPrice {

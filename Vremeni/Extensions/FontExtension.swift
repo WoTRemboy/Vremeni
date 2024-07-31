@@ -33,7 +33,7 @@ extension Font {
     }
     
     static func subhead() -> Font? {
-        Font.system(size: 15, weight: .regular)
+        Font.system(size: 15, weight: .light)
     }
     
     static func footnote() -> Font? {
