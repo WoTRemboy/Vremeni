@@ -12,6 +12,10 @@ extension Font {
         Font.system(size: 35, weight: .bold)
     }
     
+    static func totalPrice() -> Font? {
+        Font.system(size: 30, weight: .medium)
+    }
+    
     static func segmentTitle() -> Font? {
         Font.system(size: 25, weight: .medium)
     }

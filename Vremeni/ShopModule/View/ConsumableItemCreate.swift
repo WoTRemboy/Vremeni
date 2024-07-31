@@ -11,7 +11,7 @@ import SwiftData
 struct ConsumableItemCreate: View {
     
     @Environment(\.dismiss) var dismiss
-    @State var item: ConsumableItem
+    @State private var item: ConsumableItem
 
     private var viewModel: ShopView.ShopViewModel
     
@@ -20,7 +20,7 @@ struct ConsumableItemCreate: View {
         self.item = ConsumableItem.itemMockConfig(name: String(), price: 1)
     }
     
-    var body: some View {
+    internal var body: some View {
         NavigationStack {
             Form {
                 Section(Texts.ItemCreatePage.general) {

@@ -77,7 +77,7 @@ struct ShopViewGridCell: View {
                     viewModel.pickItem(item: item)
                 }
             }) {
-                Text(Texts.ShopPage.addToMachine)
+                Text(Texts.ShopPage.addItem)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
             .frame(height: 40)

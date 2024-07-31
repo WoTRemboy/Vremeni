@@ -12,6 +12,7 @@ struct ShopView: View {
     
     @State private var viewModel: ShopViewModel
     @State private var showingAddItemSheet = false
+    @State private var selected: ConsumableItem? = nil
     
     private let spacing: CGFloat = 16
     private let itemsInRows = 2
@@ -21,7 +22,7 @@ struct ShopView: View {
         _viewModel = State(initialValue: viewModel)
     }
     
-    var body: some View {
+    internal var body: some View {
         let columns = Array(
             repeating: GridItem(.flexible(), spacing: spacing),
             count: itemsInRows)
@@ -32,10 +33,17 @@ struct ShopView: View {
                     LazyVGrid(columns: columns, spacing: spacing) {
                         ForEach(viewModel.items) { item in
                             ShopViewGridCell(item: item, viewModel: viewModel)
+                                .onTapGesture {
+                                    selected = item
+                                }
+                        }
+                        .sheet(item: $selected) { item in
+                            ConsumableItemDetails(item: item, viewModel: viewModel)
                         }
                     }
                     .padding(.horizontal)
                 }
+                
                 .navigationTitle(Texts.Common.title)
                 .navigationBarTitleDisplayMode(.inline)
                 .background(Color.BackColors.backDefault)

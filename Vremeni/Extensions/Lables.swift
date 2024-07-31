@@ -23,12 +23,13 @@ final class Texts {
     
     enum ShopPage {
         static let title = "Fair"
-        static let addItem = "Add Sample"
-        static let addToMachine = "Add"
+        static let addItem = "Add"
+        static let addToMachine = "Add to Machine"
     }
     
     enum ItemCreatePage {
         static let title = "New Item"
+        static let details = "Details"
         static let cancel = "Cancel"
         static let save = "Save"
         
@@ -45,6 +46,7 @@ final class Texts {
         static let turnover = "Turnover (Soon)"
         static let receiveRules = "Receive rules"
         static let applicationRules = "Application rules"
+        static let null = "Null"
     }
     
     enum MachinePage {
@@ -59,5 +61,9 @@ final class Texts {
     
     enum ProfilePage {
         static let title = "Profile"
+    }
+    
+    enum TotalPrice {
+        static let total = "Total"
     }
 }
