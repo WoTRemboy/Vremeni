@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		631A5FD92C5A548C002331F7 /* ConsumableItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631A5FD82C5A548C002331F7 /* ConsumableItemDetails.swift */; };
 		631AF3D12C4FC82C00DFD63C /* VremeniApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */; };
 		631AF3D52C4FC82D00DFD63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 631AF3D42C4FC82D00DFD63C /* Assets.xcassets */; };
 		631AF3D82C4FC82D00DFD63C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 631AF3D72C4FC82D00DFD63C /* Preview Assets.xcassets */; };
@@ -29,6 +30,9 @@
 		631AF42A2C5256CF00DFD63C /* MachineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF4292C5256CF00DFD63C /* MachineViewModel.swift */; };
 		631AF42C2C5259EC00DFD63C /* MachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */; };
 		631AF4302C5273B300DFD63C /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF42F2C5273B300DFD63C /* ProgressBar.swift */; };
+		6395B7612C5A5FBD00C0C611 /* ParameterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6395B7602C5A5FBD00C0C611 /* ParameterRow.swift */; };
+		6395B7632C5A63D900C0C611 /* TotalPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6395B7622C5A63D900C0C611 /* TotalPrice.swift */; };
+		6395B7672C5A75E500C0C611 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6395B7662C5A75E500C0C611 /* ProfileViewModel.swift */; };
 		639C76382C5952E900C1CEB8 /* ConsumableItemCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639C76372C5952E900C1CEB8 /* ConsumableItemCreate.swift */; };
 		63FD7DE02C57F9EE008487DD /* InventoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7DDF2C57F9EE008487DD /* InventoryModel.swift */; };
 		63FD7DE22C57FA12008487DD /* InventoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7DE12C57FA12008487DD /* InventoryViewModel.swift */; };
@@ -52,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		631A5FD82C5A548C002331F7 /* ConsumableItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumableItemDetails.swift; sourceTree = "<group>"; };
 		631AF3CD2C4FC82C00DFD63C /* Vremeni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vremeni.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VremeniApp.swift; sourceTree = "<group>"; };
 		631AF3D42C4FC82D00DFD63C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,6 +83,9 @@
 		631AF4292C5256CF00DFD63C /* MachineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineViewModel.swift; sourceTree = "<group>"; };
 		631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineViewGridCell.swift; sourceTree = "<group>"; };
 		631AF42F2C5273B300DFD63C /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		6395B7602C5A5FBD00C0C611 /* ParameterRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterRow.swift; sourceTree = "<group>"; };
+		6395B7622C5A63D900C0C611 /* TotalPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalPrice.swift; sourceTree = "<group>"; };
+		6395B7662C5A75E500C0C611 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		639C76372C5952E900C1CEB8 /* ConsumableItemCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumableItemCreate.swift; sourceTree = "<group>"; };
 		63FD7DDF2C57F9EE008487DD /* InventoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryModel.swift; sourceTree = "<group>"; };
 		63FD7DE12C57FA12008487DD /* InventoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewModel.swift; sourceTree = "<group>"; };
@@ -136,6 +144,7 @@
 				631AF41B2C52504C00DFD63C /* MachineModule */,
 				631AF41C2C52507400DFD63C /* InventoryModule */,
 				631AF41D2C52509000DFD63C /* ProfileModule */,
+				6395B75F2C5A5FA000C0C611 /* CommonElements */,
 				631AF4072C516E7E00DFD63C /* Extensions */,
 				631AF4062C516E4100DFD63C /* SupportFiles */,
 				631AF3D62C4FC82D00DFD63C /* Preview Content */,
@@ -209,6 +218,7 @@
 				631AF4142C5176D400DFD63C /* ShopView.swift */,
 				631AF4182C517F7900DFD63C /* ShopViewGridCell.swift */,
 				639C76372C5952E900C1CEB8 /* ConsumableItemCreate.swift */,
+				631A5FD82C5A548C002331F7 /* ConsumableItemDetails.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -256,7 +266,8 @@
 		631AF41D2C52509000DFD63C /* ProfileModule */ = {
 			isa = PBXGroup;
 			children = (
-				631AF4222C5250C400DFD63C /* ProfileView.swift */,
+				6395B7642C5A75BF00C0C611 /* View */,
+				6395B7652C5A75C700C0C611 /* ViewModel */,
 			);
 			path = ProfileModule;
 			sourceTree = "<group>";
@@ -283,6 +294,31 @@
 			isa = PBXGroup;
 			children = (
 				631AF4292C5256CF00DFD63C /* MachineViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6395B75F2C5A5FA000C0C611 /* CommonElements */ = {
+			isa = PBXGroup;
+			children = (
+				6395B7602C5A5FBD00C0C611 /* ParameterRow.swift */,
+				6395B7622C5A63D900C0C611 /* TotalPrice.swift */,
+			);
+			path = CommonElements;
+			sourceTree = "<group>";
+		};
+		6395B7642C5A75BF00C0C611 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				631AF4222C5250C400DFD63C /* ProfileView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6395B7652C5A75C700C0C611 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6395B7662C5A75E500C0C611 /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -446,8 +482,12 @@
 				63FD7DE02C57F9EE008487DD /* InventoryModel.swift in Sources */,
 				631AF42A2C5256CF00DFD63C /* MachineViewModel.swift in Sources */,
 				631AF4092C516EC100DFD63C /* FontExtension.swift in Sources */,
+				631A5FD92C5A548C002331F7 /* ConsumableItemDetails.swift in Sources */,
+				6395B7672C5A75E500C0C611 /* ProfileViewModel.swift in Sources */,
 				63FD7DE22C57FA12008487DD /* InventoryViewModel.swift in Sources */,
+				6395B7632C5A63D900C0C611 /* TotalPrice.swift in Sources */,
 				631AF40F2C516EF000DFD63C /* Lables.swift in Sources */,
+				6395B7612C5A5FBD00C0C611 /* ParameterRow.swift in Sources */,
 				631AF4192C517F7900DFD63C /* ShopViewGridCell.swift in Sources */,
 				631AF4212C5250BB00DFD63C /* InventoryView.swift in Sources */,
 				639C76382C5952E900C1CEB8 /* ConsumableItemCreate.swift in Sources */,
@@ -638,7 +678,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -673,7 +713,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

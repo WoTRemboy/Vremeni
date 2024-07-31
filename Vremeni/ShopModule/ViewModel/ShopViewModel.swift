@@ -31,7 +31,7 @@ extension ShopView {
         }
         
         internal func saveItem(_ created: ConsumableItem) {
-            let item = ConsumableItem.itemMockConfig(name: created.name, price: created.price, rarity: created.rarity)
+            let item = ConsumableItem.itemMockConfig(name: created.name, description: created.itemDescription, price: created.price, rarity: created.rarity)
             modelContext.insert(item)
             fetchData()
         }
@@ -42,9 +42,19 @@ extension ShopView {
         }
         
         internal func addSamples() {
-            let items = [ConsumableItem.itemMockConfig(name: "One Minute", price: 1),
-                         ConsumableItem.itemMockConfig(name: "Three Minutes", price: 3, rarity: .uncommon),
-                         ConsumableItem.itemMockConfig(name: "Five Minutes", price: 5, rarity: .rare)]
+            let items = [ConsumableItem.itemMockConfig(name: "One Minute",
+                                                       description: "One minute is a whole 60 seconds!",
+                                                       price: 1),
+                         
+                         ConsumableItem.itemMockConfig(name: "Three Minutes",
+                                                       description: "Three minutes is a whole 180 seconds!",
+                                                       price: 3,
+                                                       rarity: .uncommon),
+                         
+                         ConsumableItem.itemMockConfig(name: "Five Minutes",
+                                                       description: "Five minutes is a whole 300 seconds!",
+                                                       price: 5,
+                                                       rarity: .rare)]
             for item in items {
                 modelContext.insert(item)
             }

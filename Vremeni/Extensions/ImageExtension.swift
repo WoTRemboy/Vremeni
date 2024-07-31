@@ -12,6 +12,10 @@ extension Image {
         static let vCoin = Image("VCoin")
     }
     
+    enum ProfilePage {
+        static let about = Image("AboutIcon")
+    }
+    
     enum Rarity {
         static let common = Image("RarityCommon")
         static let uncommon = Image("RarityUncommon")
