@@ -17,7 +17,7 @@ struct ProfileView: View {
                 Section(Texts.ProfilePage.version) {
                     version
                 }
-                // Joke
+                // Jokes
                 Section("CEO") {
                     Text("Mikhail Tverdokhleb 👑")
                 }
@@ -25,7 +25,7 @@ struct ProfileView: View {
                     Text("Roman Tverdokhleb ⛏️")
                 }
                 Section("Company of the year") {
-                    Text("Vremeni Inc. 💸")
+                    Link("Vremeni Inc. 💸", destination: URL(string: "mailto:vremeni@icloud.com")!)
                 }
             }
             .navigationTitle(Texts.Common.title)
