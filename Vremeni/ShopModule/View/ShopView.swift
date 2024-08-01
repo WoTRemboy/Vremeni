@@ -28,12 +28,18 @@ struct ShopView: View {
     internal var body: some View {
         TabView {
             NavigationStack {
-                ScrollView {
-                    picker
-                        .padding(.horizontal)
-                    collection
-                        .padding([.horizontal, .top])
+                ZStack {
+                    ScrollView {
+                        picker
+                            .padding(.horizontal)
+                        collection
+                            .padding([.horizontal, .top])
+                    }
+                    if viewModel.items.isEmpty {
+                        Text(Texts.ShopPage.placeholder)
+                    }
                 }
+                
                 .scrollDismissesKeyboard(.immediately)
                 .navigationTitle(Texts.Common.title)
                 .navigationBarTitleDisplayMode(.inline)

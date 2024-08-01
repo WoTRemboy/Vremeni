@@ -24,6 +24,7 @@ final class Texts {
     enum ShopPage {
         static let title = "Fair"
         static let searchItems = "Search items"
+        static let placeholder = "Click on the '+' button to add an Item"
 
         static let addItem = "Add"
         static let addToMachine = "Add to Machine"
@@ -58,12 +59,15 @@ final class Texts {
     
     enum MachinePage {
         static let title = "Machine"
+        static let placeholder = "Items in progress will be displayed here"
+        
         static let progress = "Progress"
         static let completed = "Completed"
     }
     
     enum InventoryPage {
         static let title = "Inventory"
+        static let placeholder = "Collected items will be displayed here"
     }
     
     enum ProfilePage {

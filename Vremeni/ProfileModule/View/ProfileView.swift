@@ -17,6 +17,16 @@ struct ProfileView: View {
                 Section(Texts.ProfilePage.version) {
                     version
                 }
+                // Joke
+                Section("CEO") {
+                    Text("Mikhail Tverdokhleb 👑")
+                }
+                Section("Bondman") {
+                    Text("Roman Tverdokhleb ⛏️")
+                }
+                Section("Company of the year") {
+                    Text("Vremeni Inc. 💸")
+                }
             }
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
