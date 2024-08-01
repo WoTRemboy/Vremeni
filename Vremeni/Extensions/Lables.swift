@@ -23,8 +23,15 @@ final class Texts {
     
     enum ShopPage {
         static let title = "Fair"
+        static let searchItems = "Search items"
+
         static let addItem = "Add"
         static let addToMachine = "Add to Machine"
+        static let research = "Research by rule"
+        
+        static let status = "Status"
+        static let available = "Available"
+        static let locked = "Locked"
     }
     
     enum ItemCreatePage {
@@ -44,7 +51,7 @@ final class Texts {
         static let rarity = "Rarity"
         static let valuation = "Valuation"
         static let turnover = "Turnover (Soon)"
-        static let receiveRules = "Receive rules"
+        static let receiveRules = "Research rule"
         static let applicationRules = "Application rules"
         static let null = "Null"
     }
