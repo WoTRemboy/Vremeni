@@ -95,7 +95,7 @@ struct ConsumableItemDetails: View {
                 dismiss()
             }
         }) {
-            Text(Texts.ShopPage.addToMachine)
+            Text(item.enabled ? Texts.ShopPage.addToMachine : Texts.ShopPage.research)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
         .frame(height: 50)

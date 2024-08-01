@@ -32,7 +32,7 @@ struct ShopViewGridCell: View {
                     .padding(.top, 8)
             }
         }
-        .frame(height: 275)
+        .frame(height: 280)
     }
     
     private var itemImage: some View {
@@ -61,8 +61,7 @@ struct ShopViewGridCell: View {
             Image(.vCoin)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 17)
-                .padding(.leading, 3.8)
+                .frame(width: 25)
             
             Text(String(Int(item.price)))
                 .font(.headline())
@@ -77,7 +76,7 @@ struct ShopViewGridCell: View {
                     viewModel.pickItem(item: item)
                 }
             }) {
-                Text(Texts.ShopPage.addItem)
+                Text(item.enabled ? Texts.ShopPage.addItem : Texts.ShopPage.research)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
             .frame(height: 40)
@@ -92,7 +91,7 @@ struct ShopViewGridCell: View {
                     viewModel.deleteItem(item: item)
                 }
             }) {
-                Image(systemName: "trash")
+                Image(systemName: "archivebox")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
             .frame(width: 40, height: 40)
@@ -112,7 +111,7 @@ struct ShopViewGridCell: View {
         let modelContext = ModelContext(container)
         
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
-        let example = ConsumableItem.itemMockConfig(name: "One Hour", price: 1)
+        let example = ConsumableItem.itemMockConfig(name: "One Hour", price: 1, enabled: true)
         return ShopViewGridCell(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")

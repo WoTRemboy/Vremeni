@@ -19,13 +19,16 @@ final class ConsumableItem: Identifiable {
     var image: String
     var price: Float
     var rarity: Rarity
+    
     var added: Date
     var started: Date
     var target: Date
+    
+    var enabled: Bool
     var inProgress: Bool
     var ready: Bool
     
-    init(name: String, itemDescription: String, image: String, price: Float, rarity: Rarity = .common, added: Date, started: Date, target: Date, inProgress: Bool = false, ready: Bool = false) {
+    init(name: String, itemDescription: String, image: String, price: Float, rarity: Rarity = .common, added: Date, started: Date, target: Date, enabled: Bool = true, inProgress: Bool = false, ready: Bool = false) {
         self.name = name
         self.itemDescription = itemDescription
         self.image = image
@@ -34,6 +37,7 @@ final class ConsumableItem: Identifiable {
         self.added = added
         self.started = started
         self.target = target
+        self.enabled = enabled
         self.inProgress = inProgress
         self.ready = ready
     }
@@ -55,17 +59,18 @@ extension ConsumableItem {
         target = .now.addingTimeInterval(TimeInterval(price * 60))
     }
     
-    static internal func itemMockConfig(name: String, description: String = String(), price: Float, rarity: Rarity = .common) -> ConsumableItem {
+    static internal func itemMockConfig(name: String, description: String = String(), price: Float, rarity: Rarity = .common, enabled: Bool = true) -> ConsumableItem {
         let name = name
         let description = description
         let image = "\(Int(price)).square"
         let price = price
+        let enable = enabled
         let rarity = rarity
         let added = Date.now
         let started = Date.now
         let target = added.addingTimeInterval(TimeInterval(price * 60))
         
-        return ConsumableItem(name: name, itemDescription: description, image: image, price: price, rarity: rarity, added: added, started: started, target: target)
+        return ConsumableItem(name: name, itemDescription: description, image: image, price: price, rarity: rarity, added: added, started: started, target: target, enabled: enable)
     }
 }
 

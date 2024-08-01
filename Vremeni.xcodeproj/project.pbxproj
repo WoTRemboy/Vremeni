@@ -678,7 +678,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -713,7 +713,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

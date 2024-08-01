@@ -21,14 +21,21 @@ struct InventoryView: View {
             count: itemsInRows)
         
         NavigationStack {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: spacing) {
-                    ForEach(items) { item in
-                        MachineViewGridCell(item: item)
+            ZStack {
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: spacing) {
+                        ForEach(items) { item in
+                            MachineViewGridCell(item: item)
+                        }
                     }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
+                
+                if items.isEmpty {
+                    Text(Texts.InventoryPage.placeholder)
+                }
             }
+            
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
             .background(Color.BackColors.backDefault)

@@ -12,64 +12,65 @@ struct ConsumableItemCreate: View {
     
     @Environment(\.dismiss) var dismiss
     @State private var item: ConsumableItem
-
+    
     private var viewModel: ShopView.ShopViewModel
     
     init(viewModel: ShopView.ShopViewModel) {
         self.viewModel = viewModel
-        self.item = ConsumableItem.itemMockConfig(name: String(), price: 1)
+        self.item = ConsumableItem.itemMockConfig(name: String(), price: 1, enabled: false)
     }
     
     internal var body: some View {
         NavigationStack {
-            Form {
-                Section(Texts.ItemCreatePage.general) {
-                    TextField(Texts.ItemCreatePage.name, text: $item.name)
-                    TextField(Texts.ItemCreatePage.description, text: $item.itemDescription, axis: .vertical)
-                }
-                
-                Section(Texts.ItemCreatePage.valuation) {
-                    picker
-                    Slider(value: $item.price, in: 1...50, step: 1)
-                    totalPriceView
-                }
-                
-                Section(Texts.ItemCreatePage.turnover) {
-                    Text(Texts.ItemCreatePage.receiveRules)
-                    Text(Texts.ItemCreatePage.applicationRules)
-                }
-            }
-            .navigationTitle(Texts.ItemCreatePage.title)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(Texts.ItemCreatePage.cancel) {
-                        dismiss()
+            form
+                .scrollDismissesKeyboard(.immediately)
+                .navigationTitle(Texts.ItemCreatePage.title)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        cancelButton
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        saveButton
                     }
                 }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(Texts.ItemCreatePage.save) {
-                        withAnimation(.snappy) {
-                            viewModel.saveItem(item)
-                            dismiss()
-                        }
-                    }
-                    .disabled(item.name.isEmpty)
-                }
-            }
         }
     }
     
-    private var totalPriceView: some View {
-        HStack(spacing: 5) {
-            Text(Texts.ItemCreatePage.total)
+    private var cancelButton: some View {
+        Button(Texts.ItemCreatePage.cancel) {
+            dismiss()
+        }
+    }
+    
+    private var saveButton: some View {
+        Button(Texts.ItemCreatePage.save) {
+            withAnimation(.snappy) {
+                viewModel.saveItem(item)
+                dismiss()
+            }
+        }
+        .disabled(item.name.isEmpty)
+    }
+    
+    private var form: some View {
+        Form {
+            Section(Texts.ItemCreatePage.general) {
+                TextField(Texts.ItemCreatePage.name, text: $item.name)
+                TextField(Texts.ItemCreatePage.description, text: $item.itemDescription, axis: .vertical)
+                Toggle(Texts.ShopPage.available, isOn: $item.enabled)
+            }
             
-            Spacer()
-            Text(String(Int(item.price)))
-            Image.ShopPage.vCoin
-                .resizable()
-                .scaledToFit()
-                .frame(width: 17)
+            Section(Texts.ItemCreatePage.valuation) {
+                picker
+                totalPriceView
+                Slider(value: $item.price, in: 1...50, step: 1)
+            }
+            
+            Section(Texts.ItemCreatePage.turnover) {
+                Text(Texts.ItemCreatePage.receiveRules)
+                Text(Texts.ItemCreatePage.applicationRules)
+            }
         }
     }
     
@@ -83,6 +84,19 @@ struct ConsumableItemCreate: View {
             Text(Texts.Rarity.mythic).tag(Rarity.mythic)
             Text(Texts.Rarity.transcendent).tag(Rarity.transcendent)
             Text(Texts.Rarity.exotic).tag(Rarity.exotic)
+        }
+    }
+    
+    private var totalPriceView: some View {
+        HStack(spacing: 5) {
+            Text(Texts.ItemCreatePage.total)
+            
+            Spacer()
+            Text(String(Int(item.price)))
+            Image.ShopPage.vCoin
+                .resizable()
+                .scaledToFit()
+                .frame(width: 17)
         }
     }
 }
