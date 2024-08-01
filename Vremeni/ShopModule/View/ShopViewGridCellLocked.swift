@@ -62,10 +62,13 @@ struct ShopViewGridCellLocked: View {
     private var stats: some View {
         VStack {
             Text("Perfect Score")
+                .lineLimit(1)
                 .font(.ruleTitle())
                 .foregroundStyle(Color.LabelColors.labelPrimary)
             
             Text("The aspiration of any adequate person")
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
                 .font(.subhead())
                 .foregroundStyle(Color.LabelColors.labelSecondary)
                 .padding(.top, -5)
@@ -91,7 +94,7 @@ struct ShopViewGridCellLocked: View {
             .padding(.top, 5)
             
         }
-        .padding(.top)
+        .padding(.top, 10)
     }
     
     private var priceView: some View {
