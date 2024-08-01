@@ -16,9 +16,9 @@ struct ShopView: View {
     
     @State private var showingAddItemSheet = false
     @State private var searchText = String()
+    @State private var itemsInRows = 2
     
     private let spacing: CGFloat = 16
-    private let itemsInRows = 2
     
     init(modelContext: ModelContext) {
         let viewModel = ShopViewModel(modelContext: modelContext)
@@ -33,7 +33,8 @@ struct ShopView: View {
                         picker
                             .padding(.horizontal)
                         collection
-                            .padding([.horizontal, .top])
+                            .padding(.horizontal)
+                            .padding(.top, 8)
                     }
                     if viewModel.items.isEmpty {
                         Text(Texts.ShopPage.placeholder)
@@ -92,10 +93,23 @@ struct ShopView: View {
         
         return LazyVGrid(columns: columns, spacing: spacing) {
             ForEach(searchResults) { item in
-                ShopViewGridCell(item: item, viewModel: viewModel)
-                    .onTapGesture {
-                        selected = item
-                    }
+                if item.enabled {
+                    ShopViewGridCell(item: item, viewModel: viewModel)
+                        .onAppear(perform: {
+                            itemsInRows = 2
+                        })
+                        .onTapGesture {
+                            selected = item
+                        }
+                } else {
+                    ShopViewGridCellLocked(item: item)
+                        .onAppear(perform: {
+                            itemsInRows = 1
+                        })
+                        .onTapGesture {
+                            selected = item
+                        }
+                }
             }
             .sheet(item: $selected) { item in
                 ConsumableItemDetails(item: item, viewModel: viewModel)
