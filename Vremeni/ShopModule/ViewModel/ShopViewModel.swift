@@ -61,12 +61,12 @@ extension ShopView {
                          ConsumableItem.itemMockConfig(name: "Five Minutes",
                                                        description: "Five minutes is a whole 300 seconds!",
                                                        price: 5,
-                                                       rarity: .rare),
-                         ConsumableItem.itemMockConfig(name: "Seven Minutes",
-                                                       description: "Five minutes is a whole 420 seconds!",
-                                                       price: 7,
                                                        rarity: .rare,
-                                                       enabled: false)]
+                                                       enabled: false),
+                         ConsumableItem.itemMockConfig(name: "Seven Minutes",
+                                                       description: "Seven minutes is a whole 420 seconds!",
+                                                       price: 7,
+                                                       rarity: .rare)]
             for item in items {
                 modelContext.insert(item)
             }

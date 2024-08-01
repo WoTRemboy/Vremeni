@@ -28,7 +28,7 @@ final class Texts {
 
         static let addItem = "Add"
         static let addToMachine = "Add to Machine"
-        static let research = "Research by rule"
+        static let research = "Research"
         
         static let status = "Status"
         static let available = "Available"
