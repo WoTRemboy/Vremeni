@@ -10,6 +10,11 @@ final class Texts {
         static let title = "Vremeni"
     }
     
+    enum ProgressBar {
+        static let progress = "Progress"
+        static let completed = "Completed"
+    }
+    
     enum Rarity {
         static let common = "Common"
         static let uncommon = "Uncommon"
@@ -59,10 +64,10 @@ final class Texts {
     
     enum MachinePage {
         static let title = "Machine"
-        static let placeholder = "Items in progress will be displayed here"
         
-        static let progress = "Progress"
-        static let completed = "Completed"
+        static let workshop = "Workshop"
+        static let emptyTitle = "Add an Item"
+        static let queue = "Queue"
     }
     
     enum InventoryPage {

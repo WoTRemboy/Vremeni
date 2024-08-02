@@ -21,20 +21,24 @@ struct MachineView: View {
             count: itemsInRows)
         
         NavigationStack {
-            ZStack {
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: spacing) {
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: spacing) {
+                    Section(header: sectionHeader) {
+                        if items.isEmpty {
+                            EmptyMachineViewGridCell()
+                        }
                         ForEach(items) { item in
                             MachineViewGridCell(item: item)
                         }
+                        NewSlotMachineViewGridCell()
                     }
-                    .padding(.horizontal)
+                    Section(header: secondSectionHeader) {
+                        
+                    }
                 }
-                
-                if items.isEmpty {
-                    Text(Texts.MachinePage.placeholder)
-                }
+                .padding(.horizontal)
             }
+            
             
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
@@ -44,6 +48,20 @@ struct MachineView: View {
             Image.TabBar.machine
             Text(Texts.MachinePage.title)
         }
+    }
+    
+    private var sectionHeader: some View {
+        Text(Texts.MachinePage.workshop)
+            .font(.segmentTitle())
+            .foregroundStyle(Color.LabelColors.labelPrimary)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private var secondSectionHeader: some View {
+        Text(Texts.MachinePage.queue)
+            .font(.segmentTitle())
+            .foregroundStyle(Color.LabelColors.labelPrimary)
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

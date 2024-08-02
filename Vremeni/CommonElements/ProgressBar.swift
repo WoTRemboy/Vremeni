@@ -30,7 +30,7 @@ struct ProgressBar: View {
     
     private var timeProgressLabel: some View {
         HStack {
-            Text(ready ? "\(Texts.MachinePage.completed)" : "\(Texts.MachinePage.progress): \(Int(percent))%")
+            Text(ready ? "\(Texts.ProgressBar.completed)" : "\(Texts.ProgressBar.progress): \(Int(percent))%")
                 .padding(.leading)
             Spacer()
         }
