@@ -49,8 +49,8 @@ struct ShopView: View {
                     toolBarButtonSamples
                     toolBarButtonPlus
                 }
+                .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
             }
-            .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
             .tabItem {
                 Image.TabBar.shop
                 Text(Texts.ShopPage.title)
