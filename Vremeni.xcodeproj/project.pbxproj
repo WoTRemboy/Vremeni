@@ -31,6 +31,9 @@
 		631AF42C2C5259EC00DFD63C /* MachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */; };
 		631AF4302C5273B300DFD63C /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF42F2C5273B300DFD63C /* ProgressBar.swift */; };
 		6373291B2C5C1E9600D7A719 /* ShopViewGridCellLocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6373291A2C5C1E9600D7A719 /* ShopViewGridCellLocked.swift */; };
+		638620A92C5D4F1F00453944 /* EmptyMachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620A82C5D4F1F00453944 /* EmptyMachineViewGridCell.swift */; };
+		638620AB2C5D566400453944 /* NewSlotMachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620AA2C5D566400453944 /* NewSlotMachineViewGridCell.swift */; };
+		638620AD2C5D7D0300453944 /* QueueMachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620AC2C5D7D0300453944 /* QueueMachineViewGridCell.swift */; };
 		6395B7612C5A5FBD00C0C611 /* ParameterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6395B7602C5A5FBD00C0C611 /* ParameterRow.swift */; };
 		6395B7632C5A63D900C0C611 /* TotalPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6395B7622C5A63D900C0C611 /* TotalPrice.swift */; };
 		6395B7672C5A75E500C0C611 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6395B7662C5A75E500C0C611 /* ProfileViewModel.swift */; };
@@ -85,6 +88,9 @@
 		631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineViewGridCell.swift; sourceTree = "<group>"; };
 		631AF42F2C5273B300DFD63C /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		6373291A2C5C1E9600D7A719 /* ShopViewGridCellLocked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewGridCellLocked.swift; sourceTree = "<group>"; };
+		638620A82C5D4F1F00453944 /* EmptyMachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMachineViewGridCell.swift; sourceTree = "<group>"; };
+		638620AA2C5D566400453944 /* NewSlotMachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSlotMachineViewGridCell.swift; sourceTree = "<group>"; };
+		638620AC2C5D7D0300453944 /* QueueMachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueMachineViewGridCell.swift; sourceTree = "<group>"; };
 		6395B7602C5A5FBD00C0C611 /* ParameterRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterRow.swift; sourceTree = "<group>"; };
 		6395B7622C5A63D900C0C611 /* TotalPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalPrice.swift; sourceTree = "<group>"; };
 		6395B7662C5A75E500C0C611 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -287,8 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				631AF41E2C5250AF00DFD63C /* MachineView.swift */,
-				631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */,
-				631AF42F2C5273B300DFD63C /* ProgressBar.swift */,
+				638620A72C5D4ECD00453944 /* VGridCells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -301,10 +306,22 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		638620A72C5D4ECD00453944 /* VGridCells */ = {
+			isa = PBXGroup;
+			children = (
+				631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */,
+				638620A82C5D4F1F00453944 /* EmptyMachineViewGridCell.swift */,
+				638620AA2C5D566400453944 /* NewSlotMachineViewGridCell.swift */,
+				638620AC2C5D7D0300453944 /* QueueMachineViewGridCell.swift */,
+			);
+			path = VGridCells;
+			sourceTree = "<group>";
+		};
 		6395B75F2C5A5FA000C0C611 /* CommonElements */ = {
 			isa = PBXGroup;
 			children = (
 				6395B7602C5A5FBD00C0C611 /* ParameterRow.swift */,
+				631AF42F2C5273B300DFD63C /* ProgressBar.swift */,
 				6395B7622C5A63D900C0C611 /* TotalPrice.swift */,
 			);
 			path = CommonElements;
@@ -484,8 +501,10 @@
 				631AF4112C516F0000DFD63C /* DateFormats.swift in Sources */,
 				63FD7DE02C57F9EE008487DD /* InventoryModel.swift in Sources */,
 				631AF42A2C5256CF00DFD63C /* MachineViewModel.swift in Sources */,
+				638620A92C5D4F1F00453944 /* EmptyMachineViewGridCell.swift in Sources */,
 				631AF4092C516EC100DFD63C /* FontExtension.swift in Sources */,
 				631A5FD92C5A548C002331F7 /* ConsumableItemDetails.swift in Sources */,
+				638620AB2C5D566400453944 /* NewSlotMachineViewGridCell.swift in Sources */,
 				6395B7672C5A75E500C0C611 /* ProfileViewModel.swift in Sources */,
 				63FD7DE22C57FA12008487DD /* InventoryViewModel.swift in Sources */,
 				6395B7632C5A63D900C0C611 /* TotalPrice.swift in Sources */,
@@ -498,6 +517,7 @@
 				631AF42C2C5259EC00DFD63C /* MachineViewGridCell.swift in Sources */,
 				631AF4232C5250C400DFD63C /* ProfileView.swift in Sources */,
 				631AF4172C5176DE00DFD63C /* ShopModel.swift in Sources */,
+				638620AD2C5D7D0300453944 /* QueueMachineViewGridCell.swift in Sources */,
 				631AF40D2C516EDD00DFD63C /* ImageExtension.swift in Sources */,
 				6373291B2C5C1E9600D7A719 /* ShopViewGridCellLocked.swift in Sources */,
 				631AF40B2C516ECF00DFD63C /* ColorExtension.swift in Sources */,
@@ -682,7 +702,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.5;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -717,7 +737,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.5;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

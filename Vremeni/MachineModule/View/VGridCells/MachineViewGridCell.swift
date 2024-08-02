@@ -28,7 +28,6 @@ struct MachineViewGridCell: View {
                             percent: item.ready ? 100 : viewModel.percent,
                             ready: item.ready)
                     .padding(.bottom)
-                // to be changed
                     .onAppear(perform: {
                         !item.ready ? viewModel.startProgress(for: item) : nil
                     })
@@ -36,6 +35,7 @@ struct MachineViewGridCell: View {
                         !item.ready ? viewModel.stopProgress() : nil
                     })
             }
+            .frame(height: reader.size.height)
             .background(Color.BackColors.backElevated)
             .cornerRadius(25)
             .shadow(color: Color.black.opacity(0.1), radius: 20)

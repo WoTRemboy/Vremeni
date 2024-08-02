@@ -24,6 +24,10 @@ extension Font {
         Font.system(size: 22, weight: .medium)
     }
     
+    static func emptyCellTitle() -> Font? {
+        Font.system(size: 22, weight: .light)
+    }
+    
     static func title() -> Font? {
         Font.system(size: 20, weight: .medium)
     }

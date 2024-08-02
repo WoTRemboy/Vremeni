@@ -10,7 +10,7 @@ import SwiftData
 
 struct MachineView: View {
     
-    @Query(filter: #Predicate { $0.inProgress }, sort: \ConsumableItem.started) private var items: [ConsumableItem]
+    @Query(filter: #Predicate { $0.inMachine }, sort: \ConsumableItem.started) var items: [ConsumableItem]
     
     private let spacing: CGFloat = 16
     private let itemsInRows = 1
@@ -21,20 +21,29 @@ struct MachineView: View {
             count: itemsInRows)
         
         NavigationStack {
-            ZStack {
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: spacing) {
-                        ForEach(items) { item in
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: spacing) {
+                    Section(header: sectionHeader) {
+                        if items.filter({ $0.inProgress }).isEmpty {
+                            EmptyMachineViewGridCell()
+                        }
+                        ForEach(items.filter({ $0.inProgress })) { item in
                             MachineViewGridCell(item: item)
                         }
+                        NewSlotMachineViewGridCell()
                     }
-                    .padding(.horizontal)
+                    
+                    if !items.filter({ $0.inMachine }).isEmpty {
+                        Section(header: secondSectionHeader) {
+                            ForEach(items.filter({ $0.inMachine })) { item in
+                                QueueMachineViewGridCell(item: item)
+                            }
+                        }
+                    }
                 }
-                
-                if items.isEmpty {
-                    Text(Texts.MachinePage.placeholder)
-                }
+                .padding(.horizontal)
             }
+            
             
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
@@ -44,6 +53,20 @@ struct MachineView: View {
             Image.TabBar.machine
             Text(Texts.MachinePage.title)
         }
+    }
+    
+    private var sectionHeader: some View {
+        Text(Texts.MachinePage.workshop)
+            .font(.segmentTitle())
+            .foregroundStyle(Color.LabelColors.labelPrimary)
+            .frame(maxWidth: .infinity, alignment: .leading)
+    }
+    
+    private var secondSectionHeader: some View {
+        Text(Texts.MachinePage.queue)
+            .font(.segmentTitle())
+            .foregroundStyle(Color.LabelColors.labelPrimary)
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

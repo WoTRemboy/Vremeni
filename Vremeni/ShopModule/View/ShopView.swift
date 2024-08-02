@@ -40,7 +40,7 @@ struct ShopView: View {
                         Text(Texts.ShopPage.placeholder)
                     }
                 }
-                
+                .scrollDisabled(viewModel.items.isEmpty)
                 .scrollDismissesKeyboard(.immediately)
                 .navigationTitle(Texts.Common.title)
                 .navigationBarTitleDisplayMode(.inline)
@@ -49,8 +49,8 @@ struct ShopView: View {
                     toolBarButtonSamples
                     toolBarButtonPlus
                 }
+                .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
             }
-            .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
             .tabItem {
                 Image.TabBar.shop
                 Text(Texts.ShopPage.title)
@@ -95,17 +95,17 @@ struct ShopView: View {
             ForEach(searchResults) { item in
                 if item.enabled {
                     ShopViewGridCell(item: item, viewModel: viewModel)
-                        .onAppear(perform: {
+                        .onAppear {
                             itemsInRows = 2
-                        })
+                        }
                         .onTapGesture {
                             selected = item
                         }
                 } else {
-                    ShopViewGridCellLocked(item: item)
-                        .onAppear(perform: {
+                    ShopViewGridCellLocked(item: item, viewModel: viewModel)
+                        .onAppear {
                             itemsInRows = 1
-                        })
+                        }
                         .onTapGesture {
                             selected = item
                         }

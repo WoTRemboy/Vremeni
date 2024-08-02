@@ -91,7 +91,11 @@ struct ConsumableItemDetails: View {
     private var buyButton: some View {
         Button(action: {
             withAnimation(.snappy) {
-                viewModel.pickItem(item: item)
+                if item.enabled {
+                    viewModel.pickItem(item: item)
+                } else {
+                    viewModel.unlockItem(item: item)
+                }
                 dismiss()
             }
         }) {

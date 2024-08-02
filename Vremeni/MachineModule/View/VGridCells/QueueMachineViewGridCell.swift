@@ -1,27 +1,23 @@
 //
-//  ShopViewGridCellLocked.swift
+//  QueueMachineViewGridCell.swift
 //  Vremeni
 //
-//  Created by Roman Tverdokhleb on 8/1/24.
+//  Created by Roman Tverdokhleb on 8/2/24.
 //
 
 import SwiftUI
-import SwiftData
 
-struct ShopViewGridCellLocked: View {
-    
+struct QueueMachineViewGridCell: View {
     private let item: ConsumableItem
-    private var viewModel: ShopView.ShopViewModel
     
-    init(item: ConsumableItem, viewModel: ShopView.ShopViewModel) {
+    init(item: ConsumableItem) {
         self.item = item
-        self.viewModel = viewModel
     }
     
     var body: some View {
         GeometryReader { reader in
             VStack(spacing: 16) {
-                itemInfo
+                content
                     .padding()
                     .frame(width: reader.size.width, alignment: .leading)
             }
@@ -32,7 +28,7 @@ struct ShopViewGridCellLocked: View {
         .frame(height: 220)
     }
     
-    private var itemInfo: some View {
+    private var content: some View {
         HStack(spacing: 16) {
             VStack(spacing: 10) {
                 Image(systemName: item.image)
@@ -40,7 +36,7 @@ struct ShopViewGridCellLocked: View {
                     .scaledToFit()
                     .fontWeight(.light)
                     .foregroundStyle(Color.accentColor, Color.cyan)
-                itemName
+                itemImageName
             }
             
             stats
@@ -48,14 +44,14 @@ struct ShopViewGridCellLocked: View {
         }
     }
     
-    private var itemName: some View {
+    private var itemImageName: some View {
         HStack(spacing: 5) {
             Rarity.rarityToImage(rarity: item.rarity)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 25)
             
-            Text(item.name)
+            Text(item.rarity.rawValue)
                 .font(.body())
                 .foregroundStyle(Color.labelPrimary)
         }
@@ -64,12 +60,12 @@ struct ShopViewGridCellLocked: View {
     
     private var stats: some View {
         VStack {
-            Text("Perfect Score")
+            Text(item.name)
                 .lineLimit(1)
                 .font(.ruleTitle())
                 .foregroundStyle(Color.LabelColors.labelPrimary)
             
-            Text("The aspiration of any adequate person")
+            Text(item.itemDescription)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .font(.subhead())
@@ -81,19 +77,7 @@ struct ShopViewGridCellLocked: View {
             priceView
                 .padding(.top, 5)
             
-            Button(action: {
-                withAnimation(.snappy) {
-                    viewModel.unlockItem(item: item)
-                }
-            }) {
-                Text(Texts.ShopPage.research)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-            }
-            .frame(height: 40)
-            .foregroundStyle(Color.orange)
-            .minimumScaleFactor(0.4)
-            .buttonStyle(.bordered)
-            .tint(Color.orange)
+            buttons
             .padding(.top, 5)
             
         }
@@ -115,18 +99,42 @@ struct ShopViewGridCellLocked: View {
                 .frame(width: 17)
         }
     }
+    
+    private var buttons: some View {
+        HStack(spacing: 16) {
+            Button(action: {
+                withAnimation(.snappy) {
+//                    viewModel.pickItem(item: item)
+                }
+            }) {
+                Image(systemName: "arrow.up")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+            .frame(width: 80, height: 40)
+            .foregroundStyle(Color.green)
+            .minimumScaleFactor(0.4)
+            .buttonStyle(.bordered)
+            .tint(Color.green)
+            
+            Button(action: {
+                withAnimation(.snappy) {
+//                    viewModel.deleteItem(item: item)
+                }
+            }) {
+                Image(systemName: "trash")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+            .frame(width: 40, height: 40)
+            .padding(.trailing, 5)
+            .foregroundColor(Color.red)
+            .buttonStyle(.bordered)
+            .tint(Color.red) 
+        }
+    }
 }
 
 #Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
-        let modelContext = ModelContext(container)
-        
-        let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
-        let example = ConsumableItem.itemMockConfig(name: "One Hour", price: 1, enabled: false)
-        return ShopViewGridCell(item: example, viewModel: viewModel)
-    } catch {
-        fatalError("Failed to create model container.")
-    }
+    let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common, enabled: false)
+    return QueueMachineViewGridCell(item: example)
 }
+

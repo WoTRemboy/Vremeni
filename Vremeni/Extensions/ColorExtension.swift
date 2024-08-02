@@ -29,4 +29,10 @@ extension Color {
         static let supportOverlay = Color("SupportOverlay")
         static let supportSegmented = Color("SupportSegmented")
     }
+    
+    enum Tints {
+        static let orange = Color("OrangeTint")
+        static let green = Color("GreenTint")
+        static let blue = Color("BlueTint")
+    }
 }

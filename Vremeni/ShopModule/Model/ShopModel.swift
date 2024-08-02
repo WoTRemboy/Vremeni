@@ -17,7 +17,11 @@ final class ConsumableItem: Identifiable {
     var name: String
     var itemDescription: String
     var image: String
+    
     var price: Float
+    var count: Int
+    
+    var type: VremeniType
     var rarity: Rarity
     
     var added: Date
@@ -25,19 +29,29 @@ final class ConsumableItem: Identifiable {
     var target: Date
     
     var enabled: Bool
+    var inMachine: Bool
     var inProgress: Bool
     var ready: Bool
     
-    init(name: String, itemDescription: String, image: String, price: Float, rarity: Rarity = .common, added: Date, started: Date, target: Date, enabled: Bool = true, inProgress: Bool = false, ready: Bool = false) {
+    init(name: String, itemDescription: String, image: String,
+         price: Float, count: Int = 0,
+         type: VremeniType = .minutes, rarity: Rarity = .common,
+         added: Date, started: Date, target: Date,
+         enabled: Bool = true, inMachine: Bool = false,
+         inProgress: Bool = false, ready: Bool = false) {
+        
         self.name = name
         self.itemDescription = itemDescription
         self.image = image
         self.price = price
+        self.count = count
+        self.type = type
         self.rarity = rarity
         self.added = added
         self.started = started
         self.target = target
         self.enabled = enabled
+        self.inMachine = inMachine
         self.inProgress = inProgress
         self.ready = ready
     }
@@ -57,6 +71,14 @@ extension ConsumableItem {
     internal func setMachineTime() {
         started = .now
         target = .now.addingTimeInterval(TimeInterval(price * 60))
+    }
+    
+    internal func unlockItem() {
+        enabled = true
+    }
+    
+    internal func addToMachine() {
+        inMachine = true
     }
     
     static internal func itemMockConfig(name: String, description: String = String(), price: Float, rarity: Rarity = .common, enabled: Bool = true) -> ConsumableItem {
@@ -149,4 +171,16 @@ final class Rule: Identifiable {
         
         return Rule(name: name, description: description, price: price, requirement: requirement, result: result)
     }
+}
+
+// MARK: - Type
+
+enum VremeniType: String, Codable {
+    case minutes = "Minutes"
+    case hours = "Hours"
+    case days = "Days"
+    case weeks = "Weeks"
+    case months = "Months"
+    case year = "Year"
+    case special = "Special"
 }
