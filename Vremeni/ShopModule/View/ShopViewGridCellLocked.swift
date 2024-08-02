@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ShopViewGridCellLocked: View {
     
     private let item: ConsumableItem
+    private var viewModel: ShopView.ShopViewModel
     
-    init(item: ConsumableItem) {
+    init(item: ConsumableItem, viewModel: ShopView.ShopViewModel) {
         self.item = item
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -80,7 +83,7 @@ struct ShopViewGridCellLocked: View {
             
             Button(action: {
                 withAnimation(.snappy) {
-//                    viewModel.pickItem(item: item)
+                    viewModel.unlockItem(item: item)
                 }
             }) {
                 Text(Texts.ShopPage.research)
@@ -115,6 +118,15 @@ struct ShopViewGridCellLocked: View {
 }
 
 #Preview {
-    let example = ConsumableItem.itemMockConfig(name: "One Hour", price: 1, rarity: .common, enabled: false)
-    return ShopViewGridCellLocked(item: example)
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        
+        let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
+        let example = ConsumableItem.itemMockConfig(name: "One Hour", price: 1, enabled: false)
+        return ShopViewGridCell(item: example, viewModel: viewModel)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
 }

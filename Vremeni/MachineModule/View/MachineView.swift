@@ -10,7 +10,7 @@ import SwiftData
 
 struct MachineView: View {
     
-    @Query(filter: #Predicate { $0.inProgress }, sort: \ConsumableItem.started) private var items: [ConsumableItem]
+    @Query(filter: #Predicate { $0.inMachine }, sort: \ConsumableItem.started) var items: [ConsumableItem]
     
     private let spacing: CGFloat = 16
     private let itemsInRows = 1
@@ -24,16 +24,21 @@ struct MachineView: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: spacing) {
                     Section(header: sectionHeader) {
-                        if items.isEmpty {
+                        if items.filter({ $0.inProgress }).isEmpty {
                             EmptyMachineViewGridCell()
                         }
-                        ForEach(items) { item in
+                        ForEach(items.filter({ $0.inProgress })) { item in
                             MachineViewGridCell(item: item)
                         }
                         NewSlotMachineViewGridCell()
                     }
-                    Section(header: secondSectionHeader) {
-                        
+                    
+                    if !items.filter({ $0.inMachine }).isEmpty {
+                        Section(header: secondSectionHeader) {
+                            ForEach(items.filter({ $0.inMachine })) { item in
+                                QueueMachineViewGridCell(item: item)
+                            }
+                        }
                     }
                 }
                 .padding(.horizontal)

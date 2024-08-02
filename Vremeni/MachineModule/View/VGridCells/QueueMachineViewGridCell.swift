@@ -101,7 +101,21 @@ struct QueueMachineViewGridCell: View {
     }
     
     private var buttons: some View {
-        HStack {
+        HStack(spacing: 16) {
+            Button(action: {
+                withAnimation(.snappy) {
+//                    viewModel.pickItem(item: item)
+                }
+            }) {
+                Image(systemName: "arrow.up")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+            .frame(width: 80, height: 40)
+            .foregroundStyle(Color.green)
+            .minimumScaleFactor(0.4)
+            .buttonStyle(.bordered)
+            .tint(Color.green)
+            
             Button(action: {
                 withAnimation(.snappy) {
 //                    viewModel.deleteItem(item: item)
@@ -114,35 +128,7 @@ struct QueueMachineViewGridCell: View {
             .padding(.trailing, 5)
             .foregroundColor(Color.red)
             .buttonStyle(.bordered)
-            .tint(Color.red)
-            
-            Button(action: {
-                withAnimation(.snappy) {
-//                    viewModel.pickItem(item: item)
-                }
-            }) {
-                Image(systemName: "arrow.down")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-            }
-            .frame(width: 60, height: 40)
-            .foregroundStyle(Color.orange)
-            .minimumScaleFactor(0.4)
-            .buttonStyle(.bordered)
-            .tint(Color.orange)
-            
-            Button(action: {
-                withAnimation(.snappy) {
-//                    viewModel.pickItem(item: item)
-                }
-            }) {
-                Image(systemName: "arrow.up")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-            }
-            .frame(width: 60, height: 40)
-            .foregroundStyle(Color.green)
-            .minimumScaleFactor(0.4)
-            .buttonStyle(.bordered)
-            .tint(Color.green)
+            .tint(Color.red) 
         }
     }
 }
