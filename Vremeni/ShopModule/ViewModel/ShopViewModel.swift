@@ -15,14 +15,25 @@ extension ShopView {
         private var modelContext: ModelContext
         private(set) var items = [ConsumableItem]()
         
+        internal var enableStatus: Bool {
+            didSet {
+                fetchData()
+            }
+        }
+        
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
+            self.enableStatus = true
             fetchData()
         }
-                
+        
         internal func pickItem(item: ConsumableItem) {
-            item.setMachineTime()
-            item.progressToggle()
+            item.addToMachine()
+            fetchData()
+        }
+        
+        internal func unlockItem(item: ConsumableItem) {
+            item.unlockItem()
             fetchData()
         }
         
@@ -31,7 +42,7 @@ extension ShopView {
         }
         
         internal func saveItem(_ created: ConsumableItem) {
-            let item = ConsumableItem.itemMockConfig(name: created.name, description: created.itemDescription, price: created.price, rarity: created.rarity)
+            let item = ConsumableItem.itemMockConfig(name: created.name, description: created.itemDescription, price: created.price, rarity: created.rarity, enabled: created.enabled)
             modelContext.insert(item)
             fetchData()
         }
@@ -54,6 +65,11 @@ extension ShopView {
                          ConsumableItem.itemMockConfig(name: "Five Minutes",
                                                        description: "Five minutes is a whole 300 seconds!",
                                                        price: 5,
+                                                       rarity: .rare,
+                                                       enabled: false),
+                         ConsumableItem.itemMockConfig(name: "Seven Minutes",
+                                                       description: "Seven minutes is a whole 420 seconds!",
+                                                       price: 7,
                                                        rarity: .rare)]
             for item in items {
                 modelContext.insert(item)
@@ -63,8 +79,8 @@ extension ShopView {
         
         private func fetchData() {
             do {
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { !$0.inProgress && !$0.ready }, sortBy: [SortDescriptor(\.price), SortDescriptor(\.added)])
-                items = try modelContext.fetch(descriptor)
+                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { !$0.inMachine && !$0.inProgress && !$0.ready }, sortBy: [SortDescriptor(\.price), SortDescriptor(\.added)])
+                items = try modelContext.fetch(descriptor).filter { $0.enabled == enableStatus }
             } catch {
                 print("Fetch failed")
             }

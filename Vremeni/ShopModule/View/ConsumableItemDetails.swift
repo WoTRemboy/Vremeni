@@ -91,11 +91,15 @@ struct ConsumableItemDetails: View {
     private var buyButton: some View {
         Button(action: {
             withAnimation(.snappy) {
-                viewModel.pickItem(item: item)
+                if item.enabled {
+                    viewModel.pickItem(item: item)
+                } else {
+                    viewModel.unlockItem(item: item)
+                }
                 dismiss()
             }
         }) {
-            Text(Texts.ShopPage.addToMachine)
+            Text(item.enabled ? Texts.ShopPage.addToMachine : Texts.ShopPage.research)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
         .frame(height: 50)
