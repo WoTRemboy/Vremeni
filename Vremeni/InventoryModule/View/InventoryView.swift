@@ -16,24 +16,24 @@ struct InventoryView: View {
     private let itemsInRows = 1
     
     var body: some View {
-        let columns = Array(
-            repeating: GridItem(.flexible(), spacing: spacing),
-            count: itemsInRows)
+//        let columns = Array(
+//            repeating: GridItem(.flexible(), spacing: spacing),
+//            count: itemsInRows)
         
         NavigationStack {
             ZStack {
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: spacing) {
-                        ForEach(items) { item in
-                            MachineViewGridCell(item: item)
-                        }
-                    }
-                    .padding(.horizontal)
-                }
+//                ScrollView {
+//                    LazyVGrid(columns: columns, spacing: spacing) {
+//                        ForEach(items) { item in
+//                            MachineViewGridCell(item: item)
+//                        }
+//                    }
+//                    .padding(.horizontal)
+//                }
                 
-                if items.isEmpty {
+//                if items.isEmpty {
                     Text(Texts.InventoryPage.placeholder)
-                }
+//                }
             }
             
             .navigationTitle(Texts.Common.title)

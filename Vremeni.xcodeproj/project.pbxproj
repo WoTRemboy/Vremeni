@@ -310,9 +310,9 @@
 			isa = PBXGroup;
 			children = (
 				631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */,
+				638620AC2C5D7D0300453944 /* QueueMachineViewGridCell.swift */,
 				638620A82C5D4F1F00453944 /* EmptyMachineViewGridCell.swift */,
 				638620AA2C5D566400453944 /* NewSlotMachineViewGridCell.swift */,
-				638620AC2C5D7D0300453944 /* QueueMachineViewGridCell.swift */,
 			);
 			path = VGridCells;
 			sourceTree = "<group>";
@@ -702,7 +702,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -737,7 +737,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

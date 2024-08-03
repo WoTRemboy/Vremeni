@@ -10,40 +10,24 @@ import SwiftData
 
 struct MachineView: View {
     
-    @Query(filter: #Predicate { $0.inMachine }, sort: \ConsumableItem.started) var items: [ConsumableItem]
-    
+    @State private var viewModel: MachineViewModel
     private let spacing: CGFloat = 16
     private let itemsInRows = 1
     
+    init(modelContext: ModelContext) {
+        let viewModel = MachineViewModel(modelContext: modelContext)
+        _viewModel = State(initialValue: viewModel)
+    }
+    
     var body: some View {
-        let columns = Array(
-            repeating: GridItem(.flexible(), spacing: spacing),
-            count: itemsInRows)
-        
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: columns, spacing: spacing) {
-                    Section(header: sectionHeader) {
-                        if items.filter({ $0.inProgress }).isEmpty {
-                            EmptyMachineViewGridCell()
-                        }
-                        ForEach(items.filter({ $0.inProgress })) { item in
-                            MachineViewGridCell(item: item)
-                        }
-                        NewSlotMachineViewGridCell()
-                    }
-                    
-                    if !items.filter({ $0.inMachine }).isEmpty {
-                        Section(header: secondSectionHeader) {
-                            ForEach(items.filter({ $0.inMachine })) { item in
-                                QueueMachineViewGridCell(item: item)
-                            }
-                        }
-                    }
-                }
+                collection
                 .padding(.horizontal)
             }
-            
+            .onAppear(perform: {
+                viewModel.updateOnAppear()
+            })
             
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
@@ -52,6 +36,36 @@ struct MachineView: View {
         .tabItem {
             Image.TabBar.machine
             Text(Texts.MachinePage.title)
+        }
+    }
+    
+    private var collection: some View {
+        let columns = Array(
+            repeating: GridItem(.flexible(), spacing: spacing),
+            count: itemsInRows)
+        
+        return LazyVGrid(columns: columns, spacing: spacing) {
+            Section(header: sectionHeader) {
+                if viewModel.items.filter({ $0.inProgress }).isEmpty {
+                    EmptyMachineViewGridCell()
+                }
+                ForEach(viewModel.items) { item in
+                    if item.inProgress {
+                        MachineViewGridCell(item: item, viewModel: viewModel)
+                    }
+                }
+                NewSlotMachineViewGridCell()
+            }
+            
+            if !viewModel.items.filter({ $0.inMachine }).isEmpty {
+                Section(header: secondSectionHeader) {
+                    ForEach(viewModel.items) { item in
+                        if item.inMachine {
+                            QueueMachineViewGridCell(item: item, viewModel: viewModel)
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -71,5 +85,12 @@ struct MachineView: View {
 }
 
 #Preview {
-    MachineView()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        return MachineView(modelContext: modelContext)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
 }

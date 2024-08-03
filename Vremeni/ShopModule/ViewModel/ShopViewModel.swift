@@ -31,12 +31,6 @@ extension ShopView {
             item.addToMachine()
             fetchData()
         }
-                
-        internal func setWorkshop(item: ConsumableItem) {
-            item.setMachineTime()
-            item.progressToggle()
-            fetchData()
-        }
         
         internal func unlockItem(item: ConsumableItem) {
             item.unlockItem()
@@ -85,7 +79,7 @@ extension ShopView {
         
         private func fetchData() {
             do {
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { !$0.inMachine && !$0.ready }, sortBy: [SortDescriptor(\.price), SortDescriptor(\.added)])
+                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { !$0.inMachine && !$0.inProgress && !$0.ready }, sortBy: [SortDescriptor(\.price), SortDescriptor(\.added)])
                 items = try modelContext.fetch(descriptor).filter { $0.enabled == enableStatus }
             } catch {
                 print("Fetch failed")

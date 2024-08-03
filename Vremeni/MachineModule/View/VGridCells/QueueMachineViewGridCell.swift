@@ -6,15 +6,19 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct QueueMachineViewGridCell: View {
-    private let item: ConsumableItem
     
-    init(item: ConsumableItem) {
+    private let item: ConsumableItem
+    private let viewModel: MachineView.MachineViewModel
+    
+    init(item: ConsumableItem, viewModel: MachineView.MachineViewModel) {
         self.item = item
+        self.viewModel = viewModel
     }
     
-    var body: some View {
+    internal var body: some View {
         GeometryReader { reader in
             VStack(spacing: 16) {
                 content
@@ -78,7 +82,7 @@ struct QueueMachineViewGridCell: View {
                 .padding(.top, 5)
             
             buttons
-            .padding(.top, 5)
+                .padding(.top, 5)
             
         }
         .padding(.top, 10)
@@ -88,6 +92,7 @@ struct QueueMachineViewGridCell: View {
         HStack(spacing: 5) {
             Text("\(Texts.ItemCreatePage.price):")
                 .font(.body())
+                .foregroundStyle(Color.labelPrimary)
             
             Text(String(Int(item.price)))
                 .font(.headline())
@@ -104,7 +109,7 @@ struct QueueMachineViewGridCell: View {
         HStack(spacing: 16) {
             Button(action: {
                 withAnimation(.snappy) {
-//                    viewModel.pickItem(item: item)
+                    viewModel.setWorkshop(item: item)
                 }
             }) {
                 Image(systemName: "arrow.up")
@@ -115,10 +120,11 @@ struct QueueMachineViewGridCell: View {
             .minimumScaleFactor(0.4)
             .buttonStyle(.bordered)
             .tint(Color.green)
+            .disabled(viewModel.isSlotAvailable())
             
             Button(action: {
                 withAnimation(.snappy) {
-//                    viewModel.deleteItem(item: item)
+                    viewModel.deleteItem(item: item)
                 }
             }) {
                 Image(systemName: "trash")
@@ -134,7 +140,16 @@ struct QueueMachineViewGridCell: View {
 }
 
 #Preview {
-    let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common, enabled: false)
-    return QueueMachineViewGridCell(item: example)
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        
+        let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
+        let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common)
+        return QueueMachineViewGridCell(item: example, viewModel: viewModel)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
 }
 

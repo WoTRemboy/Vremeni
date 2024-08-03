@@ -9,22 +9,27 @@ import SwiftUI
 
 struct ProgressBar: View {
     
-    private let width: CGFloat
     private let height: CGFloat
     private let percent: CGFloat
     private let ready: Bool
     
-    init(width: CGFloat = 200, height: CGFloat = 20, percent: CGFloat = 0, ready: Bool = false) {
-        self.width = width
+    @State private var width: CGFloat = 0
+    
+    init(height: CGFloat = 20, percent: CGFloat = 0, ready: Bool = false) {
         self.height = height
         self.percent = percent
         self.ready = ready
     }
     
     var body: some View {
-        LazyVStack(spacing: 5) {
-            timeProgressLabel
+        LazyVStack(spacing: 0) {
             progressBar
+            GeometryReader { reader in
+                HStack {}
+                    .onAppear {
+                        width = reader.size.width
+                    }
+            }
         }
     }
     
@@ -41,7 +46,7 @@ struct ProgressBar: View {
         
         return ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: height, style: .continuous)
-                .frame(width: width, height: height)
+                .frame(height: height)
                 .foregroundStyle(Color.black.opacity(0.1))
             
             RoundedRectangle(cornerRadius: height, style: .continuous)
