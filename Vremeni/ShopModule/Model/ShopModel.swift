@@ -70,6 +70,11 @@ extension ConsumableItem {
         inMachine = false
     }
     
+    internal func progressDismiss() {
+        inProgress = false
+        inMachine = true
+    }
+    
     internal func setMachineTime() {
         started = .now
         target = .now.addingTimeInterval(TimeInterval(price * 60))

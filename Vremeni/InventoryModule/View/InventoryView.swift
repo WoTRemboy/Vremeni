@@ -31,9 +31,9 @@ struct InventoryView: View {
 //                    .padding(.horizontal)
 //                }
                 
-                if items.isEmpty {
+//                if items.isEmpty {
                     Text(Texts.InventoryPage.placeholder)
-                }
+//                }
             }
             
             .navigationTitle(Texts.Common.title)

@@ -18,7 +18,7 @@ struct QueueMachineViewGridCell: View {
         self.viewModel = viewModel
     }
     
-    var body: some View {
+    internal var body: some View {
         GeometryReader { reader in
             VStack(spacing: 16) {
                 content
@@ -82,7 +82,7 @@ struct QueueMachineViewGridCell: View {
                 .padding(.top, 5)
             
             buttons
-            .padding(.top, 5)
+                .padding(.top, 5)
             
         }
         .padding(.top, 10)
@@ -92,6 +92,7 @@ struct QueueMachineViewGridCell: View {
         HStack(spacing: 5) {
             Text("\(Texts.ItemCreatePage.price):")
                 .font(.body())
+                .foregroundStyle(Color.labelPrimary)
             
             Text(String(Int(item.price)))
                 .font(.headline())
@@ -119,6 +120,7 @@ struct QueueMachineViewGridCell: View {
             .minimumScaleFactor(0.4)
             .buttonStyle(.bordered)
             .tint(Color.green)
+            .disabled(viewModel.isSlotAvailable())
             
             Button(action: {
                 withAnimation(.snappy) {
@@ -144,7 +146,7 @@ struct QueueMachineViewGridCell: View {
         let modelContext = ModelContext(container)
         
         let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
-        let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common, enabled: false)
+        let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common)
         return QueueMachineViewGridCell(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")

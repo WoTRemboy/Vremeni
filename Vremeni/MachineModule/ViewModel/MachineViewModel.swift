@@ -18,6 +18,7 @@ extension MachineView {
         private(set) var items = [ConsumableItem]()
         private(set) var timer = Timer()
         
+        private let availableSlots = 1
         private let updateInterval: TimeInterval = 0.3
         private let targetPercent: CGFloat = 100
         
@@ -36,9 +37,19 @@ extension MachineView {
             fetchData()
         }
         
+        internal func progressDismiss(item: ConsumableItem) {
+            item.progressDismiss()
+            fetchData()
+        }
+        
         internal func deleteItem(item: ConsumableItem) {
             modelContext.delete(item)
             fetchData()
+        }
+        
+        internal func isSlotAvailable() -> Bool {
+            let progressItems = items.filter({ $0.inProgress })
+            return progressItems.count == availableSlots
         }
         
         internal func percentTimeElapsed(for item: ConsumableItem) {
@@ -73,7 +84,7 @@ extension MachineView {
         
         private func fetchData() {
             do {
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.inMachine || $0.inProgress }, sortBy: [SortDescriptor(\.started), SortDescriptor(\.price)])
+                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.inMachine || $0.inProgress }, sortBy: [SortDescriptor(\.percent, order: .reverse), SortDescriptor(\.started), SortDescriptor(\.price)])
                 items = try modelContext.fetch(descriptor)
             } catch {
                 print("Fetch failed")
