@@ -6,15 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MachineViewGridCell: View {
     
-    @StateObject private var viewModel = MachineViewModel()
-    
     private let item: ConsumableItem
+    private let viewModel: MachineView.MachineViewModel
     
-    init(item: ConsumableItem) {
+    init(item: ConsumableItem, viewModel: MachineView.MachineViewModel) {
         self.item = item
+        self.viewModel = viewModel
     }
     
     internal var body: some View {
@@ -25,7 +26,7 @@ struct MachineViewGridCell: View {
                     .frame(width: reader.size.width, alignment: .leading)
                 
                 ProgressBar(width: reader.size.width - 32,
-                            percent: item.ready ? 100 : viewModel.percent,
+                            percent: item.ready ? 100 : item.percent,
                             ready: item.ready)
                     .padding(.bottom)
                     .onAppear(perform: {
@@ -71,5 +72,15 @@ struct MachineViewGridCell: View {
 }
 
 #Preview {
-    MachineViewGridCell(item: ConsumableItem.itemMockConfig(name: "One", price: 1))
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        
+        let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
+        let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common, enabled: false)
+        return MachineViewGridCell(item: example, viewModel: viewModel)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
 }

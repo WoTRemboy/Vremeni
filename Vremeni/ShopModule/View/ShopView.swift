@@ -18,9 +18,11 @@ struct ShopView: View {
     @State private var searchText = String()
     @State private var itemsInRows = 2
     
+    private let modelContext: ModelContext
     private let spacing: CGFloat = 16
     
     init(modelContext: ModelContext) {
+        self.modelContext = modelContext
         let viewModel = ShopViewModel(modelContext: modelContext)
         _viewModel = State(initialValue: viewModel)
     }
@@ -55,7 +57,7 @@ struct ShopView: View {
                 Image.TabBar.shop
                 Text(Texts.ShopPage.title)
             }
-            MachineView()
+            MachineView(modelContext: modelContext)
             InventoryView()
             ProfileView()
         }

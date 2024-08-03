@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct QueueMachineViewGridCell: View {
-    private let item: ConsumableItem
     
-    init(item: ConsumableItem) {
+    private let item: ConsumableItem
+    private let viewModel: MachineView.MachineViewModel
+    
+    init(item: ConsumableItem, viewModel: MachineView.MachineViewModel) {
         self.item = item
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -104,7 +108,7 @@ struct QueueMachineViewGridCell: View {
         HStack(spacing: 16) {
             Button(action: {
                 withAnimation(.snappy) {
-//                    viewModel.pickItem(item: item)
+                    viewModel.setWorkshop(item: item)
                 }
             }) {
                 Image(systemName: "arrow.up")
@@ -118,7 +122,7 @@ struct QueueMachineViewGridCell: View {
             
             Button(action: {
                 withAnimation(.snappy) {
-//                    viewModel.deleteItem(item: item)
+                    viewModel.deleteItem(item: item)
                 }
             }) {
                 Image(systemName: "trash")
@@ -134,7 +138,16 @@ struct QueueMachineViewGridCell: View {
 }
 
 #Preview {
-    let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common, enabled: false)
-    return QueueMachineViewGridCell(item: example)
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        
+        let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
+        let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common, enabled: false)
+        return QueueMachineViewGridCell(item: example, viewModel: viewModel)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
 }
 

@@ -19,6 +19,7 @@ final class ConsumableItem: Identifiable {
     var image: String
     
     var price: Float
+    var percent: Double
     var count: Int
     
     var type: VremeniType
@@ -34,7 +35,7 @@ final class ConsumableItem: Identifiable {
     var ready: Bool
     
     init(name: String, itemDescription: String, image: String,
-         price: Float, count: Int = 0,
+         price: Float, percent: Double = 0, count: Int = 0,
          type: VremeniType = .minutes, rarity: Rarity = .common,
          added: Date, started: Date, target: Date,
          enabled: Bool = true, inMachine: Bool = false,
@@ -44,6 +45,7 @@ final class ConsumableItem: Identifiable {
         self.itemDescription = itemDescription
         self.image = image
         self.price = price
+        self.percent = percent
         self.count = count
         self.type = type
         self.rarity = rarity
@@ -64,8 +66,8 @@ extension ConsumableItem {
     }
     
     internal func progressToggle() {
-        ready = false
         inProgress = true
+        inMachine = false
     }
     
     internal func setMachineTime() {
