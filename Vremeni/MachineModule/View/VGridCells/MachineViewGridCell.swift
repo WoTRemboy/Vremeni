@@ -11,10 +11,12 @@ import SwiftData
 struct MachineViewGridCell: View {
     
     private let item: ConsumableItem
+    private let paused: Bool
     private let viewModel: MachineView.MachineViewModel
     
-    init(item: ConsumableItem, viewModel: MachineView.MachineViewModel) {
+    init(item: ConsumableItem, paused: Bool = false, viewModel: MachineView.MachineViewModel) {
         self.item = item
+        self.paused = paused
         self.viewModel = viewModel
     }
     
@@ -51,15 +53,14 @@ struct MachineViewGridCell: View {
     }
     
     private var progressBar: some View {
-        ProgressBar(percent: item.ready ? 100 : item.percent,
-                    ready: item.ready)
+        ProgressBar(percent: item.ready ? 100 : item.percent, color: paused ? .orange : .green)
         .onAppear(perform: {
-            if !item.ready {
+            if !item.ready && !paused {
                 viewModel.startProgress(for: item)
             }
         })
         .onDisappear(perform: {
-            if !item.ready {
+            if !item.ready && !paused {
                 viewModel.stopProgress()
             }
         })
@@ -106,10 +107,14 @@ struct MachineViewGridCell: View {
         HStack(spacing: 16) {
             Button(action: {
                 withAnimation(.snappy) {
-                    viewModel.progressDismiss(item: item)
+                    if paused {
+                        viewModel.setWorkshop(item: item)
+                    } else {
+                        viewModel.progressDismiss(item: item)
+                    }
                 }
             }) {
-                Image(systemName: "stop")
+                Image(systemName: paused ? "play" : "pause")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
             .frame(width: 80, height: 40)
@@ -117,6 +122,7 @@ struct MachineViewGridCell: View {
             .minimumScaleFactor(0.4)
             .buttonStyle(.bordered)
             .tint(Color.orange)
+            .disabled(paused && !viewModel.isSlotAvailable())
             
             Button(action: {
                 withAnimation(.snappy) {
