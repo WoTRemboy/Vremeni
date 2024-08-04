@@ -76,8 +76,15 @@ extension ConsumableItem {
     }
     
     internal func setMachineTime() {
-        started = .now
-        target = .now.addingTimeInterval(TimeInterval(price * 60))
+        if percent == 0 {
+            started = .now
+            target = .now.addingTimeInterval(TimeInterval(price * 60))
+        } else {
+            let passedTime = TimeInterval((price * 60) * Float(percent / 100))
+            let remainTime = (price * 60) * Float(1 - percent / 100)
+            started = .now.addingTimeInterval(-passedTime)
+            target = .now.addingTimeInterval(TimeInterval(remainTime))
+        }
     }
     
     internal func unlockItem() {

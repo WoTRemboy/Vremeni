@@ -58,11 +58,19 @@ struct MachineView: View {
             }
             
             if !viewModel.items.filter({ $0.inMachine }).isEmpty {
-                Section(header: secondSectionHeader) {
-                    ForEach(viewModel.items) { item in
-                        if item.inMachine {
-                            QueueMachineViewGridCell(item: item, viewModel: viewModel)
-                        }
+                queueSection
+            }
+        }
+    }
+    
+    private var queueSection: some View {
+        Section(header: secondSectionHeader) {
+            ForEach(viewModel.items) { item in
+                if item.inMachine {
+                    if item.percent != 0 {
+                        MachineViewGridCell(item: item, paused: true, viewModel: viewModel)
+                    } else {
+                        QueueMachineViewGridCell(item: item, viewModel: viewModel)
                     }
                 }
             }

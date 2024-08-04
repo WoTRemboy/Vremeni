@@ -49,7 +49,7 @@ extension MachineView {
         
         internal func isSlotAvailable() -> Bool {
             let progressItems = items.filter({ $0.inProgress })
-            return progressItems.count == availableSlots
+            return progressItems.count < availableSlots
         }
         
         internal func percentTimeElapsed(for item: ConsumableItem) {
