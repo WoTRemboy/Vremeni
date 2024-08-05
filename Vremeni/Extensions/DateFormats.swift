@@ -18,7 +18,7 @@ extension Date {
     static let itemFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
-        formatter.timeStyle = .short
+        formatter.timeStyle = .medium
         return formatter
     }()
 }

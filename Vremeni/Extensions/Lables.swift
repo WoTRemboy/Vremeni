@@ -68,6 +68,13 @@ final class Texts {
         static let workshop = "Workshop"
         static let emptyTitle = "Add an Item"
         static let queue = "Queue"
+        
+        static let targetTime = "Target time"
+        static let potentialTime = "Potential target"
+        static let reward = "Reward"
+        static let pause = "Pause"
+        static let start = "Start"
+        static let continueProgress = "Continue"
     }
     
     enum InventoryPage {
