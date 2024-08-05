@@ -36,6 +36,7 @@
 		638620AD2C5D7D0300453944 /* QueueMachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620AC2C5D7D0300453944 /* QueueMachineViewGridCell.swift */; };
 		638620AF2C602B1C00453944 /* MachineAddItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620AE2C602B1C00453944 /* MachineAddItemsView.swift */; };
 		638620B32C60314F00453944 /* ItemListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620B22C60314F00453944 /* ItemListRow.swift */; };
+		638620B52C60D11B00453944 /* MachineItemDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620B42C60D11B00453944 /* MachineItemDetailsView.swift */; };
 		6395B7612C5A5FBD00C0C611 /* ParameterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6395B7602C5A5FBD00C0C611 /* ParameterRow.swift */; };
 		6395B7632C5A63D900C0C611 /* TotalPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6395B7622C5A63D900C0C611 /* TotalPrice.swift */; };
 		6395B7672C5A75E500C0C611 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6395B7662C5A75E500C0C611 /* ProfileViewModel.swift */; };
@@ -95,6 +96,7 @@
 		638620AC2C5D7D0300453944 /* QueueMachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueMachineViewGridCell.swift; sourceTree = "<group>"; };
 		638620AE2C602B1C00453944 /* MachineAddItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineAddItemsView.swift; sourceTree = "<group>"; };
 		638620B22C60314F00453944 /* ItemListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListRow.swift; sourceTree = "<group>"; };
+		638620B42C60D11B00453944 /* MachineItemDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineItemDetailsView.swift; sourceTree = "<group>"; };
 		6395B7602C5A5FBD00C0C611 /* ParameterRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterRow.swift; sourceTree = "<group>"; };
 		6395B7622C5A63D900C0C611 /* TotalPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalPrice.swift; sourceTree = "<group>"; };
 		6395B7662C5A75E500C0C611 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 			children = (
 				631AF41E2C5250AF00DFD63C /* MachineView.swift */,
 				638620AE2C602B1C00453944 /* MachineAddItemsView.swift */,
+				638620B42C60D11B00453944 /* MachineItemDetailsView.swift */,
 				638620A72C5D4ECD00453944 /* VGridCells */,
 			);
 			path = View;
@@ -520,6 +523,7 @@
 				6395B7612C5A5FBD00C0C611 /* ParameterRow.swift in Sources */,
 				631AF4192C517F7900DFD63C /* ShopViewGridCell.swift in Sources */,
 				631AF4212C5250BB00DFD63C /* InventoryView.swift in Sources */,
+				638620B52C60D11B00453944 /* MachineItemDetailsView.swift in Sources */,
 				639C76382C5952E900C1CEB8 /* ConsumableItemCreate.swift in Sources */,
 				631AF4132C5176BA00DFD63C /* ShopViewModel.swift in Sources */,
 				631AF42C2C5259EC00DFD63C /* MachineViewGridCell.swift in Sources */,
@@ -710,7 +714,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.3;
+				MARKETING_VERSION = 0.2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -745,7 +749,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.3;
+				MARKETING_VERSION = 0.2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

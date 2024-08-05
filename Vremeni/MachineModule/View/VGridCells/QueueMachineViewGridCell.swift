@@ -90,7 +90,7 @@ struct QueueMachineViewGridCell: View {
     
     private var priceView: some View {
         HStack(spacing: 5) {
-            Text("\(Texts.ItemCreatePage.price):")
+            Text("\(Texts.MachinePage.reward):")
                 .font(.body())
                 .foregroundStyle(Color.labelPrimary)
             

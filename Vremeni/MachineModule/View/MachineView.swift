@@ -11,6 +11,7 @@ import SwiftData
 struct MachineView: View {
     
     @State private var viewModel: MachineViewModel
+    @State private var selected: ConsumableItem? = nil
     @State private var showingAddItemList = false
 
     private let spacing: CGFloat = 16
@@ -61,6 +62,12 @@ struct MachineView: View {
                 ForEach(viewModel.items) { item in
                     if item.inProgress {
                         MachineViewGridCell(item: item, viewModel: viewModel)
+                            .onTapGesture {
+                                selected = item
+                            }
+                            .sheet(item: $selected) { item in
+                                MachineItemDetailsView(item: item, viewModel: viewModel)
+                            }
                     }
                 }
                 NewSlotMachineViewGridCell()
@@ -78,8 +85,20 @@ struct MachineView: View {
                 if item.inMachine {
                     if item.percent != 0 {
                         MachineViewGridCell(item: item, paused: true, viewModel: viewModel)
+                            .onTapGesture {
+                                selected = item
+                            }
+                            .sheet(item: $selected) { item in
+                                MachineItemDetailsView(item: item, viewModel: viewModel)
+                            }
                     } else {
                         QueueMachineViewGridCell(item: item, viewModel: viewModel)
+                            .onTapGesture {
+                                selected = item
+                            }
+                            .sheet(item: $selected) { item in
+                                MachineItemDetailsView(item: item, viewModel: viewModel)
+                            }
                     }
                 }
             }

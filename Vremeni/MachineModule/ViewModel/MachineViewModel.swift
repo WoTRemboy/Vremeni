@@ -47,6 +47,11 @@ extension MachineView {
             fetchData()
         }
         
+        internal func remainingTime(for item: ConsumableItem) -> String {
+            item.setMachineTime()
+            return Date.itemFormatter.string(from: item.target)
+        }
+        
         internal func isSlotAvailable() -> Bool {
             let progressItems = items.filter({ $0.inProgress })
             return progressItems.count < availableSlots
