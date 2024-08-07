@@ -28,7 +28,7 @@ struct InventoryGridCell: View {
                     .frame(width: reader.size.width, height: 17, alignment: .leading)
             }
         }
-        .frame(height: 230)
+        .frame(height: 220)
     }
     
     private var itemImage: some View {

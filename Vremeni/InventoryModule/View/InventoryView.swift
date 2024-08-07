@@ -47,9 +47,17 @@ struct InventoryView: View {
             count: itemsInRows)
         
         return LazyVGrid(columns: columns, spacing: spacing) {
-            ForEach(viewModel.items) { item in
+            ForEach(searchResults) { item in
                 InventoryGridCell(item: item, viewModel: viewModel)
             }
+        }
+    }
+    
+    private var searchResults: [ConsumableItem] {
+        if searchText.isEmpty {
+            return viewModel.items
+        } else {
+            return viewModel.items.filter { $0.name.contains(searchText) }
         }
     }
 }
@@ -59,6 +67,9 @@ struct InventoryView: View {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
+        let viewModel = InventoryView.InventoryViewModel(modelContext: modelContext)
+        viewModel.addSamples()
+        
         return InventoryView(modelContext: modelContext)
     } catch {
         fatalError("Failed to create model container.")
