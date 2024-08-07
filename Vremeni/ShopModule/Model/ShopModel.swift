@@ -95,18 +95,19 @@ extension ConsumableItem {
         inMachine = true
     }
     
-    static internal func itemMockConfig(name: String, description: String = String(), price: Float, rarity: Rarity = .common, enabled: Bool = true) -> ConsumableItem {
+    static internal func itemMockConfig(name: String, description: String = String(), price: Float, rarity: Rarity = .common, enabled: Bool = true, ready: Bool = false) -> ConsumableItem {
         let name = name
         let description = description
         let image = "\(Int(price)).square"
         let price = price
         let enable = enabled
+        let ready = ready
         let rarity = rarity
         let added = Date.now
         let started = Date.now
         let target = added.addingTimeInterval(TimeInterval(price * 60))
         
-        return ConsumableItem(name: name, itemDescription: description, image: image, price: price, rarity: rarity, added: added, started: started, target: target, enabled: enable)
+        return ConsumableItem(name: name, itemDescription: description, image: image, price: price, rarity: rarity, added: added, started: started, target: target, enabled: enable, ready: ready)
     }
 }
 

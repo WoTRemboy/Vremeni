@@ -12,6 +12,10 @@ extension Image {
         static let vCoin = Image("VCoin")
     }
     
+    enum InventoryPage {
+        static let count = Image(systemName: "x.circle.fill")
+    }
+    
     enum ProfilePage {
         static let about = Image("AboutIcon")
     }
