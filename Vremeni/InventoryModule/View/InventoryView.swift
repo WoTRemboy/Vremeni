@@ -11,9 +11,10 @@ import SwiftData
 struct InventoryView: View {
     
     @State private var viewModel: InventoryViewModel
+    @State private var searchText = String()
     
     private let spacing: CGFloat = 16
-    private let itemsInRows = 1
+    private let itemsInRows = 2
     
     init(modelContext: ModelContext) {
         let viewModel = InventoryViewModel(modelContext: modelContext)
@@ -22,16 +23,9 @@ struct InventoryView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                if !viewModel.items.isEmpty {
-                    List {
-                        ForEach(viewModel.items) { item in
-                            Text(item.name)
-                        }
-                    }
-                } else {
-                    Text(Texts.InventoryPage.placeholder)
-                }
+            ScrollView {
+                collection
+                    .padding(.horizontal)
             }
             .onAppear(perform: {
                 viewModel.updateOnAppear()
@@ -39,10 +33,23 @@ struct InventoryView: View {
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
             .background(Color.BackColors.backDefault)
+            .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
         }
         .tabItem {
             Image.TabBar.inventory
             Text(Texts.InventoryPage.title)
+        }
+    }
+    
+    private var collection: some View {
+        let columns = Array(
+            repeating: GridItem(.flexible(), spacing: spacing),
+            count: itemsInRows)
+        
+        return LazyVGrid(columns: columns, spacing: spacing) {
+            ForEach(viewModel.items) { item in
+                InventoryGridCell(item: item, viewModel: viewModel)
+            }
         }
     }
 }

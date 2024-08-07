@@ -30,6 +30,10 @@ extension Color {
         static let supportSegmented = Color("SupportSegmented")
     }
     
+    enum IconColors {
+        static let blue = Color("IconBlue")
+    }
+    
     enum Tints {
         static let orange = Color("OrangeTint")
         static let green = Color("GreenTint")

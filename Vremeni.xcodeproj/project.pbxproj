@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63194D1B2C63E01000CAA0AB /* InventoryGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63194D1A2C63E01000CAA0AB /* InventoryGridViewCell.swift */; };
 		631A5FD92C5A548C002331F7 /* ConsumableItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631A5FD82C5A548C002331F7 /* ConsumableItemDetails.swift */; };
 		631AF3D12C4FC82C00DFD63C /* VremeniApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */; };
 		631AF3D52C4FC82D00DFD63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 631AF3D42C4FC82D00DFD63C /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		63194D1A2C63E01000CAA0AB /* InventoryGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryGridViewCell.swift; sourceTree = "<group>"; };
 		631A5FD82C5A548C002331F7 /* ConsumableItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumableItemDetails.swift; sourceTree = "<group>"; };
 		631AF3CD2C4FC82C00DFD63C /* Vremeni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vremeni.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VremeniApp.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				631AF4202C5250BB00DFD63C /* InventoryView.swift */,
+				63194D1A2C63E01000CAA0AB /* InventoryGridViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				63FD7DE02C57F9EE008487DD /* InventoryModel.swift in Sources */,
 				631AF42A2C5256CF00DFD63C /* MachineViewModel.swift in Sources */,
 				638620A92C5D4F1F00453944 /* EmptyMachineViewGridCell.swift in Sources */,
+				63194D1B2C63E01000CAA0AB /* InventoryGridViewCell.swift in Sources */,
 				631AF4092C516EC100DFD63C /* FontExtension.swift in Sources */,
 				631A5FD92C5A548C002331F7 /* ConsumableItemDetails.swift in Sources */,
 				638620AB2C5D566400453944 /* NewSlotMachineViewGridCell.swift in Sources */,
