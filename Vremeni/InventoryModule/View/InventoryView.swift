@@ -10,32 +10,32 @@ import SwiftData
 
 struct InventoryView: View {
     
-    @Query(filter: #Predicate { $0.ready }, sort: \ConsumableItem.target) private var items: [ConsumableItem]
+    @State private var viewModel: InventoryViewModel
     
     private let spacing: CGFloat = 16
     private let itemsInRows = 1
     
+    init(modelContext: ModelContext) {
+        let viewModel = InventoryViewModel(modelContext: modelContext)
+        _viewModel = State(initialValue: viewModel)
+    }
+    
     var body: some View {
-//        let columns = Array(
-//            repeating: GridItem(.flexible(), spacing: spacing),
-//            count: itemsInRows)
-        
         NavigationStack {
             ZStack {
-//                ScrollView {
-//                    LazyVGrid(columns: columns, spacing: spacing) {
-//                        ForEach(items) { item in
-//                            MachineViewGridCell(item: item)
-//                        }
-//                    }
-//                    .padding(.horizontal)
-//                }
-                
-//                if items.isEmpty {
+                if !viewModel.items.isEmpty {
+                    List {
+                        ForEach(viewModel.items) { item in
+                            Text(item.name)
+                        }
+                    }
+                } else {
                     Text(Texts.InventoryPage.placeholder)
-//                }
+                }
             }
-            
+            .onAppear(perform: {
+                viewModel.updateOnAppear()
+            })
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
             .background(Color.BackColors.backDefault)
@@ -48,5 +48,12 @@ struct InventoryView: View {
 }
 
 #Preview {
-    InventoryView()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        return InventoryView(modelContext: modelContext)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
 }

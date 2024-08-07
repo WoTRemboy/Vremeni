@@ -58,7 +58,7 @@ struct ShopView: View {
                 Text(Texts.ShopPage.title)
             }
             MachineView(modelContext: modelContext)
-            InventoryView()
+            InventoryView(modelContext: modelContext)
             ProfileView()
         }
     }
