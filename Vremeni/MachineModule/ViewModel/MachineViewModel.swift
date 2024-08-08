@@ -94,6 +94,13 @@ extension MachineView {
             timer.invalidate()
         }
         
+        internal func addSamples() {
+            let one = MachineItem.itemMockConfig(name: "one hour", price: 1)
+            let two = MachineItem.itemMockConfig(name: "two hours", price: 2)
+            let three = MachineItem.itemMockConfig(name: "three hours", price: 3)
+            items = [one, two, three]
+        }
+        
         private func fetchData() {
             do {
                 let descriptor = FetchDescriptor<MachineItem>(sortBy: [SortDescriptor(\.percent, order: .reverse), SortDescriptor(\.started), SortDescriptor(\.price)])

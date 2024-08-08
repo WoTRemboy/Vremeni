@@ -139,17 +139,17 @@ struct QueueMachineViewGridCell: View {
     }
 }
 
-//#Preview {
-//    do {
-//        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-//        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
-//        let modelContext = ModelContext(container)
-//        
-//        let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
-//        let example = MachineItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common)
-//        return QueueMachineViewGridCell(item: example, viewModel: viewModel)
-//    } catch {
-//        fatalError("Failed to create model container.")
-//    }
-//}
+#Preview {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        
+        let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
+        let example = MachineItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1)
+        return QueueMachineViewGridCell(item: example, viewModel: viewModel)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
+}
 

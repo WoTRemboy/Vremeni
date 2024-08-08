@@ -69,16 +69,15 @@ extension MachineItem {
         }
     }
     
-    internal func machineItemSetup(from item: ConsumableItem) -> MachineItem {
-        let name = item.name
-        let description = item.itemDescription
-        let image = item.image
-        let price = item.price
-        let type = item.type
-        let rarity = item.rarity
-        let parent = item
+    static internal func itemMockConfig(name: String, description: String = String(), price: Float, inProgress: Bool = false, rarity: Rarity = .common) -> MachineItem {
+        let name = name
+        let description = description
+        let image = "\(Int(price)).square"
+        let price = price
+        let rarity = rarity
+        let parent = ConsumableItem.itemMockConfig(name: name, price: price)
         
-        return MachineItem(name: name, itemDescription: description, image: image, price: price, type: type, rarity: rarity, parent: parent)
+        return MachineItem(name: name, itemDescription: description, image: image, price: price, rarity: rarity, parent: parent)
     }
 }
 
