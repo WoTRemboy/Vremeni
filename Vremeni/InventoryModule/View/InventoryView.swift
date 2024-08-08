@@ -47,8 +47,16 @@ struct InventoryView: View {
             count: itemsInRows)
         
         return LazyVGrid(columns: columns, spacing: spacing) {
-            ForEach(searchResults) { item in
-                InventoryGridCell(item: item, viewModel: viewModel)
+            ForEach(Rarity.allCases) { rarity in
+                let items = searchResults.filter({ $0.rarity == rarity })
+                if !items.isEmpty {
+                    Section(header: SectionHeader(rarity.rawValue)) {
+                        ForEach(items) { item in
+                            InventoryGridCell(item: item, viewModel: viewModel)
+                        }
+                    }
+                }
+                
             }
         }
     }
