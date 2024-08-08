@@ -74,6 +74,7 @@ struct MachineAddItemsView: View {
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
         let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
+        viewModel.addSamples()
         
         return MachineAddItemsView(viewModel: viewModel)
     } catch {

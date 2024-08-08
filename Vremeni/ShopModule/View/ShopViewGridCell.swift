@@ -75,6 +75,8 @@ struct ShopViewGridCell: View {
                 withAnimation(.snappy) {
                     viewModel.pickItem(item: item)
                 }
+                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                impactMed.impactOccurred()
             }) {
                 Text(item.enabled ? Texts.ShopPage.addItem : Texts.ShopPage.research)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)

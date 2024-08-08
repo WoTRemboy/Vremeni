@@ -28,7 +28,7 @@ struct InventoryGridCell: View {
                     .frame(width: reader.size.width, height: 17, alignment: .leading)
             }
         }
-        .frame(height: 220)
+        .frame(height: 230)
     }
     
     private var itemImage: some View {
@@ -61,7 +61,7 @@ struct InventoryGridCell: View {
                 .foregroundStyle(Color.white, Color.IconColors.blue)
                 .frame(width: 25)
             
-            Text(String(Int(item.price)))
+            Text(String(item.count))
                 .font(.headline())
                 .foregroundStyle(Color.labelPrimary)
         }

@@ -15,7 +15,7 @@ extension MachineView {
     final class MachineViewModel {
         private let modelContext: ModelContext
         
-        private(set) var items = [ConsumableItem]()
+        private(set) var items = [MachineItem]()
         private(set) var timer = Timer()
         
         private let availableSlots = 1
@@ -31,25 +31,32 @@ extension MachineView {
             fetchData()
         }
         
-        internal func setWorkshop(item: ConsumableItem) {
+        internal func setWorkshop(item: MachineItem) {
             item.setMachineTime()
-            item.progressToggle()
+            item.progressStart()
             fetchData()
         }
         
-        internal func progressDismiss(item: ConsumableItem) {
+        internal func progressDismiss(item: MachineItem) {
             item.progressDismiss()
             fetchData()
         }
         
-        internal func deleteItem(item: ConsumableItem) {
+        internal func progressReady(item: MachineItem) {
+            item.readyToggle()
+            deleteItem(item: item)
+        }
+        
+        internal func deleteItem(item: MachineItem) {
+            item.inProgress = false
+            item.parent.machineItems.removeAll(where: { $0.id == item.id })
             modelContext.delete(item)
             fetchData()
         }
         
-        internal func remainingTime(for item: ConsumableItem) -> String {
+        internal func remainingTime(for item: MachineItem) -> String {
             item.setMachineTime()
-            return Date.itemFormatter.string(from: item.target)
+            return Date.itemShortFormatter.string(from: item.target)
         }
         
         internal func isSlotAvailable() -> Bool {
@@ -57,7 +64,7 @@ extension MachineView {
             return progressItems.count < availableSlots
         }
         
-        internal func percentTimeElapsed(for item: ConsumableItem) {
+        internal func percentTimeElapsed(for item: MachineItem) {
             let totalTime = item.target.timeIntervalSince(item.started)
             let currentTime = Date().timeIntervalSince(item.started)
             
@@ -66,11 +73,11 @@ extension MachineView {
                 item.percent = percent
             } else {
                 item.percent = targetPercent
-                item.readyToggle()
+                progressReady(item: item)
             }
         }
         
-        internal func startProgress(for item: ConsumableItem) {
+        internal func startProgress(for item: MachineItem) {
             timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { timer in
                 if item.percent < self.targetPercent {
                     let timeDifference = Calendar.current.dateComponents([.hour, .minute, .second], from: .now, to: item.target)
@@ -87,9 +94,16 @@ extension MachineView {
             timer.invalidate()
         }
         
+        internal func addSamples() {
+            let one = MachineItem.itemMockConfig(name: "one hour", price: 1)
+            let two = MachineItem.itemMockConfig(name: "two hours", price: 2)
+            let three = MachineItem.itemMockConfig(name: "three hours", price: 3)
+            items = [one, two, three]
+        }
+        
         private func fetchData() {
             do {
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.inMachine || $0.inProgress }, sortBy: [SortDescriptor(\.percent, order: .reverse), SortDescriptor(\.started), SortDescriptor(\.price)])
+                let descriptor = FetchDescriptor<MachineItem>(sortBy: [SortDescriptor(\.percent, order: .reverse), SortDescriptor(\.started), SortDescriptor(\.price)])
                 items = try modelContext.fetch(descriptor)
             } catch {
                 print("Fetch failed")
