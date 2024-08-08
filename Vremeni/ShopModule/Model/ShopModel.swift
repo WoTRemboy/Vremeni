@@ -19,80 +19,48 @@ final class ConsumableItem: Identifiable {
     var image: String
     
     var price: Float
-    var percent: Double
     var count: Int
     
     var type: VremeniType
     var rarity: Rarity
-    
-    var added: Date
-    var started: Date
-    var target: Date
+    @Relationship(deleteRule: .cascade) var machineItems: [MachineItem]
     
     var enabled: Bool
     var inMachine: Bool
-    var inProgress: Bool
     var ready: Bool
+    var archived: Bool
     
-    init(name: String, itemDescription: String, image: String,
-         price: Float, percent: Double = 0, count: Int = 0,
-         type: VremeniType = .minutes, rarity: Rarity = .common,
-         added: Date, started: Date, target: Date,
-         enabled: Bool = true, inMachine: Bool = false,
-         inProgress: Bool = false, ready: Bool = false) {
-        
+    init(id: UUID = UUID(), name: String, itemDescription: String, image: String, price: Float, count: Int = 0, type: VremeniType = .minutes, rarity: Rarity = .common, machineItems: [MachineItem] = [], enabled: Bool = false, inMachine: Bool = false, ready: Bool = false, archived: Bool = false) {
+        self.id = id
         self.name = name
         self.itemDescription = itemDescription
         self.image = image
         self.price = price
-        self.percent = percent
         self.count = count
         self.type = type
         self.rarity = rarity
-        self.added = added
-        self.started = started
-        self.target = target
+        self.machineItems = machineItems
         self.enabled = enabled
         self.inMachine = inMachine
-        self.inProgress = inProgress
         self.ready = ready
+        self.archived = archived
     }
 }
 
 extension ConsumableItem {
-    internal func readyToggle() {
-        ready = true
-        inProgress = false
-    }
-    
-    internal func progressToggle() {
-        inProgress = true
-        inMachine = false
-    }
-    
-    internal func progressDismiss() {
-        inProgress = false
-        inMachine = true
-    }
-    
-    internal func setMachineTime() {
-        if percent == 0 {
-            started = .now
-            target = .now.addingTimeInterval(TimeInterval(price * 60))
-        } else {
-            let passedTime = TimeInterval((price * 60) * Float(percent / 100))
-            let remainTime = (price * 60) * Float(1 - percent / 100)
-            started = .now.addingTimeInterval(-passedTime)
-            target = .now.addingTimeInterval(TimeInterval(remainTime))
-        }
-    }
     
     internal func unlockItem() {
         enabled = true
     }
     
     internal func addToMachine() {
+        let child = MachineItem(name: name, itemDescription: itemDescription, image: image, price: price, parent: self)
+        machineItems.append(child)
         inMachine = true
+    }
+    
+    internal func countPlus() {
+        count += 1
     }
     
     static internal func itemMockConfig(name: String, description: String = String(), price: Float, rarity: Rarity = .common, enabled: Bool = true, ready: Bool = false) -> ConsumableItem {
@@ -103,11 +71,8 @@ extension ConsumableItem {
         let enable = enabled
         let ready = ready
         let rarity = rarity
-        let added = Date.now
-        let started = Date.now
-        let target = added.addingTimeInterval(TimeInterval(price * 60))
         
-        return ConsumableItem(name: name, itemDescription: description, image: image, price: price, rarity: rarity, added: added, started: started, target: target, enabled: enable, ready: ready)
+        return ConsumableItem(name: name, itemDescription: description, image: image, price: price, rarity: rarity, enabled: enable, ready: ready)
     }
 }
 

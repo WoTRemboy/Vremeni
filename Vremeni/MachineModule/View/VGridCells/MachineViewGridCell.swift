@@ -10,11 +10,11 @@ import SwiftData
 
 struct MachineViewGridCell: View {
     
-    private let item: ConsumableItem
+    private let item: MachineItem
     private let paused: Bool
     private let viewModel: MachineView.MachineViewModel
     
-    init(item: ConsumableItem, paused: Bool = false, viewModel: MachineView.MachineViewModel) {
+    init(item: MachineItem, paused: Bool = false, viewModel: MachineView.MachineViewModel) {
         self.item = item
         self.paused = paused
         self.viewModel = viewModel
@@ -53,14 +53,14 @@ struct MachineViewGridCell: View {
     }
     
     private var progressBar: some View {
-        ProgressBar(percent: item.ready ? 100 : item.percent, color: paused ? .orange : .green)
+        ProgressBar(percent: item.percent, color: paused ? .orange : .green)
         .onAppear(perform: {
-            if !item.ready && !paused {
+            if item.inProgress {
                 viewModel.startProgress(for: item)
             }
         })
         .onDisappear(perform: {
-            if !item.ready && !paused {
+            if item.percent < 100 && !paused {
                 viewModel.stopProgress()
             }
         })
@@ -141,16 +141,16 @@ struct MachineViewGridCell: View {
     }
 }
 
-#Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
-        let modelContext = ModelContext(container)
-        
-        let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
-        let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common, enabled: false)
-        return MachineViewGridCell(item: example, viewModel: viewModel)
-    } catch {
-        fatalError("Failed to create model container.")
-    }
-}
+//#Preview {
+//    do {
+//        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+//        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+//        let modelContext = ModelContext(container)
+//        
+//        let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
+//        let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common, enabled: false)
+//        return MachineViewGridCell(item: example, viewModel: viewModel)
+//    } catch {
+//        fatalError("Failed to create model container.")
+//    }
+//}

@@ -79,7 +79,7 @@ extension ShopView {
         
         private func fetchData() {
             do {
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { !$0.inMachine && !$0.inProgress && !$0.ready }, sortBy: [SortDescriptor(\.price), SortDescriptor(\.added)])
+                let descriptor = FetchDescriptor<ConsumableItem>(sortBy: [SortDescriptor(\.price)])
                 items = try modelContext.fetch(descriptor).filter { $0.enabled == enableStatus }
             } catch {
                 print("Fetch failed")

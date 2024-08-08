@@ -61,7 +61,7 @@ struct InventoryGridCell: View {
                 .foregroundStyle(Color.white, Color.IconColors.blue)
                 .frame(width: 25)
             
-            Text(String(Int(item.price)))
+            Text(String(item.count))
                 .font(.headline())
                 .foregroundStyle(Color.labelPrimary)
         }

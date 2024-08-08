@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ItemListRow: View {
-    private let item: ConsumableItem
+    private let item: MachineItem
     
-    init(item: ConsumableItem) {
+    init(item: MachineItem) {
         self.item = item
     }
     
@@ -69,7 +69,7 @@ struct ItemListRow: View {
     }
 }
 
-#Preview {
-    let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common, enabled: false)
-    return ItemListRow(item: example)
-}
+//#Preview {
+//    let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common, enabled: false)
+//    return ItemListRow(item: example)
+//}

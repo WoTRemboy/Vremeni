@@ -11,10 +11,10 @@ import SwiftData
 struct MachineItemDetailsView: View {
     @Environment(\.dismiss) var dismiss
     
-    private let item: ConsumableItem
+    private let item: MachineItem
     private var viewModel: MachineView.MachineViewModel
     
-    init(item: ConsumableItem, viewModel: MachineView.MachineViewModel) {
+    init(item: MachineItem, viewModel: MachineView.MachineViewModel) {
         self.item = item
         self.viewModel = viewModel
     }
@@ -118,16 +118,16 @@ struct MachineItemDetailsView: View {
     }
 }
 
-#Preview {
-    do {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
-        let modelContext = ModelContext(container)
-        let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
-        
-        let example = ConsumableItem.itemMockConfig(name: "One Minute", description: "One minute is a whole 60 seconds!", price: 50, rarity: .uncommon)
-        return MachineItemDetailsView(item: example, viewModel: viewModel)
-    } catch {
-        fatalError("Failed to create model container.")
-    }
-}
+//#Preview {
+//    do {
+//        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+//        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+//        let modelContext = ModelContext(container)
+//        let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
+//        
+//        let example = ConsumableItem.itemMockConfig(name: "One Minute", description: "One minute is a whole 60 seconds!", price: 50, rarity: .uncommon)
+//        return MachineItemDetailsView(item: example, viewModel: viewModel)
+//    } catch {
+//        fatalError("Failed to create model container.")
+//    }
+//}
