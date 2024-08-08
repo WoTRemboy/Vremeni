@@ -25,6 +25,7 @@ extension ShopView {
             self.modelContext = modelContext
             self.enableStatus = true
             fetchData()
+            addSamples()
         }
         
         internal func pickItem(item: ConsumableItem) {
@@ -53,6 +54,7 @@ extension ShopView {
         }
         
         internal func addSamples() {
+            guard items.isEmpty else { return }
             let items = [ConsumableItem.itemMockConfig(name: "One Minute",
                                                        description: "One minute is a whole 60 seconds!",
                                                        price: 1),
@@ -60,17 +62,24 @@ extension ShopView {
                          ConsumableItem.itemMockConfig(name: "Three Minutes",
                                                        description: "Three minutes is a whole 180 seconds!",
                                                        price: 3,
-                                                       rarity: .uncommon),
+                                                       rarity: .common,
+                                                       enabled: false),
                          
                          ConsumableItem.itemMockConfig(name: "Five Minutes",
                                                        description: "Five minutes is a whole 300 seconds!",
                                                        price: 5,
-                                                       rarity: .rare,
+                                                       rarity: .uncommon,
                                                        enabled: false),
                          ConsumableItem.itemMockConfig(name: "Seven Minutes",
                                                        description: "Seven minutes is a whole 420 seconds!",
                                                        price: 7,
-                                                       rarity: .rare)]
+                                                       rarity: .uncommon,
+                                                       enabled: false),
+                         ConsumableItem.itemMockConfig(name: "Ten Minutes",
+                                                       description: "Ten minutes is a whole 600 seconds!",
+                                                       price: 10,
+                                                       rarity: .rare,
+                                                       enabled: false)]
             for item in items {
                 modelContext.insert(item)
             }

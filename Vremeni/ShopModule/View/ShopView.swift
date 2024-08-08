@@ -48,7 +48,6 @@ struct ShopView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .background(Color.BackColors.backDefault)
                 .toolbar {
-                    toolBarButtonSamples
                     toolBarButtonPlus
                 }
                 .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
@@ -60,14 +59,6 @@ struct ShopView: View {
             MachineView(modelContext: modelContext)
             InventoryView(modelContext: modelContext)
             ProfileView()
-        }
-    }
-    
-    private var toolBarButtonSamples: some View {
-        Button(Texts.ShopPage.addItem, systemImage: "rectangle.stack.badge.plus") {
-            withAnimation(.snappy) {
-                viewModel.addSamples()
-            }
         }
     }
     
