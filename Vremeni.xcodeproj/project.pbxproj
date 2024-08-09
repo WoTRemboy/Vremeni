@@ -34,6 +34,7 @@
 		631F26542C656EDE00FEAD1A /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631F26532C656EDE00FEAD1A /* SectionHeader.swift */; };
 		631F26562C66185900FEAD1A /* RarityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631F26552C66185900FEAD1A /* RarityModel.swift */; };
 		631F26582C66188300FEAD1A /* RuleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631F26572C66188300FEAD1A /* RuleModel.swift */; };
+		631F265A2C66556400FEAD1A /* InventoryStatsGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631F26592C66556400FEAD1A /* InventoryStatsGridCell.swift */; };
 		6373291B2C5C1E9600D7A719 /* ShopViewGridCellLocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6373291A2C5C1E9600D7A719 /* ShopViewGridCellLocked.swift */; };
 		638620A92C5D4F1F00453944 /* EmptyMachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620A82C5D4F1F00453944 /* EmptyMachineViewGridCell.swift */; };
 		638620AB2C5D566400453944 /* NewSlotMachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620AA2C5D566400453944 /* NewSlotMachineViewGridCell.swift */; };
@@ -98,6 +99,7 @@
 		631F26532C656EDE00FEAD1A /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		631F26552C66185900FEAD1A /* RarityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RarityModel.swift; sourceTree = "<group>"; };
 		631F26572C66188300FEAD1A /* RuleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleModel.swift; sourceTree = "<group>"; };
+		631F26592C66556400FEAD1A /* InventoryStatsGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryStatsGridCell.swift; sourceTree = "<group>"; };
 		6373291A2C5C1E9600D7A719 /* ShopViewGridCellLocked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewGridCellLocked.swift; sourceTree = "<group>"; };
 		638620A82C5D4F1F00453944 /* EmptyMachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMachineViewGridCell.swift; sourceTree = "<group>"; };
 		638620AA2C5D566400453944 /* NewSlotMachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSlotMachineViewGridCell.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 			children = (
 				631AF4202C5250BB00DFD63C /* InventoryView.swift */,
 				63194D1A2C63E01000CAA0AB /* InventoryGridViewCell.swift */,
+				631F26592C66556400FEAD1A /* InventoryStatsGridCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				638620B52C60D11B00453944 /* MachineItemDetailsView.swift in Sources */,
 				631F26562C66185900FEAD1A /* RarityModel.swift in Sources */,
 				639C76382C5952E900C1CEB8 /* ConsumableItemCreate.swift in Sources */,
+				631F265A2C66556400FEAD1A /* InventoryStatsGridCell.swift in Sources */,
 				631AF4132C5176BA00DFD63C /* ShopViewModel.swift in Sources */,
 				631AF42C2C5259EC00DFD63C /* MachineViewGridCell.swift in Sources */,
 				631F26582C66188300FEAD1A /* RuleModel.swift in Sources */,
@@ -730,7 +734,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.2;
+				MARKETING_VERSION = 0.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -765,7 +769,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.2;
+				MARKETING_VERSION = 0.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -58,7 +58,9 @@ struct InventoryView: View {
             ForEach(Rarity.allCases) { rarity in
                 let items = searchResults.filter({ $0.rarity == rarity })
                 if !items.isEmpty {
-                    Section(header: SectionHeader(rarity.rawValue)) {
+                    Section(header: SectionHeader(rarity.rawValue),
+                            footer: InventoryStatsViewGridCell(rarity: rarity, viewModel: viewModel)) {
+                        
                         ForEach(items) { item in
                             InventoryGridCell(item: item, viewModel: viewModel)
                         }

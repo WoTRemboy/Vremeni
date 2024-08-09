@@ -16,6 +16,7 @@ extension InventoryView {
         
         private(set) var items = [ConsumableItem]()
         private(set) var unfilteredItems = [ConsumableItem]()
+        private(set) var statsItems = [ConsumableItem]()
         
         internal var rarityFilter: Rarity {
             didSet {
@@ -26,15 +27,32 @@ extension InventoryView {
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
             self.rarityFilter = .all
+            fetchStatsData()
             fetchData()
         }
         
         internal func updateOnAppear() {
+            fetchStatsData()
             fetchData()
         }
         
         internal func filterItems(for rarity: Rarity) -> [ConsumableItem] {
             unfilteredItems.filter({ $0.rarity == rarity })
+        }
+        
+        internal func rarityItemsCount(for rarity: Rarity) -> String {
+            let inventoryItems = items.filter({ $0.rarity == rarity }).count
+            let allItems = statsItems.filter({ $0.rarity == rarity }).count
+            return "\(inventoryItems) / \(allItems)"
+        }
+        
+        internal func rarityItemsPercent(for rarity: Rarity) -> String {
+            let inventoryItems = Float(items.filter({ $0.rarity == rarity }).count)
+            let statsItems = Float(statsItems.filter({ $0.rarity == rarity }).count)
+            guard statsItems > 0 else { return "0%" }
+            
+            let percent = Int(inventoryItems / statsItems * 100)
+            return "\(percent)%"
         }
         
         internal func addSamples() {
@@ -79,6 +97,15 @@ extension InventoryView {
                         rarityFilter = .all
                     }
                 }
+            } catch {
+                print("Fetch failed")
+            }
+        }
+        
+        private func fetchStatsData() {
+            do {
+                let descriptor = FetchDescriptor<ConsumableItem>()
+                statsItems = try modelContext.fetch(descriptor)
             } catch {
                 print("Fetch failed")
             }
