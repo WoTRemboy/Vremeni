@@ -37,8 +37,6 @@ struct ShopView: View {
                         collection
                             .padding(.horizontal)
                             .padding(.top, 8)
-                            .animation(.snappy, value: viewModel.rarityFilter)
-                            .animation(.snappy, value: viewModel.enableStatus)
                     }
                     if viewModel.items.isEmpty {
                         Text(Texts.ShopPage.placeholder)
@@ -142,7 +140,7 @@ struct ShopView: View {
         if searchText.isEmpty {
             return viewModel.items
         } else {
-            return viewModel.items.filter { $0.name.contains(searchText) }
+            return viewModel.unfilteredItems.filter { $0.name.contains(searchText) }
         }
     }
 }

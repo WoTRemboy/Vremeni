@@ -12,17 +12,29 @@ extension InventoryView {
     
     @Observable
     final class InventoryViewModel {
-        
         private let modelContext: ModelContext
+        
         private(set) var items = [ConsumableItem]()
+        private(set) var unfilteredItems = [ConsumableItem]()
+        
+        internal var rarityFilter: Rarity {
+            didSet {
+                fetchData()
+            }
+        }
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
+            self.rarityFilter = .all
             fetchData()
         }
         
         internal func updateOnAppear() {
             fetchData()
+        }
+        
+        internal func filterItems(for rarity: Rarity) -> [ConsumableItem] {
+            unfilteredItems.filter({ $0.rarity == rarity })
         }
         
         internal func addSamples() {
@@ -57,6 +69,16 @@ extension InventoryView {
             do {
                 let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.ready }, sortBy: [SortDescriptor(\.price)])
                 items = try modelContext.fetch(descriptor)
+                
+                if rarityFilter != .all {
+                    items = items.filter { $0.rarity == rarityFilter }
+                } else {
+                    unfilteredItems = items
+                    
+                    if rarityFilter != .all {
+                        rarityFilter = .all
+                    }
+                }
             } catch {
                 print("Fetch failed")
             }

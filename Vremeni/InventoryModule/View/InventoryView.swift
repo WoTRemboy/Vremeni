@@ -36,7 +36,7 @@ struct InventoryView: View {
             .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    toolBarButtonfilter
+                    toolBarMenuFilter
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     toolBarBalanceView
@@ -69,17 +69,27 @@ struct InventoryView: View {
         }
     }
     
-    private var searchResults: [ConsumableItem] {
-        if searchText.isEmpty {
-            return viewModel.items
-        } else {
-            return viewModel.items.filter { $0.name.contains(searchText) }
-        }
-    }
-    
-    private var toolBarButtonfilter: some View {
-        Button(Texts.InventoryPage.filter, systemImage: "line.3.horizontal.decrease.circle") {
-            #warning("has to be completed")
+    private var toolBarMenuFilter: some View {
+        Menu {
+            Picker(Texts.InventoryPage.filter, selection: $viewModel.rarityFilter) {
+                Text(Rarity.all.rawValue)
+                    .tag(Rarity.all)
+            }
+            Section {
+                Picker(Texts.InventoryPage.filter, selection: $viewModel.rarityFilter) {
+                    ForEach(Rarity.allCases) { rarity in
+                        if !viewModel.filterItems(for: rarity).isEmpty {
+                            Label(
+                                title: { Text(rarity.rawValue) },
+                                icon: { Rarity.rarityToImage(rarity: rarity) }
+                            )
+                            .tag(rarity)
+                        }
+                    }
+                }
+            }
+        } label: {
+            viewModel.rarityFilter == .all ? Image.ShopPage.filter : Image.ShopPage.filledFilter
         }
     }
     
@@ -93,6 +103,14 @@ struct InventoryView: View {
             Text("128")
                 .font(.headline())
                 .foregroundStyle(Color.labelPrimary)
+        }
+    }
+    
+    private var searchResults: [ConsumableItem] {
+        if searchText.isEmpty {
+            return viewModel.items
+        } else {
+            return viewModel.unfilteredItems.filter { $0.name.contains(searchText) }
         }
     }
 }
