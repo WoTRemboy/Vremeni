@@ -55,6 +55,10 @@ extension InventoryView {
             return "\(percent)%"
         }
         
+        internal func valCalculation(for item: ConsumableItem) -> String {
+            String(Int(item.price) * item.count)
+        }
+        
         internal func addSamples() {
             let items = [ConsumableItem.itemMockConfig(name: "One Minute",
                                                        description: "One minute is a whole 60 seconds!",

@@ -11,6 +11,7 @@ import SwiftData
 struct InventoryView: View {
     
     @State private var viewModel: InventoryViewModel
+    @State private var selected: ConsumableItem? = nil
     @State private var searchText = String()
     
     private let spacing: CGFloat = 16
@@ -71,10 +72,15 @@ struct InventoryView: View {
                         
                         ForEach(items) { item in
                             InventoryGridCell(item: item, viewModel: viewModel)
+                                .onTapGesture {
+                                    selected = item
+                                }
                         }
                     }
                 }
-                
+            }
+            .sheet(item: $selected) { item in
+                InventoryItemDetailsView(item: item, viewModel: viewModel)
             }
         }
     }

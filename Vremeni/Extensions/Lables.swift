@@ -91,6 +91,7 @@ final class Texts {
         static let placeholderSubtitle = "Get some Items from Fair via Machine"
         
         static let filter = "Filter"
+        static let valuation = "Valuation"
     }
     
     enum ProfilePage {
