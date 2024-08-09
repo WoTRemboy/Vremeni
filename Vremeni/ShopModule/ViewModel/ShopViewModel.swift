@@ -14,8 +14,8 @@ extension ShopView {
     final class ShopViewModel {
         private var modelContext: ModelContext
         
-        private var unfilteredItems = [ConsumableItem]()
         private(set) var items = [ConsumableItem]()
+        private(set) var unfilteredItems = [ConsumableItem]()
         
         internal var rarityFilter: Rarity {
             didSet {

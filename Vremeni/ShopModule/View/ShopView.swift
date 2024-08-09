@@ -37,11 +37,9 @@ struct ShopView: View {
                         collection
                             .padding(.horizontal)
                             .padding(.top, 8)
-                            .animation(.snappy, value: viewModel.rarityFilter)
-                            .animation(.snappy, value: viewModel.enableStatus)
                     }
                     if viewModel.items.isEmpty {
-                        Text(Texts.ShopPage.placeholder)
+                        placeholder
                     }
                 }
                 .scrollDisabled(viewModel.items.isEmpty)
@@ -138,11 +136,23 @@ struct ShopView: View {
         }
     }
     
+    private var placeholder: some View {
+        if viewModel.enableStatus {
+            PlaceholderView(title: Texts.ShopPage.placeholderTitle,
+                            description: Texts.ShopPage.placeholderSubtitle,
+                            status: .unlocked)
+        } else {
+            PlaceholderView(title: Texts.ShopPage.placeholderTitleLocked,
+                            description: Texts.ShopPage.placeholderSubtitleLocked,
+                            status: .locked)
+        }
+    }
+    
     private var searchResults: [ConsumableItem] {
         if searchText.isEmpty {
             return viewModel.items
         } else {
-            return viewModel.items.filter { $0.name.contains(searchText) }
+            return viewModel.unfilteredItems.filter { $0.name.contains(searchText) }
         }
     }
 }
