@@ -34,6 +34,14 @@ struct InventoryView: View {
             .navigationBarTitleDisplayMode(.inline)
             .background(Color.BackColors.backDefault)
             .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    toolBarButtonfilter
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    toolBarBalanceView
+                }
+            }
         }
         .tabItem {
             Image.TabBar.inventory
@@ -66,6 +74,25 @@ struct InventoryView: View {
             return viewModel.items
         } else {
             return viewModel.items.filter { $0.name.contains(searchText) }
+        }
+    }
+    
+    private var toolBarButtonfilter: some View {
+        Button(Texts.InventoryPage.filter, systemImage: "line.3.horizontal.decrease.circle") {
+            #warning("has to be completed")
+        }
+    }
+    
+    private var toolBarBalanceView: some View {
+        HStack(spacing: 5) {
+            Image.ShopPage.vCoin
+                .resizable()
+                .scaledToFit()
+                .frame(width: 17)
+            
+            Text("128")
+                .font(.headline())
+                .foregroundStyle(Color.labelPrimary)
         }
     }
 }

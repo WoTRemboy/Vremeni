@@ -13,17 +13,26 @@ extension ShopView {
     @Observable
     final class ShopViewModel {
         private var modelContext: ModelContext
+        
+        private var unfilteredItems = [ConsumableItem]()
         private(set) var items = [ConsumableItem]()
+        
+        internal var rarityFilter: Rarity {
+            didSet {
+                fetchData()
+            }
+        }
         
         internal var enableStatus: Bool {
             didSet {
-                fetchData()
+                fetchData(filterReset: true)
             }
         }
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
             self.enableStatus = true
+            self.rarityFilter = .all
             fetchData()
             addSamples()
         }
@@ -51,6 +60,14 @@ extension ShopView {
         internal func deleteItem(item: ConsumableItem) {
             modelContext.delete(item)
             fetchData()
+        }
+        
+        internal func filterItems(for rarity: Rarity) -> [ConsumableItem] {
+            unfilteredItems.filter({ $0.rarity == rarity })
+        }
+        
+        internal func changeRowItems(enabled: Bool) -> Int {
+            enabled ? 2 : 1
         }
         
         internal func addSamples() {
@@ -86,10 +103,20 @@ extension ShopView {
             fetchData()
         }
         
-        private func fetchData() {
+        private func fetchData(filterReset: Bool = false) {
             do {
-                let descriptor = FetchDescriptor<ConsumableItem>(sortBy: [SortDescriptor(\.price)])
-                items = try modelContext.fetch(descriptor).filter { $0.enabled == enableStatus }
+                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.enabled == enableStatus }, sortBy: [SortDescriptor(\.price)])
+                items = try modelContext.fetch(descriptor)
+                
+                if rarityFilter != .all && !filterReset {
+                    items = items.filter { $0.rarity == rarityFilter }
+                } else {
+                    unfilteredItems = items
+                    
+                    if rarityFilter != .all {
+                        rarityFilter = .all
+                    }
+                }
             } catch {
                 print("Fetch failed")
             }

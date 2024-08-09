@@ -115,7 +115,7 @@ struct MachineItemDetailsView: View {
         .minimumScaleFactor(0.4)
         .buttonStyle(.bordered)
         .tint(item.percent != 0 ? Color.orange : Color.green)
-        .disabled(!viewModel.isSlotAvailable())
+        .disabled(!item.inProgress && !viewModel.isSlotAvailable())
     }
 }
 
