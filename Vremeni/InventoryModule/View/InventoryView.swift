@@ -23,13 +23,21 @@ struct InventoryView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                collection
-                    .padding(.horizontal)
+            ZStack {
+                ScrollView {
+                    collection
+                        .padding(.horizontal)
+                }
+                .onAppear(perform: {
+                    viewModel.updateOnAppear()
+                })
+                
+                if viewModel.items.isEmpty {
+                    placeholder
+                }
             }
-            .onAppear(perform: {
-                viewModel.updateOnAppear()
-            })
+            .scrollDisabled(viewModel.items.isEmpty)
+            .scrollDismissesKeyboard(.immediately)
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
             .background(Color.BackColors.backDefault)
@@ -106,6 +114,12 @@ struct InventoryView: View {
                 .font(.headline())
                 .foregroundStyle(Color.labelPrimary)
         }
+    }
+    
+    private var placeholder: some View {
+        PlaceholderView(title: Texts.InventoryPage.placeholderTitle,
+                        description: Texts.InventoryPage.placeholderSubtitle,
+                        status: .inventory)
     }
     
     private var searchResults: [ConsumableItem] {

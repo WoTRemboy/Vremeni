@@ -39,7 +39,7 @@ struct ShopView: View {
                             .padding(.top, 8)
                     }
                     if viewModel.items.isEmpty {
-                        Text(Texts.ShopPage.placeholder)
+                        placeholder
                     }
                 }
                 .scrollDisabled(viewModel.items.isEmpty)
@@ -133,6 +133,18 @@ struct ShopView: View {
             .sheet(item: $selected) { item in
                 ConsumableItemDetails(item: item, viewModel: viewModel)
             }
+        }
+    }
+    
+    private var placeholder: some View {
+        if viewModel.enableStatus {
+            PlaceholderView(title: Texts.ShopPage.placeholderTitle,
+                            description: Texts.ShopPage.placeholderSubtitle,
+                            status: .unlocked)
+        } else {
+            PlaceholderView(title: Texts.ShopPage.placeholderTitleLocked,
+                            description: Texts.ShopPage.placeholderSubtitleLocked,
+                            status: .locked)
         }
     }
     

@@ -40,14 +40,9 @@ struct MachineAddItemsView: View {
     }
     
     private var empty: some View {
-        VStack {
-            Image(systemName: "play.slash")
-                .resizable()
-                .scaledToFit()
-                .fontWeight(.light)
-                .foregroundStyle(Color.accentColor, Color.cyan)
-                .frame(height: 100)
-        }
+        PlaceholderView(title: Texts.MachinePage.placeholderTitle,
+                        description: Texts.MachinePage.placeholderSubtitle,
+                        status: .machine)
     }
     
     private var list: some View {

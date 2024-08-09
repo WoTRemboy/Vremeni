@@ -42,5 +42,10 @@ extension Image {
     
     enum Placeholder {
         static let placeholder1to1 = Image("Placeholder1to1")
+        static let search = Image(systemName: "magnifyingglass")
+        static let locked = Image(systemName: "fireworks")
+        static let unlocked = Image(systemName: "lock.open")
+        static let machine = Image(systemName: "clock.arrow.2.circlepath")
+        static let inventory = Image(systemName: "rectangle.portrait.on.rectangle.portrait")
     }
 }
