@@ -106,17 +106,11 @@ struct MachineView: View {
     }
     
     private var sectionHeader: some View {
-        Text(Texts.MachinePage.workshop)
-            .font(.segmentTitle())
-            .foregroundStyle(Color.LabelColors.labelPrimary)
-            .frame(maxWidth: .infinity, alignment: .leading)
+        SectionHeader(Texts.MachinePage.workshop)
     }
     
     private var secondSectionHeader: some View {
-        Text(Texts.MachinePage.queue)
-            .font(.segmentTitle())
-            .foregroundStyle(Color.LabelColors.labelPrimary)
-            .frame(maxWidth: .infinity, alignment: .leading)
+        SectionHeader(Texts.MachinePage.queue)
     }
 }
 

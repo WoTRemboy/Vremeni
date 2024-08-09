@@ -10,6 +10,8 @@ import SwiftUI
 extension Image {
     enum ShopPage {
         static let vCoin = Image("VCoin")
+        static let filter = Image(systemName: "line.3.horizontal.decrease.circle")
+        static let filledFilter = Image(systemName: "line.3.horizontal.decrease.circle.fill")
     }
     
     enum InventoryPage {

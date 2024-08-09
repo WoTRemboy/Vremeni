@@ -34,6 +34,14 @@ struct InventoryView: View {
             .navigationBarTitleDisplayMode(.inline)
             .background(Color.BackColors.backDefault)
             .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    toolBarButtonfilter
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    toolBarBalanceView
+                }
+            }
         }
         .tabItem {
             Image.TabBar.inventory
@@ -47,8 +55,16 @@ struct InventoryView: View {
             count: itemsInRows)
         
         return LazyVGrid(columns: columns, spacing: spacing) {
-            ForEach(searchResults) { item in
-                InventoryGridCell(item: item, viewModel: viewModel)
+            ForEach(Rarity.allCases) { rarity in
+                let items = searchResults.filter({ $0.rarity == rarity })
+                if !items.isEmpty {
+                    Section(header: SectionHeader(rarity.rawValue)) {
+                        ForEach(items) { item in
+                            InventoryGridCell(item: item, viewModel: viewModel)
+                        }
+                    }
+                }
+                
             }
         }
     }
@@ -58,6 +74,25 @@ struct InventoryView: View {
             return viewModel.items
         } else {
             return viewModel.items.filter { $0.name.contains(searchText) }
+        }
+    }
+    
+    private var toolBarButtonfilter: some View {
+        Button(Texts.InventoryPage.filter, systemImage: "line.3.horizontal.decrease.circle") {
+            #warning("has to be completed")
+        }
+    }
+    
+    private var toolBarBalanceView: some View {
+        HStack(spacing: 5) {
+            Image.ShopPage.vCoin
+                .resizable()
+                .scaledToFit()
+                .frame(width: 17)
+            
+            Text("128")
+                .font(.headline())
+                .foregroundStyle(Color.labelPrimary)
         }
     }
 }

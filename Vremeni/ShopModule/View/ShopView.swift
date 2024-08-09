@@ -32,11 +32,13 @@ struct ShopView: View {
             NavigationStack {
                 ZStack {
                     ScrollView {
-                        picker
+                        enableSegmentedPicker
                             .padding(.horizontal)
                         collection
                             .padding(.horizontal)
                             .padding(.top, 8)
+                            .animation(.snappy, value: viewModel.rarityFilter)
+                            .animation(.snappy, value: viewModel.enableStatus)
                     }
                     if viewModel.items.isEmpty {
                         Text(Texts.ShopPage.placeholder)
@@ -48,8 +50,12 @@ struct ShopView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .background(Color.BackColors.backDefault)
                 .toolbar {
-                    toolBarButtonSamples
-                    toolBarButtonPlus
+                    ToolbarItem(placement: .topBarLeading) {
+                        toolBarMenuFilter
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        toolBarButtonPlus
+                    }
                 }
                 .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
             }
@@ -63,14 +69,6 @@ struct ShopView: View {
         }
     }
     
-    private var toolBarButtonSamples: some View {
-        Button(Texts.ShopPage.addItem, systemImage: "rectangle.stack.badge.plus") {
-            withAnimation(.snappy) {
-                viewModel.addSamples()
-            }
-        }
-    }
-    
     private var toolBarButtonPlus: some View {
         Button(Texts.ShopPage.addItem, systemImage: "plus") {
             showingAddItemSheet.toggle()
@@ -80,12 +78,39 @@ struct ShopView: View {
         }
     }
     
-    private var picker: some View {
+    private var toolBarMenuFilter: some View {
+        Menu {
+            Picker(Texts.ShopPage.filterItems, selection: $viewModel.rarityFilter) {
+                Text(Rarity.all.rawValue)
+                    .tag(Rarity.all)
+            }
+            Section {
+                Picker(Texts.ShopPage.filterItems, selection: $viewModel.rarityFilter) {
+                    ForEach(Rarity.allCases) { rarity in
+                        if !viewModel.filterItems(for: rarity).isEmpty {
+                            Label(
+                                title: { Text(rarity.rawValue) },
+                                icon: { Rarity.rarityToImage(rarity: rarity) }
+                            )
+                            .tag(rarity)
+                        }
+                    }
+                }
+            }
+        } label: {
+            viewModel.rarityFilter == .all ? Image.ShopPage.filter : Image.ShopPage.filledFilter
+        }
+    }
+    
+    private var enableSegmentedPicker: some View {
         Picker(Texts.ShopPage.status, selection: $viewModel.enableStatus) {
             Text(Texts.ShopPage.available).tag(true)
             Text(Texts.ShopPage.locked).tag(false)
         }
         .pickerStyle(.segmented)
+        .onChange(of: viewModel.enableStatus) {
+            itemsInRows = viewModel.changeRowItems(enabled: viewModel.enableStatus)
+        }
     }
     
     private var collection: some View {
@@ -97,17 +122,11 @@ struct ShopView: View {
             ForEach(searchResults) { item in
                 if item.enabled {
                     ShopViewGridCell(item: item, viewModel: viewModel)
-                        .onAppear {
-                            itemsInRows = 2
-                        }
                         .onTapGesture {
                             selected = item
                         }
                 } else {
                     ShopViewGridCellLocked(item: item, viewModel: viewModel)
-                        .onAppear {
-                            itemsInRows = 1
-                        }
                         .onTapGesture {
                             selected = item
                         }

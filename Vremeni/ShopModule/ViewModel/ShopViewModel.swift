@@ -13,18 +13,28 @@ extension ShopView {
     @Observable
     final class ShopViewModel {
         private var modelContext: ModelContext
+        
+        private var unfilteredItems = [ConsumableItem]()
         private(set) var items = [ConsumableItem]()
+        
+        internal var rarityFilter: Rarity {
+            didSet {
+                fetchData()
+            }
+        }
         
         internal var enableStatus: Bool {
             didSet {
-                fetchData()
+                fetchData(filterReset: true)
             }
         }
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
             self.enableStatus = true
+            self.rarityFilter = .all
             fetchData()
+            addSamples()
         }
         
         internal func pickItem(item: ConsumableItem) {
@@ -52,7 +62,16 @@ extension ShopView {
             fetchData()
         }
         
+        internal func filterItems(for rarity: Rarity) -> [ConsumableItem] {
+            unfilteredItems.filter({ $0.rarity == rarity })
+        }
+        
+        internal func changeRowItems(enabled: Bool) -> Int {
+            enabled ? 2 : 1
+        }
+        
         internal func addSamples() {
+            guard items.isEmpty else { return }
             let items = [ConsumableItem.itemMockConfig(name: "One Minute",
                                                        description: "One minute is a whole 60 seconds!",
                                                        price: 1),
@@ -60,27 +79,44 @@ extension ShopView {
                          ConsumableItem.itemMockConfig(name: "Three Minutes",
                                                        description: "Three minutes is a whole 180 seconds!",
                                                        price: 3,
-                                                       rarity: .uncommon),
+                                                       rarity: .common,
+                                                       enabled: false),
                          
                          ConsumableItem.itemMockConfig(name: "Five Minutes",
                                                        description: "Five minutes is a whole 300 seconds!",
                                                        price: 5,
-                                                       rarity: .rare,
+                                                       rarity: .uncommon,
                                                        enabled: false),
                          ConsumableItem.itemMockConfig(name: "Seven Minutes",
                                                        description: "Seven minutes is a whole 420 seconds!",
                                                        price: 7,
-                                                       rarity: .rare)]
+                                                       rarity: .uncommon,
+                                                       enabled: false),
+                         ConsumableItem.itemMockConfig(name: "Ten Minutes",
+                                                       description: "Ten minutes is a whole 600 seconds!",
+                                                       price: 10,
+                                                       rarity: .rare,
+                                                       enabled: false)]
             for item in items {
                 modelContext.insert(item)
             }
             fetchData()
         }
         
-        private func fetchData() {
+        private func fetchData(filterReset: Bool = false) {
             do {
-                let descriptor = FetchDescriptor<ConsumableItem>(sortBy: [SortDescriptor(\.price)])
-                items = try modelContext.fetch(descriptor).filter { $0.enabled == enableStatus }
+                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.enabled == enableStatus }, sortBy: [SortDescriptor(\.price)])
+                items = try modelContext.fetch(descriptor)
+                
+                if rarityFilter != .all && !filterReset {
+                    items = items.filter { $0.rarity == rarityFilter }
+                } else {
+                    unfilteredItems = items
+                    
+                    if rarityFilter != .all {
+                        rarityFilter = .all
+                    }
+                }
             } catch {
                 print("Fetch failed")
             }

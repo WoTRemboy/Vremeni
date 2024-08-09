@@ -29,6 +29,7 @@ final class Texts {
     enum ShopPage {
         static let title = "Fair"
         static let searchItems = "Search items"
+        static let filterItems = "Filter items"
         static let placeholder = "Click on the '+' button to add an Item"
 
         static let addItem = "Add"
@@ -80,6 +81,8 @@ final class Texts {
     enum InventoryPage {
         static let title = "Inventory"
         static let placeholder = "Collected items will be displayed here"
+        
+        static let filter = "Filter"
     }
     
     enum ProfilePage {

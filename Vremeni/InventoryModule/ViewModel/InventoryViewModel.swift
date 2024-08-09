@@ -34,13 +34,18 @@ extension InventoryView {
                          ConsumableItem.itemMockConfig(name: "Three Minutes",
                                                        description: "Three minutes is a whole 180 seconds!",
                                                        price: 3,
-                                                       rarity: .uncommon,
+                                                       rarity: .common,
                                                        ready: true),
                          
                          ConsumableItem.itemMockConfig(name: "Five Minutes",
                                                        description: "Five minutes is a whole 300 seconds!",
                                                        price: 5,
-                                                       rarity: .epic,
+                                                       rarity: .common,
+                                                       ready: true),
+                         ConsumableItem.itemMockConfig(name: "Seven Minutes",
+                                                       description: "Five minutes is a whole 300 seconds!",
+                                                       price: 7,
+                                                       rarity: .uncommon,
                                                        ready: true)]
             for item in items {
                 modelContext.insert(item)
