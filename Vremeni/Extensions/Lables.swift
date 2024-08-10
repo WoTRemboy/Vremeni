@@ -43,7 +43,7 @@ final class Texts {
         static let placeholderTitle = "No available Items"
         static let placeholderSubtitle = "Unlock some Items or restore from Archive"
         static let placeholderTitleLocked = "Congratulations!"
-        static let placeholderSubtitleLocked = "You have unlocked all the Items"
+        static let placeholderSubtitleLocked = "You have unlocked all Items"
     }
     
     enum ItemCreatePage {

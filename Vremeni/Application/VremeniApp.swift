@@ -10,9 +10,9 @@ import SwiftData
 
 @main
 struct VremeniApp: App {
-    let container: ModelContainer
+    private let container: ModelContainer
     
-    var body: some Scene {
+    internal var body: some Scene {
         WindowGroup {
             ShopView(modelContext: container.mainContext)
         }

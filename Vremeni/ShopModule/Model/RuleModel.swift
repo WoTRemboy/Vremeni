@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - Rule
+// MARK: - Rule Model
 
 final class Rule: Identifiable {
     var id = UUID()
@@ -25,7 +25,11 @@ final class Rule: Identifiable {
         self.requirement = requirement
         self.result = result
     }
-    
+}
+
+// MARK: - Rule Methods
+
+extension Rule {
     internal var mockRule: Rule {
         let name = "Perfect score"
         let description = "The aspiration of any adequate person"
