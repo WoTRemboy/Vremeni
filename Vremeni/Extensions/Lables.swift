@@ -29,6 +29,7 @@ final class Texts {
     enum ShopPage {
         static let title = "Fair"
         static let searchItems = "Search items"
+        static let filterItems = "Filter items"
         static let placeholder = "Click on the '+' button to add an Item"
 
         static let addItem = "Add"
@@ -38,6 +39,11 @@ final class Texts {
         static let status = "Status"
         static let available = "Available"
         static let locked = "Locked"
+        
+        static let placeholderTitle = "No available Items"
+        static let placeholderSubtitle = "Unlock some Items or restore from Archive"
+        static let placeholderTitleLocked = "Congratulations!"
+        static let placeholderSubtitleLocked = "You have unlocked all Items"
     }
     
     enum ItemCreatePage {
@@ -64,15 +70,28 @@ final class Texts {
     
     enum MachinePage {
         static let title = "Machine"
+        static let placeholderTitle = "No queue"
+        static let placeholderSubtitle = "Add some Items from the Fair"
         
         static let workshop = "Workshop"
         static let emptyTitle = "Add an Item"
         static let queue = "Queue"
+        
+        static let targetTime = "Target time"
+        static let potentialTime = "Potential target"
+        static let reward = "Reward"
+        static let pause = "Pause"
+        static let start = "Start"
+        static let continueProgress = "Continue"
     }
     
     enum InventoryPage {
         static let title = "Inventory"
-        static let placeholder = "Collected items will be displayed here"
+        static let placeholderTitle = "No Inventory"
+        static let placeholderSubtitle = "Get some Items from Fair via Machine"
+        
+        static let filter = "Filter"
+        static let valuation = "Valuation"
     }
     
     enum ProfilePage {

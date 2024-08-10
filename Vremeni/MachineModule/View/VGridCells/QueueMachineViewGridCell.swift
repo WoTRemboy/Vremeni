@@ -10,10 +10,10 @@ import SwiftData
 
 struct QueueMachineViewGridCell: View {
     
-    private let item: ConsumableItem
+    private let item: MachineItem
     private let viewModel: MachineView.MachineViewModel
     
-    init(item: ConsumableItem, viewModel: MachineView.MachineViewModel) {
+    init(item: MachineItem, viewModel: MachineView.MachineViewModel) {
         self.item = item
         self.viewModel = viewModel
     }
@@ -90,7 +90,7 @@ struct QueueMachineViewGridCell: View {
     
     private var priceView: some View {
         HStack(spacing: 5) {
-            Text("\(Texts.ItemCreatePage.price):")
+            Text("\(Texts.MachinePage.reward):")
                 .font(.body())
                 .foregroundStyle(Color.labelPrimary)
             
@@ -120,7 +120,7 @@ struct QueueMachineViewGridCell: View {
             .minimumScaleFactor(0.4)
             .buttonStyle(.bordered)
             .tint(Color.green)
-            .disabled(viewModel.isSlotAvailable())
+            .disabled(!viewModel.isSlotAvailable())
             
             Button(action: {
                 withAnimation(.snappy) {
@@ -146,7 +146,7 @@ struct QueueMachineViewGridCell: View {
         let modelContext = ModelContext(container)
         
         let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
-        let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common)
+        let example = MachineItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1)
         return QueueMachineViewGridCell(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")

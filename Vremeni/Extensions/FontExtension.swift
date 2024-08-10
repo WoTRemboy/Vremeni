@@ -20,6 +20,10 @@ extension Font {
         Font.system(size: 25, weight: .medium)
     }
     
+    static func placeholderTitle() -> Font? {
+        Font.system(size: 22, weight: .bold)
+    }
+    
     static func ruleTitle() -> Font? {
         Font.system(size: 22, weight: .medium)
     }

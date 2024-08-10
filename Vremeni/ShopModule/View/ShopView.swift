@@ -10,16 +10,26 @@ import SwiftData
 
 struct ShopView: View {
     
-    @Environment(\.dismissSearch) private var dismissSearch
-    @State private var viewModel: ShopViewModel
-    @State private var selected: ConsumableItem? = nil
+    // MARK: - Properties
     
+    // ViewModel properties
+    @State private var viewModel: ShopViewModel
+    private let modelContext: ModelContext
+    
+    // Selected item to show & dismiss details sheet page
+    @State private var selected: ConsumableItem? = nil
+    @Environment(\.dismissSearch) private var dismissSearch
+    
+    // Show and dismiss add item sheet page
     @State private var showingAddItemSheet = false
+    // Search bar result property
     @State private var searchText = String()
+    
+    // VGrid item space & count in a row
+    private let spacing: CGFloat = 16
     @State private var itemsInRows = 2
     
-    private let modelContext: ModelContext
-    private let spacing: CGFloat = 16
+    // MARK: - Initialization
     
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
@@ -27,49 +37,57 @@ struct ShopView: View {
         _viewModel = State(initialValue: viewModel)
     }
     
+    // MARK: - Body view
+    
     internal var body: some View {
         TabView {
             NavigationStack {
                 ZStack {
                     ScrollView {
-                        picker
+                        enableSegmentedPicker
                             .padding(.horizontal)
                         collection
                             .padding(.horizontal)
                             .padding(.top, 8)
                     }
+                    // In case of items absence
                     if viewModel.items.isEmpty {
-                        Text(Texts.ShopPage.placeholder)
+                        placeholder
                     }
                 }
+                // ScrollView params
                 .scrollDisabled(viewModel.items.isEmpty)
                 .scrollDismissesKeyboard(.immediately)
+                .background(Color.BackColors.backDefault)
+                
+                // Navigation title params
                 .navigationTitle(Texts.Common.title)
                 .navigationBarTitleDisplayMode(.inline)
-                .background(Color.BackColors.backDefault)
-                .toolbar {
-                    toolBarButtonSamples
-                    toolBarButtonPlus
-                }
                 .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
+                
+                // ToolBar items
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        toolBarMenuFilter
+                    }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        toolBarButtonPlus
+                    }
+                }
+                
             }
+            // TabBar params & navigation
             .tabItem {
                 Image.TabBar.shop
                 Text(Texts.ShopPage.title)
             }
             MachineView(modelContext: modelContext)
-            InventoryView()
+            InventoryView(modelContext: modelContext)
             ProfileView()
         }
     }
     
-    private var toolBarButtonSamples: some View {
-        Button(Texts.ShopPage.addItem, systemImage: "rectangle.stack.badge.plus") {
-            withAnimation(.snappy) {
-                viewModel.addSamples()
-            }
-        }
-    }
+    // MARK: - Toolbar views
     
     private var toolBarButtonPlus: some View {
         Button(Texts.ShopPage.addItem, systemImage: "plus") {
@@ -80,12 +98,48 @@ struct ShopView: View {
         }
     }
     
-    private var picker: some View {
+    private var toolBarMenuFilter: some View {
+        // Menu with two pickers to display Sections
+        Menu {
+            // .all rarity case
+            Picker(Texts.ShopPage.filterItems, selection: $viewModel.rarityFilter) {
+                Text(Rarity.all.rawValue)
+                    .tag(Rarity.all)
+            }
+            Section {
+                // Other rarity case
+                Picker(Texts.ShopPage.filterItems, selection: $viewModel.rarityFilter) {
+                    ForEach(Rarity.allCases) { rarity in
+                        // Shows label only when there are items
+                        if !viewModel.filterItems(for: rarity).isEmpty {
+                            Label(
+                                title: { Text(rarity.rawValue) },
+                                icon: { Rarity.rarityToImage(rarity: rarity) }
+                            )
+                            .tag(rarity)
+                        }
+                    }
+                }
+            }
+        } label: {
+            // Image filling to demonstrate filter activity
+            viewModel.rarityFilter == .all ? Image.ShopPage.filter : Image.ShopPage.filledFilter
+        }
+    }
+    
+    // MARK: - Content views
+    
+    // Available/Locked items picker (changes enabledStatus)
+    private var enableSegmentedPicker: some View {
         Picker(Texts.ShopPage.status, selection: $viewModel.enableStatus) {
             Text(Texts.ShopPage.available).tag(true)
             Text(Texts.ShopPage.locked).tag(false)
         }
         .pickerStyle(.segmented)
+        .onChange(of: viewModel.enableStatus) {
+            // Changes items count in a row
+            itemsInRows = viewModel.changeRowItems(enabled: viewModel.enableStatus)
+        }
     }
     
     private var collection: some View {
@@ -96,37 +150,55 @@ struct ShopView: View {
         return LazyVGrid(columns: columns, spacing: spacing) {
             ForEach(searchResults) { item in
                 if item.enabled {
-                    ShopViewGridCell(item: item, viewModel: viewModel)
-                        .onAppear {
-                            itemsInRows = 2
-                        }
+                    // Available item cell
+                    ShopItemGridCell(item: item, viewModel: viewModel)
                         .onTapGesture {
                             selected = item
                         }
                 } else {
-                    ShopViewGridCellLocked(item: item, viewModel: viewModel)
-                        .onAppear {
-                            itemsInRows = 1
-                        }
+                    // Locked item cell
+                    ShopItemGridCellLocked(item: item, viewModel: viewModel)
                         .onTapGesture {
                             selected = item
                         }
                 }
             }
+            // Item details sheet param
             .sheet(item: $selected) { item in
                 ConsumableItemDetails(item: item, viewModel: viewModel)
             }
         }
     }
     
+    // MARK: - Empty status view
+    
+    private var placeholder: some View {
+        if viewModel.enableStatus {
+            // No available items
+            PlaceholderView(title: Texts.ShopPage.placeholderTitle,
+                            description: Texts.ShopPage.placeholderSubtitle,
+                            status: .unlocked)
+        } else {
+            // No locked items
+            PlaceholderView(title: Texts.ShopPage.placeholderTitleLocked,
+                            description: Texts.ShopPage.placeholderSubtitleLocked,
+                            status: .locked)
+        }
+    }
+    
+    // MARK: - Property for search bar results
+    
     private var searchResults: [ConsumableItem] {
         if searchText.isEmpty {
             return viewModel.items
         } else {
-            return viewModel.items.filter { $0.name.contains(searchText) }
+            // Unfiltered to show results regardless of rarity
+            return viewModel.unfilteredItems.filter { $0.name.contains(searchText) }
         }
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     do {

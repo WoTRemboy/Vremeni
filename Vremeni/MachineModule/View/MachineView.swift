@@ -11,6 +11,9 @@ import SwiftData
 struct MachineView: View {
     
     @State private var viewModel: MachineViewModel
+    @State private var selected: MachineItem? = nil
+    @State private var showingAddItemList = false
+
     private let spacing: CGFloat = 16
     private let itemsInRows = 1
     
@@ -48,21 +51,54 @@ struct MachineView: View {
             Section(header: sectionHeader) {
                 if viewModel.items.filter({ $0.inProgress }).isEmpty {
                     EmptyMachineViewGridCell()
+                        .onTapGesture {
+                            showingAddItemList.toggle()
+                        }
+                        .sheet(isPresented: $showingAddItemList, content: {
+                            MachineAddItemsView(viewModel: viewModel)
+                                .presentationDetents([.medium])
+                        })
                 }
                 ForEach(viewModel.items) { item in
                     if item.inProgress {
                         MachineViewGridCell(item: item, viewModel: viewModel)
+                            .onTapGesture {
+                                selected = item
+                            }
+                            .sheet(item: $selected) { item in
+                                MachineItemDetailsView(item: item, viewModel: viewModel)
+                            }
                     }
                 }
                 NewSlotMachineViewGridCell()
             }
             
-            if !viewModel.items.filter({ $0.inMachine }).isEmpty {
-                Section(header: secondSectionHeader) {
-                    ForEach(viewModel.items) { item in
-                        if item.inMachine {
-                            QueueMachineViewGridCell(item: item, viewModel: viewModel)
-                        }
+            if !viewModel.items.filter({ !$0.inProgress }).isEmpty {
+                queueSection
+            }
+        }
+    }
+    
+    private var queueSection: some View {
+        Section(header: secondSectionHeader) {
+            ForEach(viewModel.items) { item in
+                if !item.inProgress {
+                    if item.percent != 0 {
+                        MachineViewGridCell(item: item, paused: true, viewModel: viewModel)
+                            .onTapGesture {
+                                selected = item
+                            }
+                            .sheet(item: $selected) { item in
+                                MachineItemDetailsView(item: item, viewModel: viewModel)
+                            }
+                    } else {
+                        QueueMachineViewGridCell(item: item, viewModel: viewModel)
+                            .onTapGesture {
+                                selected = item
+                            }
+                            .sheet(item: $selected) { item in
+                                MachineItemDetailsView(item: item, viewModel: viewModel)
+                            }
                     }
                 }
             }
@@ -70,17 +106,11 @@ struct MachineView: View {
     }
     
     private var sectionHeader: some View {
-        Text(Texts.MachinePage.workshop)
-            .font(.segmentTitle())
-            .foregroundStyle(Color.LabelColors.labelPrimary)
-            .frame(maxWidth: .infinity, alignment: .leading)
+        SectionHeader(Texts.MachinePage.workshop)
     }
     
     private var secondSectionHeader: some View {
-        Text(Texts.MachinePage.queue)
-            .font(.segmentTitle())
-            .foregroundStyle(Color.LabelColors.labelPrimary)
-            .frame(maxWidth: .infinity, alignment: .leading)
+        SectionHeader(Texts.MachinePage.queue)
     }
 }
 

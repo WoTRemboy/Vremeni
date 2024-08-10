@@ -10,11 +10,13 @@ import SwiftData
 
 struct MachineViewGridCell: View {
     
-    private let item: ConsumableItem
+    private let item: MachineItem
+    private let paused: Bool
     private let viewModel: MachineView.MachineViewModel
     
-    init(item: ConsumableItem, viewModel: MachineView.MachineViewModel) {
+    init(item: MachineItem, paused: Bool = false, viewModel: MachineView.MachineViewModel) {
         self.item = item
+        self.paused = paused
         self.viewModel = viewModel
     }
     
@@ -51,15 +53,14 @@ struct MachineViewGridCell: View {
     }
     
     private var progressBar: some View {
-        ProgressBar(percent: item.ready ? 100 : item.percent,
-                    ready: item.ready)
+        ProgressBar(percent: item.percent, color: paused ? .orange : .green)
         .onAppear(perform: {
-            if !item.ready {
+            if item.inProgress {
                 viewModel.startProgress(for: item)
             }
         })
         .onDisappear(perform: {
-            if !item.ready {
+            if item.percent < 100 && !paused {
                 viewModel.stopProgress()
             }
         })
@@ -106,10 +107,14 @@ struct MachineViewGridCell: View {
         HStack(spacing: 16) {
             Button(action: {
                 withAnimation(.snappy) {
-                    viewModel.progressDismiss(item: item)
+                    if paused {
+                        viewModel.setWorkshop(item: item)
+                    } else {
+                        viewModel.progressDismiss(item: item)
+                    }
                 }
             }) {
-                Image(systemName: "stop")
+                Image(systemName: paused ? "play" : "pause")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
             .frame(width: 80, height: 40)
@@ -117,6 +122,7 @@ struct MachineViewGridCell: View {
             .minimumScaleFactor(0.4)
             .buttonStyle(.bordered)
             .tint(Color.orange)
+            .disabled(paused && !viewModel.isSlotAvailable())
             
             Button(action: {
                 withAnimation(.snappy) {
@@ -142,7 +148,7 @@ struct MachineViewGridCell: View {
         let modelContext = ModelContext(container)
         
         let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
-        let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common, enabled: false)
+        let example = MachineItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1)
         return MachineViewGridCell(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")

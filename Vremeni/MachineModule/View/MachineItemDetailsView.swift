@@ -1,21 +1,20 @@
 //
-//  ConsumableItemDetails.swift
+//  MachineItemDetailsView.swift
 //  Vremeni
 //
-//  Created by Roman Tverdokhleb on 7/31/24.
+//  Created by Roman Tverdokhleb on 8/5/24.
 //
 
 import SwiftUI
 import SwiftData
 
-struct ConsumableItemDetails: View {
-    
+struct MachineItemDetailsView: View {
     @Environment(\.dismiss) var dismiss
     
-    private let item: ConsumableItem
-    private var viewModel: ShopView.ShopViewModel
+    private let item: MachineItem
+    private var viewModel: MachineView.MachineViewModel
     
-    init(item: ConsumableItem, viewModel: ShopView.ShopViewModel) {
+    init(item: MachineItem, viewModel: MachineView.MachineViewModel) {
         self.item = item
         self.viewModel = viewModel
     }
@@ -78,9 +77,13 @@ struct ConsumableItemDetails: View {
             ParameterRow(title: Texts.ItemCreatePage.description,
                          content: item.itemDescription.isEmpty ? Texts.ItemCreatePage.null : item.itemDescription)
             
-            
-            ParameterRow(title: Texts.ItemCreatePage.receiveRules,
-                         content: Texts.ItemCreatePage.null)
+            if item.inProgress {
+                ParameterRow(title: Texts.MachinePage.targetTime,
+                             content: Date.itemFormatter.string(from: item.target))
+            } else {
+                ParameterRow(title: Texts.MachinePage.potentialTime,
+                             content: viewModel.remainingTime(for: item))
+            }
             
             ParameterRow(title: Texts.ItemCreatePage.applicationRules,
                          content: Texts.ItemCreatePage.null)
@@ -91,22 +94,28 @@ struct ConsumableItemDetails: View {
     private var buyButton: some View {
         Button(action: {
             withAnimation(.snappy) {
-                if item.enabled {
-                    viewModel.pickItem(item: item)
+                if item.inProgress {
+                    viewModel.progressDismiss(item: item)
                 } else {
-                    viewModel.unlockItem(item: item)
+                    viewModel.setWorkshop(item: item)
                 }
                 dismiss()
             }
         }) {
-            Text(item.enabled ? Texts.ShopPage.addToMachine : Texts.ShopPage.research)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            if item.inProgress {
+                Text(Texts.MachinePage.pause)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            } else {
+                Text(item.percent != 0 ? Texts.MachinePage.continueProgress : Texts.MachinePage.start)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
         }
         .frame(height: 50)
-        .foregroundStyle(Color.orange)
+        .foregroundStyle(item.percent != 0 ? Color.orange : Color.green)
         .minimumScaleFactor(0.4)
         .buttonStyle(.bordered)
-        .tint(Color.orange)
+        .tint(item.percent != 0 ? Color.orange : Color.green)
+        .disabled(!item.inProgress && !viewModel.isSlotAvailable())
     }
 }
 
@@ -115,10 +124,10 @@ struct ConsumableItemDetails: View {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
-        let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
+        let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
         
-        let example = ConsumableItem.itemMockConfig(name: "One Minute", description: "One minute is a whole 60 seconds!", price: 50, rarity: .uncommon)
-        return ConsumableItemDetails(item: example, viewModel: viewModel)
+        let example = MachineItem.itemMockConfig(name: "One Minute", description: "One minute is a whole 60 seconds!", price: 50, rarity: .uncommon)
+        return MachineItemDetailsView(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")
     }

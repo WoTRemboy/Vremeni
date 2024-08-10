@@ -10,9 +10,11 @@ import SwiftUI
 struct TotalPrice: View {
     
     private var price: String
+    private let type: TotalType
     
-    init(price: Float) {
+    init(price: Float, type: TotalType = .price) {
         self.price = String(Int(price))
+        self.type = type
     }
     
     internal var body: some View {
@@ -26,9 +28,11 @@ struct TotalPrice: View {
     
     private var priceRow: some View {
         HStack(spacing: 10) {
-            Image.ShopPage.vCoin
+            image
                 .resizable()
                 .scaledToFit()
+                .fontWeight(.heavy)
+                .foregroundStyle(Color.white, Color.IconColors.blue)
                 .frame(width: 25)
             Text(price)
                 .font(.totalPrice())
@@ -36,8 +40,22 @@ struct TotalPrice: View {
         }
     }
     
+    private var image: Image {
+        switch type {
+        case .price:
+            Image.ShopPage.vCoin
+        case .count:
+            Image.InventoryPage.count
+        }
+    }
+    
+}
+
+enum TotalType {
+    case price
+    case count
 }
 
 #Preview {
-    TotalPrice(price: 100)
+    TotalPrice(price: 100, type: .count)
 }

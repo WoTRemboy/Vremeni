@@ -8,17 +8,23 @@
 import SwiftUI
 import SwiftData
 
-struct ShopViewGridCellLocked: View {
+struct ShopItemGridCellLocked: View {
+    
+    // MARK: - Properties
     
     private let item: ConsumableItem
     private var viewModel: ShopView.ShopViewModel
+    
+    // MARK: - Initialization
     
     init(item: ConsumableItem, viewModel: ShopView.ShopViewModel) {
         self.item = item
         self.viewModel = viewModel
     }
     
-    var body: some View {
+    // MARK: - Body view
+    
+    internal var body: some View {
         GeometryReader { reader in
             VStack(spacing: 16) {
                 itemInfo
@@ -32,8 +38,11 @@ struct ShopViewGridCellLocked: View {
         .frame(height: 220)
     }
     
+    // MARK: - Content view
+    
     private var itemInfo: some View {
         HStack(spacing: 16) {
+            // ConsumableItem image, name & rarity icon
             VStack(spacing: 10) {
                 Image(systemName: item.image)
                     .resizable()
@@ -43,11 +52,15 @@ struct ShopViewGridCellLocked: View {
                 itemName
             }
             
+            // Rule info, Consumable item price & research button
             stats
                 .frame(maxWidth: .infinity)
         }
     }
     
+    // MARK: - Left side view
+    
+    // ConsumableItem name & rarity icon
     private var itemName: some View {
         HStack(spacing: 5) {
             Rarity.rarityToImage(rarity: item.rarity)
@@ -62,13 +75,18 @@ struct ShopViewGridCellLocked: View {
         .lineLimit(1)
     }
     
+    // MARK: - Right side views
+    
+    // Rule info, Consumable item price & research button
     private var stats: some View {
         VStack {
+            // Rule name
             Text("Perfect Score")
                 .lineLimit(1)
                 .font(.ruleTitle())
                 .foregroundStyle(Color.LabelColors.labelPrimary)
             
+            // Rule description
             Text("The aspiration of any adequate person")
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
@@ -77,10 +95,12 @@ struct ShopViewGridCellLocked: View {
                 .padding(.top, -5)
             
             Spacer()
-                        
+            
+            // ConsumableItem price view
             priceView
                 .padding(.top, 5)
             
+            // Research button
             Button(action: {
                 withAnimation(.snappy) {
                     viewModel.unlockItem(item: item)
@@ -89,26 +109,32 @@ struct ShopViewGridCellLocked: View {
                 Text(Texts.ShopPage.research)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
+            // Button layout params
             .frame(height: 40)
-            .foregroundStyle(Color.orange)
             .minimumScaleFactor(0.4)
-            .buttonStyle(.bordered)
-            .tint(Color.orange)
             .padding(.top, 5)
             
+            // Button style params
+            .foregroundStyle(Color.orange)
+            .buttonStyle(.bordered)
+            .tint(Color.orange)
         }
         .padding(.top, 10)
     }
     
+    // ConsumableItem price view
     private var priceView: some View {
         HStack(spacing: 5) {
+            // Price label
             Text("\(Texts.ItemCreatePage.price):")
                 .font(.body())
             
+            // Price value
             Text(String(Int(item.price)))
                 .font(.headline())
                 .foregroundStyle(Color.labelPrimary)
             
+            // vCoin icon
             Image(.vCoin)
                 .resizable()
                 .scaledToFit()
@@ -116,6 +142,8 @@ struct ShopViewGridCellLocked: View {
         }
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     do {
@@ -125,7 +153,7 @@ struct ShopViewGridCellLocked: View {
         
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         let example = ConsumableItem.itemMockConfig(name: "One Hour", price: 1, enabled: false)
-        return ShopViewGridCell(item: example, viewModel: viewModel)
+        return ShopItemGridCellLocked(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")
     }
