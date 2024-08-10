@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-// MARK: - Rarity
+// MARK: - Rarity Model
 
-enum Rarity: String, Codable, Identifiable {
+enum Rarity: String, Codable {
     case common = "Common"
     case uncommon = "Uncommon"
     case rare = "Rare"
@@ -20,14 +20,20 @@ enum Rarity: String, Codable, Identifiable {
     case transcendent = "Transcendent"
     case exotic = "Exotic"
     case all = "All"
+}
+
+// MARK: - Rarity Methods
+
+extension Rarity: Identifiable {
+    internal var id: Self { self }
     
-    var id: Self { self }
-    
-    static var allCases: [Rarity] {
+    // Case iterable method, but without .all
+    static internal var allCases: [Rarity] {
         return [.common, .uncommon, .rare, .epic, .legendary, .mythic, .transcendent, .exotic]
     }
     
-    static func rarityToImage(rarity: Rarity) -> Image {
+    // Rarity icon definition
+    static internal func rarityToImage(rarity: Rarity) -> Image {
         switch rarity {
         case .common:
             return .Rarity.common
