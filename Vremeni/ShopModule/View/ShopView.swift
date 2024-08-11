@@ -83,7 +83,7 @@ struct ShopView: View {
             }
             MachineView(modelContext: modelContext)
             InventoryView(modelContext: modelContext)
-            ProfileView()
+            ProfileView(modelContext: modelContext)
         }
     }
     

@@ -152,7 +152,7 @@ struct ShopItemGridCellLocked: View {
         let modelContext = ModelContext(container)
         
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
-        let example = ConsumableItem.itemMockConfig(name: "One Hour", price: 1, enabled: false)
+        let example = ConsumableItem.itemMockConfig(name: "One Hour", price: 1, profile: Profile.configMockProfile(), enabled: false)
         return ShopItemGridCellLocked(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")

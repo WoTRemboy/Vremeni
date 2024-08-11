@@ -96,6 +96,8 @@ final class Texts {
     
     enum ProfilePage {
         static let title = "Profile"
+        static let user = "User"
+        static let error = "Error"
         static let version = "Version"
         static let release = "release"
     }

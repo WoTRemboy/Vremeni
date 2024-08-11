@@ -37,6 +37,7 @@
 		631F265A2C66556400FEAD1A /* InventoryStatsGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631F26592C66556400FEAD1A /* InventoryStatsGridCell.swift */; };
 		631F265C2C6665A600FEAD1A /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631F265B2C6665A600FEAD1A /* PlaceholderView.swift */; };
 		631F265E2C66C05B00FEAD1A /* InventoryItemDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631F265D2C66C05B00FEAD1A /* InventoryItemDetailsView.swift */; };
+		631F26632C6800AC00FEAD1A /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631F26622C6800AC00FEAD1A /* ProfileModel.swift */; };
 		6373291B2C5C1E9600D7A719 /* ShopItemGridCellLocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6373291A2C5C1E9600D7A719 /* ShopItemGridCellLocked.swift */; };
 		638620A92C5D4F1F00453944 /* EmptyMachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620A82C5D4F1F00453944 /* EmptyMachineViewGridCell.swift */; };
 		638620AB2C5D566400453944 /* NewSlotMachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620AA2C5D566400453944 /* NewSlotMachineViewGridCell.swift */; };
@@ -104,6 +105,7 @@
 		631F26592C66556400FEAD1A /* InventoryStatsGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryStatsGridCell.swift; sourceTree = "<group>"; };
 		631F265B2C6665A600FEAD1A /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		631F265D2C66C05B00FEAD1A /* InventoryItemDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItemDetailsView.swift; sourceTree = "<group>"; };
+		631F26622C6800AC00FEAD1A /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		6373291A2C5C1E9600D7A719 /* ShopItemGridCellLocked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemGridCellLocked.swift; sourceTree = "<group>"; };
 		638620A82C5D4F1F00453944 /* EmptyMachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMachineViewGridCell.swift; sourceTree = "<group>"; };
 		638620AA2C5D566400453944 /* NewSlotMachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSlotMachineViewGridCell.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 		631AF41D2C52509000DFD63C /* ProfileModule */ = {
 			isa = PBXGroup;
 			children = (
+				631F26612C68009000FEAD1A /* Model */,
 				6395B7642C5A75BF00C0C611 /* View */,
 				6395B7652C5A75C700C0C611 /* ViewModel */,
 			);
@@ -344,6 +347,14 @@
 				631A5FD82C5A548C002331F7 /* ConsumableItemDetails.swift */,
 			);
 			path = SheetViews;
+			sourceTree = "<group>";
+		};
+		631F26612C68009000FEAD1A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				631F26622C6800AC00FEAD1A /* ProfileModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		638620A72C5D4ECD00453944 /* VGridCells */ = {
@@ -543,6 +554,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				631F26632C6800AC00FEAD1A /* ProfileModel.swift in Sources */,
 				631AF41F2C5250AF00DFD63C /* MachineView.swift in Sources */,
 				631AF4112C516F0000DFD63C /* DateFormats.swift in Sources */,
 				63FD7DE02C57F9EE008487DD /* InventoryModel.swift in Sources */,
@@ -758,7 +770,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.3;
+				MARKETING_VERSION = 0.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -793,7 +805,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.3;
+				MARKETING_VERSION = 0.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

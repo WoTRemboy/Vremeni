@@ -6,16 +6,29 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ProfileView: View {
     
-    @StateObject private var viewModel = ProfileViewModel()
+    @State private var viewModel: ProfileViewModel
     
-    var body: some View {
+    init(modelContext: ModelContext) {
+        let viewModel = ProfileViewModel(modelContext: modelContext)
+        _viewModel = State(initialValue: viewModel)
+    }
+    
+    internal var body: some View {
         NavigationStack {
             Form {
                 Section(Texts.ProfilePage.version) {
                     version
+                }
+                
+                Section("Profile Test") {
+                    Text(viewModel.profile.name)
+                        .onTapGesture {
+                           
+                        }
                 }
                 // Jokes
                 Section("CEO") {
@@ -60,5 +73,13 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        
+        return ProfileView(modelContext: modelContext)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
 }

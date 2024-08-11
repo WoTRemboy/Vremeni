@@ -21,7 +21,7 @@ struct ConsumableItemCreate: View {
     
     init(viewModel: ShopView.ShopViewModel) {
         self.viewModel = viewModel
-        self.item = ConsumableItem.itemMockConfig(name: String(), price: 1, enabled: false)
+        self.item = ConsumableItem.itemMockConfig(name: String(), price: 1, profile: viewModel.profile, enabled: false)
     }
     
     // MARK: - Body View
