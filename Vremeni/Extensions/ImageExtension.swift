@@ -57,5 +57,6 @@ extension Image {
         static let unlocked = Image(systemName: "lock.open")
         static let machine = Image(systemName: "clock.arrow.2.circlepath")
         static let inventory = Image(systemName: "rectangle.portrait.on.rectangle.portrait")
+        static let archive = Image(systemName: "archivebox")
     }
 }

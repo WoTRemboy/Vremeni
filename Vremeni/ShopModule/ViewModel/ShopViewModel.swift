@@ -64,6 +64,11 @@ extension ShopView {
             fetchData()
         }
         
+        // Updates item data when scroll view appears to detect unarchived items
+        internal func updateOnAppear() {
+            fetchData()
+        }
+        
         // MARK: - Calculation methods
         
         // Returns filtered elements by rarity
@@ -91,8 +96,8 @@ extension ShopView {
         }
         
         // Deletes ConsumableItem from SwiftData DB
-        internal func deleteItem(item: ConsumableItem) {
-            modelContext.delete(item)
+        internal func archiveItem(item: ConsumableItem) {
+            item.archiveItem()
             fetchData()
         }
         
@@ -141,7 +146,7 @@ extension ShopView {
         private func fetchData(filterReset: Bool = false) {
             do {
                 // Gets items from SwiftData DB for current enable status
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.enabled == enableStatus }, sortBy: [SortDescriptor(\.price)])
+                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.enabled == enableStatus && !$0.archived }, sortBy: [SortDescriptor(\.price)])
                 items = try modelContext.fetch(descriptor)
                 
                 // Check for .all tag selection or enable status changes (filterReset)

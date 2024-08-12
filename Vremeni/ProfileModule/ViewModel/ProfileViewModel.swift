@@ -15,12 +15,23 @@ extension ProfileView {
         private let modelContext: ModelContext
         
         private(set) var profile = Profile.configMockProfile()
+        private(set) var items = [ConsumableItem]()
         private(set) var version: String = String()
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
             versionDetect()
-            fetchData()
+            fetchProfileData()
+            fetchItemsData()
+        }
+        
+        internal func updateItemsOnAppear() {
+            fetchItemsData()
+        }
+        
+        internal func unarchiveItem(item: ConsumableItem) {
+            item.archiveItem()
+            fetchItemsData()
         }
         
         internal func versionDetect() {
@@ -30,10 +41,38 @@ extension ProfileView {
             }
         }
         
-        private func fetchData() {
+        internal func addSamples() {
+            let items = [ConsumableItem.itemMockConfig(name: "One Minute",
+                                                       description: "One minute is a whole 60 seconds!",
+                                                       price: 1,
+                                                       profile: profile,
+                                                       archived: true),
+                         
+                         ConsumableItem.itemMockConfig(name: "Three Minutes",
+                                                       description: "Three minutes is a whole 180 seconds!",
+                                                       price: 3,
+                                                       rarity: .common,
+                                                       profile: profile,
+                                                       archived: true)]
+            for item in items {
+                modelContext.insert(item)
+            }
+            fetchItemsData()
+        }
+        
+        private func fetchProfileData() {
             do {
                 let descriptor = FetchDescriptor<Profile>()
                 profile = try modelContext.fetch(descriptor).first ?? Profile.configMockProfile()
+            } catch {
+                print("Fetch failed")
+            }
+        }
+        
+        private func fetchItemsData() {
+            do {
+                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.archived }, sortBy: [SortDescriptor(\.price)])
+                items = try modelContext.fetch(descriptor)
             } catch {
                 print("Fetch failed")
             }

@@ -40,6 +40,9 @@
 		631F26632C6800AC00FEAD1A /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631F26622C6800AC00FEAD1A /* ProfileModel.swift */; };
 		631F26652C68EE5400FEAD1A /* ProfileAboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631F26642C68EE5400FEAD1A /* ProfileAboutView.swift */; };
 		631F26672C68FACF00FEAD1A /* LinkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631F26662C68FACF00FEAD1A /* LinkRow.swift */; };
+		6324BA412C6A283400A2610A /* ArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324BA402C6A283400A2610A /* ArchiveView.swift */; };
+		6324BA442C6A2D5900A2610A /* ArchiveGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324BA432C6A2D5900A2610A /* ArchiveGridCell.swift */; };
+		6324BA462C6A522A00A2610A /* ArchiveDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324BA452C6A522A00A2610A /* ArchiveDetailsView.swift */; };
 		6373291B2C5C1E9600D7A719 /* ShopItemGridCellLocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6373291A2C5C1E9600D7A719 /* ShopItemGridCellLocked.swift */; };
 		638620A92C5D4F1F00453944 /* EmptyMachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620A82C5D4F1F00453944 /* EmptyMachineViewGridCell.swift */; };
 		638620AB2C5D566400453944 /* NewSlotMachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620AA2C5D566400453944 /* NewSlotMachineViewGridCell.swift */; };
@@ -110,6 +113,9 @@
 		631F26622C6800AC00FEAD1A /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		631F26642C68EE5400FEAD1A /* ProfileAboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAboutView.swift; sourceTree = "<group>"; };
 		631F26662C68FACF00FEAD1A /* LinkRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkRow.swift; sourceTree = "<group>"; };
+		6324BA402C6A283400A2610A /* ArchiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveView.swift; sourceTree = "<group>"; };
+		6324BA432C6A2D5900A2610A /* ArchiveGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveGridCell.swift; sourceTree = "<group>"; };
+		6324BA452C6A522A00A2610A /* ArchiveDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveDetailsView.swift; sourceTree = "<group>"; };
 		6373291A2C5C1E9600D7A719 /* ShopItemGridCellLocked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemGridCellLocked.swift; sourceTree = "<group>"; };
 		638620A82C5D4F1F00453944 /* EmptyMachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMachineViewGridCell.swift; sourceTree = "<group>"; };
 		638620AA2C5D566400453944 /* NewSlotMachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSlotMachineViewGridCell.swift; sourceTree = "<group>"; };
@@ -361,6 +367,24 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		6324BA3F2C6A272A00A2610A /* NavigationPages */ = {
+			isa = PBXGroup;
+			children = (
+				631F26642C68EE5400FEAD1A /* ProfileAboutView.swift */,
+				6324BA402C6A283400A2610A /* ArchiveView.swift */,
+			);
+			path = NavigationPages;
+			sourceTree = "<group>";
+		};
+		6324BA422C6A2D3D00A2610A /* SupportViews */ = {
+			isa = PBXGroup;
+			children = (
+				6324BA432C6A2D5900A2610A /* ArchiveGridCell.swift */,
+				6324BA452C6A522A00A2610A /* ArchiveDetailsView.swift */,
+			);
+			path = SupportViews;
+			sourceTree = "<group>";
+		};
 		638620A72C5D4ECD00453944 /* VGridCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,7 +414,8 @@
 			isa = PBXGroup;
 			children = (
 				631AF4222C5250C400DFD63C /* ProfileView.swift */,
-				631F26642C68EE5400FEAD1A /* ProfileAboutView.swift */,
+				6324BA3F2C6A272A00A2610A /* NavigationPages */,
+				6324BA422C6A2D3D00A2610A /* SupportViews */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -567,6 +592,7 @@
 				631AF42A2C5256CF00DFD63C /* MachineViewModel.swift in Sources */,
 				638620A92C5D4F1F00453944 /* EmptyMachineViewGridCell.swift in Sources */,
 				63194D1B2C63E01000CAA0AB /* InventoryGridViewCell.swift in Sources */,
+				6324BA412C6A283400A2610A /* ArchiveView.swift in Sources */,
 				631AF4092C516EC100DFD63C /* FontExtension.swift in Sources */,
 				631A5FD92C5A548C002331F7 /* ConsumableItemDetails.swift in Sources */,
 				631F26542C656EDE00FEAD1A /* SectionHeader.swift in Sources */,
@@ -574,6 +600,7 @@
 				638620AB2C5D566400453944 /* NewSlotMachineViewGridCell.swift in Sources */,
 				6395B7672C5A75E500C0C611 /* ProfileViewModel.swift in Sources */,
 				638620AF2C602B1C00453944 /* MachineAddItemsView.swift in Sources */,
+				6324BA442C6A2D5900A2610A /* ArchiveGridCell.swift in Sources */,
 				63FD7DE22C57FA12008487DD /* InventoryViewModel.swift in Sources */,
 				6395B7632C5A63D900C0C611 /* TotalPrice.swift in Sources */,
 				631AF40F2C516EF000DFD63C /* Lables.swift in Sources */,
@@ -590,6 +617,7 @@
 				631AF4132C5176BA00DFD63C /* ShopViewModel.swift in Sources */,
 				631AF42C2C5259EC00DFD63C /* MachineViewGridCell.swift in Sources */,
 				631F26582C66188300FEAD1A /* RuleModel.swift in Sources */,
+				6324BA462C6A522A00A2610A /* ArchiveDetailsView.swift in Sources */,
 				631F265E2C66C05B00FEAD1A /* InventoryItemDetailsView.swift in Sources */,
 				631AF4232C5250C400DFD63C /* ProfileView.swift in Sources */,
 				631AF4172C5176DE00DFD63C /* ConsumableItem.swift in Sources */,
@@ -778,7 +806,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -813,7 +841,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

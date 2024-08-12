@@ -110,6 +110,15 @@ final class Texts {
         static let archive = "Archive"
         static let settings = "Settings"
         
+        enum Archive {
+            static let title = "Archive"
+            static let placeholderTitle = "No archive"
+            static let placeholderSubtitle = "Archived Items from the Fair will be here"
+            
+            static let valuation = "Valuation"
+            static let restore = "Restore"
+        }
+        
         enum About {
             static let title = "About"
             static let version = "Version"
