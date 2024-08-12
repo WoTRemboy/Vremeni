@@ -6,28 +6,25 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ProfileView: View {
     
-    @StateObject private var viewModel = ProfileViewModel()
+    @State private var viewModel: ProfileViewModel
     
-    var body: some View {
+    init(modelContext: ModelContext) {
+        let viewModel = ProfileViewModel(modelContext: modelContext)
+        _viewModel = State(initialValue: viewModel)
+    }
+    
+    internal var body: some View {
         NavigationStack {
             Form {
-                Section(Texts.ProfilePage.version) {
-                    version
-                }
-                // Jokes
-                Section("CEO") {
-                    Text("Mikhail Tverdokhleb 👑")
-                }
-                Section("Bondman") {
-                    Text("Roman Tverdokhleb ⛏️")
-                }
-                Section("Company of the year") {
-                    Link("Vremeni Inc. 💸", destination: URL(string: "mailto:vremeni@icloud.com")!)
-                }
+                profileSection
+                statsSection
+                otherSection
             }
+            .scrollIndicators(.hidden)
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
         }
@@ -37,28 +34,65 @@ struct ProfileView: View {
         }
     }
     
-    private var version: some View {
-        HStack(spacing: 10) {
-            Image.ProfilePage.about
-                .resizable()
-                .frame(width: 60, height: 60)
-                .clipShape(.buttonBorder)
-                .padding(.leading, -2.5)
+    private var profileSection: some View {
+        Section(Texts.ProfilePage.profile) {
+            LinkRow(title: Texts.ProfilePage.userName,
+                    image: Image(systemName: "person.crop.square.fill"),
+                    details: viewModel.profile.name)
             
-            VStack(alignment: .leading, spacing: 2) {
-                Text(Texts.Common.title)
-                    .font(.title())
-                    .foregroundStyle(Color.LabelColors.labelPrimary)
-                
-                Text(viewModel.version)
-                    .font(.subhead())
-                    .foregroundStyle(Color.LabelColors.labelSecondary)
-            }
-            Spacer()
+            LinkRow(title: Texts.ProfilePage.balance,
+                    image: Image.ProfilePage.balance,
+                    details: String(viewModel.profile.balance))
+        }
+    }
+    
+    private var statsSection: some View {
+        Section(Texts.ProfilePage.stats) {
+            Text(Texts.ProfilePage.charts)
+                .frame(maxWidth: .infinity, idealHeight: 300, alignment: .center)
+        }
+    }
+    
+    private var otherSection: some View {
+        Section(Texts.ProfilePage.other) {
+            LinkRow(title: Texts.ProfilePage.archive,
+                    image: Image(systemName: "a.square.fill"))
+            .overlay(
+                NavigationLink(destination: Text(Texts.ProfilePage.archive),
+                               label: {
+                                   EmptyView()
+                               })
+            )
+            
+            LinkRow(title: Texts.ProfilePage.settings,
+                    image: Image.ProfilePage.settings)
+            .overlay(
+                NavigationLink(destination: Text(Texts.ProfilePage.settings),
+                               label: {
+                                   EmptyView()
+                               })
+            )
+            
+            LinkRow(title: Texts.ProfilePage.About.title,
+                    image: Image.ProfilePage.about)
+            .overlay(
+                NavigationLink(destination: ProfileAboutView(viewModel: viewModel),
+                               label: {
+                                   EmptyView()
+                               })
+            )
         }
     }
 }
 
 #Preview {
-    ProfileView()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        
+        return ProfileView(modelContext: modelContext)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
 }

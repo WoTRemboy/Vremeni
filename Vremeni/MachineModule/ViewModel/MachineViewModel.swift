@@ -95,9 +95,9 @@ extension MachineView {
         }
         
         internal func addSamples() {
-            let one = MachineItem.itemMockConfig(name: "one hour", price: 1)
-            let two = MachineItem.itemMockConfig(name: "two hours", price: 2)
-            let three = MachineItem.itemMockConfig(name: "three hours", price: 3)
+            let one = MachineItem.itemMockConfig(name: "one hour", price: 1, profile: Profile.configMockProfile())
+            let two = MachineItem.itemMockConfig(name: "two hours", price: 2, profile: Profile.configMockProfile())
+            let three = MachineItem.itemMockConfig(name: "three hours", price: 3, profile: Profile.configMockProfile())
             items = [one, two, three]
         }
         

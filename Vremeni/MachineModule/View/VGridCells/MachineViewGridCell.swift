@@ -148,7 +148,7 @@ struct MachineViewGridCell: View {
         let modelContext = ModelContext(container)
         
         let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
-        let example = MachineItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1)
+        let example = MachineItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, profile: Profile.configMockProfile())
         return MachineViewGridCell(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")

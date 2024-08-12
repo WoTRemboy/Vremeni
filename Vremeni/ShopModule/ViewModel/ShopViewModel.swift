@@ -20,6 +20,7 @@ extension ShopView {
         
         private var modelContext: ModelContext
         private(set) var items = [ConsumableItem]()
+        private(set) var profile = Profile.configMockProfile()
         
         // Array property for storing all current enable status items
         private(set) var unfilteredItems = [ConsumableItem]()
@@ -45,6 +46,7 @@ extension ShopView {
             self.enableStatus = true
             self.rarityFilter = .all
             fetchData()
+            fetchProfileData()
             addSamples()
         }
         
@@ -82,6 +84,7 @@ extension ShopView {
                                                      description: created.itemDescription,
                                                      price: created.price,
                                                      rarity: created.rarity,
+                                                     profile: profile,
                                                      enabled: created.enabled)
             modelContext.insert(item)
             fetchData()
@@ -99,28 +102,33 @@ extension ShopView {
             guard items.isEmpty else { return }
             let items = [ConsumableItem.itemMockConfig(name: "One Minute",
                                                        description: "One minute is a whole 60 seconds!",
-                                                       price: 1),
+                                                       price: 1,
+                                                       profile: profile),
                          
                          ConsumableItem.itemMockConfig(name: "Three Minutes",
                                                        description: "Three minutes is a whole 180 seconds!",
                                                        price: 3,
                                                        rarity: .common,
+                                                       profile: profile,
                                                        enabled: false),
                          
                          ConsumableItem.itemMockConfig(name: "Five Minutes",
                                                        description: "Five minutes is a whole 300 seconds!",
                                                        price: 5,
                                                        rarity: .uncommon,
+                                                       profile: profile,
                                                        enabled: false),
                          ConsumableItem.itemMockConfig(name: "Seven Minutes",
                                                        description: "Seven minutes is a whole 420 seconds!",
                                                        price: 7,
                                                        rarity: .uncommon,
+                                                       profile: profile,
                                                        enabled: false),
                          ConsumableItem.itemMockConfig(name: "Ten Minutes",
                                                        description: "Ten minutes is a whole 600 seconds!",
                                                        price: 10,
                                                        rarity: .rare,
+                                                       profile: profile,
                                                        enabled: false)]
             for item in items {
                 modelContext.insert(item)
@@ -128,7 +136,7 @@ extension ShopView {
             fetchData()
         }
         
-        // MARK: - Load data method
+        // MARK: - Load data methods
         
         private func fetchData(filterReset: Bool = false) {
             do {
@@ -152,6 +160,26 @@ extension ShopView {
             } catch {
                 print("Fetch failed")
             }
+        }
+        
+        // First app launch case
+        private func createProfile() {
+            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, items: items)
+            modelContext.insert(profile)
+            fetchProfileData()
+        }
+        
+        private func fetchProfileData() {
+            do {
+                // Gets profile from SwiftData DB
+                let descriptor = FetchDescriptor<Profile>()
+                profile = try modelContext.fetch(descriptor).first ?? Profile.configMockProfile()
+            } catch {
+                print("Fetch failed")
+            }
+            
+            guard profile == Profile.configMockProfile() else { return }
+            createProfile()
         }
         
     }

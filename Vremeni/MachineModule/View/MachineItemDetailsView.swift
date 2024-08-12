@@ -126,7 +126,7 @@ struct MachineItemDetailsView: View {
         let modelContext = ModelContext(container)
         let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
         
-        let example = MachineItem.itemMockConfig(name: "One Minute", description: "One minute is a whole 60 seconds!", price: 50, rarity: .uncommon)
+        let example = MachineItem.itemMockConfig(name: "One Minute", description: "One minute is a whole 60 seconds!", price: 50, rarity: .uncommon, profile: Profile.configMockProfile())
         return MachineItemDetailsView(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")

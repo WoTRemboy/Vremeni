@@ -21,7 +21,7 @@ struct VremeniApp: App {
     
     init() {
         do {
-            container = try ModelContainer(for: ConsumableItem.self)
+            container = try ModelContainer(for: Profile.self)
         } catch {
             fatalError("Failed to create ModelContainer for ConsumableItem.")
         }

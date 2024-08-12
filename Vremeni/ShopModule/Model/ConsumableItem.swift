@@ -31,6 +31,9 @@ final class ConsumableItem: Identifiable {
     // Instanses (children) for machine module
     @Relationship(deleteRule: .cascade) var machineItems: [MachineItem]
     
+    // Child relationship for Profile
+    var profile: Profile
+    
     // Item status
     var enabled: Bool
     var inMachine: Bool
@@ -39,7 +42,7 @@ final class ConsumableItem: Identifiable {
     
     init(id: UUID = UUID(), name: String, itemDescription: String, image: String,
          price: Float, count: Int = 0, type: VremeniType = .minutes, rarity: Rarity = .common,
-         machineItems: [MachineItem] = [], enabled: Bool = false, inMachine: Bool = false,
+         machineItems: [MachineItem] = [], profile: Profile, enabled: Bool = false, inMachine: Bool = false,
          ready: Bool = false, archived: Bool = false) {
         self.id = id
         self.name = name
@@ -50,6 +53,7 @@ final class ConsumableItem: Identifiable {
         self.type = type
         self.rarity = rarity
         self.machineItems = machineItems
+        self.profile = profile
         self.enabled = enabled
         self.inMachine = inMachine
         self.ready = ready
@@ -82,7 +86,8 @@ extension ConsumableItem {
     // Mock ConsumableItem configuration method
     static internal func itemMockConfig(name: String, description: String = String(),
                                         price: Float, rarity: Rarity = .common,
-                                        enabled: Bool = true, ready: Bool = false) -> ConsumableItem {
+                                        profile: Profile, enabled: Bool = true,
+                                        ready: Bool = false) -> ConsumableItem {
         let name = name
         let description = description
         let image = "\(Int(price)).square"
@@ -90,9 +95,11 @@ extension ConsumableItem {
         let enable = enabled
         let ready = ready
         let rarity = rarity
+        let profile = profile
         
         return ConsumableItem(name: name, itemDescription: description, image: image,
-                              price: price, rarity: rarity, enabled: enable, ready: ready)
+                              price: price, rarity: rarity, profile: profile,
+                              enabled: enable, ready: ready)
     }
 }
 
