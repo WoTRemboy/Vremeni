@@ -60,5 +60,5 @@ struct LinkRow: View {
 
 
 #Preview {
-    LinkRow(title: "Title", image: Image.ProfilePage.email, details: "hi", chevron: true)
+    LinkRow(title: "Title", image: Image.ProfilePage.About.email, details: "hi", chevron: true)
 }

@@ -39,7 +39,7 @@ struct ProfileAboutView: View {
     
     private var version: some View {
         HStack(spacing: 10) {
-            Image.ProfilePage.about
+            Image.ProfilePage.About.appIcon
                 .resizable()
                 .frame(width: 60, height: 60)
                 .clipShape(.buttonBorder)
@@ -60,7 +60,7 @@ struct ProfileAboutView: View {
     
     private var director: some View {
         LinkRow(title: Texts.ProfilePage.About.father,
-                image: Image.ProfilePage.crown,
+                image: Image.ProfilePage.About.crown,
                 details: Texts.ProfilePage.About.director)
     }
     
@@ -68,7 +68,7 @@ struct ProfileAboutView: View {
         Link(destination: URL(string: Texts.ProfilePage.About.developLink)!, label: {
             
             LinkRow(title: Texts.ProfilePage.About.me,
-                    image: Image.ProfilePage.develop,
+                    image: Image.ProfilePage.About.develop,
                     details: Texts.ProfilePage.About.developer,
                     chevron: true)
         })
@@ -78,7 +78,7 @@ struct ProfileAboutView: View {
         Link(destination: URL(string: Texts.ProfilePage.About.designerLink)!, label: {
             
             LinkRow(title: Texts.ProfilePage.About.pups,
-                    image: Image.ProfilePage.graphic,
+                    image: Image.ProfilePage.About.graphic,
                     details: Texts.ProfilePage.About.designer,
                     chevron: true)
         })
@@ -88,7 +88,7 @@ struct ProfileAboutView: View {
         Link(destination: URL(string: "mailto:\(Texts.ProfilePage.About.emailContent)")!, label: {
             
             LinkRow(title: Texts.ProfilePage.About.email,
-                    image: Image.ProfilePage.email,
+                    image: Image.ProfilePage.About.email,
                     details: Texts.ProfilePage.About.emailContent,
                     chevron: true)
         })

@@ -99,8 +99,16 @@ final class Texts {
         static let user = "User"
         static let error = "Error"
         
-        static let userName = "Profile name"
+        static let profile = "Profile"
+        static let userName = "Username"
+        static let balance = "Balance"
+        
+        static let stats = "Stats"
+        static let charts = "Charts"
+        
         static let other = "Other"
+        static let archive = "Archive"
+        static let settings = "Settings"
         
         enum About {
             static let title = "About"

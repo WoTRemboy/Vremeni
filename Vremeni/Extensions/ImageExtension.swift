@@ -19,11 +19,17 @@ extension Image {
     }
     
     enum ProfilePage {
-        static let about = Image("AboutIcon")
-        static let crown = Image("CrownAbout")
-        static let develop = Image("DevelopAbout")
-        static let graphic = Image("GraphicAbout")
-        static let email = Image("EmailAbout")
+        static let balance = Image("BalanceProfile")
+        static let settings = Image("SettingsProfile")
+        static let about = Image("AboutProfile")
+        
+        enum About {
+            static let appIcon = Image("AboutIcon")
+            static let crown = Image("CrownAbout")
+            static let develop = Image("DevelopAbout")
+            static let graphic = Image("GraphicAbout")
+            static let email = Image("EmailAbout")
+        }
     }
     
     enum Rarity {
