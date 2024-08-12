@@ -11,7 +11,6 @@ import SwiftData
 struct ArchiveView: View {
     
     @State private var selected: ConsumableItem? = nil
-    @State private var searchText = String()
     
     private var viewModel: ProfileView.ProfileViewModel
     private let spacing: CGFloat = 16
@@ -31,6 +30,10 @@ struct ArchiveView: View {
                 .onAppear {
                     viewModel.updateItemsOnAppear()
                 }
+                
+                if viewModel.items.isEmpty {
+                    placeholder
+                }
             }
             .scrollDisabled(viewModel.items.isEmpty)
             .scrollDismissesKeyboard(.immediately)
@@ -38,7 +41,6 @@ struct ArchiveView: View {
             
             .navigationTitle(Texts.ProfilePage.Archive.title)
             .navigationBarTitleDisplayMode(.inline)
-            .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
         }
     }
     
@@ -49,24 +51,22 @@ struct ArchiveView: View {
             count: itemsInRows)
         
         return LazyVGrid(columns: columns, spacing: spacing) {
-            ForEach(searchResults) { item in
+            ForEach(viewModel.items) { item in
                     ArchiveGridCell(item: item, viewModel: viewModel)
                         .onTapGesture {
                             selected = item
                         }
             }
             .sheet(item: $selected) { item in
-
+                ArchiveDetailsView(item: item, viewModel: viewModel)
             }
         }
     }
     
-    private var searchResults: [ConsumableItem] {
-        if searchText.isEmpty {
-            return viewModel.items
-        } else {
-            return viewModel.items.filter { $0.name.contains(searchText) }
-        }
+    private var placeholder: some View {
+        PlaceholderView(title: Texts.ProfilePage.Archive.placeholderTitle,
+                        description: Texts.ProfilePage.Archive.placeholderSubtitle,
+                        status: .archive)
     }
 }
 
