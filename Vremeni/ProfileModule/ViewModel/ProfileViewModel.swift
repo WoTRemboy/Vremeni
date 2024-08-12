@@ -29,6 +29,10 @@ extension ProfileView {
             fetchItemsData()
         }
         
+        internal func resetProgress() {
+            // reset progress
+        }
+        
         internal func unarchiveItem(item: ConsumableItem) {
             item.archiveItem()
             fetchItemsData()

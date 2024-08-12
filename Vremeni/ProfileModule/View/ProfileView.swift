@@ -11,6 +11,7 @@ import SwiftData
 struct ProfileView: View {
     
     @State private var viewModel: ProfileViewModel
+    @State private var showingAlert = false
     
     init(modelContext: ModelContext) {
         let viewModel = ProfileViewModel(modelContext: modelContext)
@@ -22,7 +23,8 @@ struct ProfileView: View {
             Form {
                 profileSection
                 statsSection
-                otherSection
+                contentSection
+                appSection
             }
             .scrollIndicators(.hidden)
             .navigationTitle(Texts.Common.title)
@@ -53,12 +55,46 @@ struct ProfileView: View {
         }
     }
     
-    private var otherSection: some View {
-        Section(Texts.ProfilePage.other) {
+    private var contentSection: some View {
+        Section("Content") {
             LinkRow(title: Texts.ProfilePage.archive,
                     image: Image(systemName: "a.square.fill"))
             .overlay(
                 NavigationLink(destination: ArchiveView(viewModel: viewModel),
+                               label: {
+                                   EmptyView()
+                               })
+            )
+            resetButton
+        }
+    }
+    
+    private var resetButton: some View {
+        Button {
+            showingAlert = true
+        } label: {
+            LinkRow(title: Texts.ProfilePage.reset,
+                    image: Image(systemName: "minus.square.fill"),
+                    chevron: true)
+        }
+        .confirmationDialog(Texts.ProfilePage.resetContent,
+                            isPresented: $showingAlert,
+                            titleVisibility: .visible) {
+            Button(role: .destructive) {
+                viewModel.resetProgress()
+            } label: {
+                Text(Texts.ProfilePage.resetButton)
+            }
+        }
+    }
+    
+    private var appSection: some View {
+        Section(Texts.ProfilePage.app) {
+            
+            LinkRow(title: Texts.ProfilePage.About.title,
+                    image: Image.ProfilePage.about)
+            .overlay(
+                NavigationLink(destination: ProfileAboutView(viewModel: viewModel),
                                label: {
                                    EmptyView()
                                })
@@ -68,15 +104,6 @@ struct ProfileView: View {
                     image: Image.ProfilePage.settings)
             .overlay(
                 NavigationLink(destination: Text(Texts.ProfilePage.settings),
-                               label: {
-                                   EmptyView()
-                               })
-            )
-            
-            LinkRow(title: Texts.ProfilePage.About.title,
-                    image: Image.ProfilePage.about)
-            .overlay(
-                NavigationLink(destination: ProfileAboutView(viewModel: viewModel),
                                label: {
                                    EmptyView()
                                })

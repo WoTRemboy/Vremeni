@@ -106,8 +106,13 @@ final class Texts {
         static let stats = "Stats"
         static let charts = "Charts"
         
-        static let other = "Other"
+        static let content = "Content"
         static let archive = "Archive"
+        static let reset = "Reset"
+        static let resetContent = "Do you want to start over? Purchases made with real currency will remain active."
+        static let resetButton = "Reset progress (not working now)"
+        
+        static let app = "Application"
         static let settings = "Settings"
         
         enum Archive {
