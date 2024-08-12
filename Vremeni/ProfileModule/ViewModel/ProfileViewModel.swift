@@ -20,13 +20,20 @@ extension ProfileView {
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
-            versionDetect()
+            
+        }
+        
+        internal func updateOnAppear() {
             fetchProfileData()
             fetchItemsData()
         }
         
         internal func updateItemsOnAppear() {
             fetchItemsData()
+        }
+        
+        internal func updateVersionOnAppear() {
+            versionDetect()
         }
         
         internal func resetProgress() {

@@ -45,9 +45,6 @@ extension ShopView {
             self.modelContext = modelContext
             self.enableStatus = true
             self.rarityFilter = .all
-            fetchData()
-            fetchProfileData()
-            addSamples()
         }
         
         // MARK: - ConsumableItem status management methods
@@ -67,6 +64,8 @@ extension ShopView {
         // Updates item data when scroll view appears to detect unarchived items
         internal func updateOnAppear() {
             fetchData()
+            fetchProfileData()
+            addSamples()
         }
         
         // MARK: - Calculation methods

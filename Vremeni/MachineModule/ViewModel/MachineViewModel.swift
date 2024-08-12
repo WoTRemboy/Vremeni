@@ -24,7 +24,6 @@ extension MachineView {
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
-            fetchData()
         }
         
         internal func updateOnAppear() {

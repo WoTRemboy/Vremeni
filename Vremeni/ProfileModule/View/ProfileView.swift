@@ -26,6 +26,9 @@ struct ProfileView: View {
                 contentSection
                 appSection
             }
+            .onAppear {
+                viewModel.updateOnAppear()
+            }
             .scrollIndicators(.hidden)
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)

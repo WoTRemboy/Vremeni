@@ -28,13 +28,11 @@ extension InventoryView {
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
             self.rarityFilter = .all
-            fetchStatsData()
-            fetchProfileData()
-            fetchData()
         }
         
         internal func updateOnAppear() {
             fetchStatsData()
+            fetchProfileData()
             fetchData()
         }
         
