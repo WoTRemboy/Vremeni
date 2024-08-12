@@ -112,7 +112,7 @@ struct ShopItemGridCell: View {
             // Archive item button
             Button(action: {
                 withAnimation(.snappy) {
-                    viewModel.deleteItem(item: item)
+                    viewModel.archiveItem(item: item)
                 }
             }) {
                 Image(systemName: "archivebox")

@@ -70,6 +70,11 @@ extension ConsumableItem {
         enabled = true
     }
     
+    // Changes archive status (Shop & Profile Modules)
+    internal func archiveItem() {
+        archived.toggle()
+    }
+    
     // Creating a MachineItem instanse and adding it to the Machine (Shop Module)
     internal func addToMachine() {
         let child = MachineItem(name: name, itemDescription: itemDescription, image: image,
@@ -87,19 +92,20 @@ extension ConsumableItem {
     static internal func itemMockConfig(name: String, description: String = String(),
                                         price: Float, rarity: Rarity = .common,
                                         profile: Profile, enabled: Bool = true,
-                                        ready: Bool = false) -> ConsumableItem {
+                                        ready: Bool = false, archived: Bool = false) -> ConsumableItem {
         let name = name
         let description = description
         let image = "\(Int(price)).square"
         let price = price
         let enable = enabled
         let ready = ready
+        let archived = archived
         let rarity = rarity
         let profile = profile
         
         return ConsumableItem(name: name, itemDescription: description, image: image,
                               price: price, rarity: rarity, profile: profile,
-                              enabled: enable, ready: ready)
+                              enabled: enable, ready: ready, archived: archived)
     }
 }
 

@@ -58,7 +58,7 @@ struct ProfileView: View {
             LinkRow(title: Texts.ProfilePage.archive,
                     image: Image(systemName: "a.square.fill"))
             .overlay(
-                NavigationLink(destination: Text(Texts.ProfilePage.archive),
+                NavigationLink(destination: ArchiveView(viewModel: viewModel),
                                label: {
                                    EmptyView()
                                })
