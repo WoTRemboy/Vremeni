@@ -26,7 +26,7 @@ extension ProfileView {
         internal func versionDetect() {
             if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
                let buildVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
-                version = "\(appVersion) \(Texts.ProfilePage.release) \(buildVersion)"
+                version = "\(appVersion) \(Texts.ProfilePage.About.release) \(buildVersion)"
             }
         }
         

@@ -98,8 +98,29 @@ final class Texts {
         static let title = "Profile"
         static let user = "User"
         static let error = "Error"
-        static let version = "Version"
-        static let release = "release"
+        
+        static let userName = "Profile name"
+        static let other = "Other"
+        
+        enum About {
+            static let title = "About"
+            static let version = "Version"
+            static let release = "release"
+            static let director = "Director"
+            static let developer = "Developer"
+            static let designer = "Designer"
+            static let contact = "Contact"
+            static let team = "Team"
+            static let father = "Mikhail T."
+            static let me = "Roman T."
+            static let pups = "Artyom T."
+            static let email = "Email"
+            static let emailContent = "vremeni@icloud.com"
+            
+            static let directorLink = "https://t.me/Vremeni34"
+            static let developLink = "https://www.linkedin.com/in/voityvit/"
+            static let designerLink = "https://t.me/ArtyomTver"
+        }
     }
     
     enum TotalPrice {

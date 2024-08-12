@@ -20,6 +20,10 @@ extension Image {
     
     enum ProfilePage {
         static let about = Image("AboutIcon")
+        static let crown = Image("CrownAbout")
+        static let develop = Image("DevelopAbout")
+        static let graphic = Image("GraphicAbout")
+        static let email = Image("EmailAbout")
     }
     
     enum Rarity {

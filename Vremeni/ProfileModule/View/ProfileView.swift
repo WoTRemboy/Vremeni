@@ -20,25 +20,17 @@ struct ProfileView: View {
     internal var body: some View {
         NavigationStack {
             Form {
-                Section(Texts.ProfilePage.version) {
-                    version
+                Section(Texts.ProfilePage.userName) {
+                    Text(viewModel.profile.name)
                 }
                 
-                Section("Profile Test") {
-                    Text(viewModel.profile.name)
-                        .onTapGesture {
-                           
-                        }
-                }
-                // Jokes
-                Section("CEO") {
-                    Text("Mikhail Tverdokhleb 👑")
-                }
-                Section("Bondman") {
-                    Text("Roman Tverdokhleb ⛏️")
-                }
-                Section("Company of the year") {
-                    Link("Vremeni Inc. 💸", destination: URL(string: "mailto:vremeni@icloud.com")!)
+                Section(Texts.ProfilePage.other) {
+                    NavigationLink {
+                        ProfileAboutView(viewModel: viewModel)
+                    } label: {
+                        Text(Texts.ProfilePage.About.title)
+                    }
+
                 }
             }
             .navigationTitle(Texts.Common.title)
