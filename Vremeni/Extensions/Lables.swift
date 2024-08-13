@@ -99,8 +99,11 @@ final class Texts {
         static let user = "User"
         static let error = "Error"
         
+        static let accept = "Accept"
+        static let cancel = "Cancel"
+        
         static let profile = "Profile"
-        static let userName = "Username"
+        static let username = "Username"
         static let balance = "Balance"
         
         static let stats = "Stats"

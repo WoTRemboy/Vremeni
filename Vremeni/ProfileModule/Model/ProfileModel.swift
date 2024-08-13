@@ -32,6 +32,10 @@ extension Profile: Equatable {
         lhs.name == rhs.name && lhs.balance == rhs.balance
     }
     
+    internal func changeName(to username: String) {
+        name = username
+    }
+    
     internal func addCoins(_ count: Float) {
         balance += Int(count)
     }

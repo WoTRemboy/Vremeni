@@ -36,6 +36,11 @@ extension ProfileView {
             versionDetect()
         }
         
+        internal func changeNickname(to name: String) {
+            profile.changeName(to: name)
+            fetchProfileData()
+        }
+        
         internal func resetProgress() {
             // reset progress
         }

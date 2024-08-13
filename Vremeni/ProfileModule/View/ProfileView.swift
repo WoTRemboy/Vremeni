@@ -11,6 +11,7 @@ import SwiftData
 struct ProfileView: View {
     
     @State private var viewModel: ProfileViewModel
+    @State private var showingUsernameSheet = false
     @State private var showingAlert = false
     
     init(modelContext: ModelContext) {
@@ -21,8 +22,8 @@ struct ProfileView: View {
     internal var body: some View {
         NavigationStack {
             Form {
-                profileSection
                 statsSection
+                profileSection
                 contentSection
                 appSection
             }
@@ -41,9 +42,18 @@ struct ProfileView: View {
     
     private var profileSection: some View {
         Section(Texts.ProfilePage.profile) {
-            LinkRow(title: Texts.ProfilePage.userName,
-                    image: Image(systemName: "person.crop.square.fill"),
-                    details: viewModel.profile.name)
+            Button {
+                showingUsernameSheet = true
+            } label: {
+                LinkRow(title: Texts.ProfilePage.username,
+                        image: Image(systemName: "person.crop.square.fill"),
+                        details: viewModel.profile.name,
+                        chevron: true)
+            }
+            .sheet(isPresented: $showingUsernameSheet, content: {
+                NewUsernameView(username: viewModel.profile.name, viewModel: viewModel)
+                    .presentationDetents([.height(150 + 16)])
+            })
             
             LinkRow(title: Texts.ProfilePage.balance,
                     image: Image.ProfilePage.balance,
