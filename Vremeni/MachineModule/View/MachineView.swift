@@ -50,16 +50,6 @@ struct MachineView: View {
         
         return LazyVGrid(columns: columns, spacing: spacing) {
             Section(header: sectionHeader) {
-                if viewModel.items.filter({ $0.inProgress }).isEmpty {
-                    EmptyMachineViewGridCell()
-                        .onTapGesture {
-                            showingAddItemList.toggle()
-                        }
-                        .sheet(isPresented: $showingAddItemList, content: {
-                            MachineAddItemsView(viewModel: viewModel)
-                                .presentationDetents([.medium])
-                        })
-                }
                 ForEach(viewModel.items) { item in
                     if item.inProgress {
                         MachineViewGridCell(item: item, viewModel: viewModel)
@@ -71,6 +61,22 @@ struct MachineView: View {
                             }
                     }
                 }
+                
+                VStack {
+                    if viewModel.items.filter({ $0.inProgress }).isEmpty {
+                        EmptyMachineViewGridCell()
+                    } else if viewModel.isSlotAvailable() {
+                        EmptyMachiveViewCompactCell()
+                    }
+                }
+                .onTapGesture {
+                    showingAddItemList.toggle()
+                }
+                .sheet(isPresented: $showingAddItemList, content: {
+                    MachineAddItemsView(viewModel: viewModel)
+                        .presentationDetents([.medium])
+                })
+                
                 NewSlotMachineViewGridCell()
                     .onTapGesture {
                         showingUpgradeSheet.toggle()

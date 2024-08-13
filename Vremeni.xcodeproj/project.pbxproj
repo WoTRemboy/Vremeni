@@ -53,6 +53,7 @@
 		638620B52C60D11B00453944 /* MachineItemDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620B42C60D11B00453944 /* MachineItemDetailsView.swift */; };
 		6391C4922C6BBB48001ECEDF /* BuyWorkshopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6391C4912C6BBB48001ECEDF /* BuyWorkshopView.swift */; };
 		6391C4942C6BBF30001ECEDF /* UpgradeMachineRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6391C4932C6BBF30001ECEDF /* UpgradeMachineRowView.swift */; };
+		6391C4962C6C05ED001ECEDF /* EmptyMachiveViewCompactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6391C4952C6C05ED001ECEDF /* EmptyMachiveViewCompactCell.swift */; };
 		6395B7612C5A5FBD00C0C611 /* ParameterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6395B7602C5A5FBD00C0C611 /* ParameterRow.swift */; };
 		6395B7632C5A63D900C0C611 /* TotalPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6395B7622C5A63D900C0C611 /* TotalPrice.swift */; };
 		6395B7672C5A75E500C0C611 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6395B7662C5A75E500C0C611 /* ProfileViewModel.swift */; };
@@ -129,6 +130,7 @@
 		638620B42C60D11B00453944 /* MachineItemDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachineItemDetailsView.swift; sourceTree = "<group>"; };
 		6391C4912C6BBB48001ECEDF /* BuyWorkshopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyWorkshopView.swift; sourceTree = "<group>"; };
 		6391C4932C6BBF30001ECEDF /* UpgradeMachineRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeMachineRowView.swift; sourceTree = "<group>"; };
+		6391C4952C6C05ED001ECEDF /* EmptyMachiveViewCompactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMachiveViewCompactCell.swift; sourceTree = "<group>"; };
 		6395B7602C5A5FBD00C0C611 /* ParameterRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterRow.swift; sourceTree = "<group>"; };
 		6395B7622C5A63D900C0C611 /* TotalPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalPrice.swift; sourceTree = "<group>"; };
 		6395B7662C5A75E500C0C611 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				631AF42B2C5259EC00DFD63C /* MachineViewGridCell.swift */,
 				638620AC2C5D7D0300453944 /* QueueMachineViewGridCell.swift */,
 				638620A82C5D4F1F00453944 /* EmptyMachineViewGridCell.swift */,
+				6391C4952C6C05ED001ECEDF /* EmptyMachiveViewCompactCell.swift */,
 				638620AA2C5D566400453944 /* NewSlotMachineViewGridCell.swift */,
 				6391C4932C6BBF30001ECEDF /* UpgradeMachineRowView.swift */,
 			);
@@ -624,6 +627,7 @@
 				631F265A2C66556400FEAD1A /* InventoryStatsGridCell.swift in Sources */,
 				631F26652C68EE5400FEAD1A /* ProfileAboutView.swift in Sources */,
 				631F265C2C6665A600FEAD1A /* PlaceholderView.swift in Sources */,
+				6391C4962C6C05ED001ECEDF /* EmptyMachiveViewCompactCell.swift in Sources */,
 				631AF4132C5176BA00DFD63C /* ShopViewModel.swift in Sources */,
 				631AF42C2C5259EC00DFD63C /* MachineViewGridCell.swift in Sources */,
 				631F26582C66188300FEAD1A /* RuleModel.swift in Sources */,

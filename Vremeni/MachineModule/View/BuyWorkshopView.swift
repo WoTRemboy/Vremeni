@@ -53,8 +53,17 @@ struct BuyWorkshopView: View {
     
     private var options: some View {
         List {
-            UpgradeMachineRowView(type: .coins, viewModel: viewModel)
-            UpgradeMachineRowView(type: .money, viewModel: viewModel)
+            Button {
+                viewModel.changePurchaseType(to: .coins)
+            } label: {
+                UpgradeMachineRowView(type: .coins, viewModel: viewModel)
+            }
+
+            Button {
+                viewModel.changePurchaseType(to: .money)
+            } label: {
+                UpgradeMachineRowView(type: .money, viewModel: viewModel)
+            }
         }
         .scrollDisabled(true)
     }
@@ -63,6 +72,7 @@ struct BuyWorkshopView: View {
         VStack {
             Button(action: {
                 withAnimation(.snappy) {
+                    viewModel.slotPurchase()
                     dismiss()
                 }
             }) {
@@ -76,6 +86,8 @@ struct BuyWorkshopView: View {
             .foregroundStyle(Color.green)
             .buttonStyle(.bordered)
             .tint(Color.green)
+            
+            .disabled(viewModel.isPurchaseUnavailable())
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
         .padding(.bottom)

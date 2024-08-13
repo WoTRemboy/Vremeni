@@ -19,18 +19,25 @@ struct UpgradeMachineRowView: View {
     }
     
     internal var body: some View {
-        HStack(spacing: 10) {
-            Image(systemName: type == .coins ? "v.square.fill" : "m.square.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(height: 60)
+        HStack {
+            HStack(spacing: 10) {
+                Image(systemName: type == .coins ? "v.square.fill" : "m.square.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 60)
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    name
+                    price
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
             
-            VStack(alignment: .leading, spacing: 5) {
-                name
-                price
+            if type == viewModel.selectedType {
+                Image(systemName: "checkmark")
+                    .foregroundStyle(Color.accentColor)
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     private var name: some View {
@@ -42,26 +49,48 @@ struct UpgradeMachineRowView: View {
     }
     
     private var price: some View {
-        HStack(spacing: 5) {
+        HStack {
             switch type {
             case .coins:
-                let price = viewModel.internalPrice
-                Text(String(Int(price)))
-                    .font(.headline())
-                    .foregroundStyle(Color.LabelColors.labelPrimary)
+                if viewModel.slotLimitReached() {
+                    limitPrice
+                } else {
+                    noLimitPrice
+                }
                 
-                Image(.vCoin)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 17)
             case .money:
-                let price = viewModel.donatePrice
-                Text("$" + String(price))
-                    .font(.headline())
-                    .foregroundStyle(Color.LabelColors.labelPrimary)
+                realCurrencyPrice
             }
             
         }
+    }
+    
+    private var limitPrice: some View {
+        let subtitle = "Limit has been reached"
+        return Text(subtitle)
+            .font(.headline())
+            .foregroundStyle(Color.LabelColors.labelPrimary)
+    }
+    
+    private var noLimitPrice: some View {
+        HStack(spacing: 5) {
+            let price = viewModel.internalPrice
+            let subtitle = String(Int(price))
+            Text(subtitle)
+                .font(.headline())
+                .foregroundStyle(Color.LabelColors.labelPrimary)
+            Image(.vCoin)
+                .resizable()
+                .scaledToFit()
+                .frame(height: 17)
+        }
+    }
+    
+    private var realCurrencyPrice: some View {
+        let price = viewModel.donatePrice
+        return Text("$" + String(price))
+            .font(.headline())
+            .foregroundStyle(Color.LabelColors.labelPrimary)
     }
 }
 
@@ -72,7 +101,7 @@ struct UpgradeMachineRowView: View {
         let modelContext = ModelContext(container)
         
         let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
-        return UpgradeMachineRowView(type: .money, viewModel: viewModel)
+        return UpgradeMachineRowView(type: .coins, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")
     }

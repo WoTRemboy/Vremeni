@@ -20,7 +20,7 @@ struct MachineAddItemsView: View {
     internal var body: some View {
         NavigationStack {
             ZStack {
-                if viewModel.items.isEmpty {
+                if viewModel.items.filter({ !$0.inProgress }).isEmpty {
                     empty
                 } else {
                     list

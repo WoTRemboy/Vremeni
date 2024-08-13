@@ -22,7 +22,9 @@ extension MachineView {
         private let updateInterval: TimeInterval = 0.3
         private let targetPercent: CGFloat = 100
         
-        internal let internalPrice: Double = 300
+        private(set) var selectedType: UpgrageMethod = .coins
+        private let slotsLimit = 3
+        internal let internalPrice: Double = 1
         internal let donatePrice: Double = 0.99
         
         init(modelContext: ModelContext) {
@@ -61,6 +63,23 @@ extension MachineView {
         internal func remainingTime(for item: MachineItem) -> String {
             item.setMachineTime()
             return Date.itemShortFormatter.string(from: item.target)
+        }
+        
+        internal func changePurchaseType(to selected: UpgrageMethod) {
+            selectedType = selected
+        }
+        
+        internal func slotLimitReached() -> Bool {
+            profile.internalMachines > slotsLimit
+        }
+        
+        internal func isPurchaseUnavailable() -> Bool {
+            guard selectedType != .money else { return true }
+            return profile.balance < Int(internalPrice) || profile.internalMachines > slotsLimit
+        }
+        
+        internal func slotPurchase() {
+            profile.slotPurchase(price: internalPrice)
         }
         
         internal func isSlotAvailable() -> Bool {

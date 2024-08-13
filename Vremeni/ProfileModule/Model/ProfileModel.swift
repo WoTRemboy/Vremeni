@@ -40,6 +40,11 @@ extension Profile: Equatable {
         balance += Int(count)
     }
     
+    internal func slotPurchase(price: Double) {
+        balance -= Int(price)
+        internalMachines += 1
+    }
+    
     internal static func configMockProfile() -> Profile {
         Profile(name: "Mock User", balance: 228, items: [])
     }
