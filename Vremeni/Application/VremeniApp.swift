@@ -23,7 +23,7 @@ struct VremeniApp: App {
         do {
             container = try ModelContainer(for: Profile.self)
         } catch {
-            fatalError("Failed to create ModelContainer for ConsumableItem.")
+            fatalError("Failed to create ModelContainer for Profile.")
         }
     }
 }
