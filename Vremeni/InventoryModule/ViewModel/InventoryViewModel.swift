@@ -40,6 +40,15 @@ extension InventoryView {
             unfilteredItems.filter({ $0.rarity == rarity })
         }
         
+        internal func progressItemsCount() -> String {
+            let inventoryItems = Float(unfilteredItems.count)
+            let statsItems = Float(statsItems.count)
+            guard statsItems > 0 else { return "0%" }
+            
+            let percent = Int(inventoryItems / statsItems * 100)
+            return "\(percent)%"
+        }
+        
         internal func rarityItemsCount(for rarity: Rarity) -> String {
             let inventoryItems = items.filter({ $0.rarity == rarity }).count
             let allItems = statsItems.filter({ $0.rarity == rarity }).count
