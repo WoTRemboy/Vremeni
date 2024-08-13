@@ -15,19 +15,24 @@ extension MachineView {
     final class MachineViewModel {
         private let modelContext: ModelContext
         
+        private(set) var profile = Profile.configMockProfile()
         private(set) var items = [MachineItem]()
         private(set) var timer = Timer()
         
-        private let availableSlots = 1
         private let updateInterval: TimeInterval = 0.3
         private let targetPercent: CGFloat = 100
         
+        private(set) var selectedType: UpgrageMethod = .coins
+        private let slotsLimit = 3
+        internal let internalPrice: Double = 1
+        internal let donatePrice: Double = 0.99
+        
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
-            fetchData()
         }
         
         internal func updateOnAppear() {
+            fetchProfileData()
             fetchData()
         }
         
@@ -44,6 +49,7 @@ extension MachineView {
         
         internal func progressReady(item: MachineItem) {
             item.readyToggle()
+            profile.addCoins(item.price)
             deleteItem(item: item)
         }
         
@@ -59,9 +65,27 @@ extension MachineView {
             return Date.itemShortFormatter.string(from: item.target)
         }
         
+        internal func changePurchaseType(to selected: UpgrageMethod) {
+            selectedType = selected
+        }
+        
+        internal func slotLimitReached() -> Bool {
+            profile.internalMachines > slotsLimit
+        }
+        
+        internal func isPurchaseUnavailable() -> Bool {
+            guard selectedType != .money else { return true }
+            return profile.balance < Int(internalPrice) || profile.internalMachines > slotsLimit
+        }
+        
+        internal func slotPurchase() {
+            profile.slotPurchase(price: internalPrice)
+        }
+        
         internal func isSlotAvailable() -> Bool {
             let progressItems = items.filter({ $0.inProgress })
-            return progressItems.count < availableSlots
+            let availableMachines = profile.internalMachines + profile.donateMachines
+            return progressItems.count < availableMachines
         }
         
         internal func percentTimeElapsed(for item: MachineItem) {
@@ -106,7 +130,16 @@ extension MachineView {
                 let descriptor = FetchDescriptor<MachineItem>(sortBy: [SortDescriptor(\.percent, order: .reverse), SortDescriptor(\.started), SortDescriptor(\.price)])
                 items = try modelContext.fetch(descriptor)
             } catch {
-                print("Fetch failed")
+                print("MachineItem fetch for Machine viewModel failed")
+            }
+        }
+        
+        private func fetchProfileData() {
+            do {
+                let descriptor = FetchDescriptor<Profile>()
+                profile = try modelContext.fetch(descriptor).first ?? Profile.configMockProfile()
+            } catch {
+                print("Profile fetch for Machine viewModel failed")
             }
         }
 

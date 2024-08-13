@@ -45,9 +45,6 @@ extension ShopView {
             self.modelContext = modelContext
             self.enableStatus = true
             self.rarityFilter = .all
-            fetchData()
-            fetchProfileData()
-            addSamples()
         }
         
         // MARK: - ConsumableItem status management methods
@@ -67,6 +64,8 @@ extension ShopView {
         // Updates item data when scroll view appears to detect unarchived items
         internal func updateOnAppear() {
             fetchData()
+            fetchProfileData()
+            addSamples()
         }
         
         // MARK: - Calculation methods
@@ -163,7 +162,7 @@ extension ShopView {
                     }
                 }
             } catch {
-                print("Fetch failed")
+                print("ConsumableItem fetch for Shop viewModel failed")
             }
         }
         
@@ -180,7 +179,7 @@ extension ShopView {
                 let descriptor = FetchDescriptor<Profile>()
                 profile = try modelContext.fetch(descriptor).first ?? Profile.configMockProfile()
             } catch {
-                print("Fetch failed")
+                print("Profile fetch for Shop viewModel failed")
             }
             
             guard profile == Profile.configMockProfile() else { return }

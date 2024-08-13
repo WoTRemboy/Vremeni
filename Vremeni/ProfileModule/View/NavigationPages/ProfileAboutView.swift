@@ -32,6 +32,9 @@ struct ProfileAboutView: View {
                     email
                 }
             }
+            .onAppear {
+                viewModel.updateVersionOnAppear()
+            }
             .navigationTitle(Texts.ProfilePage.About.title)
             .navigationBarTitleDisplayMode(.inline)
         }

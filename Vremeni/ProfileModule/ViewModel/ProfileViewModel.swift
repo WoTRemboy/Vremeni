@@ -20,13 +20,29 @@ extension ProfileView {
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
-            versionDetect()
+            
+        }
+        
+        internal func updateOnAppear() {
             fetchProfileData()
             fetchItemsData()
         }
         
         internal func updateItemsOnAppear() {
             fetchItemsData()
+        }
+        
+        internal func updateVersionOnAppear() {
+            versionDetect()
+        }
+        
+        internal func changeNickname(to name: String) {
+            profile.changeName(to: name)
+            fetchProfileData()
+        }
+        
+        internal func resetProgress() {
+            // reset progress
         }
         
         internal func unarchiveItem(item: ConsumableItem) {
@@ -65,7 +81,7 @@ extension ProfileView {
                 let descriptor = FetchDescriptor<Profile>()
                 profile = try modelContext.fetch(descriptor).first ?? Profile.configMockProfile()
             } catch {
-                print("Fetch failed")
+                print("Profile fetch for Profile viewModel failed")
             }
         }
         
@@ -74,7 +90,7 @@ extension ProfileView {
                 let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.archived }, sortBy: [SortDescriptor(\.price)])
                 items = try modelContext.fetch(descriptor)
             } catch {
-                print("Fetch failed")
+                print("ConsumableItem fetch for Profile viewModel failed")
             }
         }
     }

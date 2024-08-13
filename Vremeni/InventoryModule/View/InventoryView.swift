@@ -48,7 +48,7 @@ struct InventoryView: View {
                     toolBarMenuFilter
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    toolBarBalanceView
+                    toolBarProgressView
                 }
             }
         }
@@ -109,17 +109,10 @@ struct InventoryView: View {
         }
     }
     
-    private var toolBarBalanceView: some View {
-        HStack(spacing: 5) {
-            Image.ShopPage.vCoin
-                .resizable()
-                .scaledToFit()
-                .frame(width: 17)
-            
-            Text("128")
-                .font(.headline())
-                .foregroundStyle(Color.labelPrimary)
-        }
+    private var toolBarProgressView: some View {
+        Text(viewModel.progressItemsCount())
+            .font(.headline())
+            .foregroundStyle(Color.labelPrimary)
     }
     
     private var placeholder: some View {

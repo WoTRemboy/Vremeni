@@ -30,13 +30,15 @@ struct LinkRow: View {
             if let details {
                 Text(details)
                     .font(.regularBody())
+                    .lineLimit(1)
                     .foregroundStyle(Color.LabelColors.labelSecondary)
             }
             
             if chevron {
                 Image(systemName: "chevron.right")
                     .font(.footnote())
-                    .foregroundStyle(Color.LabelColors.labelTertiary)
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color.LabelColors.labelDetails)
             }
         }
     }

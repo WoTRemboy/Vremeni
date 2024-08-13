@@ -28,9 +28,6 @@ extension InventoryView {
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
             self.rarityFilter = .all
-            fetchStatsData()
-            fetchProfileData()
-            fetchData()
         }
         
         internal func updateOnAppear() {
@@ -40,6 +37,15 @@ extension InventoryView {
         
         internal func filterItems(for rarity: Rarity) -> [ConsumableItem] {
             unfilteredItems.filter({ $0.rarity == rarity })
+        }
+        
+        internal func progressItemsCount() -> String {
+            let inventoryItems = Float(unfilteredItems.count)
+            let statsItems = Float(statsItems.count)
+            guard statsItems > 0 else { return "0%" }
+            
+            let percent = Int(inventoryItems / statsItems * 100)
+            return "\(percent)%"
         }
         
         internal func rarityItemsCount(for rarity: Rarity) -> String {
@@ -108,7 +114,7 @@ extension InventoryView {
                     }
                 }
             } catch {
-                print("Fetch failed")
+                print("ConsumableItem fetch for Inventory viewModel failed")
             }
         }
         
@@ -117,19 +123,8 @@ extension InventoryView {
                 let descriptor = FetchDescriptor<ConsumableItem>()
                 statsItems = try modelContext.fetch(descriptor)
             } catch {
-                print("Fetch failed")
+                print("All ConsumableItem fetch for Inventory viewModel failed")
             }
         }
-        
-        private func fetchProfileData() {
-            do {
-                // Gets profile from SwiftData DB
-                let descriptor = FetchDescriptor<Profile>()
-                profile = try modelContext.fetch(descriptor).first ?? Profile.configMockProfile()
-            } catch {
-                print("Fetch failed")
-            }
-        }
-
     }
 }
