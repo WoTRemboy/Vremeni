@@ -76,7 +76,7 @@ extension ProfileView {
                 let descriptor = FetchDescriptor<Profile>()
                 profile = try modelContext.fetch(descriptor).first ?? Profile.configMockProfile()
             } catch {
-                print("Fetch failed")
+                print("Profile fetch for Profile viewModel failed")
             }
         }
         
@@ -85,7 +85,7 @@ extension ProfileView {
                 let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.archived }, sortBy: [SortDescriptor(\.price)])
                 items = try modelContext.fetch(descriptor)
             } catch {
-                print("Fetch failed")
+                print("ConsumableItem fetch for Profile viewModel failed")
             }
         }
     }

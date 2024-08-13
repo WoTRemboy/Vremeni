@@ -32,7 +32,6 @@ extension InventoryView {
         
         internal func updateOnAppear() {
             fetchStatsData()
-            fetchProfileData()
             fetchData()
         }
         
@@ -115,7 +114,7 @@ extension InventoryView {
                     }
                 }
             } catch {
-                print("Fetch failed")
+                print("ConsumableItem fetch for Inventory viewModel failed")
             }
         }
         
@@ -124,19 +123,8 @@ extension InventoryView {
                 let descriptor = FetchDescriptor<ConsumableItem>()
                 statsItems = try modelContext.fetch(descriptor)
             } catch {
-                print("Fetch failed")
+                print("All ConsumableItem fetch for Inventory viewModel failed")
             }
         }
-        
-        private func fetchProfileData() {
-            do {
-                // Gets profile from SwiftData DB
-                let descriptor = FetchDescriptor<Profile>()
-                profile = try modelContext.fetch(descriptor).first ?? Profile.configMockProfile()
-            } catch {
-                print("Fetch failed")
-            }
-        }
-
     }
 }

@@ -15,6 +15,7 @@ extension MachineView {
     final class MachineViewModel {
         private let modelContext: ModelContext
         
+        private(set) var profile = Profile.configMockProfile()
         private(set) var items = [MachineItem]()
         private(set) var timer = Timer()
         
@@ -27,6 +28,7 @@ extension MachineView {
         }
         
         internal func updateOnAppear() {
+            fetchProfileData()
             fetchData()
         }
         
@@ -43,6 +45,7 @@ extension MachineView {
         
         internal func progressReady(item: MachineItem) {
             item.readyToggle()
+            profile.addCoins(item.price)
             deleteItem(item: item)
         }
         
@@ -105,7 +108,16 @@ extension MachineView {
                 let descriptor = FetchDescriptor<MachineItem>(sortBy: [SortDescriptor(\.percent, order: .reverse), SortDescriptor(\.started), SortDescriptor(\.price)])
                 items = try modelContext.fetch(descriptor)
             } catch {
-                print("Fetch failed")
+                print("MachineItem fetch for Machine viewModel failed")
+            }
+        }
+        
+        private func fetchProfileData() {
+            do {
+                let descriptor = FetchDescriptor<Profile>()
+                profile = try modelContext.fetch(descriptor).first ?? Profile.configMockProfile()
+            } catch {
+                print("Profile fetch for Machine viewModel failed")
             }
         }
 

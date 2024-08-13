@@ -162,7 +162,7 @@ extension ShopView {
                     }
                 }
             } catch {
-                print("Fetch failed")
+                print("ConsumableItem fetch for Shop viewModel failed")
             }
         }
         
@@ -179,7 +179,7 @@ extension ShopView {
                 let descriptor = FetchDescriptor<Profile>()
                 profile = try modelContext.fetch(descriptor).first ?? Profile.configMockProfile()
             } catch {
-                print("Fetch failed")
+                print("Profile fetch for Shop viewModel failed")
             }
             
             guard profile == Profile.configMockProfile() else { return }

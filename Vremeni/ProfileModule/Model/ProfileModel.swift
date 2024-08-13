@@ -32,6 +32,10 @@ extension Profile: Equatable {
         lhs.name == rhs.name && lhs.balance == rhs.balance
     }
     
+    internal func addCoins(_ count: Float) {
+        balance += Int(count)
+    }
+    
     internal static func configMockProfile() -> Profile {
         Profile(name: "Mock User", balance: 228, items: [])
     }
