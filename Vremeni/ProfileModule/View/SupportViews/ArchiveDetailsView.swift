@@ -29,7 +29,7 @@ struct ArchiveDetailsView: View {
                         .padding(.top, 20)
                     TotalPrice(price: item.price)
                         .padding(.top, 30)
-                    buyButton
+                    restoreButton
                         .padding([.top, .horizontal])
                     
                     Spacer()
@@ -86,7 +86,7 @@ struct ArchiveDetailsView: View {
         }
     }
     
-    private var buyButton: some View {
+    private var restoreButton: some View {
         Button(action: {
             withAnimation(.snappy) {
                 viewModel.unarchiveItem(item: item)

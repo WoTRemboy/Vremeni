@@ -69,7 +69,7 @@ struct ItemListRow: View {
     }
 }
 
-//#Preview {
-//    let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, rarity: .common, enabled: false)
-//    return ItemListRow(item: example)
-//}
+#Preview {
+    let example = MachineItem(name: "Item name", itemDescription: "Item description", image: "8.square", price: 8, parent: ConsumableItem.itemMockConfig(name: "", price: 1, profile: Profile.configMockProfile()))
+    return ItemListRow(item: example)
+}

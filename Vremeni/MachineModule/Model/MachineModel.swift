@@ -82,3 +82,7 @@ extension MachineItem {
     }
 }
 
+enum UpgrageMethod: String {
+    case coins = "Local currency"
+    case money = "Real currency"
+}

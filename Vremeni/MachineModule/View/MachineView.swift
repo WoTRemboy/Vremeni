@@ -13,6 +13,7 @@ struct MachineView: View {
     @State private var viewModel: MachineViewModel
     @State private var selected: MachineItem? = nil
     @State private var showingAddItemList = false
+    @State private var showingUpgradeSheet = false
 
     private let spacing: CGFloat = 16
     private let itemsInRows = 1
@@ -71,6 +72,13 @@ struct MachineView: View {
                     }
                 }
                 NewSlotMachineViewGridCell()
+                    .onTapGesture {
+                        showingUpgradeSheet.toggle()
+                    }
+                    .sheet(isPresented: $showingUpgradeSheet, content: {
+                        BuyWorkshopView(viewModel: viewModel)
+                            .presentationDetents([.medium])
+                    })
             }
             
             if !viewModel.items.filter({ !$0.inProgress }).isEmpty {

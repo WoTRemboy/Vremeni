@@ -77,6 +77,9 @@ final class Texts {
         static let emptyTitle = "Add an Item"
         static let queue = "Queue"
         
+        static let upgrade = "Upgrade"
+        static let purchase = "Purchase"
+        
         static let targetTime = "Target time"
         static let potentialTime = "Potential target"
         static let reward = "Reward"

@@ -19,9 +19,11 @@ extension MachineView {
         private(set) var items = [MachineItem]()
         private(set) var timer = Timer()
         
-        private let availableSlots = 1
         private let updateInterval: TimeInterval = 0.3
         private let targetPercent: CGFloat = 100
+        
+        internal let internalPrice: Double = 300
+        internal let donatePrice: Double = 0.99
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
@@ -63,7 +65,8 @@ extension MachineView {
         
         internal func isSlotAvailable() -> Bool {
             let progressItems = items.filter({ $0.inProgress })
-            return progressItems.count < availableSlots
+            let availableMachines = profile.internalMachines + profile.donateMachines
+            return progressItems.count < availableMachines
         }
         
         internal func percentTimeElapsed(for item: MachineItem) {
