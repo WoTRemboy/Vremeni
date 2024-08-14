@@ -90,13 +90,14 @@ extension ConsumableItem {
     
     // Mock ConsumableItem configuration method
     static internal func itemMockConfig(name: String, description: String = String(),
-                                        price: Float, rarity: Rarity = .common,
+                                        price: Float, count: Int = 0, rarity: Rarity = .common,
                                         profile: Profile, enabled: Bool = true,
                                         ready: Bool = false, archived: Bool = false) -> ConsumableItem {
         let name = name
         let description = description
         let image = "\(Int(price)).square"
         let price = price
+        let count = count
         let enable = enabled
         let ready = ready
         let archived = archived
@@ -104,7 +105,7 @@ extension ConsumableItem {
         let profile = profile
         
         return ConsumableItem(name: name, itemDescription: description, image: image,
-                              price: price, rarity: rarity, profile: profile,
+                              price: price, count: count, rarity: rarity, profile: profile,
                               enabled: enable, ready: ready, archived: archived)
     }
 }

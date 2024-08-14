@@ -61,7 +61,7 @@ struct MachineViewGridCell: View {
         })
         .onDisappear(perform: {
             if item.percent < 100 && !paused {
-                viewModel.stopProgress()
+                viewModel.stopProgress(for: item)
             }
         })
     }

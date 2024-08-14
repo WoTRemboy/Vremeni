@@ -21,6 +21,7 @@ struct MachineAddItemsView: View {
         NavigationStack {
             ZStack {
                 if viewModel.items.filter({ !$0.inProgress }).isEmpty {
+                    background
                     empty
                 } else {
                     list
@@ -43,6 +44,13 @@ struct MachineAddItemsView: View {
         PlaceholderView(title: Texts.MachinePage.placeholderTitle,
                         description: Texts.MachinePage.placeholderSubtitle,
                         status: .machine)
+    }
+    
+    private var background: some View {
+        Rectangle()
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            .foregroundStyle(Color.clear)
+            .background(Color.BackColors.backiOSPrimary)
     }
     
     private var list: some View {

@@ -15,21 +15,33 @@ extension ProfileView {
         private let modelContext: ModelContext
         
         private(set) var profile = Profile.configMockProfile()
-        private(set) var items = [ConsumableItem]()
         private(set) var version: String = String()
+        
+        private var items = [ConsumableItem]()
+        private var unlockedItems = [ConsumableItem]()
+        private(set) var archivedItems = [ConsumableItem]()
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
-            
         }
         
         internal func updateOnAppear() {
             fetchProfileData()
             fetchItemsData()
+            fetchArchivedItemsData()
         }
         
         internal func updateItemsOnAppear() {
-            fetchItemsData()
+            fetchArchivedItemsData()
+        }
+        
+        internal var itemsCount: Int {
+            items.count
+        }
+        
+        internal func rarityCount(for rarity: Rarity) -> Int {
+            guard rarity != .all else { return unlockedItems.count }
+            return unlockedItems.filter({ $0.rarity == rarity }).count
         }
         
         internal func updateVersionOnAppear() {
@@ -47,7 +59,7 @@ extension ProfileView {
         
         internal func unarchiveItem(item: ConsumableItem) {
             item.archiveItem()
-            fetchItemsData()
+            fetchArchivedItemsData()
         }
         
         internal func versionDetect() {
@@ -61,19 +73,30 @@ extension ProfileView {
             let items = [ConsumableItem.itemMockConfig(name: "One Minute",
                                                        description: "One minute is a whole 60 seconds!",
                                                        price: 1,
+                                                       count: 5,
                                                        profile: profile,
                                                        archived: true),
                          
                          ConsumableItem.itemMockConfig(name: "Three Minutes",
                                                        description: "Three minutes is a whole 180 seconds!",
                                                        price: 3,
+                                                       count: 3,
                                                        rarity: .common,
+                                                       profile: profile,
+                                                       archived: true),
+                         
+                         ConsumableItem.itemMockConfig(name: "Three Minutes",
+                                                       description: "Three minutes is a whole 180 seconds!",
+                                                       price: 3,
+                                                       count: 3,
+                                                       rarity: .rare,
                                                        profile: profile,
                                                        archived: true)]
             for item in items {
                 modelContext.insert(item)
             }
             fetchItemsData()
+            fetchArchivedItemsData()
         }
         
         private func fetchProfileData() {
@@ -87,8 +110,18 @@ extension ProfileView {
         
         private func fetchItemsData() {
             do {
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.archived }, sortBy: [SortDescriptor(\.price)])
+                let descriptor = FetchDescriptor<ConsumableItem>()
                 items = try modelContext.fetch(descriptor)
+                unlockedItems = items.filter { $0.enabled }
+            } catch {
+                print("ConsumableItem fetch for Profile viewModel failed")
+            }
+        }
+        
+        private func fetchArchivedItemsData() {
+            do {
+                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.archived }, sortBy: [SortDescriptor(\.price)])
+                archivedItems = try modelContext.fetch(descriptor)
             } catch {
                 print("ConsumableItem fetch for Profile viewModel failed")
             }

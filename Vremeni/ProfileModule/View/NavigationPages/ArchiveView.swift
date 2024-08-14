@@ -31,11 +31,11 @@ struct ArchiveView: View {
                     viewModel.updateItemsOnAppear()
                 }
                 
-                if viewModel.items.isEmpty {
+                if viewModel.archivedItems.isEmpty {
                     placeholder
                 }
             }
-            .scrollDisabled(viewModel.items.isEmpty)
+            .scrollDisabled(viewModel.archivedItems.isEmpty)
             .scrollDismissesKeyboard(.immediately)
             .background(Color.BackColors.backDefault)
             
@@ -51,7 +51,7 @@ struct ArchiveView: View {
             count: itemsInRows)
         
         return LazyVGrid(columns: columns, spacing: spacing) {
-            ForEach(viewModel.items) { item in
+            ForEach(viewModel.archivedItems) { item in
                     ArchiveGridCell(item: item, viewModel: viewModel)
                         .onTapGesture {
                             selected = item

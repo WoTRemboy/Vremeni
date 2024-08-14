@@ -17,7 +17,7 @@ extension MachineView {
         
         private(set) var profile = Profile.configMockProfile()
         private(set) var items = [MachineItem]()
-        private(set) var timer = Timer()
+        private var timers: [UUID: Timer] = [:]
         
         private let updateInterval: TimeInterval = 0.3
         private let targetPercent: CGFloat = 100
@@ -70,12 +70,12 @@ extension MachineView {
         }
         
         internal func slotLimitReached() -> Bool {
-            profile.internalMachines > slotsLimit
+            profile.internalMachines >= slotsLimit
         }
         
         internal func isPurchaseUnavailable() -> Bool {
             guard selectedType != .money else { return true }
-            return profile.balance < Int(internalPrice) || profile.internalMachines > slotsLimit
+            return profile.balance < Int(internalPrice) || profile.internalMachines >= slotsLimit
         }
         
         internal func slotPurchase() {
@@ -102,7 +102,9 @@ extension MachineView {
         }
         
         internal func startProgress(for item: MachineItem) {
-            timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { timer in
+            let timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { [weak self] timer in
+                guard let self = self else { return }
+                
                 if item.percent < self.targetPercent {
                     let timeDifference = Calendar.current.dateComponents([.hour, .minute, .second], from: .now, to: item.target)
                     print(timeDifference, item.target)
@@ -111,11 +113,13 @@ extension MachineView {
                     timer.invalidate()
                 }
             }
+            timers[item.id] = timer
             timer.fire()
         }
         
-        internal func stopProgress() {
-            timer.invalidate()
+        internal func stopProgress(for item: MachineItem) {
+            timers[item.id]?.invalidate()
+            timers[item.id] = nil
         }
         
         internal func addSamples() {

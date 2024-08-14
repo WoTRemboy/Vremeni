@@ -19,7 +19,9 @@ extension Image {
     }
     
     enum ProfilePage {
+        static let person = Image("PersonProfile")
         static let balance = Image("BalanceProfile")
+        static let archive = Image("ArchiveProfile")
         static let settings = Image("SettingsProfile")
         static let about = Image("AboutProfile")
         
