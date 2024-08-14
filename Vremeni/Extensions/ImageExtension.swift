@@ -8,6 +8,10 @@
 import SwiftUI
 
 extension Image {
+    enum SplashScreen {
+        static let logo = Image("SplashLogo")
+    }
+    
     enum ShopPage {
         static let vCoin = Image("VCoin")
         static let filter = Image(systemName: "line.3.horizontal.decrease.circle")
