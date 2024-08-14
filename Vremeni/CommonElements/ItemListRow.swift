@@ -22,7 +22,7 @@ struct ItemListRow: View {
                 .frame(height: 60)
                 .fontWeight(.light)
                 .foregroundStyle(Color.accentColor, Color.cyan)
-                .padding(.leading, -5)
+                .padding(.leading, -6)
             
             VStack(alignment: .leading, spacing: 5) {
                 name

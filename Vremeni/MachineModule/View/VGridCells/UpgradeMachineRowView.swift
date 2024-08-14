@@ -25,6 +25,7 @@ struct UpgradeMachineRowView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(height: 60)
+                    .padding(.leading, -6)
                 
                 VStack(alignment: .leading, spacing: 5) {
                     name
