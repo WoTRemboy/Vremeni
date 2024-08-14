@@ -33,6 +33,17 @@ extension Color {
         static let supportTextField = Color("SupportTextField")
     }
     
+    enum RarityColors {
+        static let common = Color("RarityCommon")
+        static let uncommon = Color("RarityUncommon")
+        static let rare = Color("RarityRare")
+        static let epic = Color("RarityEpic")
+        static let legendary = Color("RarityLegendary")
+        static let mythic = Color("RarityMythic")
+        static let exotic  = Color("RarityExotic")
+        static let transcendent = Color("RarityTranscendent")
+    }
+    
     enum IconColors {
         static let blue = Color("IconBlue")
     }

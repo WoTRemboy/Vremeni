@@ -111,6 +111,9 @@ final class Texts {
         
         static let stats = "Stats"
         static let charts = "Charts"
+        static let count = "Count"
+        static let unlocked = "Unlocked"
+        static let total = "Total"
         
         static let content = "Content"
         static let archive = "Archive"

@@ -63,7 +63,7 @@ struct ProfileView: View {
     
     private var statsSection: some View {
         Section(Texts.ProfilePage.stats) {
-            Text(Texts.ProfilePage.charts)
+            StatisticsChartView(viewModel: viewModel)
                 .frame(maxWidth: .infinity, idealHeight: 300, alignment: .center)
         }
     }

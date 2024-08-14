@@ -55,4 +55,28 @@ extension Rarity: Identifiable {
             return Image("")
         }
     }
+    
+    // Rarity color definition
+    static internal func rarityToColor(from rarity: Rarity) -> Color {
+        switch rarity {
+        case .common:
+            Color.RarityColors.common
+        case .uncommon:
+            Color.RarityColors.uncommon
+        case .rare:
+            Color.RarityColors.rare
+        case .epic:
+            Color.RarityColors.epic
+        case .legendary:
+            Color.RarityColors.legendary
+        case .mythic:
+            Color.RarityColors.mythic
+        case .transcendent:
+            Color.RarityColors.transcendent
+        case .exotic:
+            Color.RarityColors.exotic
+        case .all:
+            Color.RarityColors.common
+        }
+    }
 }
