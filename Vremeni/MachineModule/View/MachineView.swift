@@ -77,14 +77,16 @@ struct MachineView: View {
                         .presentationDetents([.medium])
                 })
                 
-                NewSlotMachineViewGridCell()
-                    .onTapGesture {
-                        showingUpgradeSheet.toggle()
-                    }
-                    .sheet(isPresented: $showingUpgradeSheet, content: {
-                        BuyWorkshopView(viewModel: viewModel)
-                            .presentationDetents([.medium])
-                    })
+                if !viewModel.isSlotAvailable() {
+                    NewSlotMachineViewGridCell()
+                        .onTapGesture {
+                            showingUpgradeSheet.toggle()
+                        }
+                        .sheet(isPresented: $showingUpgradeSheet, content: {
+                            BuyWorkshopView(viewModel: viewModel)
+                                .presentationDetents([.medium])
+                        })
+                }
             }
             
             if !viewModel.items.filter({ !$0.inProgress }).isEmpty {

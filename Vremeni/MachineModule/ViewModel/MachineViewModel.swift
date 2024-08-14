@@ -70,12 +70,12 @@ extension MachineView {
         }
         
         internal func slotLimitReached() -> Bool {
-            profile.internalMachines > slotsLimit
+            profile.internalMachines >= slotsLimit
         }
         
         internal func isPurchaseUnavailable() -> Bool {
             guard selectedType != .money else { return true }
-            return profile.balance < Int(internalPrice) || profile.internalMachines > slotsLimit
+            return profile.balance < Int(internalPrice) || profile.internalMachines >= slotsLimit
         }
         
         internal func slotPurchase() {

@@ -140,7 +140,7 @@ extension ShopView {
             fetchData()
         }
         
-        // MARK: - Load data methods
+        // MARK: - Load data method
         
         private func fetchData(filterReset: Bool = false) {
             do {
@@ -166,9 +166,11 @@ extension ShopView {
             }
         }
         
+        // MARK: - Profile data methods
+        
         // First app launch case
         private func createProfile() {
-            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, items: items)
+            let profile = Profile(name: Texts.ProfilePage.user, balance: 10, items: items)
             modelContext.insert(profile)
             fetchProfileData()
         }
