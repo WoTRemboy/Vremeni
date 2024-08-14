@@ -71,7 +71,7 @@ struct ProfileView: View {
     private var contentSection: some View {
         Section("Content") {
             LinkRow(title: Texts.ProfilePage.archive,
-                    image: Image(systemName: "a.square.fill"))
+                    image: Image.ProfilePage.archive)
             .overlay(
                 NavigationLink(destination: ArchiveView(viewModel: viewModel),
                                label: {
