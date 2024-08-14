@@ -14,7 +14,7 @@ struct VremeniApp: App {
     
     internal var body: some Scene {
         WindowGroup {
-            ShopView(modelContext: container.mainContext)
+            SplashScreenView(modelContext: container.mainContext)
         }
         .modelContainer(container)
     }

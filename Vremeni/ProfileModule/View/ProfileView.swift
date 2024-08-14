@@ -46,7 +46,7 @@ struct ProfileView: View {
                 showingUsernameSheet = true
             } label: {
                 LinkRow(title: Texts.ProfilePage.username,
-                        image: Image(systemName: "person.crop.square.fill"),
+                        image: Image.ProfilePage.person,
                         details: viewModel.profile.name,
                         chevron: true)
             }
@@ -69,7 +69,7 @@ struct ProfileView: View {
     }
     
     private var contentSection: some View {
-        Section("Content") {
+        Section(Texts.ProfilePage.content) {
             LinkRow(title: Texts.ProfilePage.archive,
                     image: Image.ProfilePage.archive)
             .overlay(
@@ -87,7 +87,7 @@ struct ProfileView: View {
             showingAlert = true
         } label: {
             LinkRow(title: Texts.ProfilePage.reset,
-                    image: Image(systemName: "minus.square.fill"),
+                    image: Image.ProfilePage.reset,
                     chevron: true)
         }
         .confirmationDialog(Texts.ProfilePage.resetContent,

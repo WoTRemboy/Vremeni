@@ -59,6 +59,7 @@
 		6395B7672C5A75E500C0C611 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6395B7662C5A75E500C0C611 /* ProfileViewModel.swift */; };
 		639C76382C5952E900C1CEB8 /* ConsumableItemCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639C76372C5952E900C1CEB8 /* ConsumableItemCreate.swift */; };
 		63F0090E2C6CCA3600DDF6E3 /* StatisticsChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F0090D2C6CCA3600DDF6E3 /* StatisticsChartView.swift */; };
+		63F009102C6D167C00DDF6E3 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F0090F2C6D167C00DDF6E3 /* SplashScreenView.swift */; };
 		63FD7DE02C57F9EE008487DD /* InventoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7DDF2C57F9EE008487DD /* InventoryModel.swift */; };
 		63FD7DE22C57FA12008487DD /* InventoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FD7DE12C57FA12008487DD /* InventoryViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -137,6 +138,7 @@
 		6395B7662C5A75E500C0C611 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		639C76372C5952E900C1CEB8 /* ConsumableItemCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumableItemCreate.swift; sourceTree = "<group>"; };
 		63F0090D2C6CCA3600DDF6E3 /* StatisticsChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsChartView.swift; sourceTree = "<group>"; };
+		63F0090F2C6D167C00DDF6E3 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		63FD7DDF2C57F9EE008487DD /* InventoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryModel.swift; sourceTree = "<group>"; };
 		63FD7DE12C57FA12008487DD /* InventoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -232,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */,
+				63F0090F2C6D167C00DDF6E3 /* SplashScreenView.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 				631AF42A2C5256CF00DFD63C /* MachineViewModel.swift in Sources */,
 				638620A92C5D4F1F00453944 /* EmptyMachineViewGridCell.swift in Sources */,
 				6391C4942C6BBF30001ECEDF /* UpgradeMachineRowView.swift in Sources */,
+				63F009102C6D167C00DDF6E3 /* SplashScreenView.swift in Sources */,
 				63194D1B2C63E01000CAA0AB /* InventoryGridViewCell.swift in Sources */,
 				6324BA412C6A283400A2610A /* ArchiveView.swift in Sources */,
 				631AF4092C516EC100DFD63C /* FontExtension.swift in Sources */,
@@ -826,7 +830,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.3;
+				MARKETING_VERSION = 0.4.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -861,7 +865,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.4.3;
+				MARKETING_VERSION = 0.4.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
