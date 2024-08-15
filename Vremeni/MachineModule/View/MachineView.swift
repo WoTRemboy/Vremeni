@@ -67,6 +67,7 @@ struct MachineView: View {
                         EmptyMachineViewGridCell()
                     } else if viewModel.isSlotAvailable() {
                         EmptyMachiveViewCompactCell()
+                            .padding(.top)
                     }
                 }
                 .onTapGesture {
