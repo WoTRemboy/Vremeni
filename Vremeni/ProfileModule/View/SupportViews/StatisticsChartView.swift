@@ -18,6 +18,19 @@ struct StatisticsChartView: View {
     }
     
     internal var body: some View {
+        ZStack {
+            Image(systemName: "chevron.right")
+                .font(.footnote())
+                .fontWeight(.bold)
+                .foregroundStyle(Color.LabelColors.labelDetails)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                .padding(.top)
+            chart
+        }
+        
+    }
+    
+    private var chart: some View {
         Chart(Rarity.allCases) { rarity in
             SectorMark(angle: .value(Texts.ProfilePage.count, viewModel.rarityCount(for: rarity)),
                        innerRadius: .ratio(0.6),

@@ -22,8 +22,8 @@ struct ProfileView: View {
     internal var body: some View {
         NavigationStack {
             Form {
-                statsSection
                 profileSection
+                statsSection
                 contentSection
                 appSection
             }
@@ -70,14 +70,11 @@ struct ProfileView: View {
     
     private var contentSection: some View {
         Section(Texts.ProfilePage.content) {
-            LinkRow(title: Texts.ProfilePage.archive,
-                    image: Image.ProfilePage.archive)
-            .overlay(
-                NavigationLink(destination: ArchiveView(viewModel: viewModel),
-                               label: {
-                                   EmptyView()
-                               })
-            )
+            NavigationLink(destination: ArchiveView(viewModel: viewModel),
+                           label: {
+                LinkRow(title: Texts.ProfilePage.archive,
+                        image: Image.ProfilePage.archive)
+            })
             resetButton
         }
     }
@@ -104,23 +101,17 @@ struct ProfileView: View {
     private var appSection: some View {
         Section(Texts.ProfilePage.app) {
             
-            LinkRow(title: Texts.ProfilePage.About.title,
-                    image: Image.ProfilePage.about)
-            .overlay(
-                NavigationLink(destination: ProfileAboutView(viewModel: viewModel),
-                               label: {
-                                   EmptyView()
-                               })
-            )
+            NavigationLink(destination: ProfileAboutView(viewModel: viewModel),
+                           label: {
+                LinkRow(title: Texts.ProfilePage.About.title,
+                        image: Image.ProfilePage.about)
+            })
             
-            LinkRow(title: Texts.ProfilePage.settings,
-                    image: Image.ProfilePage.settings)
-            .overlay(
-                NavigationLink(destination: Text(Texts.ProfilePage.settings),
-                               label: {
-                                   EmptyView()
-                               })
-            )
+            NavigationLink(destination: Text(Texts.ProfilePage.settings),
+                           label: {
+                LinkRow(title: Texts.ProfilePage.settings,
+                        image: Image.ProfilePage.settings)
+            })
         }
     }
 }
