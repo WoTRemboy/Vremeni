@@ -124,6 +124,15 @@ final class Texts {
         static let app = "Application"
         static let settings = "Settings"
         
+        enum Stats {
+            static let title = "Stats"
+            static let bar = "Bar"
+            static let type = "Chart type"
+            static let unlocked = "Unlocked"
+            static let of = "of"
+            static let value = "Value"
+        }
+        
         enum Archive {
             static let title = "Archive"
             static let placeholderTitle = "No archive"

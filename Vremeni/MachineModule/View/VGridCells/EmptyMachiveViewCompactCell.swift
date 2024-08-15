@@ -15,9 +15,12 @@ struct EmptyMachiveViewCompactCell: View {
                     .frame(width: reader.size.width, alignment: .center)
             }
             .frame(height: reader.size.height)
-            .background(Color.BackColors.backElevated)
+            .background(Color.BackColors.backDefault)
             .cornerRadius(25)
-            .shadow(color: Color.black.opacity(0.1), radius: 20)
+            .overlay(
+                RoundedRectangle(cornerRadius: 25)
+                    .stroke(Color.Tints.orange, lineWidth: 4)
+            )
         }
         .frame(height: 100)
     }
