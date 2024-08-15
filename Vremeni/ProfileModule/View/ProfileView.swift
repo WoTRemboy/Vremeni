@@ -52,7 +52,7 @@ struct ProfileView: View {
             }
             .sheet(isPresented: $showingUsernameSheet, content: {
                 NewUsernameView(username: viewModel.profile.name, viewModel: viewModel)
-                    .presentationDetents([.height(150 + 16)])
+                    .presentationDetents([.height(150)])
             })
             
             LinkRow(title: Texts.ProfilePage.balance,

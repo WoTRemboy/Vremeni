@@ -13,6 +13,7 @@ struct NewUsernameView: View {
     @Environment(\.dismiss) var dismiss
     private var viewModel: ProfileView.ProfileViewModel
     
+    @FocusState private var keyboardFocused
     @State private var username: String
     private var currentName: String
     
@@ -23,17 +24,19 @@ struct NewUsernameView: View {
     }
     
     internal var body: some View {
-        GeometryReader { reader in
-            VStack(spacing: 16) {
-                VStack {
-                    textField
-                    buttons
-                }
-                .padding()
-                .frame(width: reader.size.width, alignment: .leading)
+            VStack {
+                textField
+                    .focused($keyboardFocused)
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            keyboardFocused = true
+                        }
+                    }
+                buttons
+                Spacer()
             }
-        }
-        .frame(height: 155)
+            .padding()
+            .padding(.top)
     }
     
     private var textField: some View {
