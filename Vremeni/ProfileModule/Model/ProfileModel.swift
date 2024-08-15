@@ -49,3 +49,11 @@ extension Profile: Equatable {
         Profile(name: "Mock User", balance: 228, items: [])
     }
 }
+
+
+enum ChartType: String, Identifiable, CaseIterable {
+    case pie = "Research"
+    case bar = "Inventory"
+    
+    var id: Self { self }
+}

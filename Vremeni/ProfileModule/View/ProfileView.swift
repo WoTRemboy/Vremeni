@@ -65,16 +65,21 @@ struct ProfileView: View {
         Section(Texts.ProfilePage.stats) {
             StatisticsChartView(viewModel: viewModel)
                 .frame(maxWidth: .infinity, idealHeight: 300, alignment: .center)
+                .overlay {
+                    NavigationLink(destination: ChartsDetailsView(viewModel: viewModel)) {
+                        EmptyView()
+                    }
+                    .opacity(0)
+                }
         }
     }
     
     private var contentSection: some View {
         Section(Texts.ProfilePage.content) {
-            NavigationLink(destination: ArchiveView(viewModel: viewModel),
-                           label: {
+            NavigationLink(destination: ArchiveView(viewModel: viewModel)) {
                 LinkRow(title: Texts.ProfilePage.archive,
                         image: Image.ProfilePage.archive)
-            })
+            }
             resetButton
         }
     }

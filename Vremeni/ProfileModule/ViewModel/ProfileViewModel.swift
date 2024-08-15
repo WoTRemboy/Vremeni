@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 extension ProfileView {
     
@@ -20,6 +21,11 @@ extension ProfileView {
         private var items = [ConsumableItem]()
         private var unlockedItems = [ConsumableItem]()
         private(set) var archivedItems = [ConsumableItem]()
+        private(set) var actualRarities = [Rarity]()
+        
+        internal var itemsCount: Int {
+            items.count
+        }
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
@@ -35,13 +41,24 @@ extension ProfileView {
             fetchArchivedItemsData()
         }
         
-        internal var itemsCount: Int {
-            items.count
+        internal func updateStatsOnAppear() {
+            fetchItemsData()
+            fetchActualRariries()
         }
         
-        internal func rarityCount(for rarity: Rarity) -> Int {
+        internal func rarityCount(for rarity: Rarity, all: Bool = false) -> Int {
             guard rarity != .all else { return unlockedItems.count }
-            return unlockedItems.filter({ $0.rarity == rarity }).count
+            if all {
+                return items.filter({ $0.rarity == rarity }).count
+            } else {
+                return unlockedItems.filter({ $0.rarity == rarity }).count
+            }
+        }
+        
+        internal func rarityPercent(for rarity: Rarity) -> Int {
+            let allItems = Float(items.filter({ $0.rarity == rarity }).count)
+            let unlockedItems = Float(unlockedItems.filter({ $0.rarity == rarity }).count)
+            return Int(unlockedItems / allItems * 100)
         }
         
         internal func updateVersionOnAppear() {
@@ -125,6 +142,10 @@ extension ProfileView {
             } catch {
                 print("ConsumableItem fetch for Profile viewModel failed")
             }
+        }
+        
+        private func fetchActualRariries() {
+            actualRarities = Rarity.allCases.filter { rarityCount(for: $0) > 0 }
         }
     }
 }
