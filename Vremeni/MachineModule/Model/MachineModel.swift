@@ -69,15 +69,20 @@ extension MachineItem {
         }
     }
     
-    static internal func itemMockConfig(name: String, description: String = String(), price: Float, inProgress: Bool = false, rarity: Rarity = .common) -> MachineItem {
+    static internal func itemMockConfig(name: String, description: String = String(), price: Float, inProgress: Bool = false, rarity: Rarity = .common, profile: Profile) -> MachineItem {
         let name = name
         let description = description
         let image = "\(Int(price)).square"
         let price = price
         let rarity = rarity
-        let parent = ConsumableItem.itemMockConfig(name: name, price: price)
+        let profile = profile
+        let parent = ConsumableItem.itemMockConfig(name: name, price: price, profile: profile)
         
         return MachineItem(name: name, itemDescription: description, image: image, price: price, rarity: rarity, parent: parent)
     }
 }
 
+enum UpgrageMethod: String {
+    case coins = "Local currency"
+    case money = "Real currency"
+}

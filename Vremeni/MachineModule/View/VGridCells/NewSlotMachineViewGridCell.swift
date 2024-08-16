@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NewSlotMachineViewGridCell: View {
-    var body: some View {
+    internal var body: some View {
         GeometryReader { reader in
             VStack(spacing: 16) {
                 image

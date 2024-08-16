@@ -13,6 +13,7 @@ struct MachineView: View {
     @State private var viewModel: MachineViewModel
     @State private var selected: MachineItem? = nil
     @State private var showingAddItemList = false
+    @State private var showingUpgradeSheet = false
 
     private let spacing: CGFloat = 16
     private let itemsInRows = 1
@@ -49,16 +50,6 @@ struct MachineView: View {
         
         return LazyVGrid(columns: columns, spacing: spacing) {
             Section(header: sectionHeader) {
-                if viewModel.items.filter({ $0.inProgress }).isEmpty {
-                    EmptyMachineViewGridCell()
-                        .onTapGesture {
-                            showingAddItemList.toggle()
-                        }
-                        .sheet(isPresented: $showingAddItemList, content: {
-                            MachineAddItemsView(viewModel: viewModel)
-                                .presentationDetents([.medium])
-                        })
-                }
                 ForEach(viewModel.items) { item in
                     if item.inProgress {
                         MachineViewGridCell(item: item, viewModel: viewModel)
@@ -70,7 +61,33 @@ struct MachineView: View {
                             }
                     }
                 }
-                NewSlotMachineViewGridCell()
+                
+                VStack {
+                    if viewModel.items.filter({ $0.inProgress }).isEmpty {
+                        EmptyMachineViewGridCell()
+                    } else if viewModel.isSlotAvailable() {
+                        EmptyMachiveViewCompactCell()
+                            .padding(.top)
+                    }
+                }
+                .onTapGesture {
+                    showingAddItemList.toggle()
+                }
+                .sheet(isPresented: $showingAddItemList, content: {
+                    MachineAddItemsView(viewModel: viewModel)
+                        .presentationDetents([.medium])
+                })
+                
+                if !viewModel.isSlotAvailable() {
+                    NewSlotMachineViewGridCell()
+                        .onTapGesture {
+                            showingUpgradeSheet.toggle()
+                        }
+                        .sheet(isPresented: $showingUpgradeSheet, content: {
+                            BuyWorkshopView(viewModel: viewModel)
+                                .presentationDetents([.medium])
+                        })
+                }
             }
             
             if !viewModel.items.filter({ !$0.inProgress }).isEmpty {

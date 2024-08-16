@@ -14,16 +14,16 @@ struct VremeniApp: App {
     
     internal var body: some Scene {
         WindowGroup {
-            ShopView(modelContext: container.mainContext)
+            SplashScreenView(modelContext: container.mainContext)
         }
         .modelContainer(container)
     }
     
     init() {
         do {
-            container = try ModelContainer(for: ConsumableItem.self)
+            container = try ModelContainer(for: Profile.self)
         } catch {
-            fatalError("Failed to create ModelContainer for ConsumableItem.")
+            fatalError("Failed to create ModelContainer for Profile.")
         }
     }
 }

@@ -8,6 +8,10 @@
 import SwiftUI
 
 extension Image {
+    enum SplashScreen {
+        static let logo = Image("SplashLogo")
+    }
+    
     enum ShopPage {
         static let vCoin = Image("VCoin")
         static let filter = Image(systemName: "line.3.horizontal.decrease.circle")
@@ -19,7 +23,20 @@ extension Image {
     }
     
     enum ProfilePage {
-        static let about = Image("AboutIcon")
+        static let person = Image("PersonProfile")
+        static let balance = Image("BalanceProfile")
+        static let archive = Image("ArchiveProfile")
+        static let reset = Image("ResetProfile")
+        static let settings = Image("SettingsProfile")
+        static let about = Image("AboutProfile")
+        
+        enum About {
+            static let appIcon = Image("AboutIcon")
+            static let crown = Image("CrownAbout")
+            static let develop = Image("DevelopAbout")
+            static let graphic = Image("GraphicAbout")
+            static let email = Image("EmailAbout")
+        }
     }
     
     enum Rarity {
@@ -47,5 +64,7 @@ extension Image {
         static let unlocked = Image(systemName: "lock.open")
         static let machine = Image(systemName: "clock.arrow.2.circlepath")
         static let inventory = Image(systemName: "rectangle.portrait.on.rectangle.portrait")
+        static let archive = Image(systemName: "archivebox")
+        static let stats = Image(systemName: "chart.xyaxis.line")
     }
 }

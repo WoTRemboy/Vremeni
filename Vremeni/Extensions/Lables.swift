@@ -77,6 +77,9 @@ final class Texts {
         static let emptyTitle = "Add an Item"
         static let queue = "Queue"
         
+        static let upgrade = "Upgrade"
+        static let purchase = "Purchase"
+        
         static let targetTime = "Target time"
         static let potentialTime = "Potential target"
         static let reward = "Reward"
@@ -96,8 +99,79 @@ final class Texts {
     
     enum ProfilePage {
         static let title = "Profile"
-        static let version = "Version"
-        static let release = "release"
+        static let user = "User"
+        static let error = "Error"
+        
+        static let accept = "Accept"
+        static let cancel = "Cancel"
+        
+        static let profile = "Profile"
+        static let username = "Username"
+        static let balance = "Balance"
+        
+        static let stats = "Stats"
+        static let charts = "Charts"
+        static let count = "Count"
+        static let unlocked = "Unlocked"
+        static let total = "Total"
+        
+        static let content = "Content"
+        static let archive = "Archive"
+        static let reset = "Reset"
+        static let resetContent = "Do you want to start over? Purchases made with real currency will remain active."
+        static let resetButton = "Reset progress (not working now)"
+        
+        static let app = "Application"
+        static let settings = "Settings"
+        
+        enum Stats {
+            static let title = "Stats"
+            static let placeholderTitle = "No Stats"
+            static let placeholderDesc = "Get some items from Fair via Machine"
+            
+            static let bar = "Bar"
+            static let count = "Count"
+            static let category = "Category"
+            static let type = "Chart type"
+            
+            static let progress = "Progress"
+            static let balance = "Balance"
+            static let valuation = "Valuation is"
+            static let rarities = "Rarities"
+            
+            static let unlocked = "Unlocked"
+            static let of = "of"
+            static let value = "Value"
+        }
+        
+        enum Archive {
+            static let title = "Archive"
+            static let placeholderTitle = "No archive"
+            static let placeholderSubtitle = "Archived Items from the Fair will be here"
+            
+            static let valuation = "Valuation"
+            static let restore = "Restore"
+        }
+        
+        enum About {
+            static let title = "About"
+            static let version = "Version"
+            static let release = "release"
+            static let director = "Director"
+            static let developer = "Developer"
+            static let designer = "Designer"
+            static let contact = "Contact"
+            static let team = "Team"
+            static let father = "Mikhail T."
+            static let me = "Roman T."
+            static let pups = "Artyom T."
+            static let email = "Email"
+            static let emailContent = "vremeni@icloud.com"
+            
+            static let directorLink = "https://t.me/Vremeni34"
+            static let developLink = "https://www.linkedin.com/in/voityvit/"
+            static let designerLink = "https://t.me/ArtyomTver"
+        }
     }
     
     enum TotalPrice {

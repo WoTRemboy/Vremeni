@@ -149,7 +149,7 @@ struct ConsumableItemDetails: View {
         let modelContext = ModelContext(container)
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         
-        let example = ConsumableItem.itemMockConfig(name: "One Minute", description: "One minute is a whole 60 seconds!", price: 50, rarity: .uncommon)
+        let example = ConsumableItem.itemMockConfig(name: "One Minute", description: "One minute is a whole 60 seconds!", price: 50, rarity: .uncommon, profile: Profile.configMockProfile())
         return ConsumableItemDetails(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")

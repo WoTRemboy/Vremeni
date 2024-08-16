@@ -31,6 +31,9 @@ final class ConsumableItem: Identifiable {
     // Instanses (children) for machine module
     @Relationship(deleteRule: .cascade) var machineItems: [MachineItem]
     
+    // Child relationship for Profile
+    var profile: Profile
+    
     // Item status
     var enabled: Bool
     var inMachine: Bool
@@ -39,7 +42,7 @@ final class ConsumableItem: Identifiable {
     
     init(id: UUID = UUID(), name: String, itemDescription: String, image: String,
          price: Float, count: Int = 0, type: VremeniType = .minutes, rarity: Rarity = .common,
-         machineItems: [MachineItem] = [], enabled: Bool = false, inMachine: Bool = false,
+         machineItems: [MachineItem] = [], profile: Profile, enabled: Bool = false, inMachine: Bool = false,
          ready: Bool = false, archived: Bool = false) {
         self.id = id
         self.name = name
@@ -50,6 +53,7 @@ final class ConsumableItem: Identifiable {
         self.type = type
         self.rarity = rarity
         self.machineItems = machineItems
+        self.profile = profile
         self.enabled = enabled
         self.inMachine = inMachine
         self.ready = ready
@@ -64,6 +68,11 @@ extension ConsumableItem {
     // Transition from locked to available status (Shop Module)
     internal func unlockItem() {
         enabled = true
+    }
+    
+    // Changes archive status (Shop & Profile Modules)
+    internal func archiveItem() {
+        archived.toggle()
     }
     
     // Creating a MachineItem instanse and adding it to the Machine (Shop Module)
@@ -81,18 +90,23 @@ extension ConsumableItem {
     
     // Mock ConsumableItem configuration method
     static internal func itemMockConfig(name: String, description: String = String(),
-                                        price: Float, rarity: Rarity = .common,
-                                        enabled: Bool = true, ready: Bool = false) -> ConsumableItem {
+                                        price: Float, count: Int = 0, rarity: Rarity = .common,
+                                        profile: Profile, enabled: Bool = true,
+                                        ready: Bool = false, archived: Bool = false) -> ConsumableItem {
         let name = name
         let description = description
         let image = "\(Int(price)).square"
         let price = price
+        let count = count
         let enable = enabled
         let ready = ready
+        let archived = archived
         let rarity = rarity
+        let profile = profile
         
         return ConsumableItem(name: name, itemDescription: description, image: image,
-                              price: price, rarity: rarity, enabled: enable, ready: ready)
+                              price: price, count: count, rarity: rarity, profile: profile,
+                              enabled: enable, ready: ready, archived: archived)
     }
 }
 

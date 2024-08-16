@@ -35,6 +35,7 @@ struct PlaceholderView: View {
             Text(description)
                 .font(.subhead())
                 .foregroundStyle(Color.LabelColors.labelSecondary)
+                .multilineTextAlignment(.center)
         }
     }
     
@@ -50,6 +51,10 @@ struct PlaceholderView: View {
             Image.Placeholder.machine
         case .inventory:
             Image.Placeholder.inventory
+        case .archive:
+            Image.Placeholder.archive
+        case .stats:
+            Image.Placeholder.stats
         }
     }
 }
@@ -60,6 +65,8 @@ enum PlaceholderStatus {
     case locked
     case machine
     case inventory
+    case archive
+    case stats
 }
 
 #Preview {

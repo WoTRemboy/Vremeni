@@ -20,6 +20,7 @@ extension ShopView {
         
         private var modelContext: ModelContext
         private(set) var items = [ConsumableItem]()
+        private(set) var profile = Profile.configMockProfile()
         
         // Array property for storing all current enable status items
         private(set) var unfilteredItems = [ConsumableItem]()
@@ -44,8 +45,6 @@ extension ShopView {
             self.modelContext = modelContext
             self.enableStatus = true
             self.rarityFilter = .all
-            fetchData()
-            addSamples()
         }
         
         // MARK: - ConsumableItem status management methods
@@ -60,6 +59,13 @@ extension ShopView {
         internal func unlockItem(item: ConsumableItem) {
             item.unlockItem()
             fetchData()
+        }
+        
+        // Updates item data when scroll view appears to detect unarchived items
+        internal func updateOnAppear() {
+            fetchData()
+            fetchProfileData()
+            addSamples()
         }
         
         // MARK: - Calculation methods
@@ -82,14 +88,15 @@ extension ShopView {
                                                      description: created.itemDescription,
                                                      price: created.price,
                                                      rarity: created.rarity,
+                                                     profile: profile,
                                                      enabled: created.enabled)
             modelContext.insert(item)
             fetchData()
         }
         
         // Deletes ConsumableItem from SwiftData DB
-        internal func deleteItem(item: ConsumableItem) {
-            modelContext.delete(item)
+        internal func archiveItem(item: ConsumableItem) {
+            item.archiveItem()
             fetchData()
         }
         
@@ -99,28 +106,33 @@ extension ShopView {
             guard items.isEmpty else { return }
             let items = [ConsumableItem.itemMockConfig(name: "One Minute",
                                                        description: "One minute is a whole 60 seconds!",
-                                                       price: 1),
+                                                       price: 1,
+                                                       profile: profile),
                          
                          ConsumableItem.itemMockConfig(name: "Three Minutes",
                                                        description: "Three minutes is a whole 180 seconds!",
                                                        price: 3,
                                                        rarity: .common,
+                                                       profile: profile,
                                                        enabled: false),
                          
                          ConsumableItem.itemMockConfig(name: "Five Minutes",
                                                        description: "Five minutes is a whole 300 seconds!",
                                                        price: 5,
                                                        rarity: .uncommon,
+                                                       profile: profile,
                                                        enabled: false),
                          ConsumableItem.itemMockConfig(name: "Seven Minutes",
                                                        description: "Seven minutes is a whole 420 seconds!",
                                                        price: 7,
                                                        rarity: .uncommon,
+                                                       profile: profile,
                                                        enabled: false),
                          ConsumableItem.itemMockConfig(name: "Ten Minutes",
                                                        description: "Ten minutes is a whole 600 seconds!",
                                                        price: 10,
                                                        rarity: .rare,
+                                                       profile: profile,
                                                        enabled: false)]
             for item in items {
                 modelContext.insert(item)
@@ -133,7 +145,7 @@ extension ShopView {
         private func fetchData(filterReset: Bool = false) {
             do {
                 // Gets items from SwiftData DB for current enable status
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.enabled == enableStatus }, sortBy: [SortDescriptor(\.price)])
+                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.enabled == enableStatus && !$0.archived }, sortBy: [SortDescriptor(\.price)])
                 items = try modelContext.fetch(descriptor)
                 
                 // Check for .all tag selection or enable status changes (filterReset)
@@ -150,8 +162,30 @@ extension ShopView {
                     }
                 }
             } catch {
-                print("Fetch failed")
+                print("ConsumableItem fetch for Shop viewModel failed")
             }
+        }
+        
+        // MARK: - Profile data methods
+        
+        // First app launch case
+        private func createProfile() {
+            let profile = Profile(name: Texts.ProfilePage.user, balance: 10, items: items)
+            modelContext.insert(profile)
+            fetchProfileData()
+        }
+        
+        private func fetchProfileData() {
+            do {
+                // Gets profile from SwiftData DB
+                let descriptor = FetchDescriptor<Profile>()
+                profile = try modelContext.fetch(descriptor).first ?? Profile.configMockProfile()
+            } catch {
+                print("Profile fetch for Shop viewModel failed")
+            }
+            
+            guard profile == Profile.configMockProfile() else { return }
+            createProfile()
         }
         
     }

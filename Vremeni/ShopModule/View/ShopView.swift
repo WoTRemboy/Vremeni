@@ -50,6 +50,9 @@ struct ShopView: View {
                             .padding(.horizontal)
                             .padding(.top, 8)
                     }
+                    .onAppear {
+                        viewModel.updateOnAppear()
+                    }
                     // In case of items absence
                     if viewModel.items.isEmpty {
                         placeholder
@@ -83,7 +86,7 @@ struct ShopView: View {
             }
             MachineView(modelContext: modelContext)
             InventoryView(modelContext: modelContext)
-            ProfileView()
+            ProfileView(modelContext: modelContext)
         }
     }
     

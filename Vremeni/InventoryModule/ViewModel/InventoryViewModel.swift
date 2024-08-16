@@ -14,6 +14,7 @@ extension InventoryView {
     final class InventoryViewModel {
         private let modelContext: ModelContext
         
+        private(set) var profile = Profile.configMockProfile()
         private(set) var items = [ConsumableItem]()
         private(set) var unfilteredItems = [ConsumableItem]()
         private(set) var statsItems = [ConsumableItem]()
@@ -27,8 +28,6 @@ extension InventoryView {
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
             self.rarityFilter = .all
-            fetchStatsData()
-            fetchData()
         }
         
         internal func updateOnAppear() {
@@ -38,6 +37,15 @@ extension InventoryView {
         
         internal func filterItems(for rarity: Rarity) -> [ConsumableItem] {
             unfilteredItems.filter({ $0.rarity == rarity })
+        }
+        
+        internal func progressItemsCount() -> String {
+            let inventoryItems = Float(unfilteredItems.count)
+            let statsItems = Float(statsItems.count)
+            guard statsItems > 0 else { return "0%" }
+            
+            let percent = Int(inventoryItems / statsItems * 100)
+            return "\(percent)%"
         }
         
         internal func rarityItemsCount(for rarity: Rarity) -> String {
@@ -63,23 +71,27 @@ extension InventoryView {
             let items = [ConsumableItem.itemMockConfig(name: "One Minute",
                                                        description: "One minute is a whole 60 seconds!",
                                                        price: 1,
+                                                       profile: profile,
                                                        ready: true),
                          
                          ConsumableItem.itemMockConfig(name: "Three Minutes",
                                                        description: "Three minutes is a whole 180 seconds!",
                                                        price: 3,
                                                        rarity: .common,
+                                                       profile: profile,
                                                        ready: true),
                          
                          ConsumableItem.itemMockConfig(name: "Five Minutes",
                                                        description: "Five minutes is a whole 300 seconds!",
                                                        price: 5,
                                                        rarity: .common,
+                                                       profile: profile,
                                                        ready: true),
                          ConsumableItem.itemMockConfig(name: "Seven Minutes",
                                                        description: "Five minutes is a whole 300 seconds!",
                                                        price: 7,
                                                        rarity: .uncommon,
+                                                       profile: profile,
                                                        ready: true)]
             for item in items {
                 modelContext.insert(item)
@@ -102,7 +114,7 @@ extension InventoryView {
                     }
                 }
             } catch {
-                print("Fetch failed")
+                print("ConsumableItem fetch for Inventory viewModel failed")
             }
         }
         
@@ -111,9 +123,8 @@ extension InventoryView {
                 let descriptor = FetchDescriptor<ConsumableItem>()
                 statsItems = try modelContext.fetch(descriptor)
             } catch {
-                print("Fetch failed")
+                print("All ConsumableItem fetch for Inventory viewModel failed")
             }
         }
-
     }
 }
