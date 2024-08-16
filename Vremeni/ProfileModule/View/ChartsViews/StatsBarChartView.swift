@@ -25,6 +25,7 @@ struct StatsBarChartView: View {
         } else {
             PlaceholderView(title: Texts.ProfilePage.Stats.placeholderTitle,
                             description: Texts.ProfilePage.Stats.placeholderDesc, status: .stats)
+            .frame(maxWidth: .infinity, alignment: .center)
         }
     }
     
