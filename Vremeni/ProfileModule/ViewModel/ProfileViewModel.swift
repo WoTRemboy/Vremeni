@@ -20,11 +20,24 @@ extension ProfileView {
         
         private var items = [ConsumableItem]()
         private var unlockedItems = [ConsumableItem]()
+        private var readyItems = [ConsumableItem]()
         private(set) var archivedItems = [ConsumableItem]()
         private(set) var actualRarities = [Rarity]()
         
         internal var itemsCount: Int {
             items.count
+        }
+        
+        internal var rariries: [Rarity] {
+            Rarity.allCases
+        }
+        
+        internal var raritiesCount: Int {
+            Rarity.allCases.count
+        }
+        
+        internal var inventoryRarities: [Rarity] {
+            actualRarities.filter { inventoryRarityCount(for: $0) > 0 }
         }
         
         init(modelContext: ModelContext) {
@@ -58,7 +71,20 @@ extension ProfileView {
         internal func rarityPercent(for rarity: Rarity) -> Int {
             let allItems = Float(items.filter({ $0.rarity == rarity }).count)
             let unlockedItems = Float(unlockedItems.filter({ $0.rarity == rarity }).count)
+            guard unlockedItems > 0 else { return 0 }
             return Int(unlockedItems / allItems * 100)
+        }
+        
+        internal func valuationPercent(for rarity: Rarity) -> Int {
+            guard profile.balance > 0 else { return 0 }
+            let rarityItems = readyItems.filter { $0.rarity == rarity }
+            let valuation = rarityItems.reduce(0) { $0 + (Int($1.price) * $1.count) }
+            return Int(Float(valuation) / Float(profile.balance) * 100)
+        }
+        
+        internal func inventoryRarityCount(for rarity: Rarity) -> Int {
+            let rarityItems = readyItems.filter { $0.rarity == rarity }
+            return rarityItems.reduce(0) { $0 + $1.count }
         }
         
         internal func updateVersionOnAppear() {
@@ -92,6 +118,7 @@ extension ProfileView {
                                                        price: 1,
                                                        count: 5,
                                                        profile: profile,
+                                                       ready: true,
                                                        archived: true),
                          
                          ConsumableItem.itemMockConfig(name: "Three Minutes",
@@ -100,6 +127,7 @@ extension ProfileView {
                                                        count: 3,
                                                        rarity: .common,
                                                        profile: profile,
+                                                       ready: true,
                                                        archived: true),
                          
                          ConsumableItem.itemMockConfig(name: "Three Minutes",
@@ -108,11 +136,13 @@ extension ProfileView {
                                                        count: 3,
                                                        rarity: .rare,
                                                        profile: profile,
+                                                       ready: true,
                                                        archived: true)]
             for item in items {
                 modelContext.insert(item)
             }
             fetchItemsData()
+            fetchActualRariries()
             fetchArchivedItemsData()
         }
         
@@ -130,6 +160,7 @@ extension ProfileView {
                 let descriptor = FetchDescriptor<ConsumableItem>()
                 items = try modelContext.fetch(descriptor)
                 unlockedItems = items.filter { $0.enabled }
+                readyItems = items.filter { $0.ready }
             } catch {
                 print("ConsumableItem fetch for Profile viewModel failed")
             }

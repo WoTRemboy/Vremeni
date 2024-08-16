@@ -10,7 +10,7 @@ import SwiftData
 
 struct ChartsDetailsView: View {
     
-    @State private var selectedChartType: ChartType = .pie
+    @State private var selectedChartType: ChartType = .research
     private var viewModel: ProfileView.ProfileViewModel
     
     init(viewModel: ProfileView.ProfileViewModel) {
@@ -24,13 +24,21 @@ struct ChartsDetailsView: View {
                     picker
                     
                     switch selectedChartType {
-                    case .pie:
-                        StatsPieChartView(viewModel: viewModel)
-                        pieStats
-                    case .bar:
-                        Text(Texts.ProfilePage.Stats.bar)
+                    case .research:
+                        researchChart
+                            .transition(.move(edge: .leading))
+                        researchStats
+                            .transition(.move(edge: .leading))
+                        
+                    case .inventory:
+                        inventoryChart
+                            .transition(.move(edge: .trailing))
+                        
+                        if viewModel.inventoryRarities.count > 0 {
+                            inventoryStats
+                                .transition(.move(edge: .trailing))
+                        }
                     }
-                    
                     Spacer()
                 }
             }
@@ -45,7 +53,7 @@ struct ChartsDetailsView: View {
     }
     
     private var picker: some View {
-        Picker(Texts.ProfilePage.Stats.type, selection: $selectedChartType) {
+        Picker(Texts.ProfilePage.Stats.type, selection: $selectedChartType.animation()) {
             ForEach(ChartType.allCases) {
                 Text($0.rawValue)
             }
@@ -54,11 +62,40 @@ struct ChartsDetailsView: View {
         .padding(.horizontal)
     }
     
-    private var pieStats: some View {
+    private var researchChart: some View {
+        StatsBarChartView(type: .research, viewModel: viewModel)
+            .frame(minHeight: 130,
+                   idealHeight: CGFloat(100 * viewModel.actualRarities.count)
+            )
+    }
+    
+    private var researchStats: some View {
         VStack {
-            ForEach(viewModel.actualRarities) { rarity in
+            SectionHeader(Texts.ProfilePage.Stats.progress)
+                .padding(.leading)
+            ForEach(viewModel.rariries) { rarity in
                 ParameterRow(title: rarity.rawValue,
-                content: "\(Texts.ProfilePage.Stats.unlocked) \(viewModel.rarityCount(for: rarity)) \(Texts.ProfilePage.Stats.of) \(viewModel.rarityCount(for: rarity, all: true)) (\(viewModel.rarityPercent(for: rarity))%)")
+                content: "\(Texts.ProfilePage.Stats.unlocked) \(viewModel.rarityCount(for: rarity)) \(Texts.ProfilePage.Stats.of) \(viewModel.rarityCount(for: rarity, all: true))",
+                trailingContent: "\(viewModel.rarityPercent(for: rarity))%")
+            }
+        }
+    }
+    
+    private var inventoryChart: some View {
+        StatsBarChartView(type: .inventory, viewModel: viewModel)
+            .frame(minHeight: viewModel.inventoryRarities.count > 0 ? 130 : 300,
+                   idealHeight: viewModel.inventoryRarities.count > 0 ? CGFloat(100 * viewModel.inventoryRarities.count) : 120
+            )
+    }
+    
+    private var inventoryStats: some View {
+        VStack {
+            SectionHeader(Texts.ProfilePage.Stats.balance)
+                .padding(.leading)
+            ForEach(viewModel.inventoryRarities) { rarity in
+                ParameterRow(title: rarity.rawValue,
+                             content: "\(Texts.ProfilePage.Stats.valuation) \(viewModel.rarityCount(for: rarity))",
+                             trailingContent: "\(viewModel.valuationPercent(for: rarity))%")
             }
         }
     }

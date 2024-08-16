@@ -126,8 +126,19 @@ final class Texts {
         
         enum Stats {
             static let title = "Stats"
+            static let placeholderTitle = "No Stats"
+            static let placeholderDesc = "Get some items from Fair via Machine"
+            
             static let bar = "Bar"
+            static let count = "Count"
+            static let category = "Category"
             static let type = "Chart type"
+            
+            static let progress = "Progress"
+            static let balance = "Balance"
+            static let valuation = "Valuation is"
+            static let rarities = "Rarities"
+            
             static let unlocked = "Unlocked"
             static let of = "of"
             static let value = "Value"

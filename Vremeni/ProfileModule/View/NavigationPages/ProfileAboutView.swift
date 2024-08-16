@@ -62,27 +62,27 @@ struct ProfileAboutView: View {
     }
     
     private var director: some View {
-        LinkRow(title: Texts.ProfilePage.About.father,
+        LinkRow(title: Texts.ProfilePage.About.director,
                 image: Image.ProfilePage.About.crown,
-                details: Texts.ProfilePage.About.director)
-    }
-    
-    private var developer: some View {
-        Link(destination: URL(string: Texts.ProfilePage.About.developLink)!, label: {
-            
-            LinkRow(title: Texts.ProfilePage.About.me,
-                    image: Image.ProfilePage.About.develop,
-                    details: Texts.ProfilePage.About.developer,
-                    chevron: true)
-        })
+                details: Texts.ProfilePage.About.father)
     }
     
     private var designer: some View {
         Link(destination: URL(string: Texts.ProfilePage.About.designerLink)!, label: {
             
-            LinkRow(title: Texts.ProfilePage.About.pups,
+            LinkRow(title: Texts.ProfilePage.About.designer,
                     image: Image.ProfilePage.About.graphic,
-                    details: Texts.ProfilePage.About.designer,
+                    details: Texts.ProfilePage.About.pups,
+                    chevron: true)
+        })
+    }
+    
+    private var developer: some View {
+        Link(destination: URL(string: Texts.ProfilePage.About.developLink)!, label: {
+            
+            LinkRow(title: Texts.ProfilePage.About.developer,
+                    image: Image.ProfilePage.About.develop,
+                    details: Texts.ProfilePage.About.me,
                     chevron: true)
         })
     }
