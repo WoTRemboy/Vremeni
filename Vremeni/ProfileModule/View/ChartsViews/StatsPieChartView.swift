@@ -41,7 +41,7 @@ struct StatsPieChartView: View {
                     .position(x: frame.midX, y: frame.midY)
             }
         }
-        .frame(height: 400)
+        .aspectRatio(1, contentMode: .fit)
         .padding()
     }
     
@@ -66,15 +66,15 @@ struct StatsPieChartView: View {
     
     private var insideContent: some View {
         VStack {
-            Text(Texts.ProfilePage.unlocked)
+            Text(Texts.ProfilePage.Stats.rarities)
                 .font(.callout)
                 .foregroundStyle(.secondary)
             
-            Text(String(viewModel.rarityCount(for: .all)))
+            Text(String(viewModel.actualRarities.count))
                 .font(.title2.bold())
                 .foregroundColor(.primary)
             
-            Text("\(Texts.ProfilePage.total) \(viewModel.itemsCount)")
+            Text("\(Texts.ProfilePage.total) \(viewModel.raritiesCount)")
                 .font(.callout)
                 .foregroundStyle(.secondary)
         }

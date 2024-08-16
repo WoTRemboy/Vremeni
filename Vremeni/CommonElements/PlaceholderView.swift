@@ -53,6 +53,8 @@ struct PlaceholderView: View {
             Image.Placeholder.inventory
         case .archive:
             Image.Placeholder.archive
+        case .stats:
+            Image.Placeholder.stats
         }
     }
 }
@@ -64,6 +66,7 @@ enum PlaceholderStatus {
     case machine
     case inventory
     case archive
+    case stats
 }
 
 #Preview {

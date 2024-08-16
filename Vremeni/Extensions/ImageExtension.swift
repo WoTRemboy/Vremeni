@@ -65,5 +65,6 @@ extension Image {
         static let machine = Image(systemName: "clock.arrow.2.circlepath")
         static let inventory = Image(systemName: "rectangle.portrait.on.rectangle.portrait")
         static let archive = Image(systemName: "archivebox")
+        static let stats = Image(systemName: "chart.xyaxis.line")
     }
 }

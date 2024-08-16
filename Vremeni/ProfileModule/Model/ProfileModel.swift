@@ -52,8 +52,8 @@ extension Profile: Equatable {
 
 
 enum ChartType: String, Identifiable, CaseIterable {
-    case pie = "Research"
-    case bar = "Inventory"
+    case research = "Research"
+    case inventory = "Inventory"
     
     var id: Self { self }
 }
