@@ -32,7 +32,7 @@ struct ParameterRow: View {
                     contentView
                 }
 
-                if let trailingContent {
+                if trailingContent != nil {
                     trailingView
                 }
             }
