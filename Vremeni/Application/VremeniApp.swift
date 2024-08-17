@@ -10,11 +10,20 @@ import SwiftData
 
 @main
 struct VremeniApp: App {
+    @StateObject private var bannerService = BannerViewModel()
     private let container: ModelContainer
+    
     
     internal var body: some Scene {
         WindowGroup {
-            SplashScreenView(modelContext: container.mainContext)
+            ZStack {
+                SplashScreenView(modelContext: container.mainContext)
+                
+                if let type = bannerService.bannerType {
+                    BannerView(type: type)
+                }
+            }
+            .environmentObject(bannerService)
         }
         .modelContainer(container)
     }
