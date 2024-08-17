@@ -12,6 +12,8 @@ struct ShopItemGridCell: View {
     
     // MARK: - Properties
     
+    @EnvironmentObject var bannerService: BannerViewModel
+    
     private let item: ConsumableItem
     private var viewModel: ShopView.ShopViewModel
     
@@ -89,9 +91,9 @@ struct ShopItemGridCell: View {
         HStack(spacing: 5) {
             // Pick item button
             Button(action: {
-                withAnimation(.snappy) {
-                    viewModel.pickItem(item: item)
-                }
+                viewModel.pickItem(item: item)
+                // Pick item banner
+                bannerService.setBanner(banner: .added(message: Texts.Banner.added))
                 // Medium haptic feedback
                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
                 impactMed.impactOccurred()
@@ -113,7 +115,10 @@ struct ShopItemGridCell: View {
             Button(action: {
                 withAnimation(.snappy) {
                     viewModel.archiveItem(item: item)
+                    // Archive item banner
+                    bannerService.setBanner(banner: .archived(message: Texts.Banner.archived))
                 }
+                
             }) {
                 Image(systemName: "archivebox")
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -139,8 +144,11 @@ struct ShopItemGridCell: View {
         let modelContext = ModelContext(container)
         
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
+        let environmentObject = BannerViewModel()
         let example = ConsumableItem.itemMockConfig(name: "One Hour", price: 1, profile: Profile.configMockProfile(), enabled: true)
+        
         return ShopItemGridCell(item: example, viewModel: viewModel)
+            .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")
     }

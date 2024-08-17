@@ -16,10 +16,16 @@ struct VremeniApp: App {
     
     internal var body: some Scene {
         WindowGroup {
-            SplashScreenView(modelContext: container.mainContext)
+            ZStack {
+                SplashScreenView(modelContext: container.mainContext)
+                
+                if let type = bannerService.bannerType {
+                    BannerView(type: type)
+                }
+            }
+            .environmentObject(bannerService)
         }
         .modelContainer(container)
-        .environmentObject(bannerService)
     }
     
     init() {

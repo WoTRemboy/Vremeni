@@ -9,9 +9,9 @@ import SwiftUI
 
 enum BannerType {
     internal var id: Self { self }
-    case added(message: String, isPersistent: Bool)
-    case archived(message: String, isPersistent: Bool)
-    case ready(message: String, isPersistent: Bool)
+    case added(message: String)
+    case archived(message: String)
+    case ready(message: String)
     
     internal var backgroundColor: Color {
         switch self {
@@ -24,28 +24,21 @@ enum BannerType {
         }
     }
     
-    internal var imageName: String {
+    internal var image: Image {
         switch self {
         case .added:
-            "exclamationmark.triangle.fill"
+            Image.Banner.added
         case .archived:
-            "xmark.circle.fill"
+            Image.Banner.archived
         case .ready:
-            "checkmark.circle.fill"
+            Image.Banner.ready
         }
     }
     
     internal var message: String {
         switch self {
-        case let .added(message, _), let .archived(message, _), let .ready(message, _):
+        case let .added(message), let .archived(message), let .ready(message):
             return message
-        }
-    }
-    
-    internal var isPersistent: Bool {
-        switch self {
-        case let .added(_, isPersistent), let .archived(_, isPersistent), let .ready(_, isPersistent):
-            return isPersistent
         }
     }
 }

@@ -10,38 +10,47 @@ import SwiftUI
 final class BannerViewModel: ObservableObject {
     
     @Published internal var isAnimating = false
-    @Published internal var dragOffSet: CGSize = .zero
-    
+    @Published internal var bannerOffset: CGFloat = -200.0
+
     @Published internal var bannerType: BannerType? {
         didSet {
-            withAnimation {
-                switch bannerType {
-                case .none:
-                    isAnimating = false
-                case .some:
-                    isAnimating = true
+            if bannerType != nil {
+                withAnimation {
+                    showBanner()
                 }
             }
         }
     }
+        
+    private func showBanner() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation(.spring()) {
+                self.bannerOffset = 0
+                self.isAnimating = true
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.hideBanner()
+        }
+    }
     
-    internal let maxDragOffsetHeight: CGFloat = -50.0
+    private func hideBanner() {
+        withAnimation(.spring()) {
+            bannerOffset = -200
+            isAnimating = false
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.bannerType = nil
+        }
+    }
     
     internal func setBanner(banner: BannerType) {
-        withAnimation {
-            self.bannerType = bannerType
-        }
+        self.bannerType = banner
     }
     
     internal func removeBanner() {
-        withAnimation {
-            self.bannerType = nil
-            self.isAnimating = false
-            self.dragOffSet = .zero
-        }
-    }
-    
-    internal func setupPreview() {
-        
+        hideBanner()
     }
 }

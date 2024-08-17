@@ -174,6 +174,12 @@ final class Texts {
         }
     }
     
+    enum Banner {
+        static let added = "Added to Machine."
+        static let archived = "Moved to Archive."
+        static let ready = "is ready."
+    }
+    
     enum TotalPrice {
         static let total = "Total"
     }
