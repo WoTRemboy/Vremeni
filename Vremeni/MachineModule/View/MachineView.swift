@@ -10,32 +10,44 @@ import SwiftData
 
 struct MachineView: View {
     
+    // MARK: - Properties
+    
+    // Machine viewModel
     @State private var viewModel: MachineViewModel
+    // Selected item for sheet display
     @State private var selected: MachineItem? = nil
+    // Sheet display toggles
     @State private var showingAddItemList = false
     @State private var showingUpgradeSheet = false
 
+    // Collection params
     private let spacing: CGFloat = 16
     private let itemsInRows = 1
+    
+    // MARK: - Initialization
     
     init(modelContext: ModelContext) {
         let viewModel = MachineViewModel(modelContext: modelContext)
         _viewModel = State(initialValue: viewModel)
     }
     
-    var body: some View {
+    // MARK: - Body content
+    
+    internal var body: some View {
         NavigationStack {
             ScrollView {
                 collection
                 .padding(.horizontal)
             }
+            // Collection view data update
             .onAppear(perform: {
                 viewModel.updateOnAppear()
             })
+            .background(Color.BackColors.backDefault)
             
+            // Navigation bar params
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
-            .background(Color.BackColors.backDefault)
         }
         .tabItem {
             Image.TabBar.machine
@@ -43,76 +55,110 @@ struct MachineView: View {
         }
     }
     
+    // MARK: - Collection view
+    
     private var collection: some View {
+        // Collection view display params
         let columns = Array(
             repeating: GridItem(.flexible(), spacing: spacing),
             count: itemsInRows)
         
         return LazyVGrid(columns: columns, spacing: spacing) {
+            // Workshop section
             Section(header: sectionHeader) {
                 ForEach(viewModel.items) { item in
+                    // In case item in workshop progress exists
                     if item.inProgress {
+                        // MachineItem progress cell
                         MachineViewGridCell(item: item, viewModel: viewModel)
                             .onTapGesture {
                                 selected = item
                             }
+                            // Shows progress item details
                             .sheet(item: $selected) { item in
                                 MachineItemDetailsView(item: item, viewModel: viewModel)
                             }
                     }
                 }
                 
-                VStack {
-                    if viewModel.items.filter({ $0.inProgress }).isEmpty {
-                        EmptyMachineViewGridCell()
-                    } else if viewModel.isSlotAvailable() {
-                        EmptyMachiveViewCompactCell()
-                            .padding(.top)
-                    }
-                }
-                .onTapGesture {
-                    showingAddItemList.toggle()
-                }
-                .sheet(isPresented: $showingAddItemList, content: {
-                    MachineAddItemsView(viewModel: viewModel)
-                        .presentationDetents([.medium])
-                })
+                // Add new MachineItem to workshop (regular & compact vers)
+                addNewItemCell
                 
+                // All workshop cell are busy
                 if !viewModel.isSlotAvailable() {
-                    NewSlotMachineViewGridCell()
-                        .onTapGesture {
-                            showingUpgradeSheet.toggle()
-                        }
-                        .sheet(isPresented: $showingUpgradeSheet, content: {
-                            BuyWorkshopView(viewModel: viewModel)
-                                .presentationDetents([.medium])
-                        })
+                    // Upgrade workshop cell
+                    upgradeCell
                 }
             }
             
+            // In case there are items in queue
             if !viewModel.items.filter({ !$0.inProgress }).isEmpty {
                 queueSection
             }
         }
     }
     
+    // MARK: - Workshop section cells
+    
+    private var addNewItemCell: some View {
+        VStack {
+            // Workshop is empty
+            if viewModel.items.filter({ $0.inProgress }).isEmpty {
+                // Regular cell
+                EmptyMachineViewGridCell()
+            // There is MachineItem in progress
+            } else if viewModel.isSlotAvailable() {
+                // Compact cell
+                EmptyMachiveViewCompactCell()
+                    .padding(.top)
+            }
+        }
+        .onTapGesture {
+            showingAddItemList.toggle()
+        }
+        // Shows Queue sheet menu
+        .sheet(isPresented: $showingAddItemList, content: {
+            MachineAddItemsView(viewModel: viewModel)
+                .presentationDetents([.medium])
+        })
+    }
+    
+    private var upgradeCell: some View {
+        NewSlotMachineViewGridCell()
+            .onTapGesture {
+                showingUpgradeSheet.toggle()
+            }
+            // Shows Upgrade sheet menu
+            .sheet(isPresented: $showingUpgradeSheet, content: {
+                BuyWorkshopView(viewModel: viewModel)
+                    .presentationDetents([.medium])
+            })
+    }
+    
+    // MARK: - Queue section view
+    
     private var queueSection: some View {
         Section(header: secondSectionHeader) {
             ForEach(viewModel.items) { item in
                 if !item.inProgress {
+                    // In case progress is not 0
                     if item.percent != 0 {
+                        // Paused progress item cell
                         MachineViewGridCell(item: item, paused: true, viewModel: viewModel)
                             .onTapGesture {
                                 selected = item
                             }
+                            // Shows paused item details
                             .sheet(item: $selected) { item in
                                 MachineItemDetailsView(item: item, viewModel: viewModel)
                             }
                     } else {
+                        // Resular queue item cell
                         QueueMachineViewGridCell(item: item, viewModel: viewModel)
                             .onTapGesture {
                                 selected = item
                             }
+                            // Shows queue item details
                             .sheet(item: $selected) { item in
                                 MachineItemDetailsView(item: item, viewModel: viewModel)
                             }
@@ -122,14 +168,20 @@ struct MachineView: View {
         }
     }
     
+    // MARK: - Header views
+    
+    // Workshop section header
     private var sectionHeader: some View {
         SectionHeader(Texts.MachinePage.workshop)
     }
     
+    // Queue section header
     private var secondSectionHeader: some View {
         SectionHeader(Texts.MachinePage.queue)
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     do {
