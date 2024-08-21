@@ -9,6 +9,8 @@ import SwiftUI
 
 final class BannerViewModel: ObservableObject {
     
+    private var isShowingAvailable = true
+    
     @Published internal var isAnimating = false
     @Published internal var bannerOffset: CGFloat = -200.0
 
@@ -23,10 +25,12 @@ final class BannerViewModel: ObservableObject {
     }
         
     private func showBanner() {
+        guard isShowingAvailable else { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             withAnimation(.spring()) {
                 self.bannerOffset = 0
                 self.isAnimating = true
+                self.isShowingAvailable = false
             }
         }
         
@@ -43,6 +47,7 @@ final class BannerViewModel: ObservableObject {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.bannerType = nil
+            self.isShowingAvailable = true
         }
     }
     

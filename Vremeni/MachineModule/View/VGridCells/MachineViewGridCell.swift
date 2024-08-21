@@ -59,11 +59,6 @@ struct MachineViewGridCell: View {
                 viewModel.startProgress(for: item)
             }
         })
-        .onDisappear(perform: {
-            if item.percent < 100 && !paused {
-                viewModel.stopProgress(for: item)
-            }
-        })
     }
     
     private var stats: some View {

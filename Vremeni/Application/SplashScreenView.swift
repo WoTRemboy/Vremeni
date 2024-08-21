@@ -10,22 +10,31 @@ import SwiftData
 
 struct SplashScreenView: View {
     
-    @State private var isActive = false
-    @State private var size = 0.8
-    @State private var opacity = 0.5
+    // MARK: - Properties
     
+    // Show splash screen toggle
+    @State private var isActive = false
+    
+    // ViewModel property
     private let modelContext: ModelContext
+    
+    // MARK: - Initialization
     
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
     }
     
+    // MARK: - Body view
+    
     internal var body: some View {
         if isActive {
+            // Step to the main view
             ShopView(modelContext: modelContext)
         } else {
+            // Shows splash screnn
             content
                 .onAppear {
+                    // Then hides view after 0.5s
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         withAnimation {
                             self.isActive = true
@@ -35,19 +44,24 @@ struct SplashScreenView: View {
         }
     }
     
+    // MARK: - Main vontent
+    
     private var content: some View {
         ZStack {
+            // Background color
             Color.BackColors.backSplash
                 .ignoresSafeArea()
-            VStack {
-                Image.SplashScreen.logo
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 600)
-            }
+            
+            // Logo image
+            Image.SplashScreen.logo
+                .resizable()
+                .scaledToFit()
+                .frame(height: 600)
         }
     }
 }
+
+// MARK: - Preview
 
 #Preview {
     do {
