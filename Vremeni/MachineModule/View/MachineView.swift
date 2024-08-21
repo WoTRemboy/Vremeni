@@ -83,7 +83,7 @@ struct MachineView: View {
                             .onTapGesture {
                                 selected = item
                             }
-                            // Shows progress item details
+                            // Shows item progress details
                             .sheet(item: $selected) { item in
                                 MachineItemDetailsView(item: item, viewModel: viewModel)
                             }

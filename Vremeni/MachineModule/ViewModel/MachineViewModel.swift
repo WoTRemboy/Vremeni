@@ -109,7 +109,15 @@ extension MachineView {
             }
         }
         
+        internal func activateMachineProgress() {
+            let children = items.filter { $0.inProgress }
+            for child in children {
+                startProgress(for: child)
+            }
+        }
+        
         internal func startProgress(for item: MachineItem) {
+            guard timers[item.id] == nil else { return }
             let timer = Timer.scheduledTimer(withTimeInterval: updateInterval, repeats: true) { [weak self] timer in
                 guard let self = self else { return }
                 
