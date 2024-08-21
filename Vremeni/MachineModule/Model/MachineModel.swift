@@ -62,12 +62,12 @@ extension MachineItem {
         inProgress = false
     }
     
-    // Begins workshop proccessing
+    // Begins workshop processing
     internal func progressStart() {
         inProgress = true
     }
     
-    // Ends/Cancels workshop proccessing
+    // Ends/Cancels workshop processing
     internal func progressDismiss() {
         inProgress = false
     }

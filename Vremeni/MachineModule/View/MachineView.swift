@@ -12,8 +12,11 @@ struct MachineView: View {
     
     // MARK: - Properties
     
+    // Banner viewModel
+    @EnvironmentObject var bannerService: BannerViewModel
     // Machine viewModel
     @State private var viewModel: MachineViewModel
+    
     // Selected item for sheet display
     @State private var selected: MachineItem? = nil
     // Sheet display toggles
@@ -43,6 +46,12 @@ struct MachineView: View {
             .onAppear(perform: {
                 viewModel.updateOnAppear()
             })
+            // Shows ready banner when item is ready
+            .onChange(of: viewModel.readyNotification.ready) {
+                guard let name = viewModel.readyNotification.name else { return }
+                bannerService.setBanner(banner: .ready(message: "«\(name)» \(Texts.Banner.ready)"))
+                viewModel.hideReadyNotification()
+            }
             .background(Color.BackColors.backDefault)
             
             // Navigation bar params
@@ -188,7 +197,10 @@ struct MachineView: View {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
+        let environmentObject = BannerViewModel()
+        
         return MachineView(modelContext: modelContext)
+            .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")
     }

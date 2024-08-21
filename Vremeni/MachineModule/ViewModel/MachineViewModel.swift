@@ -23,6 +23,7 @@ extension MachineView {
         private let targetPercent: CGFloat = 100
         
         private(set) var selectedType: UpgrageMethod = .coins
+        private(set) var readyNotification: (ready: Bool, name: String?) = (false, nil)
         private let slotsLimit = 3
         internal let internalPrice: Double = 1
         internal let donatePrice: Double = 0.99
@@ -48,9 +49,16 @@ extension MachineView {
         }
         
         internal func progressReady(item: MachineItem) {
-            item.readyToggle()
             profile.addCoins(item.price)
-            deleteItem(item: item)
+            readyNotification = (true, item.name)
+            withAnimation(.bouncy) {
+                item.readyToggle()
+                deleteItem(item: item)
+            }
+        }
+        
+        internal func hideReadyNotification() {
+            readyNotification = (false, nil)
         }
         
         internal func deleteItem(item: MachineItem) {
