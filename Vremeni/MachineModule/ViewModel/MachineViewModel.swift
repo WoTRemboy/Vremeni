@@ -45,6 +45,7 @@ extension MachineView {
         
         internal func progressDismiss(item: MachineItem) {
             item.progressDismiss()
+            stopProgress(for: item)
             fetchData()
         }
         
