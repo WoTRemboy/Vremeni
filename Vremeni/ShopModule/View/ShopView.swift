@@ -46,9 +46,17 @@ struct ShopView: View {
                     ScrollView {
                         enableSegmentedPicker
                             .padding(.horizontal)
-                        collection
-                            .padding(.horizontal)
-                            .padding(.top, 8)
+                        if viewModel.enableStatus {
+                            availableCollection
+                                .padding(.horizontal)
+                                .padding(.top, 8)
+                                .transition(.move(edge: .leading))
+                        } else {
+                            researchCollection
+                                .padding(.horizontal)
+                                .padding(.top, 8)
+                                .transition(.move(edge: .trailing))
+                        }
                     }
                     .onAppear {
                         viewModel.updateOnAppear()
@@ -56,8 +64,11 @@ struct ShopView: View {
                     // In case of items absence
                     if viewModel.items.isEmpty {
                         placeholder
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .transition(.move(edge: .trailing))
                     }
                 }
+                .animation(.easeInOut, value: viewModel.enableStatus)
                 // ScrollView params
                 .scrollDisabled(viewModel.items.isEmpty)
                 .scrollDismissesKeyboard(.immediately)
@@ -134,7 +145,7 @@ struct ShopView: View {
     
     // Available/Locked items picker (changes enabledStatus)
     private var enableSegmentedPicker: some View {
-        Picker(Texts.ShopPage.status, selection: $viewModel.enableStatus) {
+        Picker(Texts.ShopPage.status, selection: $viewModel.enableStatus.animation()) {
             Text(Texts.ShopPage.available).tag(true)
             Text(Texts.ShopPage.locked).tag(false)
         }
@@ -145,26 +156,37 @@ struct ShopView: View {
         }
     }
     
-    private var collection: some View {
+    private var availableCollection: some View {
         let columns = Array(
             repeating: GridItem(.flexible(), spacing: spacing),
-            count: itemsInRows)
+            count: 2)
+        
+        return LazyVGrid(columns: columns, spacing: spacing) {
+            ForEach(searchResults.filter { $0.enabled }) { item in
+                // Available item cell
+                ShopItemGridCell(item: item, viewModel: viewModel)
+                    .onTapGesture {
+                        selected = item
+                    }
+            }
+            // Item details sheet param
+            .sheet(item: $selected) { item in
+                ConsumableItemDetails(item: item, viewModel: viewModel)
+            }
+        }
+    }
+    
+    private var researchCollection: some View {
+        let columns = Array(
+            repeating: GridItem(.flexible(), spacing: spacing),
+            count: 1)
         
         return LazyVGrid(columns: columns, spacing: spacing) {
             ForEach(searchResults) { item in
-                if item.enabled {
-                    // Available item cell
-                    ShopItemGridCell(item: item, viewModel: viewModel)
-                        .onTapGesture {
-                            selected = item
-                        }
-                } else {
-                    // Locked item cell
-                    ShopItemGridCellLocked(item: item, viewModel: viewModel)
-                        .onTapGesture {
-                            selected = item
-                        }
-                }
+                ShopItemGridCellLocked(item: item, viewModel: viewModel)
+                    .onTapGesture {
+                        selected = item
+                    }
             }
             // Item details sheet param
             .sheet(item: $selected) { item in
