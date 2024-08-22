@@ -30,6 +30,16 @@ extension MachineView {
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
+            NotificationCenter.default.addObserver(self, selector: #selector(handleResetProgress), name: .resetProgressNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(handleStartTimers), name: .startProgressNotification, object: nil)
+        }
+        
+        @objc private func handleResetProgress() {
+            stopAllTimers()
+        }
+        
+        @objc private func handleStartTimers() {
+            startTimers()
         }
         
         internal func updateOnAppear() {
@@ -40,6 +50,7 @@ extension MachineView {
         internal func setWorkshop(item: MachineItem) {
             item.setMachineTime()
             item.progressStart()
+            startProgress(for: item)
             fetchData()
         }
         
@@ -67,6 +78,20 @@ extension MachineView {
             item.parent.machineItems.removeAll(where: { $0.id == item.id })
             modelContext.delete(item)
             fetchData()
+        }
+        
+        internal func startTimers() {
+            updateOnAppear()
+            for item in items.filter({ $0.inProgress }) {
+                startProgress(for: item)
+            }
+        }
+        
+        internal func stopAllTimers() {
+            for timer in timers.values {
+                timer.invalidate()
+            }
+            timers.removeAll()
         }
         
         internal func remainingTime(for item: MachineItem) -> String {

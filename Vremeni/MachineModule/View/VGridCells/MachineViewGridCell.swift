@@ -54,11 +54,6 @@ struct MachineViewGridCell: View {
     
     private var progressBar: some View {
         ProgressBar(percent: item.percent, color: paused ? .orange : .green)
-        .onAppear(perform: {
-            if item.inProgress {
-                viewModel.startProgress(for: item)
-            }
-        })
     }
     
     private var stats: some View {

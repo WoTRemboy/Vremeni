@@ -25,6 +25,9 @@ extension ShopView {
         // Array property for storing all current enable status items
         private(set) var unfilteredItems = [ConsumableItem]()
         
+        // First appear toggle
+        private var firstTime = true
+        
         // Active rarity filter property with PO for data update
         internal var rarityFilter: Rarity {
             didSet {
@@ -66,6 +69,11 @@ extension ShopView {
             fetchData()
             fetchProfileData()
             addSamples()
+            
+            // Starts workshop timers when app loaded
+            guard firstTime else { return }
+            NotificationCenter.default.post(name: .startProgressNotification, object: nil)
+            firstTime.toggle()
         }
         
         // MARK: - Calculation methods

@@ -97,7 +97,9 @@ struct ProfileView: View {
                             isPresented: $showingAlert,
                             titleVisibility: .visible) {
             Button(role: .destructive) {
-                viewModel.resetProgress()
+                withAnimation {
+                    viewModel.resetProgress()
+                }
             } label: {
                 Text(Texts.ProfilePage.resetButton)
             }
