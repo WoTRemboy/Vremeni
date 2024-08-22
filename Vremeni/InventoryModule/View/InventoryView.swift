@@ -51,6 +51,7 @@ struct InventoryView: View {
                     toolBarProgressView
                 }
             }
+            .toolbarBackground(.visible, for: .tabBar)
         }
         .tabItem {
             Image.TabBar.inventory

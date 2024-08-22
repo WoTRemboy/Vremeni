@@ -67,7 +67,8 @@ struct ShopView: View {
                     if viewModel.items.isEmpty {
                         placeholder
                             .frame(maxWidth: .infinity, alignment: .center)
-                            .transition(.move(edge: .trailing))
+                        // No available <-, but No Locked ->
+                            .transition(.move(edge: viewModel.enableStatus ? .leading : .trailing))
                     }
                 }
                 .animation(.easeInOut, value: viewModel.enableStatus)
@@ -90,6 +91,7 @@ struct ShopView: View {
                         toolBarButtonPlus
                     }
                 }
+                .toolbarBackground(.visible, for: .tabBar)
                 
             }
             // TabBar params & navigation
