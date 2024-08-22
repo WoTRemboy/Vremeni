@@ -118,6 +118,9 @@ struct ShopItemGridCell: View {
                     // Archive item banner
                     bannerService.setBanner(banner: .archived(message: Texts.Banner.archived))
                 }
+                // Medium haptic feedback
+                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                impactMed.impactOccurred()
                 
             }) {
                 Image(systemName: "archivebox")

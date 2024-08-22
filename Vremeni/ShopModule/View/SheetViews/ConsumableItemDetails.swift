@@ -12,6 +12,7 @@ struct ConsumableItemDetails: View {
     
     // MARK: - Properties
     
+    @EnvironmentObject var bannerService: BannerViewModel
     @Environment(\.dismiss) var dismiss
     
     private let item: ConsumableItem
@@ -118,6 +119,7 @@ struct ConsumableItemDetails: View {
                 if item.enabled {
                     // Pick item to machine when it is available
                     viewModel.pickItem(item: item)
+                    bannerService.setBanner(banner: .added(message: Texts.Banner.added))
                 } else {
                     // Unlock item when item is locked
                     viewModel.unlockItem(item: item)
@@ -148,9 +150,12 @@ struct ConsumableItemDetails: View {
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
+        let environmentObject = BannerViewModel()
         
         let example = ConsumableItem.itemMockConfig(name: "One Minute", description: "One minute is a whole 60 seconds!", price: 50, rarity: .uncommon, profile: Profile.configMockProfile())
+        
         return ConsumableItemDetails(item: example, viewModel: viewModel)
+            .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")
     }

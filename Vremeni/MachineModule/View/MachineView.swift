@@ -54,9 +54,10 @@ struct MachineView: View {
             }
             .background(Color.BackColors.backDefault)
             
-            // Navigation bar params
+            // Toolbar params
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(.visible, for: .tabBar)
         }
         .tabItem {
             Image.TabBar.machine

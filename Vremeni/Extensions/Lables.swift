@@ -5,6 +5,8 @@
 //  Created by Roman Tverdokhleb on 24.07.2024.
 //
 
+import Foundation
+
 final class Texts {
     enum Common {
         static let title = "Vremeni"
@@ -119,7 +121,7 @@ final class Texts {
         static let archive = "Archive"
         static let reset = "Reset"
         static let resetContent = "Do you want to start over? Purchases made with real currency will remain active."
-        static let resetButton = "Reset progress (not working now)"
+        static let resetButton = "Reset progress"
         
         static let app = "Application"
         static let settings = "Settings"
@@ -183,4 +185,9 @@ final class Texts {
     enum TotalPrice {
         static let total = "Total"
     }
+}
+
+extension Notification.Name {
+    static let resetProgressNotification = Notification.Name("resetProgressNotification")
+    static let startProgressNotification = Notification.Name("startProgressNotification")
 }

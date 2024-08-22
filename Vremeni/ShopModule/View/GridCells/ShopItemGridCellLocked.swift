@@ -60,7 +60,7 @@ struct ShopItemGridCellLocked: View {
     
     // MARK: - Left side view
     
-    // ConsumableItem name & rarity icon
+    // ConsumableItem rarity name & icon
     private var itemName: some View {
         HStack(spacing: 5) {
             Rarity.rarityToImage(rarity: item.rarity)
@@ -68,7 +68,7 @@ struct ShopItemGridCellLocked: View {
                 .scaledToFit()
                 .frame(width: 25)
             
-            Text(item.name)
+            Text(item.rarity.rawValue)
                 .font(.body())
                 .foregroundStyle(Color.labelPrimary)
         }
@@ -77,17 +77,17 @@ struct ShopItemGridCellLocked: View {
     
     // MARK: - Right side views
     
-    // Rule info, Consumable item price & research button
+    // ConsumableItem name, desc, price & research button
     private var stats: some View {
         VStack {
-            // Rule name
-            Text("Perfect Score")
+            // ConsumableItem name
+            Text(item.name)
                 .lineLimit(1)
                 .font(.ruleTitle())
                 .foregroundStyle(Color.LabelColors.labelPrimary)
             
-            // Rule description
-            Text("The aspiration of any adequate person")
+            // ConsumableItem description
+            Text(item.itemDescription)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .font(.subhead())
@@ -152,7 +152,7 @@ struct ShopItemGridCellLocked: View {
         let modelContext = ModelContext(container)
         
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
-        let example = ConsumableItem.itemMockConfig(name: "One Hour", price: 1, profile: Profile.configMockProfile(), enabled: false)
+        let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, profile: Profile.configMockProfile(), enabled: false)
         return ShopItemGridCellLocked(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")
