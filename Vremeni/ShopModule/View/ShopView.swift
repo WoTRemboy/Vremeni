@@ -47,11 +47,13 @@ struct ShopView: View {
                         enableSegmentedPicker
                             .padding(.horizontal)
                         if viewModel.enableStatus {
+                            // Collecion with available items
                             availableCollection
                                 .padding(.horizontal)
                                 .padding(.top, 8)
                                 .transition(.move(edge: .leading))
                         } else {
+                            // Collecion with locked items
                             researchCollection
                                 .padding(.horizontal)
                                 .padding(.top, 8)
