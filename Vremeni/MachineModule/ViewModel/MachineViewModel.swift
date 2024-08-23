@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import SwiftData
+import NotificationCenter
 
 extension MachineView {
     
@@ -163,6 +164,18 @@ extension MachineView {
         internal func stopProgress(for item: MachineItem) {
             timers[item.id]?.invalidate()
             timers[item.id] = nil
+        }
+        
+        internal func notificationSetup(for item: MachineItem) {
+            let content = UNMutableNotificationContent()
+            content.title = "Vremeni"
+            content.subtitle = "«\(item.name)» \(Texts.Banner.ready)"
+            content.sound = .default
+            
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: item.target.timeIntervalSinceNow, repeats: false)
+            let request = UNNotificationRequest(identifier: item.id.uuidString, content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request)
         }
         
         internal func addSamples() {

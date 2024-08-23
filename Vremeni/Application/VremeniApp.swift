@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 @main
 struct VremeniApp: App {
@@ -45,6 +46,13 @@ struct VremeniApp: App {
             container = try ModelContainer(for: Profile.self)
         } catch {
             fatalError("Failed to create ModelContainer for Profile.")
+        }
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
+            if success {
+                print("Notifications are allowed.")
+            } else if let error {
+                print(error.localizedDescription)
+            }
         }
     }
 }
