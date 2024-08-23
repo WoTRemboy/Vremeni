@@ -36,7 +36,9 @@ struct PlaceholderView: View {
                 .font(.subhead())
                 .foregroundStyle(Color.LabelColors.labelSecondary)
                 .multilineTextAlignment(.center)
+                .lineLimit(1)
         }
+        .padding(.horizontal)
     }
     
     private var image: Image {

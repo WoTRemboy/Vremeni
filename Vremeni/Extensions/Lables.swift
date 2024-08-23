@@ -12,6 +12,11 @@ final class Texts {
         static let title = "Vremeni"
     }
     
+    enum Placeholder {
+        static let title = "No Results"
+        static let discription = "for"
+    }
+    
     enum ProgressBar {
         static let progress = "Progress"
         static let completed = "Completed"
