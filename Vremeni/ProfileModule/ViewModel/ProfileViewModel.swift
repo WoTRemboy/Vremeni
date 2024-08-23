@@ -97,7 +97,33 @@ extension ProfileView {
         }
         
         internal func resetProgress() {
-            // reset progress
+            do {
+                let consumableItems = try modelContext.fetch(FetchDescriptor<ConsumableItem>())
+                for item in consumableItems {
+                    modelContext.delete(item)
+                }
+            } catch {
+                print("Failed to delete ConsumableItem")
+            }
+            
+            do {
+                let machineItems = try modelContext.fetch(FetchDescriptor<MachineItem>())
+                for item in machineItems {
+                    modelContext.delete(item)
+                }
+                NotificationCenter.default.post(name: .resetProgressNotification, object: nil)
+            } catch {
+                print("Failed to delete MachineItem")
+            }
+            
+            do {
+                try modelContext.save()
+            } catch {
+                print("Failed to save context after reset")
+            }
+            
+            profile.resetBalance()
+            addSamples()
         }
         
         internal func unarchiveItem(item: ConsumableItem) {
@@ -116,28 +142,33 @@ extension ProfileView {
             let items = [ConsumableItem.itemMockConfig(name: "One Minute",
                                                        description: "One minute is a whole 60 seconds!",
                                                        price: 1,
-                                                       count: 5,
-                                                       profile: profile,
-                                                       ready: true,
-                                                       archived: true),
+                                                       profile: profile),
                          
                          ConsumableItem.itemMockConfig(name: "Three Minutes",
                                                        description: "Three minutes is a whole 180 seconds!",
                                                        price: 3,
-                                                       count: 3,
                                                        rarity: .common,
                                                        profile: profile,
-                                                       ready: true,
-                                                       archived: true),
+                                                       enabled: false),
                          
-                         ConsumableItem.itemMockConfig(name: "Three Minutes",
-                                                       description: "Three minutes is a whole 180 seconds!",
-                                                       price: 3,
-                                                       count: 3,
+                         ConsumableItem.itemMockConfig(name: "Five Minutes",
+                                                       description: "Five minutes is a whole 300 seconds!",
+                                                       price: 5,
+                                                       rarity: .uncommon,
+                                                       profile: profile,
+                                                       enabled: false),
+                         ConsumableItem.itemMockConfig(name: "Seven Minutes",
+                                                       description: "Seven minutes is a whole 420 seconds!",
+                                                       price: 7,
+                                                       rarity: .uncommon,
+                                                       profile: profile,
+                                                       enabled: false),
+                         ConsumableItem.itemMockConfig(name: "Ten Minutes",
+                                                       description: "Ten minutes is a whole 600 seconds!",
+                                                       price: 10,
                                                        rarity: .rare,
                                                        profile: profile,
-                                                       ready: true,
-                                                       archived: true)]
+                                                       enabled: false)]
             for item in items {
                 modelContext.insert(item)
             }

@@ -54,16 +54,6 @@ struct MachineViewGridCell: View {
     
     private var progressBar: some View {
         ProgressBar(percent: item.percent, color: paused ? .orange : .green)
-        .onAppear(perform: {
-            if item.inProgress {
-                viewModel.startProgress(for: item)
-            }
-        })
-        .onDisappear(perform: {
-            if item.percent < 100 && !paused {
-                viewModel.stopProgress(for: item)
-            }
-        })
     }
     
     private var stats: some View {
@@ -109,8 +99,10 @@ struct MachineViewGridCell: View {
                 withAnimation(.snappy) {
                     if paused {
                         viewModel.setWorkshop(item: item)
+                        viewModel.notificationSetup(for: item)
                     } else {
                         viewModel.progressDismiss(item: item)
+                        viewModel.notificationRemove(for: item.id)
                     }
                 }
             }) {
@@ -126,6 +118,8 @@ struct MachineViewGridCell: View {
             
             Button(action: {
                 withAnimation(.snappy) {
+                    viewModel.stopProgress(for: item)
+                    viewModel.notificationRemove(for: item.id)
                     viewModel.deleteItem(item: item)
                 }
             }) {

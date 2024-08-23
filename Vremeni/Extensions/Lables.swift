@@ -5,9 +5,16 @@
 //  Created by Roman Tverdokhleb on 24.07.2024.
 //
 
+import Foundation
+
 final class Texts {
     enum Common {
         static let title = "Vremeni"
+    }
+    
+    enum Placeholder {
+        static let title = "No Results"
+        static let discription = "for"
     }
     
     enum ProgressBar {
@@ -119,7 +126,7 @@ final class Texts {
         static let archive = "Archive"
         static let reset = "Reset"
         static let resetContent = "Do you want to start over? Purchases made with real currency will remain active."
-        static let resetButton = "Reset progress (not working now)"
+        static let resetButton = "Reset progress"
         
         static let app = "Application"
         static let settings = "Settings"
@@ -174,7 +181,19 @@ final class Texts {
         }
     }
     
+    enum Banner {
+        static let added = "Added to Machine."
+        static let archived = "Moved to Archive."
+        static let ready = "is ready."
+    }
+    
     enum TotalPrice {
         static let total = "Total"
     }
+}
+
+extension Notification.Name {
+    static let resetProgressNotification = Notification.Name("resetProgressNotification")
+    static let startProgressNotification = Notification.Name("startProgressNotification")
+    static let inventoryUpdateNotification = Notification.Name("inventoryUpdateNotification")
 }

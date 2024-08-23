@@ -46,9 +46,19 @@ struct ShopView: View {
                     ScrollView {
                         enableSegmentedPicker
                             .padding(.horizontal)
-                        collection
-                            .padding(.horizontal)
-                            .padding(.top, 8)
+                        if viewModel.enableStatus {
+                            // Collecion with available items
+                            availableCollection
+                                .padding(.horizontal)
+                                .padding(.top, 8)
+                                .transition(.move(edge: .leading))
+                        } else {
+                            // Collecion with locked items
+                            researchCollection
+                                .padding(.horizontal)
+                                .padding(.top, 8)
+                                .transition(.move(edge: .trailing))
+                        }
                     }
                     .onAppear {
                         viewModel.updateOnAppear()
@@ -56,8 +66,14 @@ struct ShopView: View {
                     // In case of items absence
                     if viewModel.items.isEmpty {
                         placeholder
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        // No available <-, but No Locked ->
+                            .transition(.move(edge: viewModel.enableStatus ? .leading : .trailing))
+                    } else if searchResults.isEmpty {
+                        searchPlaceholder
                     }
                 }
+                .animation(.easeInOut, value: viewModel.enableStatus)
                 // ScrollView params
                 .scrollDisabled(viewModel.items.isEmpty)
                 .scrollDismissesKeyboard(.immediately)
@@ -77,6 +93,7 @@ struct ShopView: View {
                         toolBarButtonPlus
                     }
                 }
+                .toolbarBackground(.visible, for: .tabBar)
                 
             }
             // TabBar params & navigation
@@ -134,7 +151,7 @@ struct ShopView: View {
     
     // Available/Locked items picker (changes enabledStatus)
     private var enableSegmentedPicker: some View {
-        Picker(Texts.ShopPage.status, selection: $viewModel.enableStatus) {
+        Picker(Texts.ShopPage.status, selection: $viewModel.enableStatus.animation()) {
             Text(Texts.ShopPage.available).tag(true)
             Text(Texts.ShopPage.locked).tag(false)
         }
@@ -145,26 +162,18 @@ struct ShopView: View {
         }
     }
     
-    private var collection: some View {
+    private var availableCollection: some View {
         let columns = Array(
             repeating: GridItem(.flexible(), spacing: spacing),
-            count: itemsInRows)
+            count: 2)
         
         return LazyVGrid(columns: columns, spacing: spacing) {
-            ForEach(searchResults) { item in
-                if item.enabled {
-                    // Available item cell
-                    ShopItemGridCell(item: item, viewModel: viewModel)
-                        .onTapGesture {
-                            selected = item
-                        }
-                } else {
-                    // Locked item cell
-                    ShopItemGridCellLocked(item: item, viewModel: viewModel)
-                        .onTapGesture {
-                            selected = item
-                        }
-                }
+            ForEach(searchResults.filter { $0.enabled }) { item in
+                // Available item cell
+                ShopItemGridCell(item: item, viewModel: viewModel)
+                    .onTapGesture {
+                        selected = item
+                    }
             }
             // Item details sheet param
             .sheet(item: $selected) { item in
@@ -173,7 +182,26 @@ struct ShopView: View {
         }
     }
     
-    // MARK: - Empty status view
+    private var researchCollection: some View {
+        let columns = Array(
+            repeating: GridItem(.flexible(), spacing: spacing),
+            count: 1)
+        
+        return LazyVGrid(columns: columns, spacing: spacing) {
+            ForEach(searchResults) { item in
+                ShopItemGridCellLocked(item: item, viewModel: viewModel)
+                    .onTapGesture {
+                        selected = item
+                    }
+            }
+            // Item details sheet param
+            .sheet(item: $selected) { item in
+                ConsumableItemDetails(item: item, viewModel: viewModel)
+            }
+        }
+    }
+    
+    // MARK: - Empty status views
     
     private var placeholder: some View {
         if viewModel.enableStatus {
@@ -187,6 +215,12 @@ struct ShopView: View {
                             description: Texts.ShopPage.placeholderSubtitleLocked,
                             status: .locked)
         }
+    }
+    
+    private var searchPlaceholder: some View {
+        PlaceholderView(title: Texts.Placeholder.title,
+                        description: "\(Texts.Placeholder.discription) “\(searchText)“",
+                        status: .search)
     }
     
     // MARK: - Property for search bar results

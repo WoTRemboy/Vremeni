@@ -33,6 +33,7 @@ struct ProfileView: View {
             .scrollIndicators(.hidden)
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(.visible, for: .tabBar)
         }
         .tabItem {
             Image.TabBar.profile
@@ -96,7 +97,9 @@ struct ProfileView: View {
                             isPresented: $showingAlert,
                             titleVisibility: .visible) {
             Button(role: .destructive) {
-                viewModel.resetProgress()
+                withAnimation {
+                    viewModel.resetProgress()
+                }
             } label: {
                 Text(Texts.ProfilePage.resetButton)
             }

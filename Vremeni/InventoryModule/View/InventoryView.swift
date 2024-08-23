@@ -35,6 +35,8 @@ struct InventoryView: View {
                 
                 if viewModel.items.isEmpty {
                     placeholder
+                } else if searchResults.isEmpty {
+                    searchPlaceholder
                 }
             }
             .scrollDisabled(viewModel.items.isEmpty)
@@ -51,6 +53,7 @@ struct InventoryView: View {
                     toolBarProgressView
                 }
             }
+            .toolbarBackground(.visible, for: .tabBar)
         }
         .tabItem {
             Image.TabBar.inventory
@@ -119,6 +122,12 @@ struct InventoryView: View {
         PlaceholderView(title: Texts.InventoryPage.placeholderTitle,
                         description: Texts.InventoryPage.placeholderSubtitle,
                         status: .inventory)
+    }
+    
+    private var searchPlaceholder: some View {
+        PlaceholderView(title: Texts.Placeholder.title,
+                        description: "\(Texts.Placeholder.discription) “\(searchText)“",
+                        status: .search)
     }
     
     private var searchResults: [ConsumableItem] {

@@ -39,6 +39,12 @@ extension Image {
         }
     }
     
+    enum Banner {
+        static let added = Image("AddedBanner")
+        static let archived = Image("ArchivedBanner")
+        static let ready = Image("ReadyBanner")
+    }
+    
     enum Rarity {
         static let common = Image("RarityCommon")
         static let uncommon = Image("RarityUncommon")

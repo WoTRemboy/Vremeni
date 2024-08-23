@@ -45,6 +45,10 @@ extension Profile: Equatable {
         internalMachines += 1
     }
     
+    internal func resetBalance() {
+        balance = 0
+    }
+    
     internal static func configMockProfile() -> Profile {
         Profile(name: "Mock User", balance: 228, items: [])
     }
