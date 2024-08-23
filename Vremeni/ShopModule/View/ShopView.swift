@@ -69,6 +69,8 @@ struct ShopView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                         // No available <-, but No Locked ->
                             .transition(.move(edge: viewModel.enableStatus ? .leading : .trailing))
+                    } else if searchResults.isEmpty {
+                        searchPlaceholder
                     }
                 }
                 .animation(.easeInOut, value: viewModel.enableStatus)
@@ -199,7 +201,7 @@ struct ShopView: View {
         }
     }
     
-    // MARK: - Empty status view
+    // MARK: - Empty status views
     
     private var placeholder: some View {
         if viewModel.enableStatus {
@@ -213,6 +215,12 @@ struct ShopView: View {
                             description: Texts.ShopPage.placeholderSubtitleLocked,
                             status: .locked)
         }
+    }
+    
+    private var searchPlaceholder: some View {
+        PlaceholderView(title: Texts.Placeholder.title,
+                        description: "\(Texts.Placeholder.discription) “\(searchText)“",
+                        status: .search)
     }
     
     // MARK: - Property for search bar results

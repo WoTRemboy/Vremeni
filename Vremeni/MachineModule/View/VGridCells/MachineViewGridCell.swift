@@ -99,8 +99,10 @@ struct MachineViewGridCell: View {
                 withAnimation(.snappy) {
                     if paused {
                         viewModel.setWorkshop(item: item)
+                        viewModel.notificationSetup(for: item)
                     } else {
                         viewModel.progressDismiss(item: item)
+                        viewModel.notificationRemove(for: item.id)
                     }
                 }
             }) {
@@ -116,6 +118,8 @@ struct MachineViewGridCell: View {
             
             Button(action: {
                 withAnimation(.snappy) {
+                    viewModel.stopProgress(for: item)
+                    viewModel.notificationRemove(for: item.id)
                     viewModel.deleteItem(item: item)
                 }
             }) {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import SwiftData
 
 extension InventoryView {
@@ -28,6 +29,12 @@ extension InventoryView {
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
             self.rarityFilter = .all
+            NotificationCenter.default.addObserver(self, selector: #selector(handleDataUpdate), name: .inventoryUpdateNotification, object: nil)
+        }
+        
+        @objc private func handleDataUpdate() {
+            fetchStatsData()
+            fetchData()
         }
         
         internal func updateOnAppear() {
