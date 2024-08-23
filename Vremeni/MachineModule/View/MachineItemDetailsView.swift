@@ -96,8 +96,10 @@ struct MachineItemDetailsView: View {
             withAnimation(.snappy) {
                 if item.inProgress {
                     viewModel.progressDismiss(item: item)
+                    viewModel.notificationRemove(for: item.id)
                 } else {
                     viewModel.setWorkshop(item: item)
+                    viewModel.notificationSetup(for: item)
                 }
                 dismiss()
             }

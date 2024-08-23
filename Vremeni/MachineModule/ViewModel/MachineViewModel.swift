@@ -168,14 +168,18 @@ extension MachineView {
         
         internal func notificationSetup(for item: MachineItem) {
             let content = UNMutableNotificationContent()
-            content.title = "Vremeni"
-            content.subtitle = "«\(item.name)» \(Texts.Banner.ready)"
+            content.title = Texts.Common.title
+            content.body = "«\(item.name)» \(Texts.Banner.ready)"
             content.sound = .default
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: item.target.timeIntervalSinceNow, repeats: false)
             let request = UNNotificationRequest(identifier: item.id.uuidString, content: content, trigger: trigger)
             
             UNUserNotificationCenter.current().add(request)
+        }
+        
+        internal func notificationRemove(for id: UUID) {
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id.uuidString])
         }
         
         internal func addSamples() {
