@@ -190,4 +190,5 @@ final class Texts {
 extension Notification.Name {
     static let resetProgressNotification = Notification.Name("resetProgressNotification")
     static let startProgressNotification = Notification.Name("startProgressNotification")
+    static let inventoryUpdateNotification = Notification.Name("inventoryUpdateNotification")
 }

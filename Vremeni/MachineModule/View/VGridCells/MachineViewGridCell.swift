@@ -116,6 +116,7 @@ struct MachineViewGridCell: View {
             
             Button(action: {
                 withAnimation(.snappy) {
+                    viewModel.stopProgress(for: item)
                     viewModel.deleteItem(item: item)
                 }
             }) {

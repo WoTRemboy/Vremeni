@@ -63,6 +63,7 @@ extension MachineView {
         internal func progressReady(item: MachineItem) {
             profile.addCoins(item.price)
             readyNotification = (true, item.name)
+            NotificationCenter.default.post(name: .inventoryUpdateNotification, object: nil)
             withAnimation(.bouncy) {
                 item.readyToggle()
                 deleteItem(item: item)
