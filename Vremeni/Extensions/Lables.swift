@@ -56,6 +56,9 @@ final class Texts {
             static let title = "Rule"
             static let section = "Research Conditions (Mock)"
             static let unlock = "Unlock"
+            static let soon = "Coming soon!"
+            static let working = "Working on this 23/7 for a Great Party."
+            static let ok = "Give a bowl of rice"
         }
     }
     

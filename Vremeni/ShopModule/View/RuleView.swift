@@ -11,6 +11,7 @@ import SwiftData
 struct RuleView: View {
     
     @Environment(\.dismiss) var dismiss
+    @State private var showingAlert = false
     
     private var viewModel: ShopView.ShopViewModel
     private let item: ConsumableItem
@@ -94,10 +95,20 @@ struct RuleView: View {
     }
     
     private var button: some View {
-        Button(action: {}) {
+        Button(action: {
+            showingAlert = true
+        }) {
             Text(Texts.ShopPage.Rule.unlock)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text(Texts.ShopPage.Rule.soon),
+                  message: Text(Texts.ShopPage.Rule.working),
+                  dismissButton: .cancel(Text(Texts.ShopPage.Rule.ok), action: {
+                dismiss()
+            }))
+        }
+        
         .frame(height: 50)
         .minimumScaleFactor(0.4)
         
