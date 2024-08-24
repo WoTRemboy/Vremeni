@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 import SwiftUI
+import UserNotifications
 
 extension ProfileView {
     
@@ -121,8 +122,8 @@ extension ProfileView {
             } catch {
                 print("Failed to save context after reset")
             }
-            
-            profile.resetBalance()
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            profile.resetStacks()
             addSamples()
         }
         

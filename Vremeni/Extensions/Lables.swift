@@ -51,6 +51,15 @@ final class Texts {
         static let placeholderSubtitle = "Unlock some Items or restore from Archive"
         static let placeholderTitleLocked = "Congratulations!"
         static let placeholderSubtitleLocked = "You have unlocked all Items"
+        
+        enum Rule {
+            static let title = "Rule"
+            static let section = "Research Conditions (Mock)"
+            static let unlock = "Unlock"
+            static let soon = "Coming soon!"
+            static let working = "Working on this 23/7 for a Great Party."
+            static let ok = "Give a bowl of rice"
+        }
     }
     
     enum ItemCreatePage {
@@ -129,6 +138,11 @@ final class Texts {
         static let resetButton = "Reset progress"
         
         static let app = "Application"
+        static let notifications = "Notifications (soon)"
+        static let appearance = "Appearance (soon)"
+        static let language = "Language (soon)"
+        static let languageTitle = "Change language"
+        static let languageContent = "Select the language you want in Settings."
         static let settings = "Settings"
         
         enum Stats {
@@ -185,6 +199,7 @@ final class Texts {
         static let added = "Added to Machine."
         static let archived = "Moved to Archive."
         static let ready = "is ready."
+        static let reset = "Progress has been reset."
     }
     
     enum TotalPrice {

@@ -27,8 +27,11 @@ extension Image {
         static let balance = Image("BalanceProfile")
         static let archive = Image("ArchiveProfile")
         static let reset = Image("ResetProfile")
-        static let settings = Image("SettingsProfile")
         static let about = Image("AboutProfile")
+        static let notifications = Image("NotificationsProfile")
+        static let appearance = Image("AppearanceProfile")
+        static let language = Image("LanguageProfile")
+        static let settings = Image("SettingsProfile")
         
         enum About {
             static let appIcon = Image("AboutIcon")
@@ -43,6 +46,7 @@ extension Image {
         static let added = Image("AddedBanner")
         static let archived = Image("ArchivedBanner")
         static let ready = Image("ReadyBanner")
+        static let reset = Image("ResetBanner")
     }
     
     enum Rarity {
