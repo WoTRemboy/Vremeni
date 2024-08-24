@@ -101,13 +101,12 @@ struct ShopItemGridCellLocked: View {
                 .padding(.top, 5)
             
             // Research button
-            Button(action: {
-                withAnimation(.snappy) {
-                    viewModel.unlockItem(item: item)
-                }
-            }) {
-                Text(Texts.ShopPage.research)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            Button(action: {}) {
+                NavigationLink(destination: RuleView(),
+                               label: {
+                    Text(Texts.ShopPage.research)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                })
             }
             // Button layout params
             .frame(height: 40)
