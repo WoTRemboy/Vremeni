@@ -138,6 +138,11 @@ final class Texts {
         static let resetButton = "Reset progress"
         
         static let app = "Application"
+        static let notifications = "Notifications (soon)"
+        static let appearance = "Appearance (soon)"
+        static let language = "Language (soon)"
+        static let languageTitle = "Change language"
+        static let languageContent = "Select the language you want in Settings."
         static let settings = "Settings"
         
         enum Stats {

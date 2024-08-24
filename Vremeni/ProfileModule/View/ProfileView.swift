@@ -13,7 +13,9 @@ struct ProfileView: View {
     @EnvironmentObject private var bannerService: BannerViewModel
     @State private var viewModel: ProfileViewModel
     @State private var showingUsernameSheet = false
-    @State private var showingAlert = false
+    @State private var showingResetAlert = false
+    @State private var showingLanguageAlert = false
+    @State private var notificationsEnable = true
     
     init(modelContext: ModelContext) {
         let viewModel = ProfileViewModel(modelContext: modelContext)
@@ -82,20 +84,42 @@ struct ProfileView: View {
                 LinkRow(title: Texts.ProfilePage.archive,
                         image: Image.ProfilePage.archive)
             }
+            languageButton
             resetButton
+        }
+    }
+    
+    private var languageButton: some View {
+        Button {
+            showingLanguageAlert = true
+        } label: {
+            LinkRow(title: Texts.ProfilePage.language,
+                    image: Image.ProfilePage.language,
+                    chevron: true)
+        }
+        .alert(isPresented:$showingLanguageAlert) {
+            Alert(
+                title: Text(Texts.ProfilePage.languageTitle),
+                message: Text(Texts.ProfilePage.languageContent),
+                primaryButton: .default(Text(Texts.ProfilePage.settings)) {
+                    guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                    UIApplication.shared.open(url)
+                },
+                secondaryButton: .cancel(Text(Texts.ProfilePage.cancel))
+            )
         }
     }
     
     private var resetButton: some View {
         Button {
-            showingAlert = true
+            showingResetAlert = true
         } label: {
             LinkRow(title: Texts.ProfilePage.reset,
                     image: Image.ProfilePage.reset,
                     chevron: true)
         }
         .confirmationDialog(Texts.ProfilePage.resetContent,
-                            isPresented: $showingAlert,
+                            isPresented: $showingResetAlert,
                             titleVisibility: .visible) {
             Button(role: .destructive) {
                 withAnimation {
@@ -111,16 +135,22 @@ struct ProfileView: View {
     private var appSection: some View {
         Section(Texts.ProfilePage.app) {
             
+            Toggle(isOn: $notificationsEnable) {
+                LinkRow(title: Texts.ProfilePage.notifications,
+                        image: Image.ProfilePage.notifications)
+            }
+            
+            NavigationLink(destination: Text(Texts.ProfilePage.appearance),
+                           label: {
+                LinkRow(title: Texts.ProfilePage.appearance,
+                        image: Image.ProfilePage.appearance)
+            })
+            
+            
             NavigationLink(destination: ProfileAboutView(viewModel: viewModel),
                            label: {
                 LinkRow(title: Texts.ProfilePage.About.title,
                         image: Image.ProfilePage.about)
-            })
-            
-            NavigationLink(destination: Text(Texts.ProfilePage.settings),
-                           label: {
-                LinkRow(title: Texts.ProfilePage.settings,
-                        image: Image.ProfilePage.settings)
             })
         }
     }
