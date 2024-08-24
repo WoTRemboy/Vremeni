@@ -115,21 +115,27 @@ struct ConsumableItemDetails: View {
     // Enable context action button
     private var buyButton: some View {
         Button(action: {
-            withAnimation(.snappy) {
-                if item.enabled {
+            if item.enabled {
+                withAnimation(.snappy) {
                     // Pick item to machine when it is available
                     viewModel.pickItem(item: item)
                     bannerService.setBanner(banner: .added(message: Texts.Banner.added))
-                } else {
-                    // Unlock item when item is locked
-                    viewModel.unlockItem(item: item)
                 }
-                dismiss()
             }
+            dismiss()
         }) {
-            // Button name definition depending on enable status
-            Text(item.enabled ? Texts.ShopPage.addToMachine : Texts.ShopPage.research)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            // Button definition depending on enable status
+            if item.enabled {
+                Text(Texts.ShopPage.addToMachine)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            } else {
+                NavigationLink(destination: RuleView(item: item, viewModel: viewModel, details: true),
+                               label: {
+                    Text(Texts.ShopPage.research)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                })
+            }
+            
         }
         // Button layout params
         .frame(height: 50)

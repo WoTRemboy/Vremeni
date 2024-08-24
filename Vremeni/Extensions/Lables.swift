@@ -51,6 +51,12 @@ final class Texts {
         static let placeholderSubtitle = "Unlock some Items or restore from Archive"
         static let placeholderTitleLocked = "Congratulations!"
         static let placeholderSubtitleLocked = "You have unlocked all Items"
+        
+        enum Rule {
+            static let title = "Rule"
+            static let section = "Research Conditions (Mock)"
+            static let unlock = "Unlock"
+        }
     }
     
     enum ItemCreatePage {

@@ -12,6 +12,8 @@ struct ShopItemGridCellLocked: View {
     
     // MARK: - Properties
     
+    @State var selected: ConsumableItem? = nil
+
     private let item: ConsumableItem
     private var viewModel: ShopView.ShopViewModel
     
@@ -101,12 +103,14 @@ struct ShopItemGridCellLocked: View {
                 .padding(.top, 5)
             
             // Research button
-            Button(action: {}) {
-                NavigationLink(destination: RuleView(),
-                               label: {
-                    Text(Texts.ShopPage.research)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                })
+            Button(action: {
+                selected = item
+            }) {
+                Text(Texts.ShopPage.research)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+            .sheet(item: $selected) { item in
+                RuleView(item: item, viewModel: viewModel)
             }
             // Button layout params
             .frame(height: 40)
