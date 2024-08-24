@@ -45,8 +45,9 @@ extension Profile: Equatable {
         internalMachines += 1
     }
     
-    internal func resetBalance() {
+    internal func resetStacks() {
         balance = 0
+        internalMachines = 1
     }
     
     internal static func configMockProfile() -> Profile {
