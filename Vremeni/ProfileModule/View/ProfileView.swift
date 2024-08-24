@@ -10,6 +10,7 @@ import SwiftData
 
 struct ProfileView: View {
     
+    @EnvironmentObject private var bannerService: BannerViewModel
     @State private var viewModel: ProfileViewModel
     @State private var showingUsernameSheet = false
     @State private var showingAlert = false
@@ -99,6 +100,7 @@ struct ProfileView: View {
             Button(role: .destructive) {
                 withAnimation {
                     viewModel.resetProgress()
+                    bannerService.setBanner(banner: .reset(message: Texts.Banner.reset))
                 }
             } label: {
                 Text(Texts.ProfilePage.resetButton)
@@ -129,8 +131,10 @@ struct ProfileView: View {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
+        let environmentObject = BannerViewModel()
         
         return ProfileView(modelContext: modelContext)
+            .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")
     }

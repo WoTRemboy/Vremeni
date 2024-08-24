@@ -194,6 +194,7 @@ final class Texts {
         static let added = "Added to Machine."
         static let archived = "Moved to Archive."
         static let ready = "is ready."
+        static let reset = "Progress has been reset."
     }
     
     enum TotalPrice {

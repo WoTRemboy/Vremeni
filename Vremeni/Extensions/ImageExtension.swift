@@ -43,6 +43,7 @@ extension Image {
         static let added = Image("AddedBanner")
         static let archived = Image("ArchivedBanner")
         static let ready = Image("ReadyBanner")
+        static let reset = Image("ResetBanner")
     }
     
     enum Rarity {
