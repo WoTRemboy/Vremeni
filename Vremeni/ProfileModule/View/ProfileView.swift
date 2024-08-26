@@ -15,7 +15,6 @@ struct ProfileView: View {
     @State private var showingUsernameSheet = false
     @State private var showingResetAlert = false
     @State private var showingLanguageAlert = false
-    @State private var notificationsEnable = true
     
     init(modelContext: ModelContext) {
         let viewModel = ProfileViewModel(modelContext: modelContext)
@@ -134,10 +133,12 @@ struct ProfileView: View {
     
     private var appSection: some View {
         Section(Texts.ProfilePage.app) {
-            
-            Toggle(isOn: $notificationsEnable) {
+            Toggle(isOn: $viewModel.notificationsEnabled) {
                 LinkRow(title: Texts.ProfilePage.notifications,
                         image: Image.ProfilePage.notifications)
+            }
+            .onChange(of: viewModel.notificationsEnabled) { _, newValue in
+                viewModel.setNotificationsStatus(allowed: newValue)
             }
             
             NavigationLink(destination: Text(Texts.ProfilePage.appearance),

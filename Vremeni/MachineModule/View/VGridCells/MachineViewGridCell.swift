@@ -10,6 +10,8 @@ import SwiftData
 
 struct MachineViewGridCell: View {
     
+    @AppStorage(Texts.UserDefaults.notifications) private var notificationEnabled: NotificationStatus = .prohibited
+    
     private let item: MachineItem
     private let paused: Bool
     private let viewModel: MachineView.MachineViewModel
@@ -99,7 +101,9 @@ struct MachineViewGridCell: View {
                 withAnimation(.snappy) {
                     if paused {
                         viewModel.setWorkshop(item: item)
-                        viewModel.notificationSetup(for: item)
+                        if notificationEnabled == .allowed {
+                            viewModel.notificationSetup(for: item)
+                        }
                     } else {
                         viewModel.progressDismiss(item: item)
                         viewModel.notificationRemove(for: item.id)

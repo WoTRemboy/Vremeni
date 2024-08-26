@@ -19,6 +19,9 @@ extension ProfileView {
         private(set) var profile = Profile.configMockProfile()
         private(set) var version: String = String()
         
+        internal var notificationsEnabled: Bool = false
+        private(set) var notificationsStatus: NotificationStatus = .prohibited
+        
         private var items = [ConsumableItem]()
         private var unlockedItems = [ConsumableItem]()
         private var readyItems = [ConsumableItem]()
@@ -49,6 +52,7 @@ extension ProfileView {
             fetchProfileData()
             fetchItemsData()
             fetchArchivedItemsData()
+            readNotificationStatus()
         }
         
         internal func updateItemsOnAppear() {
@@ -86,6 +90,26 @@ extension ProfileView {
         internal func inventoryRarityCount(for rarity: Rarity) -> Int {
             let rarityItems = readyItems.filter { $0.rarity == rarity }
             return rarityItems.reduce(0) { $0 + $1.count }
+        }
+        
+        private func readNotificationStatus() {
+            let defaults = UserDefaults.standard
+            let rawValue = defaults.string(forKey: Texts.UserDefaults.notifications) ?? String()
+            notificationsStatus = NotificationStatus(rawValue: rawValue) ?? .prohibited
+            
+            guard notificationsStatus == .allowed else { return }
+            notificationsEnabled = true
+        }
+        
+        internal func setNotificationsStatus(allowed: Bool) {
+            let defaults = UserDefaults.standard
+            if allowed {
+                notificationsStatus = .allowed
+            } else {
+                notificationsStatus = .disabled
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            }
+            defaults.set(notificationsStatus.rawValue, forKey: Texts.UserDefaults.notifications)
         }
         
         internal func updateVersionOnAppear() {

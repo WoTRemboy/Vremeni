@@ -138,7 +138,7 @@ final class Texts {
         static let resetButton = "Reset progress"
         
         static let app = "Application"
-        static let notifications = "Notifications (soon)"
+        static let notifications = "Notifications"
         static let appearance = "Appearance (soon)"
         static let language = "Language (soon)"
         static let languageTitle = "Change language"
@@ -204,6 +204,10 @@ final class Texts {
     
     enum TotalPrice {
         static let total = "Total"
+    }
+    
+    enum UserDefaults {
+        static let notifications = "notificationsEnabled"
     }
 }
 
