@@ -20,6 +20,7 @@ extension ProfileView {
         private(set) var version: String = String()
         
         internal var notificationsEnabled: Bool = false
+        internal var showingNotificationAlert: Bool = false
         private(set) var notificationsStatus: NotificationStatus = .prohibited
         
         private var items = [ConsumableItem]()
@@ -103,13 +104,20 @@ extension ProfileView {
         
         internal func setNotificationsStatus(allowed: Bool) {
             let defaults = UserDefaults.standard
-            if allowed {
-                notificationsStatus = .allowed
-            } else {
-                notificationsStatus = .disabled
-                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
+                if success {
+                    self.notificationsStatus = allowed ? .allowed : .disabled
+                    print("Notifications are set to \(allowed).")
+                } else if let error {
+                    print(error.localizedDescription)
+                } else {
+                    self.notificationsStatus = .prohibited
+                    self.notificationsEnabled = false
+                    self.showingNotificationAlert = true
+                    print("Notifications are prohibited.")
+                }
+                defaults.set(self.notificationsStatus.rawValue, forKey: Texts.UserDefaults.notifications)
             }
-            defaults.set(notificationsStatus.rawValue, forKey: Texts.UserDefaults.notifications)
         }
         
         internal func updateVersionOnAppear() {

@@ -139,6 +139,8 @@ final class Texts {
         
         static let app = "Application"
         static let notifications = "Notifications"
+        static let notificationsTitle = "Notification Access Required"
+        static let notificationsContent = "Please enable notifications in Settings."
         static let appearance = "Appearance (soon)"
         static let language = "Language (soon)"
         static let languageTitle = "Change language"
@@ -215,4 +217,5 @@ extension Notification.Name {
     static let resetProgressNotification = Notification.Name("resetProgressNotification")
     static let startProgressNotification = Notification.Name("startProgressNotification")
     static let inventoryUpdateNotification = Notification.Name("inventoryUpdateNotification")
+    static let userNotificationUpdate = Notification.Name("userNotificationUpdate")
 }
