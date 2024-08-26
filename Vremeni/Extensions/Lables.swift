@@ -141,10 +141,17 @@ final class Texts {
         static let notifications = "Notifications"
         static let notificationsTitle = "Notification Access Required"
         static let notificationsContent = "Please enable notifications in Settings."
-        static let appearance = "Appearance (soon)"
+        
+        static let appearance = "Appearance"
+        static let theme = "Theme"
+        static let system = "System"
+        static let light = "Light"
+        static let dark = "Dark"
+        
         static let language = "Language (soon)"
         static let languageTitle = "Change language"
         static let languageContent = "Select the language you want in Settings."
+        
         static let settings = "Settings"
         
         enum Stats {
@@ -210,6 +217,7 @@ final class Texts {
     
     enum UserDefaults {
         static let notifications = "notificationsEnabled"
+        static let theme = "userTheme"
     }
 }
 

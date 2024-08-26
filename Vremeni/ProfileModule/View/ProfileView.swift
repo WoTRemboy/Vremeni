@@ -14,6 +14,8 @@ struct ProfileView: View {
     @State private var viewModel: ProfileViewModel
     
     @State private var showingUsernameSheet = false
+    @State private var showingThemeSheet = false
+
     @State private var showingResetAlert = false
     @State private var showingLanguageAlert = false
     
@@ -119,13 +121,7 @@ struct ProfileView: View {
     private var appSection: some View {
         Section(Texts.ProfilePage.app) {
             notificationToggle
-            
-            NavigationLink(destination: Text(Texts.ProfilePage.appearance),
-                           label: {
-                LinkRow(title: Texts.ProfilePage.appearance,
-                        image: Image.ProfilePage.appearance)
-            })
-            
+            appearanceButton
             languageButton
         }
     }
@@ -148,6 +144,21 @@ struct ProfileView: View {
                 },
                 secondaryButton: .cancel(Text(Texts.ProfilePage.cancel))
             )
+        }
+    }
+    
+    private var appearanceButton: some View {
+        Button {
+            showingThemeSheet = true
+        } label: {
+            LinkRow(title: Texts.ProfilePage.appearance,
+                    image: Image.ProfilePage.appearance,
+                    chevron: true)
+        }
+        .sheet(isPresented: $showingThemeSheet) {
+            ThemeChangeView()
+                .presentationDetents([.height(350)])
+                .presentationBackground(.clear)
         }
     }
     

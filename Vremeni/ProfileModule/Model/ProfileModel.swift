@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 @Model
 final class Profile: Identifiable {
@@ -61,4 +62,22 @@ enum ChartType: String, Identifiable, CaseIterable {
     case inventory = "Inventory"
     
     var id: Self { self }
+}
+
+
+enum Theme: String, CaseIterable {
+    case systemDefault = "Default"
+    case light = "Light"
+    case dark = "Dark"
+    
+    internal func color(_ scheme: ColorScheme) -> Color {
+        switch self {
+        case .systemDefault:
+            scheme == .light ? Color.Tints.orange : Color.Tints.blue
+        case .light:
+            Color.Tints.orange
+        case .dark:
+            Color.Tints.blue
+        }
+    }
 }
