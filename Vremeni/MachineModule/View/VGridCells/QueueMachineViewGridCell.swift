@@ -10,8 +10,6 @@ import SwiftData
 
 struct QueueMachineViewGridCell: View {
     
-    @AppStorage(Texts.UserDefaults.notifications) private var notificationEnabled: NotificationStatus = .prohibited
-    
     private let item: MachineItem
     private let viewModel: MachineView.MachineViewModel
     
@@ -112,7 +110,7 @@ struct QueueMachineViewGridCell: View {
             Button(action: {
                 withAnimation(.snappy) {
                     viewModel.setWorkshop(item: item)
-                    if notificationEnabled == .allowed {
+                    if viewModel.notificationStatus == .allowed {
                         viewModel.notificationSetup(for: item)
                     }
                 }

@@ -25,6 +25,8 @@ extension MachineView {
         
         private(set) var selectedType: UpgrageMethod = .coins
         private(set) var readyNotification: (ready: Bool, name: String?) = (false, nil)
+        private(set) var notificationStatus: NotificationStatus = .prohibited
+        
         private let slotsLimit = 3
         internal let internalPrice: Double = 1
         internal let donatePrice: Double = 0.99
@@ -46,6 +48,7 @@ extension MachineView {
         internal func updateOnAppear() {
             fetchProfileData()
             fetchData()
+            readNotificationStatus()
         }
         
         internal func setWorkshop(item: MachineItem) {
@@ -164,6 +167,12 @@ extension MachineView {
         internal func stopProgress(for item: MachineItem) {
             timers[item.id]?.invalidate()
             timers[item.id] = nil
+        }
+        
+        private func readNotificationStatus() {
+            let defaults = UserDefaults.standard
+            let rawValue = defaults.string(forKey: Texts.UserDefaults.notifications) ?? String()
+            notificationStatus = NotificationStatus(rawValue: rawValue) ?? .prohibited
         }
         
         internal func notificationSetup(for item: MachineItem) {
