@@ -117,7 +117,7 @@ struct RuleView: View {
         .tint(Color.orange)
         
         .padding(.horizontal)
-        .padding(.top, 30)
+        .padding(.vertical, 30)
     }
 }
 
