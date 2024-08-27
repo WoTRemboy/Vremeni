@@ -108,7 +108,7 @@ extension ProfileView {
             case .systemDefault:
                 (CGSize(width: 0, height: 0), 90)
             case .light:
-                (CGSize(width: 150, height: 150), 180)
+                (CGSize(width: 150, height: -150), 180)
             case .dark:
                 (CGSize(width: 30, height: -25), 180)
             }
