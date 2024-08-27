@@ -90,7 +90,7 @@ struct ConsumableItemCreate: View {
                 // Displays ConsumableItem price value
                 totalPriceView
                 // Sets ConsumableItem price value
-                Slider(value: $item.price, in: 1...50, step: 1)
+                Slider(value: $item.price, in: 1...1000, step: 1)
             }
             
             // Turnoiver section
