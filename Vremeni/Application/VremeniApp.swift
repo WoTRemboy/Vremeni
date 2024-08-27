@@ -16,6 +16,8 @@ struct VremeniApp: App {
     
     // UserDefaults for user notifications status
     @AppStorage(Texts.UserDefaults.notifications) private var notificationsEnabled: NotificationStatus = .prohibited
+    // UserDefaults for current app theme
+    @AppStorage(Texts.UserDefaults.theme) private var userTheme: Theme = .systemDefault
     // Banner viewModel
     @StateObject private var bannerService = BannerViewModel()
     // SwiftData container
@@ -36,6 +38,10 @@ struct VremeniApp: App {
             }
             // Banner viewModel environment
             .environmentObject(bannerService)
+            // App theme style setup
+            .onAppear {
+                setTheme(style: userTheme.userInterfaceStyle)
+            }
         }
         // SwiftData model container
         .modelContainer(container)
@@ -52,8 +58,31 @@ struct VremeniApp: App {
         requestNotifications()
     }
     
-    // MARK: - Notifications Request
+    // MARK: - Appearance setup
     
+    private func setTheme(style: UIUserInterfaceStyle) {
+        // System style by default
+        guard style != .unspecified else { return }
+        // Setups a theme style without animation
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
+                window.overrideUserInterfaceStyle = style
+            }
+        }
+    }
+}
+
+// MARK: - Notifications
+
+// Notifications Model
+enum NotificationStatus: String {
+    case allowed = "allowed"
+    case disabled = "disabled"
+    case prohibited = "prohibited"
+}
+
+// Notifications Method
+extension VremeniApp {
     // Requests user for alert & sound notifications
     private func requestNotifications() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
@@ -70,12 +99,4 @@ struct VremeniApp: App {
             }
         }
     }
-}
-
-// MARK: - Notifications Model
-
-enum NotificationStatus: String {
-    case allowed = "allowed"
-    case disabled = "disabled"
-    case prohibited = "prohibited"
 }

@@ -6,41 +6,95 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ThemeChangeView: View {
-    
+        
     @Environment(\.colorScheme) private var scheme
-    @AppStorage(Texts.UserDefaults.theme) private var userTheme: Theme = .systemDefault
+    @Environment(\.dismiss) var dismiss
     
-    internal var body: some View {
-        content
+    @AppStorage(Texts.UserDefaults.theme) private var userTheme: Theme = .systemDefault
+    @State private var circleOffset: CGSize = .zero
+    @State private var circleSize: CGFloat = 0
+    
+    private var viewModel: ProfileView.ProfileViewModel
+    
+    init(viewModel: ProfileView.ProfileViewModel) {
+        self.viewModel = viewModel
     }
     
-    private var content: some View {
-        VStack(spacing: 10) {
-            Circle()
-                .fill(userTheme.color(scheme))
-                .frame(width: 150)
-            
-            Text(Texts.ProfilePage.theme)
-                .font(.ruleTitle())
-                .padding(.top, 25)
-            
-            Picker(Texts.ProfilePage.theme, selection: $userTheme.animation()) {
-                Text(Texts.ProfilePage.system).tag(Theme.systemDefault)
-                Text(Texts.ProfilePage.light).tag(Theme.light)
-                Text(Texts.ProfilePage.dark).tag(Theme.dark)
+    internal var body: some View {
+        NavigationStack {
+            VStack(spacing: 16) {
+                planet
+                picker
+                Spacer()
             }
-            .pickerStyle(.segmented)
-            .padding()
+            .onAppear {
+                (circleOffset, circleSize) = viewModel.selectShape(userTheme)
+            }
+            
+            .onChange(of: userTheme) { oldTheme, newTheme in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    viewModel.changeTheme(theme: newTheme)
+                }
+                withAnimation(.snappy(duration: 0.3)) {
+                    (circleOffset, circleSize) = viewModel.selectShape(newTheme)
+                }
+            }
+            
+            .frame(maxWidth: .infinity, idealHeight: 350, maxHeight: .infinity)
+            .background(Color.BackColors.backSecondary)
+            
+            .navigationTitle(Texts.ProfilePage.theme)
+            .toolbarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(Texts.ProfilePage.done) {
+                        dismiss()
+                    }
+                }
+            }
         }
-        .frame(maxWidth: .infinity, idealHeight: 350, maxHeight: .infinity)
-        .background(Color.BackColors.backDefault)
-        .clipShape(.rect(cornerRadius: 30))
+    }
+    
+    private var planet: some View {
+        Circle()
+            .fill(userTheme.color(scheme))
+            .frame(width: 180)
+            .mask {
+                Rectangle()
+                    .overlay {
+                        Circle()
+                            .offset(circleOffset)
+                            .blendMode(.destinationOut)
+                            .frame(width: circleSize)
+                    }
+                
+            }
+            .padding(.top)
+    }
+    
+    private var picker: some View {
+        Picker(Texts.ProfilePage.theme, selection: $userTheme) {
+            ForEach(Theme.allCases, id: \.self) { theme in
+                Text(theme.rawValue).tag(theme)
+            }
+        }
+        .pickerStyle(.segmented)
+        .padding(.top, 25)
         .padding(.horizontal)
     }
 }
 
 #Preview {
-    ThemeChangeView()
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        let viewModel = ProfileView.ProfileViewModel(modelContext: modelContext)
+        return ThemeChangeView(viewModel: viewModel)
+    } catch {
+        fatalError("Failed to create model container.")
+    }
 }

@@ -93,6 +93,27 @@ extension ProfileView {
             return rarityItems.reduce(0) { $0 + $1.count }
         }
         
+        internal func changeTheme(theme: Theme) {
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                if let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
+                    UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                        window.overrideUserInterfaceStyle = theme.userInterfaceStyle
+                    })
+                }
+            }
+        }
+        
+        internal func selectShape(_ theme: Theme) -> (CGSize, CGFloat) {
+            switch theme {
+            case .systemDefault:
+                (CGSize(width: 0, height: 0), 90)
+            case .light:
+                (CGSize(width: 150, height: 150), 180)
+            case .dark:
+                (CGSize(width: 30, height: -25), 180)
+            }
+        }
+        
         private func readNotificationStatus() {
             let defaults = UserDefaults.standard
             let rawValue = defaults.string(forKey: Texts.UserDefaults.notifications) ?? String()

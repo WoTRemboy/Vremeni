@@ -147,6 +147,7 @@ final class Texts {
         static let system = "System"
         static let light = "Light"
         static let dark = "Dark"
+        static let done = "Done"
         
         static let language = "Language (soon)"
         static let languageTitle = "Change language"

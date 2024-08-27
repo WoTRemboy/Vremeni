@@ -73,11 +73,33 @@ enum Theme: String, CaseIterable {
     internal func color(_ scheme: ColorScheme) -> Color {
         switch self {
         case .systemDefault:
-            scheme == .light ? Color.Tints.orange : Color.Tints.blue
+            scheme == .light ? Color.orange : Color.blue
         case .light:
-            Color.Tints.orange
+            Color.orange
         case .dark:
-            Color.Tints.blue
+            Color.blue
+        }
+    }
+    
+    internal var userInterfaceStyle: UIUserInterfaceStyle {
+            switch self {
+            case .systemDefault:
+                return .unspecified
+            case .light:
+                return .light
+            case .dark:
+                return .dark
+            }
+        }
+    
+    internal var colorScheme: ColorScheme? {
+        switch self {
+        case .systemDefault:
+            nil
+        case .light:
+            ColorScheme.light
+        case .dark:
+            ColorScheme.dark
         }
     }
 }

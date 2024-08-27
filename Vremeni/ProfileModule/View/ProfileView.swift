@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ProfileView: View {
-    
+        
     @EnvironmentObject private var bannerService: BannerViewModel
     @State private var viewModel: ProfileViewModel
     
@@ -156,9 +156,9 @@ struct ProfileView: View {
                     chevron: true)
         }
         .sheet(isPresented: $showingThemeSheet) {
-            ThemeChangeView()
+            ThemeChangeView(viewModel: viewModel)
                 .presentationDetents([.height(350)])
-                .presentationBackground(.clear)
+                .interactiveDismissDisabled()
         }
     }
     
