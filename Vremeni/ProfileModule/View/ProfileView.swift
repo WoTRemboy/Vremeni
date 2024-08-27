@@ -168,6 +168,7 @@ struct ProfileView: View {
         } label: {
             LinkRow(title: Texts.ProfilePage.language,
                     image: Image.ProfilePage.language,
+                    details: Texts.ProfilePage.languageDetails,
                     chevron: true)
         }
         .alert(isPresented: $showingLanguageAlert) {
