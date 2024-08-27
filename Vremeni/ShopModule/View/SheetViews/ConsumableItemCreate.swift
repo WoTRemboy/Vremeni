@@ -21,7 +21,9 @@ struct ConsumableItemCreate: View {
     
     init(viewModel: ShopView.ShopViewModel) {
         self.viewModel = viewModel
-        self.item = ConsumableItem.itemMockConfig(name: String(), price: 1, profile: viewModel.profile, enabled: false)
+        self.item = ConsumableItem.itemMockConfig(
+            nameKey: String(), price: 1,
+            profile: viewModel.profile, enabled: false)
     }
     
     // MARK: - Body View
@@ -76,9 +78,9 @@ struct ConsumableItemCreate: View {
             // General Section
             Section(Texts.ItemCreatePage.general) {
                 // Sets ConsumableItem name
-                TextField(Texts.ItemCreatePage.name, text: $item.name)
+                TextField(Texts.ItemCreatePage.name, text: $item.nameKey)
                 // Sets ConsumableItem description
-                TextField(Texts.ItemCreatePage.description, text: $item.itemDescription, axis: .vertical)
+                TextField(Texts.ItemCreatePage.description, text: $item.descriptionKey, axis: .vertical)
                 // Sets ConsumableItem enable status
                 Toggle(Texts.ShopPage.available, isOn: $item.enabled)
             }

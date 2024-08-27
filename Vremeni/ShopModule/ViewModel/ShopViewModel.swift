@@ -92,8 +92,8 @@ extension ShopView {
         
         // Saves ConsumableItem to SwiftData DB
         internal func saveItem(_ created: ConsumableItem) {
-            let item = ConsumableItem.itemMockConfig(name: created.name,
-                                                     description: created.itemDescription,
+            let item = ConsumableItem.itemMockConfig(nameKey: created.name,
+                                                     descriptionKey: created.itemDescription,
                                                      price: created.price,
                                                      rarity: created.rarity,
                                                      profile: profile,
@@ -112,36 +112,39 @@ extension ShopView {
         
         internal func addSamples() {
             guard items.isEmpty else { return }
-            let items = [ConsumableItem.itemMockConfig(name: "One Minute",
-                                                       description: "One minute is a whole 60 seconds!",
-                                                       price: 1,
-                                                       profile: profile),
+            let items = [
+                ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle,
+                                              descriptionKey: Content.Common.oneMinuteDescription,
+                                              price: 1,
+                                              profile: profile),
                          
-                         ConsumableItem.itemMockConfig(name: "Three Minutes",
-                                                       description: "Three minutes is a whole 180 seconds!",
-                                                       price: 3,
-                                                       rarity: .common,
-                                                       profile: profile,
-                                                       enabled: false),
+                ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle,
+                                              descriptionKey: Content.Common.threeMinutesDescription,
+                                              price: 3,
+                                              rarity: .common,
+                                              profile: profile,
+                                              enabled: false),
                          
-                         ConsumableItem.itemMockConfig(name: "Five Minutes",
-                                                       description: "Five minutes is a whole 300 seconds!",
-                                                       price: 5,
-                                                       rarity: .uncommon,
-                                                       profile: profile,
-                                                       enabled: false),
-                         ConsumableItem.itemMockConfig(name: "Seven Minutes",
-                                                       description: "Seven minutes is a whole 420 seconds!",
-                                                       price: 7,
-                                                       rarity: .uncommon,
-                                                       profile: profile,
-                                                       enabled: false),
-                         ConsumableItem.itemMockConfig(name: "Ten Minutes",
-                                                       description: "Ten minutes is a whole 600 seconds!",
-                                                       price: 10,
-                                                       rarity: .rare,
-                                                       profile: profile,
-                                                       enabled: false)]
+                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
+                                              descriptionKey: Content.Uncommon.fiveMinutesDescription,
+                                              price: 5,
+                                              rarity: .uncommon,
+                                              profile: profile,
+                                              enabled: false),
+                
+                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
+                                              descriptionKey: Content.Uncommon.sevenMinutesDescription,
+                                              price: 7,
+                                              rarity: .uncommon,
+                                              profile: profile,
+                                              enabled: false),
+                
+                ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,
+                                              descriptionKey: Content.Rare.tenMinutesDescription,
+                                              price: 10,
+                                              rarity: .rare,
+                                              profile: profile,
+                                              enabled: false)]
             for item in items {
                 modelContext.insert(item)
             }

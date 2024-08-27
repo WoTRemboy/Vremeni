@@ -134,6 +134,186 @@
         }
       }
     },
+    "ContentCommonFiveMinutesDescription" : {
+      "comment" : "Five minutes are a whole 300 seconds!",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Five minutes are a whole 300 seconds!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пять минут - это 300 секунд!"
+          }
+        }
+      }
+    },
+    "ContentCommonFiveMinutesTitle" : {
+      "comment" : "Five Minutes",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Five Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пять минут"
+          }
+        }
+      }
+    },
+    "ContentCommonOneMinuteDescription" : {
+      "comment" : "One minute is a whole 60 seconds!",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One minute is a whole 60 seconds!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Одна минута - это 60 секунд!"
+          }
+        }
+      }
+    },
+    "ContentCommonOneMinuteTitle" : {
+      "comment" : "One Minute",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One Minute"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Одна минута"
+          }
+        }
+      }
+    },
+    "ContentCommonSevenMinutesDescription" : {
+      "comment" : "Seven minutes are a whole 420 seconds!",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seven minutes are a whole 420 seconds!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Семь минут - это 420 секунд!"
+          }
+        }
+      }
+    },
+    "ContentCommonSevenMinutesTitle" : {
+      "comment" : "Seven Minutes",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seven Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Семь минут"
+          }
+        }
+      }
+    },
+    "ContentCommonTenMinutesDescription" : {
+      "comment" : "Ten minutes are a whole 600 seconds!",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten minutes are a whole 600 seconds!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Десять минут - это 600 секунд!"
+          }
+        }
+      }
+    },
+    "ContentCommonTenMinutesTitle" : {
+      "comment" : "Ten Minutes",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Десять минут"
+          }
+        }
+      }
+    },
+    "ContentCommonThreeMinutesDescription" : {
+      "comment" : "Three minutes are a whole 180 seconds!",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Three minutes are a whole 180 seconds!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Три минуты - это 180 секунд!"
+          }
+        }
+      }
+    },
+    "ContentCommonThreeMinutesTitle" : {
+      "comment" : "Three Minutes",
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Three Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Три минуты"
+          }
+        }
+      }
+    },
     "InventoryPagePlaceholderSubtitle" : {
       "comment" : "Get some Items from Fair via Machine",
       "localizations" : {
@@ -146,7 +326,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Получите предметы из Ярмарки с помощью Мастерской"
+            "value" : "Получите предметы с Ярмарки при помощи Мастерской"
           }
         }
       }
@@ -520,7 +700,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Добавьте предметы из Ярмарки"
+            "value" : "Добавьте предметы с Ярмарки"
           }
         }
       }
@@ -996,7 +1176,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Архивные предметы с Ярмарки отображаются здесь"
+            "value" : "Архивные предметы с Ярмарки хранятся здесь"
           }
         }
       }
@@ -1506,7 +1686,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Получите предметы из Ярмарки с помощью Мастерской"
+            "value" : "Получите предметы с Ярмарки при помощи Мастерской"
           }
         }
       }

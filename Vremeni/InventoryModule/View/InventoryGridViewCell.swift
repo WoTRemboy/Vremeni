@@ -75,7 +75,10 @@ struct InventoryGridCell: View {
         let modelContext = ModelContext(container)
         
         let viewModel = InventoryView.InventoryViewModel(modelContext: modelContext)
-        let example = ConsumableItem.itemMockConfig(name: "One Hour", price: 1, profile: Profile.configMockProfile(), enabled: true)
+        let example = ConsumableItem.itemMockConfig(
+            nameKey: Content.Common.oneMinuteTitle,
+            price: 1, profile: Profile.configMockProfile(),
+            enabled: true)
         return InventoryGridCell(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")

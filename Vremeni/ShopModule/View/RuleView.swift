@@ -128,7 +128,11 @@ struct RuleView: View {
         let modelContext = ModelContext(container)
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         
-        let example = ConsumableItem.itemMockConfig(name: "Five Minutes", description: "Five minutes is a whole 300 seconds!", price: 5, rarity: .uncommon, profile: Profile.configMockProfile())
+        let example = ConsumableItem.itemMockConfig(
+            nameKey: Content.Uncommon.fiveMinutesTitle,
+            descriptionKey: Content.Uncommon.fiveMinutesDescription,
+            price: 5, rarity: .uncommon,
+            profile: Profile.configMockProfile())
         
         return RuleView(item: example, viewModel: viewModel)
     } catch {
