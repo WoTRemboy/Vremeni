@@ -19,6 +19,10 @@ extension ProfileView {
         private(set) var profile = Profile.configMockProfile()
         private(set) var version: String = String()
         
+        internal var notificationsEnabled: Bool = false
+        internal var showingNotificationAlert: Bool = false
+        private(set) var notificationsStatus: NotificationStatus = .prohibited
+        
         private var items = [ConsumableItem]()
         private var unlockedItems = [ConsumableItem]()
         private var readyItems = [ConsumableItem]()
@@ -49,6 +53,7 @@ extension ProfileView {
             fetchProfileData()
             fetchItemsData()
             fetchArchivedItemsData()
+            readNotificationStatus()
         }
         
         internal func updateItemsOnAppear() {
@@ -86,6 +91,54 @@ extension ProfileView {
         internal func inventoryRarityCount(for rarity: Rarity) -> Int {
             let rarityItems = readyItems.filter { $0.rarity == rarity }
             return rarityItems.reduce(0) { $0 + $1.count }
+        }
+        
+        internal func changeTheme(theme: Theme) {
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                if let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
+                    UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                        window.overrideUserInterfaceStyle = theme.userInterfaceStyle
+                    })
+                }
+            }
+        }
+        
+        internal func selectShape(_ theme: Theme) -> (CGSize, CGFloat) {
+            switch theme {
+            case .systemDefault:
+                (CGSize(width: 0, height: 0), 90)
+            case .light:
+                (CGSize(width: 150, height: 150), 180)
+            case .dark:
+                (CGSize(width: 30, height: -25), 180)
+            }
+        }
+        
+        private func readNotificationStatus() {
+            let defaults = UserDefaults.standard
+            let rawValue = defaults.string(forKey: Texts.UserDefaults.notifications) ?? String()
+            notificationsStatus = NotificationStatus(rawValue: rawValue) ?? .prohibited
+            
+            guard notificationsStatus == .allowed else { return }
+            notificationsEnabled = true
+        }
+        
+        internal func setNotificationsStatus(allowed: Bool) {
+            let defaults = UserDefaults.standard
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
+                if success {
+                    self.notificationsStatus = allowed ? .allowed : .disabled
+                    print("Notifications are set to \(allowed).")
+                } else if let error {
+                    print(error.localizedDescription)
+                } else {
+                    self.notificationsStatus = .prohibited
+                    self.notificationsEnabled = false
+                    self.showingNotificationAlert = true
+                    print("Notifications are prohibited.")
+                }
+                defaults.set(self.notificationsStatus.rawValue, forKey: Texts.UserDefaults.notifications)
+            }
         }
         
         internal func updateVersionOnAppear() {

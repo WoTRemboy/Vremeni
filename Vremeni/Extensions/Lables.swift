@@ -138,11 +138,21 @@ final class Texts {
         static let resetButton = "Reset progress"
         
         static let app = "Application"
-        static let notifications = "Notifications (soon)"
-        static let appearance = "Appearance (soon)"
+        static let notifications = "Notifications"
+        static let notificationsTitle = "Notification Access Required"
+        static let notificationsContent = "Please enable notifications in Settings."
+        
+        static let appearance = "Appearance"
+        static let theme = "Theme"
+        static let system = "System"
+        static let light = "Light"
+        static let dark = "Dark"
+        static let done = "Done"
+        
         static let language = "Language (soon)"
         static let languageTitle = "Change language"
         static let languageContent = "Select the language you want in Settings."
+        
         static let settings = "Settings"
         
         enum Stats {
@@ -205,10 +215,16 @@ final class Texts {
     enum TotalPrice {
         static let total = "Total"
     }
+    
+    enum UserDefaults {
+        static let notifications = "notificationsEnabled"
+        static let theme = "userTheme"
+    }
 }
 
 extension Notification.Name {
     static let resetProgressNotification = Notification.Name("resetProgressNotification")
     static let startProgressNotification = Notification.Name("startProgressNotification")
     static let inventoryUpdateNotification = Notification.Name("inventoryUpdateNotification")
+    static let userNotificationUpdate = Notification.Name("userNotificationUpdate")
 }

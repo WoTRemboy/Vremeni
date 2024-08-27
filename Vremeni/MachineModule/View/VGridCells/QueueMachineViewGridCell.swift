@@ -110,7 +110,9 @@ struct QueueMachineViewGridCell: View {
             Button(action: {
                 withAnimation(.snappy) {
                     viewModel.setWorkshop(item: item)
-                    viewModel.notificationSetup(for: item)
+                    if viewModel.notificationStatus == .allowed {
+                        viewModel.notificationSetup(for: item)
+                    }
                 }
             }) {
                 Image(systemName: "arrow.up")

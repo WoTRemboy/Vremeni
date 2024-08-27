@@ -99,7 +99,9 @@ struct MachineItemDetailsView: View {
                     viewModel.notificationRemove(for: item.id)
                 } else {
                     viewModel.setWorkshop(item: item)
-                    viewModel.notificationSetup(for: item)
+                    if viewModel.notificationStatus == .allowed {
+                        viewModel.notificationSetup(for: item)
+                    }
                 }
                 dismiss()
             }

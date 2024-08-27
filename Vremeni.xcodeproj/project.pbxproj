@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6306D8792C7CE1D100F58C79 /* ThemeChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6306D8782C7CE1D100F58C79 /* ThemeChangeView.swift */; };
 		63194D1B2C63E01000CAA0AB /* InventoryGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63194D1A2C63E01000CAA0AB /* InventoryGridViewCell.swift */; };
 		631A5FD92C5A548C002331F7 /* ConsumableItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631A5FD82C5A548C002331F7 /* ConsumableItemDetails.swift */; };
 		631AF3D12C4FC82C00DFD63C /* VremeniApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */; };
@@ -89,6 +90,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6306D8782C7CE1D100F58C79 /* ThemeChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThemeChangeView.swift; path = Vremeni/ProfileModule/View/NavigationPages/ThemeChangeView.swift; sourceTree = SOURCE_ROOT; };
 		63194D1A2C63E01000CAA0AB /* InventoryGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryGridViewCell.swift; sourceTree = "<group>"; };
 		631A5FD82C5A548C002331F7 /* ConsumableItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumableItemDetails.swift; sourceTree = "<group>"; };
 		631AF3CD2C4FC82C00DFD63C /* Vremeni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vremeni.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -412,6 +414,7 @@
 			children = (
 				6324BA432C6A2D5900A2610A /* ArchiveGridCell.swift */,
 				6324BA452C6A522A00A2610A /* ArchiveDetailsView.swift */,
+				6306D8782C7CE1D100F58C79 /* ThemeChangeView.swift */,
 				63843BDC2C6B6F9B00589C2D /* NewUsernameView.swift */,
 			);
 			path = SupportViews;
@@ -690,6 +693,7 @@
 				638620B32C60314F00453944 /* ItemListRow.swift in Sources */,
 				63973ADA2C70ACB300F734FE /* BannerModel.swift in Sources */,
 				6395B7612C5A5FBD00C0C611 /* ParameterRow.swift in Sources */,
+				6306D8792C7CE1D100F58C79 /* ThemeChangeView.swift in Sources */,
 				631AF4192C517F7900DFD63C /* ShopItemGridCell.swift in Sources */,
 				631AF4212C5250BB00DFD63C /* InventoryView.swift in Sources */,
 				638620B52C60D11B00453944 /* MachineItemDetailsView.swift in Sources */,
@@ -888,6 +892,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vremeni/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -898,7 +903,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.0;
+				MARKETING_VERSION = 0.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -923,6 +928,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Vremeni/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -933,7 +939,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.0;
+				MARKETING_VERSION = 0.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -99,7 +99,9 @@ struct MachineViewGridCell: View {
                 withAnimation(.snappy) {
                     if paused {
                         viewModel.setWorkshop(item: item)
-                        viewModel.notificationSetup(for: item)
+                        if viewModel.notificationStatus == .allowed {
+                            viewModel.notificationSetup(for: item)
+                        }
                     } else {
                         viewModel.progressDismiss(item: item)
                         viewModel.notificationRemove(for: item.id)

@@ -62,6 +62,9 @@ struct MachineAddItemsView: View {
                             viewModel.setWorkshop(item: item)
                             dismiss()
                         }
+                        if viewModel.notificationStatus == .allowed {
+                            viewModel.notificationSetup(for: item)
+                        }
                     }) {
                         ItemListRow(item: item)
                     }
