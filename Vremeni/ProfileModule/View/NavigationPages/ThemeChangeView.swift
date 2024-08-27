@@ -35,10 +35,10 @@ struct ThemeChangeView: View {
             }
             
             .onChange(of: userTheme) { oldTheme, newTheme in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     viewModel.changeTheme(theme: newTheme)
                 }
-                withAnimation(.snappy(duration: 0.3)) {
+                withAnimation(.snappy(duration: 0.2)) {
                     (circleOffset, circleSize) = viewModel.selectShape(newTheme)
                 }
             }

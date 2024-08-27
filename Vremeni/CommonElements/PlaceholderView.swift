@@ -36,7 +36,7 @@ struct PlaceholderView: View {
                 .font(.subhead())
                 .foregroundStyle(Color.LabelColors.labelSecondary)
                 .multilineTextAlignment(.center)
-                .lineLimit(1)
+                .lineLimit(2)
         }
         .padding(.horizontal)
     }

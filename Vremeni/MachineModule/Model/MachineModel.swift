@@ -97,7 +97,7 @@ extension MachineItem {
         let price = price
         let rarity = rarity
         let profile = profile
-        let parent = ConsumableItem.itemMockConfig(name: name, price: price, profile: profile)
+        let parent = ConsumableItem.itemMockConfig(nameKey: name, price: price, profile: profile)
         
         return MachineItem(name: name, itemDescription: description, image: image, price: price, rarity: rarity, parent: parent)
     }

@@ -16,9 +16,17 @@ final class ConsumableItem: Identifiable {
     
     // General
     var id = UUID()
-    var name: String
-    var itemDescription: String
+    var nameKey: String
+    var descriptionKey: String
     var image: String
+    
+    // General localized
+    var name: String {
+        NSLocalizedString(nameKey, comment: String())
+    }
+    var itemDescription: String {
+        NSLocalizedString(descriptionKey, comment: String())
+    }
     
     // Valuation
     var price: Float
@@ -40,13 +48,15 @@ final class ConsumableItem: Identifiable {
     var ready: Bool
     var archived: Bool
     
-    init(id: UUID = UUID(), name: String, itemDescription: String, image: String,
-         price: Float, count: Int = 0, type: VremeniType = .minutes, rarity: Rarity = .common,
-         machineItems: [MachineItem] = [], profile: Profile, enabled: Bool = false, inMachine: Bool = false,
+    init(id: UUID = UUID(), nameKey: String, descriptionKey: String,
+         image: String, price: Float, count: Int = 0, type: VremeniType = .minutes,
+         rarity: Rarity = .common, machineItems: [MachineItem] = [], profile: Profile,
+         enabled: Bool = false, inMachine: Bool = false,
          ready: Bool = false, archived: Bool = false) {
+        
         self.id = id
-        self.name = name
-        self.itemDescription = itemDescription
+        self.nameKey = nameKey
+        self.descriptionKey = descriptionKey
         self.image = image
         self.price = price
         self.count = count
@@ -89,12 +99,13 @@ extension ConsumableItem {
     }
     
     // Mock ConsumableItem configuration method
-    static internal func itemMockConfig(name: String, description: String = String(),
-                                        price: Float, count: Int = 0, rarity: Rarity = .common,
+    static internal func itemMockConfig(nameKey: String, descriptionKey: String = String(),
+                                        price: Float, count: Int = 0,
+                                        rarity: Rarity = .common,
                                         profile: Profile, enabled: Bool = true,
                                         ready: Bool = false, archived: Bool = false) -> ConsumableItem {
-        let name = name
-        let description = description
+        let nameKey = nameKey
+        let descriptionKey = descriptionKey
         let image = "\(Int(price)).square"
         let price = price
         let count = count
@@ -104,9 +115,10 @@ extension ConsumableItem {
         let rarity = rarity
         let profile = profile
         
-        return ConsumableItem(name: name, itemDescription: description, image: image,
-                              price: price, count: count, rarity: rarity, profile: profile,
-                              enabled: enable, ready: ready, archived: archived)
+        return ConsumableItem(nameKey: nameKey, descriptionKey: descriptionKey,
+                              image: image, price: price, count: count, rarity: rarity,
+                              profile: profile, enabled: enable, ready: ready,
+                              archived: archived)
     }
 }
 

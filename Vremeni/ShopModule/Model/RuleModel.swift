@@ -36,13 +36,13 @@ extension Rule {
         let price: Float = 5
         
         var requirement = Set<ConsumableItem>()
-        let one = ConsumableItem.itemMockConfig(name: "One Minute", price: 1, profile: Profile.configMockProfile())
-        let two = ConsumableItem.itemMockConfig(name: "Two Minutes", price: 2, profile: Profile.configMockProfile())
+        let one = ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle, price: 1, profile: Profile.configMockProfile())
+        let two = ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle, price: 2, profile: Profile.configMockProfile())
         requirement.insert(one)
         requirement.insert(two)
         requirement.insert(two)
         
-        let result = ConsumableItem.itemMockConfig(name: "Five Minutes", price: 5, profile: Profile.configMockProfile())
+        let result = ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle, price: 5, profile: Profile.configMockProfile())
         
         return Rule(name: name, description: description, price: price, requirement: requirement, result: result)
     }

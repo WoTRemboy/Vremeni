@@ -70,6 +70,12 @@ struct ItemListRow: View {
 }
 
 #Preview {
-    let example = MachineItem(name: "Item name", itemDescription: "Item description", image: "8.square", price: 8, parent: ConsumableItem.itemMockConfig(name: "", price: 1, profile: Profile.configMockProfile()))
+    let example = MachineItem(
+        name: "Item name",
+        itemDescription: "Item description",
+        image: "8.square", price: 8,
+        parent: ConsumableItem.itemMockConfig(
+            nameKey: Content.Common.oneMinuteTitle,
+            price: 1, profile: Profile.configMockProfile()))
     return ItemListRow(item: example)
 }

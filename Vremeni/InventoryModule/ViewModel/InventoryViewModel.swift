@@ -75,31 +75,38 @@ extension InventoryView {
         }
         
         internal func addSamples() {
-            let items = [ConsumableItem.itemMockConfig(name: "One Minute",
-                                                       description: "One minute is a whole 60 seconds!",
-                                                       price: 1,
-                                                       profile: profile,
-                                                       ready: true),
+            let items = [
+                ConsumableItem.itemMockConfig(
+                    nameKey: Content.Common.oneMinuteTitle,
+                    descriptionKey: Content.Common.oneMinuteDescription,
+                    price: 1,
+                    profile: profile,
+                    ready: true),
                          
-                         ConsumableItem.itemMockConfig(name: "Three Minutes",
-                                                       description: "Three minutes is a whole 180 seconds!",
-                                                       price: 3,
-                                                       rarity: .common,
-                                                       profile: profile,
-                                                       ready: true),
+                ConsumableItem.itemMockConfig(
+                    nameKey: Content.Common.threeMinutesTitle,
+                    descriptionKey: Content.Common.threeMinutesDescription,
+                    price: 3,
+                    rarity: .common,
+                    profile: profile,
+                    ready: true),
                          
-                         ConsumableItem.itemMockConfig(name: "Five Minutes",
-                                                       description: "Five minutes is a whole 300 seconds!",
-                                                       price: 5,
-                                                       rarity: .common,
-                                                       profile: profile,
-                                                       ready: true),
-                         ConsumableItem.itemMockConfig(name: "Seven Minutes",
-                                                       description: "Five minutes is a whole 300 seconds!",
-                                                       price: 7,
-                                                       rarity: .uncommon,
-                                                       profile: profile,
-                                                       ready: true)]
+                ConsumableItem.itemMockConfig(
+                    nameKey: Content.Uncommon.fiveMinutesTitle,
+                    descriptionKey: Content.Uncommon.fiveMinutesDescription,
+                    price: 5,
+                    rarity: .common,
+                    profile: profile,
+                    ready: true),
+                
+                ConsumableItem.itemMockConfig(
+                    nameKey: Content.Uncommon.sevenMinutesTitle,
+                    descriptionKey: Content.Uncommon.sevenMinutesDescription,
+                    price: 7,
+                    rarity: .uncommon,
+                    profile: profile,
+                    ready: true)]
+            
             for item in items {
                 modelContext.insert(item)
             }

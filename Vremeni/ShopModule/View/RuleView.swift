@@ -83,13 +83,13 @@ struct RuleView: View {
     private var conditionRows: some View {
         VStack(spacing: 14) {
             ParameterRow(title: "One Minute",
-                         content: "Inventory: 5",
+                         content: "\(Texts.ShopPage.Rule.inventory): 5",
                          trailingContent: "3/3")
             ParameterRow(title: "Three Minutes",
-                         content: "Inventory: 2",
+                         content: "\(Texts.ShopPage.Rule.inventory): 2",
                          trailingContent: "2/6")
-            ParameterRow(title: "Coins",
-                         content: "Inventory: 128",
+            ParameterRow(title: Texts.ShopPage.Rule.coins,
+                         content: "\(Texts.ShopPage.Rule.inventory): 128",
                          trailingContent: "21/21")
         }
     }
@@ -128,7 +128,11 @@ struct RuleView: View {
         let modelContext = ModelContext(container)
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         
-        let example = ConsumableItem.itemMockConfig(name: "Five Minutes", description: "Five minutes is a whole 300 seconds!", price: 5, rarity: .uncommon, profile: Profile.configMockProfile())
+        let example = ConsumableItem.itemMockConfig(
+            nameKey: Content.Uncommon.fiveMinutesTitle,
+            descriptionKey: Content.Uncommon.fiveMinutesDescription,
+            price: 5, rarity: .uncommon,
+            profile: Profile.configMockProfile())
         
         return RuleView(item: example, viewModel: viewModel)
     } catch {

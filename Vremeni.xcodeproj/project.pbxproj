@@ -46,6 +46,8 @@
 		6324BA462C6A522A00A2610A /* ArchiveDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324BA452C6A522A00A2610A /* ArchiveDetailsView.swift */; };
 		633571FF2C6EA425005E5D26 /* StatsPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633571FE2C6EA425005E5D26 /* StatsPieChartView.swift */; };
 		633572012C6F547D005E5D26 /* StatsBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633572002C6F547D005E5D26 /* StatsBarChartView.swift */; };
+		635D59332C7E460F00EA2550 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 635D59322C7E460F00EA2550 /* Localizable.xcstrings */; };
+		635D59372C7E668700EA2550 /* ContentLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635D59362C7E668700EA2550 /* ContentLabels.swift */; };
 		6373291B2C5C1E9600D7A719 /* ShopItemGridCellLocked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6373291A2C5C1E9600D7A719 /* ShopItemGridCellLocked.swift */; };
 		63843BDD2C6B6F9B00589C2D /* NewUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63843BDC2C6B6F9B00589C2D /* NewUsernameView.swift */; };
 		638620A92C5D4F1F00453944 /* EmptyMachineViewGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638620A82C5D4F1F00453944 /* EmptyMachineViewGridCell.swift */; };
@@ -133,6 +135,8 @@
 		6324BA452C6A522A00A2610A /* ArchiveDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveDetailsView.swift; sourceTree = "<group>"; };
 		633571FE2C6EA425005E5D26 /* StatsPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPieChartView.swift; sourceTree = "<group>"; };
 		633572002C6F547D005E5D26 /* StatsBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsBarChartView.swift; sourceTree = "<group>"; };
+		635D59322C7E460F00EA2550 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		635D59362C7E668700EA2550 /* ContentLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLabels.swift; sourceTree = "<group>"; };
 		6373291A2C5C1E9600D7A719 /* ShopItemGridCellLocked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemGridCellLocked.swift; sourceTree = "<group>"; };
 		63843BDC2C6B6F9B00589C2D /* NewUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUsernameView.swift; sourceTree = "<group>"; };
 		638620A82C5D4F1F00453944 /* EmptyMachineViewGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMachineViewGridCell.swift; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 			children = (
 				631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */,
 				63F0090F2C6D167C00DDF6E3 /* SplashScreenView.swift */,
+				635D59322C7E460F00EA2550 /* Localizable.xcstrings */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 				631AF40A2C516ECF00DFD63C /* ColorExtension.swift */,
 				631AF40C2C516EDD00DFD63C /* ImageExtension.swift */,
 				631AF40E2C516EF000DFD63C /* Lables.swift */,
+				635D59362C7E668700EA2550 /* ContentLabels.swift */,
 				631AF4102C516F0000DFD63C /* DateFormats.swift */,
 			);
 			path = Extensions;
@@ -623,6 +629,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 631AF3C42C4FC82B00DFD63C;
 			productRefGroup = 631AF3CE2C4FC82C00DFD63C /* Products */;
@@ -643,6 +650,7 @@
 			files = (
 				631AF3D82C4FC82D00DFD63C /* Preview Assets.xcassets in Resources */,
 				631AF3D52C4FC82D00DFD63C /* Assets.xcassets in Resources */,
+				635D59332C7E460F00EA2550 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,6 +704,7 @@
 				6306D8792C7CE1D100F58C79 /* ThemeChangeView.swift in Sources */,
 				631AF4192C517F7900DFD63C /* ShopItemGridCell.swift in Sources */,
 				631AF4212C5250BB00DFD63C /* InventoryView.swift in Sources */,
+				635D59372C7E668700EA2550 /* ContentLabels.swift in Sources */,
 				638620B52C60D11B00453944 /* MachineItemDetailsView.swift in Sources */,
 				63973AE12C70B3D700F734FE /* BannerView.swift in Sources */,
 				631F26562C66185900FEAD1A /* RarityModel.swift in Sources */,
@@ -903,7 +912,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.1;
+				MARKETING_VERSION = 0.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -939,7 +948,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.1;
+				MARKETING_VERSION = 0.5.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
