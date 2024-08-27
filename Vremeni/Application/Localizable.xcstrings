@@ -135,13 +135,12 @@
       }
     },
     "ContentCommonFiveMinutesDescription" : {
-      "comment" : "Five minutes are a whole 300 seconds!",
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Five minutes are a whole 300 seconds!"
+            "value" : "Five Minutes are a whole 300 seconds!"
           }
         },
         "ru" : {
@@ -153,8 +152,7 @@
       }
     },
     "ContentCommonFiveMinutesTitle" : {
-      "comment" : "Five Minutes",
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -171,13 +169,12 @@
       }
     },
     "ContentCommonOneMinuteDescription" : {
-      "comment" : "One minute is a whole 60 seconds!",
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "One minute is a whole 60 seconds!"
+            "value" : "One Minute is a whole 60 seconds!"
           }
         },
         "ru" : {
@@ -189,8 +186,7 @@
       }
     },
     "ContentCommonOneMinuteTitle" : {
-      "comment" : "One Minute",
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -207,13 +203,12 @@
       }
     },
     "ContentCommonSevenMinutesDescription" : {
-      "comment" : "Seven minutes are a whole 420 seconds!",
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Seven minutes are a whole 420 seconds!"
+            "value" : "Seven Minutes are a whole 420 seconds!"
           }
         },
         "ru" : {
@@ -225,8 +220,7 @@
       }
     },
     "ContentCommonSevenMinutesTitle" : {
-      "comment" : "Seven Minutes",
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -243,13 +237,12 @@
       }
     },
     "ContentCommonTenMinutesDescription" : {
-      "comment" : "Ten minutes are a whole 600 seconds!",
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ten minutes are a whole 600 seconds!"
+            "value" : "Ten Minutes are a whole 600 seconds!"
           }
         },
         "ru" : {
@@ -261,8 +254,7 @@
       }
     },
     "ContentCommonTenMinutesTitle" : {
-      "comment" : "Ten Minutes",
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -279,13 +271,12 @@
       }
     },
     "ContentCommonThreeMinutesDescription" : {
-      "comment" : "Three minutes are a whole 180 seconds!",
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Three minutes are a whole 180 seconds!"
+            "value" : "Three Minutes are a whole 180 seconds!"
           }
         },
         "ru" : {
@@ -297,8 +288,7 @@
       }
     },
     "ContentCommonThreeMinutesTitle" : {
-      "comment" : "Three Minutes",
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -343,7 +333,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нет инвентаря"
+            "value" : "Нет витрины"
           }
         }
       }
@@ -360,7 +350,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Инвентарь"
+            "value" : "Витрина"
           }
         }
       }
@@ -2214,6 +2204,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Исследовать"
+          }
+        }
+      }
+    },
+    "ShopPageRuleCoins" : {
+      "comment" : "Coins",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coins"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Валюта"
+          }
+        }
+      }
+    },
+    "ShopPageRuleInventory" : {
+      "comment" : "Inventory",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inventory"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Наличие"
           }
         }
       }
