@@ -102,6 +102,11 @@ final class Texts {
         static let pause = NSLocalizedString("MachinePagePause", comment: "Pause")
         static let start = NSLocalizedString("MachinePageStart", comment: "Start")
         static let continueProgress = NSLocalizedString("MachinePageContinue", comment: "Continue")
+        
+        enum Upgrade {
+            static let coins = NSLocalizedString("MachinePageUpgradeCoins", comment: "Local currency")
+            static let real = NSLocalizedString("MachinePageUpgradeReal", comment: "Real currency")
+        }
     }
     
     enum InventoryPage {
@@ -164,6 +169,8 @@ final class Texts {
             static let count = NSLocalizedString("ProfilePageStatsCount", comment: "Count")
             static let category = "Category"
             static let type = "Chart type"
+            static let research = NSLocalizedString("ProfilePageStatsResearch", comment: "Research")
+            static let inventory = NSLocalizedString("ProfilePageStatsInventory", comment: "Inventory")
             
             static let progress = NSLocalizedString("ProfilePageStatsProgress", comment: "Progress")
             static let balance = NSLocalizedString("ProfilePageStatsBalance", comment: "Balance")

@@ -55,7 +55,7 @@ struct ChartsDetailsView: View {
     private var picker: some View {
         Picker(Texts.ProfilePage.Stats.type, selection: $selectedChartType.animation()) {
             ForEach(ChartType.allCases) {
-                Text($0.rawValue)
+                Text($0.name)
             }
         }
         .pickerStyle(.segmented)

@@ -112,9 +112,9 @@ enum UpgrageMethod: String {
     internal var name: String {
         switch self {
         case .coins:
-            <#code#>
+            Texts.MachinePage.Upgrade.coins
         case .money:
-            <#code#>
+            Texts.MachinePage.Upgrade.real
         }
     }
 }

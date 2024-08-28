@@ -61,7 +61,16 @@ enum ChartType: String, Identifiable, CaseIterable {
     case research = "Research"
     case inventory = "Inventory"
     
-    var id: Self { self }
+    internal var id: Self { self }
+    
+    internal var name: String {
+        switch self {
+        case .research:
+            Texts.ProfilePage.Stats.research
+        case .inventory:
+            Texts.ProfilePage.Stats.inventory
+        }
+    }
 }
 
 
@@ -69,6 +78,17 @@ enum Theme: String, CaseIterable {
     case systemDefault = "Default"
     case light = "Light"
     case dark = "Dark"
+    
+    internal var name: String {
+        switch self {
+        case .systemDefault:
+            Texts.ProfilePage.system
+        case .light:
+            Texts.ProfilePage.light
+        case .dark:
+            Texts.ProfilePage.dark
+        }
+    }
     
     internal func color(_ scheme: ColorScheme) -> Color {
         switch self {

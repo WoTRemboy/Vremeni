@@ -848,6 +848,40 @@
         }
       }
     },
+    "MachinePageUpgradeCoins" : {
+      "comment" : "Local currency",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local currency"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Внутренняя валюта"
+          }
+        }
+      }
+    },
+    "MachinePageUpgradeReal" : {
+      "comment" : "Real currency",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Real currency"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Реальная валюта"
+          }
+        }
+      }
+    },
     "MachinePageWorkshop" : {
       "comment" : "Workshop",
       "localizations" : {
@@ -1647,6 +1681,17 @@
         }
       }
     },
+    "ProfilePageStatsInventory" : {
+      "comment" : "Inventory",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Получено"
+          }
+        }
+      }
+    },
     "ProfilePageStatsOf" : {
       "comment" : "of",
       "localizations" : {
@@ -1728,6 +1773,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Редкости"
+          }
+        }
+      }
+    },
+    "ProfilePageStatsResearch" : {
+      "comment" : "Research",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Исследовано"
           }
         }
       }
