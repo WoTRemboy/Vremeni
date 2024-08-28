@@ -108,4 +108,13 @@ extension MachineItem {
 enum UpgrageMethod: String {
     case coins = "Local currency"
     case money = "Real currency"
+    
+    internal var name: String {
+        switch self {
+        case .coins:
+            <#code#>
+        case .money:
+            <#code#>
+        }
+    }
 }

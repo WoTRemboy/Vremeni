@@ -74,7 +74,7 @@ struct ChartsDetailsView: View {
             SectionHeader(Texts.ProfilePage.Stats.progress)
                 .padding(.leading)
             ForEach(viewModel.rariries) { rarity in
-                ParameterRow(title: rarity.rawValue,
+                ParameterRow(title: rarity.name,
                 content: "\(Texts.ProfilePage.Stats.unlocked) \(viewModel.rarityCount(for: rarity)) \(Texts.ProfilePage.Stats.of) \(viewModel.rarityCount(for: rarity, all: true))",
                 trailingContent: "\(viewModel.rarityPercent(for: rarity))%")
             }
@@ -93,7 +93,7 @@ struct ChartsDetailsView: View {
             SectionHeader(Texts.ProfilePage.Stats.balance)
                 .padding(.leading)
             ForEach(viewModel.inventoryRarities) { rarity in
-                ParameterRow(title: rarity.rawValue,
+                ParameterRow(title: rarity.name,
                              content: "\(Texts.ProfilePage.Stats.valuation) \(viewModel.rarityCount(for: rarity))",
                              trailingContent: "\(viewModel.valuationPercent(for: rarity))%")
             }

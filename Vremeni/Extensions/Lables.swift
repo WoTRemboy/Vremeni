@@ -31,6 +31,7 @@ final class Texts {
         static let mythic = NSLocalizedString("RarityMythic", comment: "Mythic")
         static let transcendent = NSLocalizedString("RarityTranscendent", comment: "Transcendent")
         static let exotic = NSLocalizedString("RarityExotic", comment: "Exotic")
+        static let all = NSLocalizedString("RarityAll", comment: "All")
     }
     
     enum ShopPage {

@@ -36,7 +36,7 @@ struct StatisticsChartView: View {
                        innerRadius: .ratio(0.6),
                        angularInset: 1.5)
             .cornerRadius(5)
-            .foregroundStyle(Rarity.rarityToColor(from: rarity))
+            .foregroundStyle(rarity.color)
             .opacity(0.8)
         }
         .chartLegend(.hidden)

@@ -40,7 +40,7 @@ struct InventoryStatsViewGridCell: View {
             Text(viewModel.rarityItemsCount(for: rarity))
                 .font(.emptyCellTitle())
                 .foregroundStyle(Color.LabelColors.labelPrimary)
-            Rarity.rarityToImage(rarity: rarity)
+            rarity.image
                 .resizable()
                 .scaledToFit()
                 .frame(height: 40)

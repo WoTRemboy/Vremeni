@@ -83,12 +83,12 @@ struct ConsumableItemDetails: View {
             // Item rarity view
             HStack(spacing: 5) {
                 // Rarity icon
-                Rarity.rarityToImage(rarity: item.rarity)
+                item.rarity.image
                     .resizable()
                     .scaledToFit()
                     .frame(width: 25)
                 // Rarity name
-                Text(item.rarity.rawValue)
+                Text(item.rarity.name)
                     .font(.body())
             }
         }

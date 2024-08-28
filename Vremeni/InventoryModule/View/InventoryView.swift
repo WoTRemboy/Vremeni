@@ -70,7 +70,7 @@ struct InventoryView: View {
             ForEach(Rarity.allCases) { rarity in
                 let items = searchResults.filter({ $0.rarity == rarity })
                 if !items.isEmpty {
-                    Section(header: SectionHeader(rarity.rawValue),
+                    Section(header: SectionHeader(rarity.name),
                             footer: InventoryStatsViewGridCell(rarity: rarity, viewModel: viewModel)) {
                         
                         ForEach(items) { item in
@@ -91,7 +91,7 @@ struct InventoryView: View {
     private var toolBarMenuFilter: some View {
         Menu {
             Picker(Texts.InventoryPage.filter, selection: $viewModel.rarityFilter) {
-                Text(Rarity.all.rawValue)
+                Text(Rarity.all.name)
                     .tag(Rarity.all)
             }
             Section {
@@ -99,8 +99,8 @@ struct InventoryView: View {
                     ForEach(Rarity.allCases) { rarity in
                         if !viewModel.filterItems(for: rarity).isEmpty {
                             Label(
-                                title: { Text(rarity.rawValue) },
-                                icon: { Rarity.rarityToImage(rarity: rarity) }
+                                title: { Text(rarity.name) },
+                                icon: { rarity.image }
                             )
                             .tag(rarity)
                         }

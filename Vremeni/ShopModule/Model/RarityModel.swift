@@ -32,9 +32,33 @@ extension Rarity: Identifiable {
         return [.common, .uncommon, .rare, .epic, .legendary, .mythic, .transcendent, .exotic]
     }
     
+    // Rarity name definition
+    internal var name: String {
+        switch self {
+        case .common:
+            Texts.Rarity.common
+        case .uncommon:
+            Texts.Rarity.uncommon
+        case .rare:
+            Texts.Rarity.rare
+        case .epic:
+            Texts.Rarity.epic
+        case .legendary:
+            Texts.Rarity.legendary
+        case .mythic:
+            Texts.Rarity.mythic
+        case .transcendent:
+            Texts.Rarity.transcendent
+        case .exotic:
+            Texts.Rarity.exotic
+        case .all:
+            Texts.Rarity.all
+        }
+    }
+    
     // Rarity icon definition
-    static internal func rarityToImage(rarity: Rarity) -> Image {
-        switch rarity {
+    internal var image: Image {
+        switch self {
         case .common:
             return .Rarity.common
         case .uncommon:
@@ -57,8 +81,8 @@ extension Rarity: Identifiable {
     }
     
     // Rarity color definition
-    static internal func rarityToColor(from rarity: Rarity) -> Color {
-        switch rarity {
+    internal var color: Color {
+        switch self {
         case .common:
             Color.RarityColors.common
         case .uncommon:

@@ -1880,7 +1880,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Никнейм"
+            "value" : "Имя"
           }
         }
       }
@@ -1915,6 +1915,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Прогресс"
+          }
+        }
+      }
+    },
+    "RarityAll" : {
+      "comment" : "All",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все"
           }
         }
       }
