@@ -1684,6 +1684,12 @@
     "ProfilePageStatsInventory" : {
       "comment" : "Inventory",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inventory"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1780,6 +1786,12 @@
     "ProfilePageStatsResearch" : {
       "comment" : "Research",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Research"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2328,6 +2340,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Дать миска рис"
+          }
+        }
+      }
+    },
+    "ShopPageRuleReward" : {
+      "comment" : "Reward",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reward"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Награда"
           }
         }
       }

@@ -54,6 +54,7 @@ final class Texts {
         
         enum Rule {
             static let title = NSLocalizedString("ShopPageRuleTitle", comment: "Rule")
+            static let reward = NSLocalizedString("ShopPageRuleReward", comment: "Reward")
             static let section = NSLocalizedString("ShopPageRuleSection", comment: "Research Conditions (Mock)")
             static let inventory = NSLocalizedString("ShopPageRuleInventory", comment: "Inventory")
             static let coins = NSLocalizedString("ShopPageRuleCoins", comment: "Coins")
