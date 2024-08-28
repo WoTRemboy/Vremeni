@@ -78,7 +78,7 @@ struct ThemeChangeView: View {
     private var picker: some View {
         Picker(Texts.ProfilePage.theme, selection: $userTheme) {
             ForEach(Theme.allCases, id: \.self) { theme in
-                Text(theme.rawValue).tag(theme)
+                Text(theme.name).tag(theme)
             }
         }
         .pickerStyle(.segmented)

@@ -26,7 +26,8 @@ struct RuleView: View {
     internal var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
-                itemInfo
+                unlockSection
+                itemInfoNew
                 researchCondition
                 conditionRows
                 button
@@ -48,36 +49,49 @@ struct RuleView: View {
         .foregroundStyle(Color.blue)
     }
     
-    private var itemInfo: some View {
-        VStack(spacing: 5) {
+    private var unlockSection: some View {
+        SectionHeader(Texts.ShopPage.Rule.reward)
+            .padding(.horizontal)
+    }
+    
+    private var itemInfoNew: some View {
+        HStack(spacing: 10) {
             Image(systemName: item.image)
                 .resizable()
                 .fontWeight(.light)
-                .scaledToFit()
-                .frame(width: 200)
+                .frame(width: 80, height: 80)
+                .clipShape(.buttonBorder)
+                .padding(.leading, -2.5)
                 .foregroundStyle(Color.blue, Color.cyan)
             
-            Text(item.name)
-                .font(.segmentTitle())
-                .foregroundStyle(Color.LabelColors.labelPrimary)
-                .padding(.top, 10)
-            
-            HStack(spacing: 5) {
-                Rarity.rarityToImage(rarity: item.rarity)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 25)
-                Text(item.rarity.rawValue)
-                    .font(.body())
+            VStack(alignment: .leading, spacing: 5) {
+                Text(item.name)
+                    .font(.title())
                     .foregroundStyle(Color.LabelColors.labelPrimary)
+                
+                rarityRow
             }
+            Spacer()
+        }
+        .padding(.horizontal)
+    }
+    
+    private var rarityRow: some View {
+        HStack(spacing: 5) {
+            item.rarity.image
+                .resizable()
+                .scaledToFit()
+                .frame(height: 17)
+            
+            Text(item.rarity.name)
+                .font(.subhead())
+                .foregroundStyle(Color.LabelColors.labelSecondary)
         }
     }
     
     private var researchCondition: some View {
         SectionHeader(Texts.ShopPage.Rule.section)
-            .padding(.horizontal)
-            .padding(.top, 20)
+            .padding([.top, .horizontal])
     }
     
     private var conditionRows: some View {

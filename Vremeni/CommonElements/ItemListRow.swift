@@ -42,7 +42,7 @@ struct ItemListRow: View {
                 .font(.body())
                 .foregroundStyle(Color.LabelColors.labelPrimary)
             
-            Rarity.rarityToImage(rarity: item.rarity)
+            item.rarity.image
                 .resizable()
                 .scaledToFit()
                 .frame(height: 17)

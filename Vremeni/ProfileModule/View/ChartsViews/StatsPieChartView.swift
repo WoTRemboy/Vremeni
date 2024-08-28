@@ -27,8 +27,8 @@ struct StatsPieChartView: View {
                        angularInset: 1.5)
             
             .cornerRadius(5)
-            .foregroundStyle(Rarity.rarityToColor(from: rarity))
-            .foregroundStyle(by: .value(Texts.ProfilePage.Stats.value, rarity.rawValue))
+            .foregroundStyle(rarity.color)
+            .foregroundStyle(by: .value(Texts.ProfilePage.Stats.value, rarity.name))
             .opacity(0.8)
         }
         .chartLegend(alignment: .center, spacing: 18) {
@@ -54,9 +54,9 @@ struct StatsPieChartView: View {
             ForEach(viewModel.actualRarities) { rarity in
                 HStack {
                     BasicChartSymbolShape.circle
-                        .foregroundColor(Rarity.rarityToColor(from: rarity))
+                        .foregroundColor(rarity.color)
                         .frame(width: 8, height: 8)
-                    Text(rarity.rawValue)
+                    Text(rarity.name)
                         .foregroundColor(.gray)
                         .font(.caption)
                 }

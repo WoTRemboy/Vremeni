@@ -123,7 +123,7 @@ struct ShopView: View {
         Menu {
             // .all rarity case
             Picker(Texts.ShopPage.filterItems, selection: $viewModel.rarityFilter) {
-                Text(Rarity.all.rawValue)
+                Text(Rarity.all.name)
                     .tag(Rarity.all)
             }
             Section {
@@ -133,8 +133,8 @@ struct ShopView: View {
                         // Shows label only when there are items
                         if !viewModel.filterItems(for: rarity).isEmpty {
                             Label(
-                                title: { Text(rarity.rawValue) },
-                                icon: { Rarity.rarityToImage(rarity: rarity) }
+                                title: { Text(rarity.name) },
+                                icon: { rarity.image }
                             )
                             .tag(rarity)
                         }

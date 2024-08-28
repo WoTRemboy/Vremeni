@@ -60,11 +60,11 @@ struct InventoryItemDetailsView: View {
                 .padding(.top, 10)
             
             HStack(spacing: 5) {
-                Rarity.rarityToImage(rarity: item.rarity)
+                item.rarity.image
                     .resizable()
                     .scaledToFit()
                     .frame(width: 25)
-                Text(item.rarity.rawValue)
+                Text(item.rarity.name)
                     .font(.body())
             }
         }

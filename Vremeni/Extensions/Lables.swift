@@ -31,6 +31,7 @@ final class Texts {
         static let mythic = NSLocalizedString("RarityMythic", comment: "Mythic")
         static let transcendent = NSLocalizedString("RarityTranscendent", comment: "Transcendent")
         static let exotic = NSLocalizedString("RarityExotic", comment: "Exotic")
+        static let all = NSLocalizedString("RarityAll", comment: "All")
     }
     
     enum ShopPage {
@@ -53,6 +54,7 @@ final class Texts {
         
         enum Rule {
             static let title = NSLocalizedString("ShopPageRuleTitle", comment: "Rule")
+            static let reward = NSLocalizedString("ShopPageRuleReward", comment: "Reward")
             static let section = NSLocalizedString("ShopPageRuleSection", comment: "Research Conditions (Mock)")
             static let inventory = NSLocalizedString("ShopPageRuleInventory", comment: "Inventory")
             static let coins = NSLocalizedString("ShopPageRuleCoins", comment: "Coins")
@@ -101,6 +103,11 @@ final class Texts {
         static let pause = NSLocalizedString("MachinePagePause", comment: "Pause")
         static let start = NSLocalizedString("MachinePageStart", comment: "Start")
         static let continueProgress = NSLocalizedString("MachinePageContinue", comment: "Continue")
+        
+        enum Upgrade {
+            static let coins = NSLocalizedString("MachinePageUpgradeCoins", comment: "Local currency")
+            static let real = NSLocalizedString("MachinePageUpgradeReal", comment: "Real currency")
+        }
     }
     
     enum InventoryPage {
@@ -163,6 +170,8 @@ final class Texts {
             static let count = NSLocalizedString("ProfilePageStatsCount", comment: "Count")
             static let category = "Category"
             static let type = "Chart type"
+            static let research = NSLocalizedString("ProfilePageStatsResearch", comment: "Research")
+            static let inventory = NSLocalizedString("ProfilePageStatsInventory", comment: "Inventory")
             
             static let progress = NSLocalizedString("ProfilePageStatsProgress", comment: "Progress")
             static let balance = NSLocalizedString("ProfilePageStatsBalance", comment: "Balance")
