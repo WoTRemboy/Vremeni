@@ -140,3 +140,20 @@ enum VremeniType: String, Codable {
     case year = "Year"
     case special = "Special"
 }
+
+enum ResearchType {
+    case completed
+    case locked
+    case less
+    
+    internal var icon: Image {
+        switch self {
+        case .completed:
+            Image.ShopPage.Research.check
+        case .locked:
+            Image.ShopPage.Research.locked
+        case .less:
+            Image.ShopPage.Research.less
+        }
+    }
+}

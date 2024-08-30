@@ -26,9 +26,7 @@ struct RuleView: View {
     internal var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
-                unlockSection
                 itemInfoNew
-                researchCondition
                 conditionRows
                 button
             }
@@ -73,7 +71,7 @@ struct RuleView: View {
             }
             Spacer()
         }
-        .padding(.horizontal)
+        .padding([.top, .horizontal])
     }
     
     private var rarityRow: some View {
@@ -96,16 +94,18 @@ struct RuleView: View {
     
     private var conditionRows: some View {
         VStack(spacing: 14) {
-            ParameterRow(title: "One Minute",
-                         content: "\(Texts.ShopPage.Rule.inventory): 5",
-                         trailingContent: "3/3")
-            ParameterRow(title: "Three Minutes",
-                         content: "\(Texts.ShopPage.Rule.inventory): 2",
-                         trailingContent: "2/6")
-            ParameterRow(title: Texts.ShopPage.Rule.coins,
-                         content: "\(Texts.ShopPage.Rule.inventory): 128",
-                         trailingContent: "21/21")
+            ForEach(item.requirement.sorted(by: { $0.key > $1.key }), id: \.key) { requirement in
+                ParameterRow(title: requirement.key,
+                             content: "\(Texts.ShopPage.Rule.inventory): 5",
+                             trailingContent: "5/7",
+                             researchType: .completed)
+            }
+            ParameterRow(title: "Coins",
+                         content: "\(Texts.ShopPage.Rule.inventory): 125",
+                         trailingContent: "4/7",
+                         researchType: .less)
         }
+        .padding(.top)
     }
     
     private var button: some View {
@@ -142,11 +142,13 @@ struct RuleView: View {
         let modelContext = ModelContext(container)
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         
+        let requirements = ["One Hour": 2, "Three Hours": 1]
+        
         let example = ConsumableItem.itemMockConfig(
             nameKey: Content.Uncommon.fiveMinutesTitle,
             descriptionKey: Content.Uncommon.fiveMinutesDescription,
             price: 5, rarity: .uncommon,
-            profile: Profile.configMockProfile())
+            profile: Profile.configMockProfile(), requirement: requirements)
         
         return RuleView(item: example, viewModel: viewModel)
     } catch {
