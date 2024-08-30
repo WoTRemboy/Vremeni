@@ -36,6 +36,9 @@ final class ConsumableItem: Identifiable {
     var type: VremeniType
     var rarity: Rarity
     
+    // Research requirements
+    var requirement: [String: Int]
+    
     // Instanses (children) for machine module
     @Relationship(deleteRule: .cascade) var machineItems: [MachineItem]
     
@@ -50,7 +53,8 @@ final class ConsumableItem: Identifiable {
     
     init(id: UUID = UUID(), nameKey: String, descriptionKey: String,
          image: String, price: Float, count: Int = 0, type: VremeniType = .minutes,
-         rarity: Rarity = .common, machineItems: [MachineItem] = [], profile: Profile,
+         rarity: Rarity = .common, machineItems: [MachineItem] = [],
+         profile: Profile, requirement: [String: Int],
          enabled: Bool = false, inMachine: Bool = false,
          ready: Bool = false, archived: Bool = false) {
         
@@ -64,6 +68,7 @@ final class ConsumableItem: Identifiable {
         self.rarity = rarity
         self.machineItems = machineItems
         self.profile = profile
+        self.requirement = requirement
         self.enabled = enabled
         self.inMachine = inMachine
         self.ready = ready
@@ -102,7 +107,8 @@ extension ConsumableItem {
     static internal func itemMockConfig(nameKey: String, descriptionKey: String = String(),
                                         price: Float, count: Int = 0,
                                         rarity: Rarity = .common,
-                                        profile: Profile, enabled: Bool = true,
+                                        profile: Profile, requirement: [String: Int] = [:],
+                                        enabled: Bool = true,
                                         ready: Bool = false, archived: Bool = false) -> ConsumableItem {
         let nameKey = nameKey
         let descriptionKey = descriptionKey
@@ -114,10 +120,11 @@ extension ConsumableItem {
         let archived = archived
         let rarity = rarity
         let profile = profile
+        let requirement = requirement
         
         return ConsumableItem(nameKey: nameKey, descriptionKey: descriptionKey,
                               image: image, price: price, count: count, rarity: rarity,
-                              profile: profile, enabled: enable, ready: ready,
+                              profile: profile, requirement: requirement, enabled: enable, ready: ready,
                               archived: archived)
     }
 }
