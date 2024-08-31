@@ -61,7 +61,14 @@ extension ShopView {
         
         // Transfers ConsumableItem from Locked status to Available
         internal func unlockItem(item: ConsumableItem) {
+            guard profile.balance >= Int(item.price) else { return }
             item.unlockItem()
+            
+            for requirement in item.requirement {
+                let consItem = allItems.first(where: { $0.nameKey == requirement.key })
+                consItem?.reduceCount(for: requirement.value)
+            }
+            profile.unlockItem(for: item.price)
             fetchData()
         }
         
@@ -107,6 +114,15 @@ extension ShopView {
             } else {
                 return .less
             }
+        }
+        
+        internal func unlockButtonAvailable(for item: ConsumableItem) -> Bool {
+            for requirement in item.requirement {
+                guard researchTypeDefinition(for: requirement.key, of: requirement.value) == .completed else { return false }
+            }
+            guard researchTypeDefinition(for: item.price) == .completed else { return false }
+            
+            return true
         }
         
         // MARK: - Calculation methods

@@ -41,6 +41,10 @@ extension Profile: Equatable {
         balance += Int(count)
     }
     
+    internal func unlockItem(for price: Float) {
+        balance -= Int(price)
+    }
+    
     internal func slotPurchase(price: Double) {
         balance -= Int(price)
         internalMachines += 1

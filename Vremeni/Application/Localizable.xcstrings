@@ -117,6 +117,23 @@
         }
       }
     },
+    "BannerUnlocked" : {
+      "comment" : "is unlocked.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "is unlocked."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "открыто."
+          }
+        }
+      }
+    },
     "CommonTitle" : {
       "comment" : "Vremeni",
       "localizations" : {

@@ -218,6 +218,7 @@ final class Texts {
         static let archived = NSLocalizedString("BannerArchived", comment: "Moved to Archive.")
         static let ready = NSLocalizedString("BannerReady", comment: "is ready.")
         static let reset = NSLocalizedString("BannerReset", comment: "Progress has been reset.")
+        static let unlocked = NSLocalizedString("BannerUnlocked", comment: "is unlocked.")
     }
     
     enum TotalPrice {

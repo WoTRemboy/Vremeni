@@ -10,8 +10,8 @@ import SwiftData
 
 struct RuleView: View {
     
+    @EnvironmentObject private var bannerService: BannerViewModel
     @Environment(\.dismiss) var dismiss
-    @State private var showingAlert = false
     
     private var viewModel: ShopView.ShopViewModel
     private let item: ConsumableItem
@@ -111,18 +111,17 @@ struct RuleView: View {
     
     private var button: some View {
         Button(action: {
-            showingAlert = true
+            withAnimation(.snappy) {
+                viewModel.unlockItem(item: item)
+                bannerService.setBanner(banner: .unlocked(message: "\(item.name) \(Texts.Banner.unlocked)"))
+                
+                dismiss()
+            }
         }) {
             Text(Texts.ShopPage.Rule.unlock)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
-        .alert(isPresented: $showingAlert) {
-            Alert(title: Text(Texts.ShopPage.Rule.soon),
-                  message: Text(Texts.ShopPage.Rule.working),
-                  dismissButton: .cancel(Text(Texts.ShopPage.Rule.ok), action: {
-                dismiss()
-            }))
-        }
+        .disabled(!viewModel.unlockButtonAvailable(for: item))
         
         .frame(height: 50)
         .minimumScaleFactor(0.4)

@@ -103,6 +103,11 @@ extension ConsumableItem {
         count += 1
     }
     
+    // Reduces item's count when other item unlocks
+    internal func reduceCount(for price: Int) {
+        count -= price
+    }
+    
     // Mock ConsumableItem configuration method
     static internal func itemMockConfig(nameKey: String, descriptionKey: String = String(),
                                         price: Float, count: Int = 0,
