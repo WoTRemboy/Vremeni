@@ -113,7 +113,7 @@ struct RuleView: View {
         Button(action: {
             withAnimation(.snappy) {
                 viewModel.unlockItem(item: item)
-                bannerService.setBanner(banner: .unlocked(message: "\(item.name) \(Texts.Banner.unlocked)"))
+                bannerService.setBanner(banner: .unlocked(message: "\(Texts.Banner.unlocked): \(item.name)."))
                 
                 dismiss()
             }

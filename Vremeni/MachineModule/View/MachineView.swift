@@ -49,7 +49,7 @@ struct MachineView: View {
             // Shows ready banner when item is ready
             .onChange(of: viewModel.readyNotification.ready) {
                 guard let name = viewModel.readyNotification.name else { return }
-                bannerService.setBanner(banner: .ready(message: "«\(name)» \(Texts.Banner.ready)"))
+                bannerService.setBanner(banner: .ready(message: "\(Texts.Banner.ready): \(name)."))
                 viewModel.hideReadyNotification()
             }
             .background(Color.BackColors.backDefault)
