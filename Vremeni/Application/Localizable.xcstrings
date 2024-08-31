@@ -89,13 +89,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "is ready."
+            "value" : "Ready"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "готово."
+            "value" : "Готово"
           }
         }
       }
@@ -113,6 +113,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Прогресс был сброшен."
+          }
+        }
+      }
+    },
+    "BannerUnlocked" : {
+      "comment" : "is unlocked.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlocked"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Открыто"
           }
         }
       }
@@ -2424,7 +2441,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Исследовать"
+            "value" : "Открыть"
           }
         }
       }

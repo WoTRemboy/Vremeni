@@ -193,36 +193,43 @@ extension ProfileView {
         }
         
         internal func addSamples() {
-            let items = [ConsumableItem.itemMockConfig(nameKey: "ContentCommonOneMinuteTitle",
-                                                       descriptionKey: Content.Common.oneMinuteDescription,
-                                                       price: 1,
-                                                       profile: profile),
+            let items = [
+                ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle,
+                                              descriptionKey: Content.Common.oneMinuteDescription,
+                                              price: 1,
+                                              profile: profile),
                          
-                         ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle,
-                                                       descriptionKey: Content.Common.threeMinutesDescription,
-                                                       price: 3,
-                                                       rarity: .common,
-                                                       profile: profile,
-                                                       enabled: false),
+                ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle,
+                                              descriptionKey: Content.Common.threeMinutesDescription,
+                                              price: 3,
+                                              rarity: .common,
+                                              profile: profile,
+                                              requirement: [RuleItem.oneHour.rawValue : 3],
+                                              enabled: false),
                          
-                         ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
-                                                       descriptionKey: Content.Uncommon.fiveMinutesDescription,
-                                                       price: 5,
-                                                       rarity: .uncommon,
-                                                       profile: profile,
-                                                       enabled: false),
-                         ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
-                                                       descriptionKey: Content.Uncommon.sevenMinutesDescription,
-                                                       price: 7,
-                                                       rarity: .uncommon,
-                                                       profile: profile,
-                                                       enabled: false),
-                         ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,
-                                                       descriptionKey: Content.Rare.tenMinutesDescription,
-                                                       price: 10,
-                                                       rarity: .rare,
-                                                       profile: profile,
-                                                       enabled: false)]
+                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
+                                              descriptionKey: Content.Uncommon.fiveMinutesDescription,
+                                              price: 5,
+                                              rarity: .uncommon,
+                                              profile: profile,
+                                              requirement: [RuleItem.oneHour.rawValue : 2, RuleItem.threeHours.rawValue : 1],
+                                              enabled: false),
+                
+                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
+                                              descriptionKey: Content.Uncommon.sevenMinutesDescription,
+                                              price: 7,
+                                              rarity: .uncommon,
+                                              profile: profile,
+                                              requirement: [RuleItem.fiveHours.rawValue : 1, RuleItem.oneHour.rawValue : 2],
+                                              enabled: false),
+                
+                ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,
+                                              descriptionKey: Content.Rare.tenMinutesDescription,
+                                              price: 10,
+                                              rarity: .rare,
+                                              profile: profile,
+                                              requirement: [RuleItem.sevenHours.rawValue : 1, RuleItem.threeHours.rawValue : 1],
+                                              enabled: false)]
             for item in items {
                 modelContext.insert(item)
             }

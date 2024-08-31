@@ -178,7 +178,7 @@ extension MachineView {
         internal func notificationSetup(for item: MachineItem) {
             let content = UNMutableNotificationContent()
             content.title = Texts.Common.title
-            content.body = "«\(item.name)» \(Texts.Banner.ready)"
+            content.body = "\(Texts.Banner.ready): \(item.name)."
             content.sound = .default
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: item.target.timeIntervalSinceNow, repeats: false)

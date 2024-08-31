@@ -20,6 +20,7 @@ extension ShopView {
         
         private var modelContext: ModelContext
         private(set) var items = [ConsumableItem]()
+        private(set) var allItems = [ConsumableItem]()
         private(set) var profile = Profile.configMockProfile()
         
         // Array property for storing all current enable status items
@@ -60,7 +61,14 @@ extension ShopView {
         
         // Transfers ConsumableItem from Locked status to Available
         internal func unlockItem(item: ConsumableItem) {
+            guard profile.balance >= Int(item.price) else { return }
             item.unlockItem()
+            
+            for requirement in item.requirement {
+                let consItem = allItems.first(where: { $0.nameKey == requirement.key })
+                consItem?.reduceCount(for: requirement.value)
+            }
+            profile.unlockItem(for: item.price)
             fetchData()
         }
         
@@ -76,6 +84,47 @@ extension ShopView {
             firstTime.toggle()
         }
         
+        // MARK: - Research Setups
+        
+        // Setups content for ParameterRow content row (Research page)
+        internal func researchContentSetup(for requirement: String) -> String {
+            "\(Texts.ShopPage.Rule.inventory): \(inventoryItemCount(for: requirement))"
+        }
+        
+        // Setups content for ParameterRow trailing row (Research page)
+        internal func researchTrailingSetup(for requirement: String, of count: Int) -> String {
+            "\(inventoryItemCount(for: requirement))/\(count)"
+        }
+        
+        // Defines research type for item requirement (Research page)
+        internal func researchTypeDefinition(for requirement: String, of count: Int) -> ResearchType {
+            if inventoryItemCount(for: requirement) >= count {
+                return .completed
+            } else if ((allItems.first(where: { $0.nameKey == requirement })?.enabled) == false) {
+                return .locked
+            } else {
+                return .less
+            }
+        }
+        
+        // Defines research type for price requirement (Research page)
+        internal func researchTypeDefinition(for price: Float) -> ResearchType {
+            if profile.balance >= Int(price) {
+                return .completed
+            } else {
+                return .less
+            }
+        }
+        
+        internal func unlockButtonAvailable(for item: ConsumableItem) -> Bool {
+            for requirement in item.requirement {
+                guard researchTypeDefinition(for: requirement.key, of: requirement.value) == .completed else { return false }
+            }
+            guard researchTypeDefinition(for: item.price) == .completed else { return false }
+            
+            return true
+        }
+        
         // MARK: - Calculation methods
         
         // Returns filtered elements by rarity
@@ -86,6 +135,10 @@ extension ShopView {
         // Returns the grid width depending on the enable filter value
         internal func changeRowItems(enabled: Bool) -> Int {
             enabled ? 2 : 1
+        }
+        
+        internal func inventoryItemCount(for name: String) -> Int {
+            allItems.first(where: { $0.nameKey == name })?.count ?? -3
         }
         
         // MARK: - SwiftData management methods
@@ -108,56 +161,14 @@ extension ShopView {
             fetchData()
         }
         
-        // MARK: - Mock data method
-        
-        internal func addSamples() {
-            guard items.isEmpty else { return }
-            let items = [
-                ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle,
-                                              descriptionKey: Content.Common.oneMinuteDescription,
-                                              price: 1,
-                                              profile: profile),
-                         
-                ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle,
-                                              descriptionKey: Content.Common.threeMinutesDescription,
-                                              price: 3,
-                                              rarity: .common,
-                                              profile: profile,
-                                              enabled: false),
-                         
-                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
-                                              descriptionKey: Content.Uncommon.fiveMinutesDescription,
-                                              price: 5,
-                                              rarity: .uncommon,
-                                              profile: profile,
-                                              enabled: false),
-                
-                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
-                                              descriptionKey: Content.Uncommon.sevenMinutesDescription,
-                                              price: 7,
-                                              rarity: .uncommon,
-                                              profile: profile,
-                                              enabled: false),
-                
-                ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,
-                                              descriptionKey: Content.Rare.tenMinutesDescription,
-                                              price: 10,
-                                              rarity: .rare,
-                                              profile: profile,
-                                              enabled: false)]
-            for item in items {
-                modelContext.insert(item)
-            }
-            fetchData()
-        }
-        
         // MARK: - Load data method
         
         private func fetchData(filterReset: Bool = false) {
             do {
                 // Gets items from SwiftData DB for current enable status
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.enabled == enableStatus && !$0.archived }, sortBy: [SortDescriptor(\.price)])
-                items = try modelContext.fetch(descriptor)
+                let descriptor = FetchDescriptor<ConsumableItem>(sortBy: [SortDescriptor(\.price)])
+                allItems = try modelContext.fetch(descriptor)
+                items = allItems.filter { $0.enabled == enableStatus && !$0.archived }
                 
                 // Check for .all tag selection or enable status changes (filterReset)
                 if rarityFilter != .all && !filterReset {
@@ -199,5 +210,51 @@ extension ShopView {
             createProfile()
         }
         
+        // MARK: - Mock data method
+        
+        internal func addSamples() {
+            guard allItems.isEmpty else { return }
+            let items = [
+                ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle,
+                                              descriptionKey: Content.Common.oneMinuteDescription,
+                                              price: 1,
+                                              profile: profile),
+                         
+                ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle,
+                                              descriptionKey: Content.Common.threeMinutesDescription,
+                                              price: 3,
+                                              rarity: .common,
+                                              profile: profile,
+                                              requirement: [RuleItem.oneHour.rawValue : 3],
+                                              enabled: false),
+                         
+                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
+                                              descriptionKey: Content.Uncommon.fiveMinutesDescription,
+                                              price: 5,
+                                              rarity: .uncommon,
+                                              profile: profile,
+                                              requirement: [RuleItem.oneHour.rawValue : 2, RuleItem.threeHours.rawValue : 1],
+                                              enabled: false),
+                
+                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
+                                              descriptionKey: Content.Uncommon.sevenMinutesDescription,
+                                              price: 7,
+                                              rarity: .uncommon,
+                                              profile: profile,
+                                              requirement: [RuleItem.fiveHours.rawValue : 1, RuleItem.oneHour.rawValue : 2],
+                                              enabled: false),
+                
+                ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,
+                                              descriptionKey: Content.Rare.tenMinutesDescription,
+                                              price: 10,
+                                              rarity: .rare,
+                                              profile: profile,
+                                              requirement: [RuleItem.sevenHours.rawValue : 1, RuleItem.threeHours.rawValue : 1],
+                                              enabled: false)]
+            for item in items {
+                modelContext.insert(item)
+            }
+            fetchData()
+        }
     }
 }

@@ -10,8 +10,8 @@ import SwiftData
 
 struct RuleView: View {
     
+    @EnvironmentObject private var bannerService: BannerViewModel
     @Environment(\.dismiss) var dismiss
-    @State private var showingAlert = false
     
     private var viewModel: ShopView.ShopViewModel
     private let item: ConsumableItem
@@ -26,9 +26,7 @@ struct RuleView: View {
     internal var body: some View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
-                unlockSection
                 itemInfoNew
-                researchCondition
                 conditionRows
                 button
             }
@@ -73,7 +71,7 @@ struct RuleView: View {
             }
             Spacer()
         }
-        .padding(.horizontal)
+        .padding([.top, .horizontal])
     }
     
     private var rarityRow: some View {
@@ -96,32 +94,34 @@ struct RuleView: View {
     
     private var conditionRows: some View {
         VStack(spacing: 14) {
-            ParameterRow(title: "One Minute",
-                         content: "\(Texts.ShopPage.Rule.inventory): 5",
-                         trailingContent: "3/3")
-            ParameterRow(title: "Three Minutes",
-                         content: "\(Texts.ShopPage.Rule.inventory): 2",
-                         trailingContent: "2/6")
+            ForEach(item.requirement.sorted(by: { $0.value > $1.value }), id: \.key) { requirement in
+                ParameterRow(title: NSLocalizedString(requirement.key, comment: String()),
+                             content: viewModel.researchContentSetup(for: requirement.key),
+                             trailingContent: viewModel.researchTrailingSetup(for: requirement.key, of: requirement.value),
+                             researchType: viewModel.researchTypeDefinition(for: requirement.key, of: requirement.value))
+            }
+            
             ParameterRow(title: Texts.ShopPage.Rule.coins,
-                         content: "\(Texts.ShopPage.Rule.inventory): 128",
-                         trailingContent: "21/21")
+                         content: "\(Texts.ShopPage.Rule.inventory): \(viewModel.profile.balance)",
+                         trailingContent: "\(viewModel.profile.balance)/\(Int(item.price))",
+                         researchType: viewModel.researchTypeDefinition(for: item.price))
         }
+        .padding(.top)
     }
     
     private var button: some View {
         Button(action: {
-            showingAlert = true
+            withAnimation(.snappy) {
+                viewModel.unlockItem(item: item)
+                bannerService.setBanner(banner: .unlocked(message: "\(Texts.Banner.unlocked): \(item.name)."))
+                
+                dismiss()
+            }
         }) {
             Text(Texts.ShopPage.Rule.unlock)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
-        .alert(isPresented: $showingAlert) {
-            Alert(title: Text(Texts.ShopPage.Rule.soon),
-                  message: Text(Texts.ShopPage.Rule.working),
-                  dismissButton: .cancel(Text(Texts.ShopPage.Rule.ok), action: {
-                dismiss()
-            }))
-        }
+        .disabled(!viewModel.unlockButtonAvailable(for: item))
         
         .frame(height: 50)
         .minimumScaleFactor(0.4)
@@ -142,11 +142,13 @@ struct RuleView: View {
         let modelContext = ModelContext(container)
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         
+        let requirements = ["One Hour": 2, "Three Hours": 1]
+        
         let example = ConsumableItem.itemMockConfig(
             nameKey: Content.Uncommon.fiveMinutesTitle,
             descriptionKey: Content.Uncommon.fiveMinutesDescription,
             price: 5, rarity: .uncommon,
-            profile: Profile.configMockProfile())
+            profile: Profile.configMockProfile(), requirement: requirements)
         
         return RuleView(item: example, viewModel: viewModel)
     } catch {

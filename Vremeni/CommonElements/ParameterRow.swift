@@ -12,11 +12,13 @@ struct ParameterRow: View {
     private let title: String
     private let content: String
     private let trailingContent: String?
+    private let researchType: ResearchType?
     
-    init(title: String, content: String, trailingContent: String? = nil) {
+    init(title: String, content: String, trailingContent: String? = nil, researchType: ResearchType? = nil) {
         self.title = title
         self.content = content
         self.trailingContent = trailingContent
+        self.researchType = researchType
     }
     
     internal var body: some View {
@@ -34,6 +36,10 @@ struct ParameterRow: View {
 
                 if trailingContent != nil {
                     trailingView
+                }
+                
+                if researchType != nil {
+                    trailingIcon
                 }
             }
         }
@@ -65,8 +71,33 @@ struct ParameterRow: View {
             .padding(.trailing)
             .padding(.top, 14)
     }
+    
+    private var trailingIcon: some View {
+        researchType?.icon
+            .resizable()
+            .scaledToFit()
+        
+            .frame(width: 22)
+            .padding(.trailing)
+            .padding(.top, 14)
+        
+            .foregroundStyle(
+                {
+                    switch researchType {
+                    case .completed:
+                        return Color.green
+                    case .locked:
+                        return Color.red
+                    case .less:
+                        return Color.yellow
+                    case .none:
+                        return Color.red
+                    }
+                }()
+            )
+    }
 }
 
 #Preview {
-    ParameterRow(title: "Description", content: "Description content", trailingContent: "57%")
+    ParameterRow(title: "Description", content: "Description content", trailingContent: "57%", researchType: .completed)
 }

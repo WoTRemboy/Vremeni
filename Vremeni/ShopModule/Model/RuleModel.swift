@@ -6,21 +6,18 @@
 //
 
 import Foundation
+import SwiftData
 
 // MARK: - Rule Model
 
 final class Rule: Identifiable {
     var id = UUID()
-    var name: String
-    var description: String
     var price: Float
-    var requirement: Set<ConsumableItem>
+    var requirement: [String: Int]
     var result: ConsumableItem
     
-    init(id: UUID = UUID(), name: String, description: String, price: Float, requirement: Set<ConsumableItem>, result: ConsumableItem) {
+    init(id: UUID = UUID(), price: Float, requirement: [String: Int], result: ConsumableItem) {
         self.id = id
-        self.name = name
-        self.description = description
         self.price = price
         self.requirement = requirement
         self.result = result
@@ -30,20 +27,33 @@ final class Rule: Identifiable {
 // MARK: - Rule Methods
 
 extension Rule {
-    internal var mockRule: Rule {
-        let name = "Perfect score"
-        let description = "The aspiration of any adequate person"
+    static func mockRule() -> Rule {
         let price: Float = 5
         
-        var requirement = Set<ConsumableItem>()
+        var requirement = [String: Int]()
         let one = ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle, price: 1, profile: Profile.configMockProfile())
         let two = ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle, price: 2, profile: Profile.configMockProfile())
-        requirement.insert(one)
-        requirement.insert(two)
-        requirement.insert(two)
+        
+        requirement[one.nameKey] = 1
+        requirement[two.nameKey] = 2
         
         let result = ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle, price: 5, profile: Profile.configMockProfile())
         
-        return Rule(name: name, description: description, price: price, requirement: requirement, result: result)
+        return Rule(price: price, requirement: requirement, result: result)
     }
+    
+    static internal func config(requirement: [String: Int], result: ConsumableItem) -> Rule {
+        Rule(price: result.price,
+             requirement: requirement,
+             result: result)
+    }
+}
+
+
+enum RuleItem: String {
+    case oneHour = "ContentCommonOneMinuteTitle"
+    case threeHours = "ContentCommonThreeMinutesTitle"
+    case fiveHours = "ContentCommonFiveMinutesTitle"
+    case sevenHours = "ContentCommonSevenMinutesTitle"
+    case tenHours = "ContentCommonTenMinutesTitle"
 }
