@@ -48,3 +48,12 @@ extension Rule {
              result: result)
     }
 }
+
+
+enum RuleItem: String {
+    case oneHour = "ContentCommonOneMinuteTitle"
+    case threeHours = "ContentCommonThreeMinutesTitle"
+    case fiveHours = "ContentCommonFiveMinutesTitle"
+    case sevenHours = "ContentCommonSevenMinutesTitle"
+    case tenHours = "ContentCommonTenMinutesTitle"
+}
