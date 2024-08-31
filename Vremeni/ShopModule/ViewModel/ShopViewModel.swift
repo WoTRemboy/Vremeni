@@ -20,6 +20,7 @@ extension ShopView {
         
         private var modelContext: ModelContext
         private(set) var items = [ConsumableItem]()
+        private(set) var allItems = [ConsumableItem]()
         private(set) var profile = Profile.configMockProfile()
         
         // Array property for storing all current enable status items
@@ -76,6 +77,38 @@ extension ShopView {
             firstTime.toggle()
         }
         
+        // MARK: - Research Setups
+        
+        // Setups content for ParameterRow content row (Research page)
+        internal func researchContentSetup(for requirement: String) -> String {
+            "\(Texts.ShopPage.Rule.inventory): \(inventoryItemCount(for: requirement))"
+        }
+        
+        // Setups content for ParameterRow trailing row (Research page)
+        internal func researchTrailingSetup(for requirement: String, of count: Int) -> String {
+            "\(inventoryItemCount(for: requirement))/\(count)"
+        }
+        
+        // Defines research type for item requirement (Research page)
+        internal func researchTypeDefinition(for requirement: String, of count: Int) -> ResearchType {
+            if inventoryItemCount(for: requirement) >= count {
+                return .completed
+            } else if ((allItems.first(where: { $0.nameKey == requirement })?.enabled) == false) {
+                return .locked
+            } else {
+                return .less
+            }
+        }
+        
+        // Defines research type for price requirement (Research page)
+        internal func researchTypeDefinition(for price: Float) -> ResearchType {
+            if profile.balance >= Int(price) {
+                return .completed
+            } else {
+                return .less
+            }
+        }
+        
         // MARK: - Calculation methods
         
         // Returns filtered elements by rarity
@@ -86,6 +119,10 @@ extension ShopView {
         // Returns the grid width depending on the enable filter value
         internal func changeRowItems(enabled: Bool) -> Int {
             enabled ? 2 : 1
+        }
+        
+        internal func inventoryItemCount(for name: String) -> Int {
+            allItems.first(where: { $0.nameKey == name })?.count ?? -3
         }
         
         // MARK: - SwiftData management methods
@@ -113,8 +150,9 @@ extension ShopView {
         private func fetchData(filterReset: Bool = false) {
             do {
                 // Gets items from SwiftData DB for current enable status
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.enabled == enableStatus && !$0.archived }, sortBy: [SortDescriptor(\.price)])
-                items = try modelContext.fetch(descriptor)
+                let descriptor = FetchDescriptor<ConsumableItem>(sortBy: [SortDescriptor(\.price)])
+                allItems = try modelContext.fetch(descriptor)
+                items = allItems.filter { $0.enabled == enableStatus && !$0.archived }
                 
                 // Check for .all tag selection or enable status changes (filterReset)
                 if rarityFilter != .all && !filterReset {
@@ -159,7 +197,7 @@ extension ShopView {
         // MARK: - Mock data method
         
         internal func addSamples() {
-            guard items.isEmpty else { return }
+            guard allItems.isEmpty else { return }
             let items = [
                 ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle,
                                               descriptionKey: Content.Common.oneMinuteDescription,

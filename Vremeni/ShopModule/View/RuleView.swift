@@ -94,16 +94,17 @@ struct RuleView: View {
     
     private var conditionRows: some View {
         VStack(spacing: 14) {
-            ForEach(item.requirement.sorted(by: { $0.key > $1.key }), id: \.key) { requirement in
-                ParameterRow(title: requirement.key,
-                             content: "\(Texts.ShopPage.Rule.inventory): 5",
-                             trailingContent: "5/7",
-                             researchType: .completed)
+            ForEach(item.requirement.sorted(by: { $0.value > $1.value }), id: \.key) { requirement in
+                ParameterRow(title: NSLocalizedString(requirement.key, comment: String()),
+                             content: viewModel.researchContentSetup(for: requirement.key),
+                             trailingContent: viewModel.researchTrailingSetup(for: requirement.key, of: requirement.value),
+                             researchType: viewModel.researchTypeDefinition(for: requirement.key, of: requirement.value))
             }
-            ParameterRow(title: "Coins",
-                         content: "\(Texts.ShopPage.Rule.inventory): 125",
-                         trailingContent: "4/7",
-                         researchType: .less)
+            
+            ParameterRow(title: Texts.ShopPage.Rule.coins,
+                         content: "\(Texts.ShopPage.Rule.inventory): \(viewModel.profile.balance)",
+                         trailingContent: "\(viewModel.profile.balance)/\(Int(item.price))",
+                         researchType: viewModel.researchTypeDefinition(for: item.price))
         }
         .padding(.top)
     }
