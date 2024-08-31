@@ -81,6 +81,20 @@ struct ParameterRow: View {
             .padding(.trailing)
             .padding(.top, 14)
         
+            .foregroundStyle(
+                {
+                    switch researchType {
+                    case .completed:
+                        return Color.green
+                    case .locked:
+                        return Color.red
+                    case .less:
+                        return Color.yellow
+                    case .none:
+                        return Color.red
+                    }
+                }()
+            )
     }
 }
 
