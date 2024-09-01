@@ -922,7 +922,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Any purchases and progress are measured in units of Vremeni - real time."
+            "value" : "Any purchases and progress are measured in units of Vremeni."
           }
         },
         "ru" : {
@@ -979,7 +979,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Соберите их все!"
+            "value" : "Прогресс"
           }
         }
       }
@@ -1081,7 +1081,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Добавляйте новые слоты в Машину, чтобы получать предметы еще быстрее."
+            "value" : "Добавляйте слоты в Машину,\nчтобы получать предметы быстрее."
           }
         }
       }

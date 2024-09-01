@@ -39,11 +39,13 @@ struct OnboardingScreenView: View {
             } label: {
                 Text(Texts.OnboardingPage.skip)
                     .font(.body())
-                    .foregroundStyle(Color.LabelColors.labelSecondary)
+                    .foregroundStyle(viewModel.buttonType == .nextPage ? Color.LabelColors.labelSecondary : Color.clear)
                     .padding(.horizontal)
             }
-
+            .padding(.top)
         }
+        .disabled(viewModel.buttonType == .getStarted)
+        .animation(.easeInOut, value: viewModel.buttonType)
     }
     
     private var content: some View {
