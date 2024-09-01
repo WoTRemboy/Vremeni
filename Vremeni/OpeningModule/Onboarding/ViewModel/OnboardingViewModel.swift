@@ -10,7 +10,7 @@ import SwiftUI
 
 final class OnboardingViewModel: ObservableObject {
     
-    @Published internal var isActive = false
+    @AppStorage(Texts.UserDefaults.firstLaunch) var firstLaunch: Bool = false
     @Published internal var steps = OnboardingStep.stepsSetup()
     @Published internal var currentStep = 0
     
@@ -40,7 +40,7 @@ final class OnboardingViewModel: ObservableObject {
     
     internal func getStarted() {
         withAnimation {
-            isActive = true
+            firstLaunch = true
         }
     }
 }

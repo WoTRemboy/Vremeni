@@ -19,7 +19,7 @@ struct OnboardingScreenView: View {
     }
     
     internal var body: some View {
-        if viewModel.isActive {
+        if viewModel.firstLaunch {
             ShopView(modelContext: modelContext)
         } else {
             VStack {
