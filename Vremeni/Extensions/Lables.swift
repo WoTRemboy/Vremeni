@@ -34,6 +34,21 @@ final class Texts {
         static let all = NSLocalizedString("RarityAll", comment: "All")
     }
     
+    enum OnboardingPage {
+        static let skip = "Skip"
+        static let next = "Next page"
+        static let started = "Get started"
+        
+        static let firstTitle = "Vremeni is the key"
+        static let firstDescription = "Any purchases and progress are measured in units of Vremeni - real time."
+        static let secondTitle = "Get your item"
+        static let secondDescription = "To obtain an item, you need to process it through the Workshop."
+        static let thirdTitle = "Upgrade Workshop"
+        static let thirdDescription = "Add new slots to the Machine to collect items even faster."
+        static let fourthTitle = "Collect them all!"
+        static let fourthDescription = "Go through time and earn all the rarities: from common to exotic."
+    }
+    
     enum ShopPage {
         static let title = NSLocalizedString("ShopPageTitle", comment: "Fair")
         static let searchItems = NSLocalizedString("ShopPageSearchItems", comment: "Search items")
