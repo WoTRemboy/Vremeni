@@ -6,17 +6,28 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct OnboardingScreenView: View {
     
     @EnvironmentObject private var viewModel: OnboardingViewModel
     
+    private let modelContext: ModelContext
+    
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
+    }
+    
     internal var body: some View {
-        VStack {
-            skipButton
-            content
-            progressCircles
-            actionButton
+        if viewModel.isActive {
+            ShopView(modelContext: modelContext)
+        } else {
+            VStack {
+                skipButton
+                content
+                progressCircles
+                actionButton
+            }
         }
     }
     
@@ -43,6 +54,7 @@ struct OnboardingScreenView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 250, height: 250)
+                        .clipShape(.buttonBorder)
                     
                     Text(viewModel.steps[index].name)
                         .font(.largeTitle())
@@ -110,7 +122,16 @@ struct OnboardingScreenView: View {
 }
 
 #Preview {
-    let enviromentObject = OnboardingViewModel()
-    return OnboardingScreenView()
-        .environmentObject(enviromentObject)
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
+        let modelContext = ModelContext(container)
+        let enviromentObject = OnboardingViewModel()
+        
+        return OnboardingScreenView(modelContext: modelContext)
+            .environmentObject(enviromentObject)
+
+    } catch {
+        fatalError("Failed to create model container.")
+    }
 }

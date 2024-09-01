@@ -35,18 +35,18 @@ final class Texts {
     }
     
     enum OnboardingPage {
-        static let skip = "Skip"
-        static let next = "Next page"
-        static let started = "Get started"
+        static let skip = NSLocalizedString("OnboardingPageSkip", comment: "Skip")
+        static let next = NSLocalizedString("OnboardingPageNext", comment: "Next page")
+        static let started = NSLocalizedString("OnboardingPageStarted", comment: "Get started")
         
-        static let firstTitle = "Vremeni is the key"
-        static let firstDescription = "Any purchases and progress are measured in units of Vremeni - real time."
-        static let secondTitle = "Get your item"
-        static let secondDescription = "To obtain an item, you need to process it through the Workshop."
-        static let thirdTitle = "Upgrade Workshop"
-        static let thirdDescription = "Add new slots to the Machine to collect items even faster."
-        static let fourthTitle = "Collect them all!"
-        static let fourthDescription = "Go through time and earn all the rarities: from common to exotic."
+        static let firstTitle = NSLocalizedString("OnboardingPageFirstTitle", comment: "Vremeni is the key")
+        static let firstDescription = NSLocalizedString("OnboardingPageFirstDescription", comment: "Any purchases and progress are measured in units of Vremeni - real time.")
+        static let secondTitle = NSLocalizedString("OnboardingPageSecondTitle", comment: "Get your item")
+        static let secondDescription = NSLocalizedString("OnboardingPageSecondDescription", comment: "To obtain an item, you need to process it through the Workshop.")
+        static let thirdTitle = NSLocalizedString("OnboardingPageThirdTitle", comment: "Upgrade Workshop")
+        static let thirdDescription = NSLocalizedString("OnboardingPageThirdDescription", comment: "Add new slots to the Machine to collect items even faster.")
+        static let fourthTitle = NSLocalizedString("OnboardingPageFourthTitle", comment: "Collect them all!")
+        static let fourthDescription = NSLocalizedString("OnboardingPageFourthDescription", comment: "Go through time and earn all the rarities: from common to exotic.")
     }
     
     enum ShopPage {
