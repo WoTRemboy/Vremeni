@@ -911,7 +911,194 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Станция"
+            "value" : "Машина"
+          }
+        }
+      }
+    },
+    "OnboardingPageFirstDescription" : {
+      "comment" : "Any purchases and progress are measured in units of Vremeni - real time.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Any purchases and progress are measured in units of Vremeni."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все покупки и прогресс\nизмеряются в единицах Времени."
+          }
+        }
+      }
+    },
+    "OnboardingPageFirstTitle" : {
+      "comment" : "Vremeni is the key",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vremeni is the key"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Времени"
+          }
+        }
+      }
+    },
+    "OnboardingPageFourthDescription" : {
+      "comment" : "Go through time and earn all the rarities: from common to exotic.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go through time and earn all the rarities: from common to exotic."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пройдите через время\nи заработайте все редкости."
+          }
+        }
+      }
+    },
+    "OnboardingPageFourthTitle" : {
+      "comment" : "Collect them all!",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Collect them all!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прогресс"
+          }
+        }
+      }
+    },
+    "OnboardingPageNext" : {
+      "comment" : "Next page",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next page"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Далее"
+          }
+        }
+      }
+    },
+    "OnboardingPageSecondDescription" : {
+      "comment" : "To obtain an item, you need to process it through the Workshop.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To obtain an item, you need to process it through the Workshop."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чтобы получить предмет, его необходимо обработать в Машине."
+          }
+        }
+      }
+    },
+    "OnboardingPageSecondTitle" : {
+      "comment" : "Get your item",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get your item"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мастерская"
+          }
+        }
+      }
+    },
+    "OnboardingPageSkip" : {
+      "comment" : "Skip",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пропустить"
+          }
+        }
+      }
+    },
+    "OnboardingPageStarted" : {
+      "comment" : "Get started",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get started"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начать"
+          }
+        }
+      }
+    },
+    "OnboardingPageThirdDescription" : {
+      "comment" : "Add new slots to the Machine to collect items even faster.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add new slots to the Machine to collect items even faster."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавляйте слоты в Машину,\nчтобы получать предметы быстрее."
+          }
+        }
+      }
+    },
+    "OnboardingPageThirdTitle" : {
+      "comment" : "Upgrade Workshop",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upgrade Workshop"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прокачка"
           }
         }
       }

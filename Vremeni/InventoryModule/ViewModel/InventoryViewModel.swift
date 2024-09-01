@@ -115,7 +115,7 @@ extension InventoryView {
         
         private func fetchData() {
             do {
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.ready }, sortBy: [SortDescriptor(\.price)])
+                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.ready && $0.count > 0 }, sortBy: [SortDescriptor(\.price)])
                 items = try modelContext.fetch(descriptor)
                 
                 if rarityFilter != .all {

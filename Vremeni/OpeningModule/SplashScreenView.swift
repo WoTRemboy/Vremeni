@@ -29,7 +29,8 @@ struct SplashScreenView: View {
     internal var body: some View {
         if isActive {
             // Step to the main view
-            ShopView(modelContext: modelContext)
+            OnboardingScreenView(modelContext: modelContext)
+                .environmentObject(OnboardingViewModel())
         } else {
             // Shows splash screnn
             content
