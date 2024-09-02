@@ -46,6 +46,22 @@ extension InventoryView {
             unfilteredItems.filter({ $0.rarity == rarity })
         }
         
+        internal func applicationDesctiption(item: ConsumableItem) -> [String] {
+            // For the first item (One Hours) there are no requirements
+            guard !item.applications.isEmpty else { return [Texts.ItemCreatePage.null] }
+            
+            var items = [String]()
+            let applications = item.applications.sorted { $0.value < $1.value }
+            for application in applications {
+                // Setups application string
+                let applicationName = NSLocalizedString(application.key, comment: String())
+                let reqString = applicationName
+                items.append(reqString)
+            }
+            
+            return items
+        }
+        
         internal func progressItemsCount() -> String {
             let inventoryItems = Float(unfilteredItems.count)
             let statsItems = Float(statsItems.count)
@@ -115,7 +131,7 @@ extension InventoryView {
         
         private func fetchData() {
             do {
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.ready && $0.count > 0 }, sortBy: [SortDescriptor(\.price)])
+                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.ready }, sortBy: [SortDescriptor(\.price)])
                 items = try modelContext.fetch(descriptor)
                 
                 if rarityFilter != .all {

@@ -157,7 +157,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Five Minutes are a whole 300 seconds!"
+            "value" : "Five Minutes is a whole 300 seconds!"
           }
         },
         "ru" : {
@@ -225,7 +225,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Seven Minutes are a whole 420 seconds!"
+            "value" : "Seven Minutes is a whole 420 seconds!"
           }
         },
         "ru" : {
@@ -259,7 +259,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ten Minutes are a whole 600 seconds!"
+            "value" : "Ten Minutes is a whole 600 seconds!"
           }
         },
         "ru" : {
@@ -293,7 +293,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Three Minutes are a whole 180 seconds!"
+            "value" : "Three Minutes is a whole 180 seconds!"
           }
         },
         "ru" : {
@@ -674,6 +674,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Возобновить"
+          }
+        }
+      }
+    },
+    "MachinePageLimit" : {
+      "comment" : "Limit has been reached",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limit has been reached"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Достигнут лимит"
           }
         }
       }

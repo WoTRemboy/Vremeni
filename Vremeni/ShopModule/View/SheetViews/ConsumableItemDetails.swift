@@ -103,11 +103,11 @@ struct ConsumableItemDetails: View {
             
             // Research rule name row
             ParameterRow(title: Texts.ItemCreatePage.receiveRules,
-                         content: Texts.ItemCreatePage.null)
+                         contentArray: viewModel.ruleDesctiption(item: item))
             
             // Application rule name row
             ParameterRow(title: Texts.ItemCreatePage.applicationRules,
-                         content: Texts.ItemCreatePage.null)
+                         contentArray: viewModel.applicationDesctiption(item: item))
             
         }
     }
@@ -159,10 +159,15 @@ struct ConsumableItemDetails: View {
         let environmentObject = BannerViewModel()
         
         let example = ConsumableItem.itemMockConfig(
-            nameKey: Content.Common.oneMinuteTitle,
-            descriptionKey: Content.Common.oneMinuteDescription,
-            price: 50, rarity: .uncommon,
-            profile: Profile.configMockProfile())
+            nameKey: Content.Common.threeMinutesTitle,
+            descriptionKey: Content.Common.threeMinutesDescription,
+            price: 3,
+            rarity: .common,
+            profile: Profile.configMockProfile(),
+            requirement: [RuleItem.oneHour.rawValue : 3],
+            applications: [RuleItem.oneHour.rawValue : 1,
+                           RuleItem.threeHours.rawValue : 3],
+            enabled: false)
         
         return ConsumableItemDetails(item: example, viewModel: viewModel)
             .environmentObject(environmentObject)

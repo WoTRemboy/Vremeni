@@ -302,7 +302,6 @@
 			isa = PBXGroup;
 			children = (
 				631AF4142C5176D400DFD63C /* ShopView.swift */,
-				63FDF4DD2C7A2A9200AF02CC /* RuleView.swift */,
 				631F265F2C67B39F00FEAD1A /* GridCells */,
 				631F26602C67B3F700FEAD1A /* SheetViews */,
 			);
@@ -402,6 +401,7 @@
 			children = (
 				639C76372C5952E900C1CEB8 /* ConsumableItemCreate.swift */,
 				631A5FD82C5A548C002331F7 /* ConsumableItemDetails.swift */,
+				63FDF4DD2C7A2A9200AF02CC /* RuleView.swift */,
 			);
 			path = SheetViews;
 			sourceTree = "<group>";
@@ -969,7 +969,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.5;
+				MARKETING_VERSION = 0.5.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1006,7 +1006,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.5;
+				MARKETING_VERSION = 0.5.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

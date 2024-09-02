@@ -36,8 +36,11 @@ final class ConsumableItem: Identifiable {
     var type: VremeniType
     var rarity: Rarity
     
-    // Research requirements
+    // Research requirements (Item name + Count)
     var requirement: [String: Int]
+    
+    // Research applications (Item name + Price)
+    var applications: [String: Int]
     
     // Instanses (children) for machine module
     @Relationship(deleteRule: .cascade) var machineItems: [MachineItem]
@@ -54,7 +57,7 @@ final class ConsumableItem: Identifiable {
     init(id: UUID = UUID(), nameKey: String, descriptionKey: String,
          image: String, price: Float, count: Int = 0, type: VremeniType = .minutes,
          rarity: Rarity = .common, machineItems: [MachineItem] = [],
-         profile: Profile, requirement: [String: Int],
+         profile: Profile, requirement: [String: Int], applications: [String: Int],
          enabled: Bool = false, inMachine: Bool = false,
          ready: Bool = false, archived: Bool = false) {
         
@@ -69,6 +72,7 @@ final class ConsumableItem: Identifiable {
         self.machineItems = machineItems
         self.profile = profile
         self.requirement = requirement
+        self.applications = applications
         self.enabled = enabled
         self.inMachine = inMachine
         self.ready = ready
@@ -92,8 +96,9 @@ extension ConsumableItem {
     
     // Creating a MachineItem instanse and adding it to the Machine (Shop Module)
     internal func addToMachine() {
-        let child = MachineItem(name: name, itemDescription: itemDescription, image: image,
-                                price: price, rarity: rarity, parent: self)
+        let child = MachineItem(nameKey: nameKey, descriptionKey: descriptionKey,
+                                image: image, price: price, rarity: rarity,
+                                parent: self, applications: self.applications)
         machineItems.append(child)
         inMachine = true
     }
@@ -113,6 +118,7 @@ extension ConsumableItem {
                                         price: Float, count: Int = 0,
                                         rarity: Rarity = .common,
                                         profile: Profile, requirement: [String: Int] = [:],
+                                        applications: [String: Int] = [:],
                                         enabled: Bool = true,
                                         ready: Bool = false, archived: Bool = false) -> ConsumableItem {
         let nameKey = nameKey
@@ -126,10 +132,11 @@ extension ConsumableItem {
         let rarity = rarity
         let profile = profile
         let requirement = requirement
+        let applications = applications
         
         return ConsumableItem(nameKey: nameKey, descriptionKey: descriptionKey,
                               image: image, price: price, count: count, rarity: rarity,
-                              profile: profile, requirement: requirement, enabled: enable, ready: ready,
+                              profile: profile, requirement: requirement, applications: applications, enabled: enable, ready: ready,
                               archived: archived)
     }
 }

@@ -94,7 +94,7 @@ struct ChartsDetailsView: View {
                 .padding(.leading)
             ForEach(viewModel.inventoryRarities) { rarity in
                 ParameterRow(title: rarity.name,
-                             content: "\(Texts.ProfilePage.Stats.valuation) \(viewModel.rarityCount(for: rarity))",
+                             content: "\(Texts.ProfilePage.Stats.valuation): \(viewModel.valuationCount(for: rarity))",
                              trailingContent: "\(viewModel.valuationPercent(for: rarity))%")
             }
         }

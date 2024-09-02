@@ -67,7 +67,7 @@ struct UpgradeMachineRowView: View {
     }
     
     private var limitPrice: some View {
-        let subtitle = "Limit has been reached"
+        let subtitle = Texts.MachinePage.limit
         return Text(subtitle)
             .font(.headline())
             .foregroundStyle(Color.LabelColors.labelPrimary)
