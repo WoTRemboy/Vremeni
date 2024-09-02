@@ -45,6 +45,10 @@ extension ProfileView {
             actualRarities.filter { inventoryRarityCount(for: $0) > 0 }
         }
         
+        internal var inventoryBalance: Int {
+            readyItems.reduce(0) { $0 + (Int($1.price) * $1.count) }
+        }
+        
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
         }
@@ -85,12 +89,17 @@ extension ProfileView {
             guard profile.balance > 0 else { return 0 }
             let rarityItems = readyItems.filter { $0.rarity == rarity }
             let valuation = rarityItems.reduce(0) { $0 + (Int($1.price) * $1.count) }
-            return Int(Float(valuation) / Float(profile.balance) * 100)
+            return Int(Float(valuation) / Float(inventoryBalance) * 100)
         }
         
         internal func inventoryRarityCount(for rarity: Rarity) -> Int {
             let rarityItems = readyItems.filter { $0.rarity == rarity }
             return rarityItems.reduce(0) { $0 + $1.count }
+        }
+        
+        internal func valuationCount(for rarity: Rarity) -> Int {
+            let rarityItems = readyItems.filter { $0.rarity == rarity }
+            return rarityItems.reduce(0) { $0 + ($1.count * Int($1.price)) }
         }
         
         internal func changeTheme(theme: Theme) {
