@@ -121,7 +121,7 @@ struct RuleView: View {
             Text(Texts.ShopPage.Rule.unlock)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
-//        .disabled(!viewModel.unlockButtonAvailable(for: item))
+        .disabled(!viewModel.unlockButtonAvailable(for: item))
         
         .frame(height: 50)
         .minimumScaleFactor(0.4)

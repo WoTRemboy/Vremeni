@@ -11,12 +11,14 @@ struct ParameterRow: View {
     
     private let title: String
     private let content: String
+    private let contentArray: [String]
     private let trailingContent: String?
     private let researchType: ResearchType?
     
-    init(title: String, content: String, trailingContent: String? = nil, researchType: ResearchType? = nil) {
+    init(title: String, content: String = String(), contentArray: [String] = [], trailingContent: String? = nil, researchType: ResearchType? = nil) {
         self.title = title
         self.content = content
+        self.contentArray = contentArray
         self.trailingContent = trailingContent
         self.researchType = researchType
     }
@@ -34,14 +36,19 @@ struct ParameterRow: View {
                 }
                 VStack(spacing: 0) {
                     titleView
-                    contentView
+                    
+                    if !content.isEmpty {
+                        contentView
+                    }
+                    
+                    if !contentArray.isEmpty {
+                        contentArrayView
+                    }
                 }
 
                 if trailingContent != nil {
                     trailingView
                 }
-                
-                
             }
         }
     }
@@ -62,6 +69,19 @@ struct ParameterRow: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.leading)
             .padding(.top, 5)
+    }
+    
+    private var contentArrayView: some View {
+        VStack(spacing: 5) {
+            ForEach(contentArray, id: \.self) { row in
+                Text(row)
+                    .font(.subhead())
+                    .foregroundStyle(Color.LabelColors.labelSecondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading)
+            }
+        }
+        .padding(.top, 5)
     }
     
     private var trailingView: some View {
@@ -100,5 +120,5 @@ struct ParameterRow: View {
 }
 
 #Preview {
-    ParameterRow(title: "Description", content: "Description content", trailingContent: "57%", researchType: .completed)
+    ParameterRow(title: "Description", content: "Description content", contentArray: ["One Hour", "Three Hours"], trailingContent: "57%", researchType: .completed)
 }

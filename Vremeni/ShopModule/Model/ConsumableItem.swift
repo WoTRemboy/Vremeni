@@ -36,11 +36,11 @@ final class ConsumableItem: Identifiable {
     var type: VremeniType
     var rarity: Rarity
     
-    // Research requirements
+    // Research requirements (Item name + Count)
     var requirement: [String: Int]
     
-    // Research applications
-    var applications: [String]
+    // Research applications (Item name + Price)
+    var applications: [String: Int]
     
     // Instanses (children) for machine module
     @Relationship(deleteRule: .cascade) var machineItems: [MachineItem]
@@ -57,7 +57,7 @@ final class ConsumableItem: Identifiable {
     init(id: UUID = UUID(), nameKey: String, descriptionKey: String,
          image: String, price: Float, count: Int = 0, type: VremeniType = .minutes,
          rarity: Rarity = .common, machineItems: [MachineItem] = [],
-         profile: Profile, requirement: [String: Int], applications: [String],
+         profile: Profile, requirement: [String: Int], applications: [String: Int],
          enabled: Bool = false, inMachine: Bool = false,
          ready: Bool = false, archived: Bool = false) {
         
@@ -117,7 +117,8 @@ extension ConsumableItem {
                                         price: Float, count: Int = 0,
                                         rarity: Rarity = .common,
                                         profile: Profile, requirement: [String: Int] = [:],
-                                        applications: [String] = [], enabled: Bool = true,
+                                        applications: [String: Int] = [:],
+                                        enabled: Bool = true,
                                         ready: Bool = false, archived: Bool = false) -> ConsumableItem {
         let nameKey = nameKey
         let descriptionKey = descriptionKey

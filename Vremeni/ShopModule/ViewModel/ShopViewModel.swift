@@ -129,22 +129,36 @@ extension ShopView {
         }
         
         // Configures rule description for Details Page
-        internal func ruleDesctiption(item: ConsumableItem) -> String {
+        internal func ruleDesctiption(item: ConsumableItem) -> [String] {
             // For the first item (One Hours) there are no requirements
-            guard !item.requirement.isEmpty else { return Texts.ItemCreatePage.null }
+            guard !item.requirement.isEmpty else { return [Texts.ItemCreatePage.null] }
             
-            var rule = String()
+            var rule = [String]()
             let requirements = item.requirement.sorted { $0.value > $1.value }
-            for (number, requirement) in requirements.enumerated() {
-                // Checks if this requirement is the last one
-                let newRow = number < (requirements.count - 1) ? "\n" : String()
+            for requirement in requirements {
                 // Setups requirement string
                 let requirementName = NSLocalizedString(requirement.key, comment: String())
-                let reqString = "\(requirementName) × \(requirement.value)" + newRow
+                let reqString = "\(requirementName) × \(requirement.value)"
                 rule.append(reqString)
             }
             
             return rule
+        }
+        
+        internal func applicationDesctiption(item: ConsumableItem) -> [String] {
+            // For the first item (One Hours) there are no requirements
+            guard !item.applications.isEmpty else { return [Texts.ItemCreatePage.null] }
+            
+            var items = [String]()
+            let applications = item.applications.sorted { $0.value < $1.value }
+            for application in applications {
+                // Setups application string
+                let applicationName = NSLocalizedString(application.key, comment: String())
+                let reqString = applicationName
+                items.append(reqString)
+            }
+            
+            return items
         }
         
         // MARK: - Calculation methods
@@ -241,9 +255,9 @@ extension ShopView {
                                               descriptionKey: Content.Common.oneMinuteDescription,
                                               price: 1,
                                               profile: profile,
-                                              applications: [RuleItem.threeHours.rawValue,
-                                                             RuleItem.fiveHours.rawValue,
-                                                             RuleItem.sevenHours.rawValue]
+                                              applications: [RuleItem.threeHours.rawValue : 3,
+                                                             RuleItem.fiveHours.rawValue : 5,
+                                                             RuleItem.sevenHours.rawValue : 7]
                                              ),
                          
                 ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle,
@@ -252,8 +266,8 @@ extension ShopView {
                                               rarity: .common,
                                               profile: profile,
                                               requirement: [RuleItem.oneHour.rawValue : 3],
-                                              applications: [RuleItem.fiveHours.rawValue,
-                                                             RuleItem.tenHours.rawValue],
+                                              applications: [RuleItem.fiveHours.rawValue : 5,
+                                                             RuleItem.tenHours.rawValue : 10],
                                               enabled: false),
                          
                 ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
@@ -262,7 +276,7 @@ extension ShopView {
                                               rarity: .uncommon,
                                               profile: profile,
                                               requirement: [RuleItem.oneHour.rawValue : 2, RuleItem.threeHours.rawValue : 1],
-                                              applications: [RuleItem.sevenHours.rawValue],
+                                              applications: [RuleItem.sevenHours.rawValue : 7],
                                               enabled: false),
                 
                 ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
@@ -271,7 +285,7 @@ extension ShopView {
                                               rarity: .uncommon,
                                               profile: profile,
                                               requirement: [RuleItem.fiveHours.rawValue : 1, RuleItem.oneHour.rawValue : 2],
-                                              applications: [RuleItem.tenHours.rawValue],
+                                              applications: [RuleItem.tenHours.rawValue : 10],
                                               enabled: false),
                 
                 ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,

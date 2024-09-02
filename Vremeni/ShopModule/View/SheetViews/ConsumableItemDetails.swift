@@ -103,11 +103,11 @@ struct ConsumableItemDetails: View {
             
             // Research rule name row
             ParameterRow(title: Texts.ItemCreatePage.receiveRules,
-                         content: viewModel.ruleDesctiption(item: item))
+                         contentArray: viewModel.ruleDesctiption(item: item))
             
             // Application rule name row
             ParameterRow(title: Texts.ItemCreatePage.applicationRules,
-                         content: Texts.ItemCreatePage.null)
+                         contentArray: viewModel.applicationDesctiption(item: item))
             
         }
     }
@@ -165,6 +165,8 @@ struct ConsumableItemDetails: View {
             rarity: .common,
             profile: Profile.configMockProfile(),
             requirement: [RuleItem.oneHour.rawValue : 3],
+            applications: [RuleItem.oneHour.rawValue : 1,
+                           RuleItem.threeHours.rawValue : 3],
             enabled: false)
         
         return ConsumableItemDetails(item: example, viewModel: viewModel)
