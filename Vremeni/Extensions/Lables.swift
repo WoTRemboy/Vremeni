@@ -111,6 +111,7 @@ final class Texts {
         
         static let upgrade = NSLocalizedString("MachinePageUpgrade", comment: "Upgrade")
         static let purchase = NSLocalizedString("MachinePagePurchase", comment: "Purchase")
+        static let limit = NSLocalizedString("MachinePageLimit", comment: "Limit has been reached")
         
         static let targetTime = NSLocalizedString("MachinePageTargetTime", comment: "Target time")
         static let potentialTime = NSLocalizedString("MachinePagePotentialTarget", comment: "Potential target")

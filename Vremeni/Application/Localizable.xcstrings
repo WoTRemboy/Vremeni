@@ -678,6 +678,23 @@
         }
       }
     },
+    "MachinePageLimit" : {
+      "comment" : "Limit has been reached",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limit has been reached"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Достигнут лимит"
+          }
+        }
+      }
+    },
     "MachinePagePause" : {
       "comment" : "Pause",
       "localizations" : {
