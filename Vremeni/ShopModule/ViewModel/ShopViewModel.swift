@@ -214,7 +214,7 @@ extension ShopView {
         
         // First app launch case
         private func createProfile() {
-            let profile = Profile(name: Texts.ProfilePage.user, balance: 10, items: items)
+            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, items: items)
             modelContext.insert(profile)
             fetchProfileData()
         }
@@ -240,7 +240,11 @@ extension ShopView {
                 ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle,
                                               descriptionKey: Content.Common.oneMinuteDescription,
                                               price: 1,
-                                              profile: profile),
+                                              profile: profile,
+                                              applications: [RuleItem.threeHours.rawValue,
+                                                             RuleItem.fiveHours.rawValue,
+                                                             RuleItem.sevenHours.rawValue]
+                                             ),
                          
                 ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle,
                                               descriptionKey: Content.Common.threeMinutesDescription,
@@ -248,6 +252,8 @@ extension ShopView {
                                               rarity: .common,
                                               profile: profile,
                                               requirement: [RuleItem.oneHour.rawValue : 3],
+                                              applications: [RuleItem.fiveHours.rawValue,
+                                                             RuleItem.tenHours.rawValue],
                                               enabled: false),
                          
                 ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
@@ -256,6 +262,7 @@ extension ShopView {
                                               rarity: .uncommon,
                                               profile: profile,
                                               requirement: [RuleItem.oneHour.rawValue : 2, RuleItem.threeHours.rawValue : 1],
+                                              applications: [RuleItem.sevenHours.rawValue],
                                               enabled: false),
                 
                 ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
@@ -264,6 +271,7 @@ extension ShopView {
                                               rarity: .uncommon,
                                               profile: profile,
                                               requirement: [RuleItem.fiveHours.rawValue : 1, RuleItem.oneHour.rawValue : 2],
+                                              applications: [RuleItem.tenHours.rawValue],
                                               enabled: false),
                 
                 ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,

@@ -39,6 +39,9 @@ final class ConsumableItem: Identifiable {
     // Research requirements
     var requirement: [String: Int]
     
+    // Research applications
+    var applications: [String]
+    
     // Instanses (children) for machine module
     @Relationship(deleteRule: .cascade) var machineItems: [MachineItem]
     
@@ -54,7 +57,7 @@ final class ConsumableItem: Identifiable {
     init(id: UUID = UUID(), nameKey: String, descriptionKey: String,
          image: String, price: Float, count: Int = 0, type: VremeniType = .minutes,
          rarity: Rarity = .common, machineItems: [MachineItem] = [],
-         profile: Profile, requirement: [String: Int],
+         profile: Profile, requirement: [String: Int], applications: [String],
          enabled: Bool = false, inMachine: Bool = false,
          ready: Bool = false, archived: Bool = false) {
         
@@ -69,6 +72,7 @@ final class ConsumableItem: Identifiable {
         self.machineItems = machineItems
         self.profile = profile
         self.requirement = requirement
+        self.applications = applications
         self.enabled = enabled
         self.inMachine = inMachine
         self.ready = ready
@@ -113,7 +117,7 @@ extension ConsumableItem {
                                         price: Float, count: Int = 0,
                                         rarity: Rarity = .common,
                                         profile: Profile, requirement: [String: Int] = [:],
-                                        enabled: Bool = true,
+                                        applications: [String] = [], enabled: Bool = true,
                                         ready: Bool = false, archived: Bool = false) -> ConsumableItem {
         let nameKey = nameKey
         let descriptionKey = descriptionKey
@@ -126,10 +130,11 @@ extension ConsumableItem {
         let rarity = rarity
         let profile = profile
         let requirement = requirement
+        let applications = applications
         
         return ConsumableItem(nameKey: nameKey, descriptionKey: descriptionKey,
                               image: image, price: price, count: count, rarity: rarity,
-                              profile: profile, requirement: requirement, enabled: enable, ready: ready,
+                              profile: profile, requirement: requirement, applications: applications, enabled: enable, ready: ready,
                               archived: archived)
     }
 }
