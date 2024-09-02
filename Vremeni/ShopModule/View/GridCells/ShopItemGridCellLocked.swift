@@ -12,6 +12,8 @@ struct ShopItemGridCellLocked: View {
     
     // MARK: - Properties
     
+    @State var selected: ConsumableItem? = nil
+
     private let item: ConsumableItem
     private var viewModel: ShopView.ShopViewModel
     
@@ -63,12 +65,12 @@ struct ShopItemGridCellLocked: View {
     // ConsumableItem rarity name & icon
     private var itemName: some View {
         HStack(spacing: 5) {
-            Rarity.rarityToImage(rarity: item.rarity)
+            item.rarity.image
                 .resizable()
                 .scaledToFit()
                 .frame(width: 25)
             
-            Text(item.rarity.rawValue)
+            Text(item.rarity.name)
                 .font(.body())
                 .foregroundStyle(Color.labelPrimary)
         }
@@ -102,12 +104,13 @@ struct ShopItemGridCellLocked: View {
             
             // Research button
             Button(action: {
-                withAnimation(.snappy) {
-                    viewModel.unlockItem(item: item)
-                }
+                selected = item
             }) {
                 Text(Texts.ShopPage.research)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+            .sheet(item: $selected) { item in
+                RuleView(item: item, viewModel: viewModel)
             }
             // Button layout params
             .frame(height: 40)
@@ -152,7 +155,11 @@ struct ShopItemGridCellLocked: View {
         let modelContext = ModelContext(container)
         
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
-        let example = ConsumableItem.itemMockConfig(name: "One Hour", description: "One hour is a whole 60 seconds!", price: 1, profile: Profile.configMockProfile(), enabled: false)
+        let example = ConsumableItem.itemMockConfig(
+            nameKey: Content.Common.oneMinuteTitle,
+            descriptionKey: Content.Common.oneMinuteDescription,
+            price: 1, profile: Profile.configMockProfile(),
+            enabled: false)
         return ShopItemGridCellLocked(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")

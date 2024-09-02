@@ -25,6 +25,8 @@ extension MachineView {
         
         private(set) var selectedType: UpgrageMethod = .coins
         private(set) var readyNotification: (ready: Bool, name: String?) = (false, nil)
+        private(set) var notificationStatus: NotificationStatus = .prohibited
+        
         private let slotsLimit = 3
         internal let internalPrice: Double = 1
         internal let donatePrice: Double = 0.99
@@ -46,6 +48,7 @@ extension MachineView {
         internal func updateOnAppear() {
             fetchProfileData()
             fetchData()
+            readNotificationStatus()
         }
         
         internal func setWorkshop(item: MachineItem) {
@@ -103,6 +106,22 @@ extension MachineView {
         
         internal func changePurchaseType(to selected: UpgrageMethod) {
             selectedType = selected
+        }
+        
+        internal func applicationDesctiption(item: MachineItem) -> [String] {
+            // For the first item (One Hours) there are no requirements
+            guard !item.applications.isEmpty else { return [Texts.ItemCreatePage.null] }
+            
+            var items = [String]()
+            let applications = item.applications.sorted { $0.value < $1.value }
+            for application in applications {
+                // Setups application string
+                let applicationName = NSLocalizedString(application.key, comment: String())
+                let reqString = applicationName
+                items.append(reqString)
+            }
+            
+            return items
         }
         
         internal func slotLimitReached() -> Bool {
@@ -166,10 +185,16 @@ extension MachineView {
             timers[item.id] = nil
         }
         
+        private func readNotificationStatus() {
+            let defaults = UserDefaults.standard
+            let rawValue = defaults.string(forKey: Texts.UserDefaults.notifications) ?? String()
+            notificationStatus = NotificationStatus(rawValue: rawValue) ?? .prohibited
+        }
+        
         internal func notificationSetup(for item: MachineItem) {
             let content = UNMutableNotificationContent()
             content.title = Texts.Common.title
-            content.body = "«\(item.name)» \(Texts.Banner.ready)"
+            content.body = "\(Texts.Banner.ready): \(item.name)."
             content.sound = .default
             
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: item.target.timeIntervalSinceNow, repeats: false)

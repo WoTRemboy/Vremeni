@@ -46,6 +46,22 @@ extension InventoryView {
             unfilteredItems.filter({ $0.rarity == rarity })
         }
         
+        internal func applicationDesctiption(item: ConsumableItem) -> [String] {
+            // For the first item (One Hours) there are no requirements
+            guard !item.applications.isEmpty else { return [Texts.ItemCreatePage.null] }
+            
+            var items = [String]()
+            let applications = item.applications.sorted { $0.value < $1.value }
+            for application in applications {
+                // Setups application string
+                let applicationName = NSLocalizedString(application.key, comment: String())
+                let reqString = applicationName
+                items.append(reqString)
+            }
+            
+            return items
+        }
+        
         internal func progressItemsCount() -> String {
             let inventoryItems = Float(unfilteredItems.count)
             let statsItems = Float(statsItems.count)
@@ -75,31 +91,38 @@ extension InventoryView {
         }
         
         internal func addSamples() {
-            let items = [ConsumableItem.itemMockConfig(name: "One Minute",
-                                                       description: "One minute is a whole 60 seconds!",
-                                                       price: 1,
-                                                       profile: profile,
-                                                       ready: true),
+            let items = [
+                ConsumableItem.itemMockConfig(
+                    nameKey: Content.Common.oneMinuteTitle,
+                    descriptionKey: Content.Common.oneMinuteDescription,
+                    price: 1,
+                    profile: profile,
+                    ready: true),
                          
-                         ConsumableItem.itemMockConfig(name: "Three Minutes",
-                                                       description: "Three minutes is a whole 180 seconds!",
-                                                       price: 3,
-                                                       rarity: .common,
-                                                       profile: profile,
-                                                       ready: true),
+                ConsumableItem.itemMockConfig(
+                    nameKey: Content.Common.threeMinutesTitle,
+                    descriptionKey: Content.Common.threeMinutesDescription,
+                    price: 3,
+                    rarity: .common,
+                    profile: profile,
+                    ready: true),
                          
-                         ConsumableItem.itemMockConfig(name: "Five Minutes",
-                                                       description: "Five minutes is a whole 300 seconds!",
-                                                       price: 5,
-                                                       rarity: .common,
-                                                       profile: profile,
-                                                       ready: true),
-                         ConsumableItem.itemMockConfig(name: "Seven Minutes",
-                                                       description: "Five minutes is a whole 300 seconds!",
-                                                       price: 7,
-                                                       rarity: .uncommon,
-                                                       profile: profile,
-                                                       ready: true)]
+                ConsumableItem.itemMockConfig(
+                    nameKey: Content.Uncommon.fiveMinutesTitle,
+                    descriptionKey: Content.Uncommon.fiveMinutesDescription,
+                    price: 5,
+                    rarity: .common,
+                    profile: profile,
+                    ready: true),
+                
+                ConsumableItem.itemMockConfig(
+                    nameKey: Content.Uncommon.sevenMinutesTitle,
+                    descriptionKey: Content.Uncommon.sevenMinutesDescription,
+                    price: 7,
+                    rarity: .uncommon,
+                    profile: profile,
+                    ready: true)]
+            
             for item in items {
                 modelContext.insert(item)
             }

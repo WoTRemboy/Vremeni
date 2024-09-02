@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 @Model
 final class Profile: Identifiable {
@@ -40,13 +41,18 @@ extension Profile: Equatable {
         balance += Int(count)
     }
     
+    internal func unlockItem(for price: Float) {
+        balance -= Int(price)
+    }
+    
     internal func slotPurchase(price: Double) {
         balance -= Int(price)
         internalMachines += 1
     }
     
-    internal func resetBalance() {
+    internal func resetStacks() {
         balance = 0
+        internalMachines = 1
     }
     
     internal static func configMockProfile() -> Profile {
@@ -59,5 +65,65 @@ enum ChartType: String, Identifiable, CaseIterable {
     case research = "Research"
     case inventory = "Inventory"
     
-    var id: Self { self }
+    internal var id: Self { self }
+    
+    internal var name: String {
+        switch self {
+        case .research:
+            Texts.ProfilePage.Stats.research
+        case .inventory:
+            Texts.ProfilePage.Stats.inventory
+        }
+    }
+}
+
+
+enum Theme: String, CaseIterable {
+    case systemDefault = "Default"
+    case light = "Light"
+    case dark = "Dark"
+    
+    internal var name: String {
+        switch self {
+        case .systemDefault:
+            Texts.ProfilePage.system
+        case .light:
+            Texts.ProfilePage.light
+        case .dark:
+            Texts.ProfilePage.dark
+        }
+    }
+    
+    internal func color(_ scheme: ColorScheme) -> Color {
+        switch self {
+        case .systemDefault:
+            scheme == .light ? Color.orange : Color.blue
+        case .light:
+            Color.orange
+        case .dark:
+            Color.blue
+        }
+    }
+    
+    internal var userInterfaceStyle: UIUserInterfaceStyle {
+            switch self {
+            case .systemDefault:
+                return .unspecified
+            case .light:
+                return .light
+            case .dark:
+                return .dark
+            }
+        }
+    
+    internal var colorScheme: ColorScheme? {
+        switch self {
+        case .systemDefault:
+            nil
+        case .light:
+            ColorScheme.light
+        case .dark:
+            ColorScheme.dark
+        }
+    }
 }

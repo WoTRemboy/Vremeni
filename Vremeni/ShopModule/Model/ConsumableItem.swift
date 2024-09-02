@@ -16,9 +16,17 @@ final class ConsumableItem: Identifiable {
     
     // General
     var id = UUID()
-    var name: String
-    var itemDescription: String
+    var nameKey: String
+    var descriptionKey: String
     var image: String
+    
+    // General localized
+    var name: String {
+        NSLocalizedString(nameKey, comment: String())
+    }
+    var itemDescription: String {
+        NSLocalizedString(descriptionKey, comment: String())
+    }
     
     // Valuation
     var price: Float
@@ -27,6 +35,12 @@ final class ConsumableItem: Identifiable {
     // Item type
     var type: VremeniType
     var rarity: Rarity
+    
+    // Research requirements (Item name + Count)
+    var requirement: [String: Int]
+    
+    // Research applications (Item name + Price)
+    var applications: [String: Int]
     
     // Instanses (children) for machine module
     @Relationship(deleteRule: .cascade) var machineItems: [MachineItem]
@@ -40,13 +54,16 @@ final class ConsumableItem: Identifiable {
     var ready: Bool
     var archived: Bool
     
-    init(id: UUID = UUID(), name: String, itemDescription: String, image: String,
-         price: Float, count: Int = 0, type: VremeniType = .minutes, rarity: Rarity = .common,
-         machineItems: [MachineItem] = [], profile: Profile, enabled: Bool = false, inMachine: Bool = false,
+    init(id: UUID = UUID(), nameKey: String, descriptionKey: String,
+         image: String, price: Float, count: Int = 0, type: VremeniType = .minutes,
+         rarity: Rarity = .common, machineItems: [MachineItem] = [],
+         profile: Profile, requirement: [String: Int], applications: [String: Int],
+         enabled: Bool = false, inMachine: Bool = false,
          ready: Bool = false, archived: Bool = false) {
+        
         self.id = id
-        self.name = name
-        self.itemDescription = itemDescription
+        self.nameKey = nameKey
+        self.descriptionKey = descriptionKey
         self.image = image
         self.price = price
         self.count = count
@@ -54,6 +71,8 @@ final class ConsumableItem: Identifiable {
         self.rarity = rarity
         self.machineItems = machineItems
         self.profile = profile
+        self.requirement = requirement
+        self.applications = applications
         self.enabled = enabled
         self.inMachine = inMachine
         self.ready = ready
@@ -77,8 +96,9 @@ extension ConsumableItem {
     
     // Creating a MachineItem instanse and adding it to the Machine (Shop Module)
     internal func addToMachine() {
-        let child = MachineItem(name: name, itemDescription: itemDescription, image: image,
-                                price: price, rarity: rarity, parent: self)
+        let child = MachineItem(nameKey: nameKey, descriptionKey: descriptionKey,
+                                image: image, price: price, rarity: rarity,
+                                parent: self, applications: self.applications)
         machineItems.append(child)
         inMachine = true
     }
@@ -88,13 +108,21 @@ extension ConsumableItem {
         count += 1
     }
     
+    // Reduces item's count when other item unlocks
+    internal func reduceCount(for price: Int) {
+        count -= price
+    }
+    
     // Mock ConsumableItem configuration method
-    static internal func itemMockConfig(name: String, description: String = String(),
-                                        price: Float, count: Int = 0, rarity: Rarity = .common,
-                                        profile: Profile, enabled: Bool = true,
+    static internal func itemMockConfig(nameKey: String, descriptionKey: String = String(),
+                                        price: Float, count: Int = 0,
+                                        rarity: Rarity = .common,
+                                        profile: Profile, requirement: [String: Int] = [:],
+                                        applications: [String: Int] = [:],
+                                        enabled: Bool = true,
                                         ready: Bool = false, archived: Bool = false) -> ConsumableItem {
-        let name = name
-        let description = description
+        let nameKey = nameKey
+        let descriptionKey = descriptionKey
         let image = "\(Int(price)).square"
         let price = price
         let count = count
@@ -103,10 +131,13 @@ extension ConsumableItem {
         let archived = archived
         let rarity = rarity
         let profile = profile
+        let requirement = requirement
+        let applications = applications
         
-        return ConsumableItem(name: name, itemDescription: description, image: image,
-                              price: price, count: count, rarity: rarity, profile: profile,
-                              enabled: enable, ready: ready, archived: archived)
+        return ConsumableItem(nameKey: nameKey, descriptionKey: descriptionKey,
+                              image: image, price: price, count: count, rarity: rarity,
+                              profile: profile, requirement: requirement, applications: applications, enabled: enable, ready: ready,
+                              archived: archived)
     }
 }
 
@@ -120,4 +151,21 @@ enum VremeniType: String, Codable {
     case months = "Months"
     case year = "Year"
     case special = "Special"
+}
+
+enum ResearchType {
+    case completed
+    case locked
+    case less
+    
+    internal var icon: Image {
+        switch self {
+        case .completed:
+            Image.ShopPage.Research.check
+        case .locked:
+            Image.ShopPage.Research.locked
+        case .less:
+            Image.ShopPage.Research.less
+        }
+    }
 }

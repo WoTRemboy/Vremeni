@@ -34,21 +34,30 @@ struct ProgressBar: View {
     }
     
     private var progressBar: some View {
+        RoundedRectangle(cornerRadius: height, style: .continuous)
+            .frame(height: height)
+            .foregroundStyle(Color.black.opacity(0.1))
+        
+            .overlay(alignment: .leading) {
+                progressIndicator
+            }
+    }
+    
+    private var progressIndicator: some View {
         let multiplier = width / 100
         
-        return ZStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: height, style: .continuous)
-                .frame(height: height)
-                .foregroundStyle(Color.black.opacity(0.1))
-            
-            RoundedRectangle(cornerRadius: height, style: .continuous)
-                .frame(width: percent * multiplier, height: height)
-                .foregroundStyle(color)
-                .animation(.linear, value: percent)
-        }
+        return RoundedRectangle(cornerRadius: height, style: .continuous)
+            .frame(width: width, height: height)
+            .foregroundStyle(color)
+        
+            .mask(alignment: .leading) {
+                RoundedRectangle(cornerRadius: height, style: .continuous)
+                    .frame(width: percent * multiplier, height: height)
+                    .animation(.linear, value: percent)
+            }
     }
 }
 
 #Preview {
-    ProgressBar(percent: 60)
+    ProgressBar(percent: 2)
 }

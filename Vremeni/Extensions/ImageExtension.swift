@@ -16,6 +16,12 @@ extension Image {
         static let vCoin = Image("VCoin")
         static let filter = Image(systemName: "line.3.horizontal.decrease.circle")
         static let filledFilter = Image(systemName: "line.3.horizontal.decrease.circle.fill")
+        
+        enum Research {
+            static let check = Image(systemName: "checkmark.circle")
+            static let locked = Image(systemName: "lock.circle")
+            static let less = Image(systemName: "lessthan.circle")
+        }
     }
     
     enum InventoryPage {
@@ -27,8 +33,11 @@ extension Image {
         static let balance = Image("BalanceProfile")
         static let archive = Image("ArchiveProfile")
         static let reset = Image("ResetProfile")
-        static let settings = Image("SettingsProfile")
         static let about = Image("AboutProfile")
+        static let notifications = Image("NotificationsProfile")
+        static let appearance = Image("AppearanceProfile")
+        static let language = Image("LanguageProfile")
+        static let settings = Image("SettingsProfile")
         
         enum About {
             static let appIcon = Image("AboutIcon")
@@ -43,6 +52,8 @@ extension Image {
         static let added = Image("AddedBanner")
         static let archived = Image("ArchivedBanner")
         static let ready = Image("ReadyBanner")
+        static let reset = Image("ResetBanner")
+        static let unlocked = Image("UnlockedBanner")
     }
     
     enum Rarity {

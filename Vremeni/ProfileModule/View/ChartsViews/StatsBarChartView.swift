@@ -33,14 +33,14 @@ struct StatsBarChartView: View {
         Chart(type == .research ? viewModel.actualRarities : viewModel.inventoryRarities) { rarity in
             BarMark(x: .value(Texts.ProfilePage.Stats.count,type == .research ? viewModel.rarityCount(for: rarity) : viewModel.inventoryRarityCount(for: rarity)),
                     
-                    y: .value(Texts.ProfilePage.Stats.category, rarity.rawValue))
+                    y: .value(Texts.ProfilePage.Stats.category, rarity.name))
             
             .annotation(position: .trailing, alignment: .leading) {
                 Text(String(type == .research ? viewModel.rarityCount(for: rarity) : viewModel.inventoryRarityCount(for: rarity)))
                 
                     .padding(.leading)
             }
-            .foregroundStyle(Rarity.rarityToColor(from: rarity))
+            .foregroundStyle(rarity.color)
             .opacity(0.8)
         }
         .padding()

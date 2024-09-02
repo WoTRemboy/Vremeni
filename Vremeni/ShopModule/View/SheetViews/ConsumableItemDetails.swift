@@ -83,12 +83,12 @@ struct ConsumableItemDetails: View {
             // Item rarity view
             HStack(spacing: 5) {
                 // Rarity icon
-                Rarity.rarityToImage(rarity: item.rarity)
+                item.rarity.image
                     .resizable()
                     .scaledToFit()
                     .frame(width: 25)
                 // Rarity name
-                Text(item.rarity.rawValue)
+                Text(item.rarity.name)
                     .font(.body())
             }
         }
@@ -103,11 +103,11 @@ struct ConsumableItemDetails: View {
             
             // Research rule name row
             ParameterRow(title: Texts.ItemCreatePage.receiveRules,
-                         content: Texts.ItemCreatePage.null)
+                         contentArray: viewModel.ruleDesctiption(item: item))
             
             // Application rule name row
             ParameterRow(title: Texts.ItemCreatePage.applicationRules,
-                         content: Texts.ItemCreatePage.null)
+                         contentArray: viewModel.applicationDesctiption(item: item))
             
         }
     }
@@ -115,21 +115,27 @@ struct ConsumableItemDetails: View {
     // Enable context action button
     private var buyButton: some View {
         Button(action: {
-            withAnimation(.snappy) {
-                if item.enabled {
+            if item.enabled {
+                withAnimation(.snappy) {
                     // Pick item to machine when it is available
                     viewModel.pickItem(item: item)
                     bannerService.setBanner(banner: .added(message: Texts.Banner.added))
-                } else {
-                    // Unlock item when item is locked
-                    viewModel.unlockItem(item: item)
                 }
-                dismiss()
             }
+            dismiss()
         }) {
-            // Button name definition depending on enable status
-            Text(item.enabled ? Texts.ShopPage.addToMachine : Texts.ShopPage.research)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            // Button definition depending on enable status
+            if item.enabled {
+                Text(Texts.ShopPage.addToMachine)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            } else {
+                NavigationLink(destination: RuleView(item: item, viewModel: viewModel, details: true),
+                               label: {
+                    Text(Texts.ShopPage.research)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                })
+            }
+            
         }
         // Button layout params
         .frame(height: 50)
@@ -152,7 +158,16 @@ struct ConsumableItemDetails: View {
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         let environmentObject = BannerViewModel()
         
-        let example = ConsumableItem.itemMockConfig(name: "One Minute", description: "One minute is a whole 60 seconds!", price: 50, rarity: .uncommon, profile: Profile.configMockProfile())
+        let example = ConsumableItem.itemMockConfig(
+            nameKey: Content.Common.threeMinutesTitle,
+            descriptionKey: Content.Common.threeMinutesDescription,
+            price: 3,
+            rarity: .common,
+            profile: Profile.configMockProfile(),
+            requirement: [RuleItem.oneHour.rawValue : 3],
+            applications: [RuleItem.oneHour.rawValue : 1,
+                           RuleItem.threeHours.rawValue : 3],
+            enabled: false)
         
         return ConsumableItemDetails(item: example, viewModel: viewModel)
             .environmentObject(environmentObject)

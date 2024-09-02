@@ -57,7 +57,7 @@ struct ShopItemGridCell: View {
     // ConsumableItem name & rarity icon
     private var itemName: some View {
         HStack(spacing: 5) {
-            Rarity.rarityToImage(rarity: item.rarity)
+            item.rarity.image
                 .resizable()
                 .scaledToFit()
                 .frame(width: 25)
@@ -148,7 +148,11 @@ struct ShopItemGridCell: View {
         
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         let environmentObject = BannerViewModel()
-        let example = ConsumableItem.itemMockConfig(name: "One Hour", price: 1, profile: Profile.configMockProfile(), enabled: true)
+        
+        let example = ConsumableItem.itemMockConfig(
+            nameKey: Content.Common.oneMinuteTitle,
+            price: 1, profile: Profile.configMockProfile(),
+            enabled: true)
         
         return ShopItemGridCell(item: example, viewModel: viewModel)
             .environmentObject(environmentObject)

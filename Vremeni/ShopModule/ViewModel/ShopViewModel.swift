@@ -20,6 +20,7 @@ extension ShopView {
         
         private var modelContext: ModelContext
         private(set) var items = [ConsumableItem]()
+        private(set) var allItems = [ConsumableItem]()
         private(set) var profile = Profile.configMockProfile()
         
         // Array property for storing all current enable status items
@@ -60,7 +61,14 @@ extension ShopView {
         
         // Transfers ConsumableItem from Locked status to Available
         internal func unlockItem(item: ConsumableItem) {
+            guard profile.balance >= Int(item.price) else { return }
             item.unlockItem()
+            
+            for requirement in item.requirement {
+                let consItem = allItems.first(where: { $0.nameKey == requirement.key })
+                consItem?.reduceCount(for: requirement.value)
+            }
+            profile.unlockItem(for: item.price)
             fetchData()
         }
         
@@ -76,6 +84,83 @@ extension ShopView {
             firstTime.toggle()
         }
         
+        // MARK: - Research Setups
+        
+        // Setups content for ParameterRow content row (Research page)
+        internal func researchContentSetup(for requirement: String) -> String {
+            "\(Texts.ShopPage.Rule.inventory): \(inventoryItemCount(for: requirement))"
+        }
+        
+        // Setups content for ParameterRow trailing row (Research page)
+        internal func researchTrailingSetup(for requirement: String, of count: Int) -> String {
+            "\(inventoryItemCount(for: requirement))/\(count)"
+        }
+        
+        // Defines research type for item requirement (Research page)
+        internal func researchTypeDefinition(for requirement: String, of count: Int) -> ResearchType {
+            if inventoryItemCount(for: requirement) >= count {
+                return .completed
+            } else if ((allItems.first(where: { $0.nameKey == requirement })?.enabled) == false) {
+                return .locked
+            } else {
+                return .less
+            }
+        }
+        
+        // Defines research type for price requirement (Research page)
+        internal func researchTypeDefinition(for price: Float) -> ResearchType {
+            if profile.balance >= Int(price) {
+                return .completed
+            } else {
+                return .less
+            }
+        }
+        
+        // Checks that all conditions are met
+        internal func unlockButtonAvailable(for item: ConsumableItem) -> Bool {
+            // Items collection requirements check
+            for requirement in item.requirement {
+                guard researchTypeDefinition(for: requirement.key, of: requirement.value) == .completed else { return false }
+            }
+            // Coins requirement check
+            guard researchTypeDefinition(for: item.price) == .completed else { return false }
+            
+            return true
+        }
+        
+        // Configures rule description for Details Page
+        internal func ruleDesctiption(item: ConsumableItem) -> [String] {
+            // For the first item (One Hours) there are no requirements
+            guard !item.requirement.isEmpty else { return [Texts.ItemCreatePage.null] }
+            
+            var rule = [String]()
+            let requirements = item.requirement.sorted { $0.value > $1.value }
+            for requirement in requirements {
+                // Setups requirement string
+                let requirementName = NSLocalizedString(requirement.key, comment: String())
+                let reqString = "\(requirementName) × \(requirement.value)"
+                rule.append(reqString)
+            }
+            
+            return rule
+        }
+        
+        internal func applicationDesctiption(item: ConsumableItem) -> [String] {
+            // For the first item (One Hours) there are no requirements
+            guard !item.applications.isEmpty else { return [Texts.ItemCreatePage.null] }
+            
+            var items = [String]()
+            let applications = item.applications.sorted { $0.value < $1.value }
+            for application in applications {
+                // Setups application string
+                let applicationName = NSLocalizedString(application.key, comment: String())
+                let reqString = applicationName
+                items.append(reqString)
+            }
+            
+            return items
+        }
+        
         // MARK: - Calculation methods
         
         // Returns filtered elements by rarity
@@ -88,12 +173,16 @@ extension ShopView {
             enabled ? 2 : 1
         }
         
+        internal func inventoryItemCount(for name: String) -> Int {
+            allItems.first(where: { $0.nameKey == name })?.count ?? -3
+        }
+        
         // MARK: - SwiftData management methods
         
         // Saves ConsumableItem to SwiftData DB
         internal func saveItem(_ created: ConsumableItem) {
-            let item = ConsumableItem.itemMockConfig(name: created.name,
-                                                     description: created.itemDescription,
+            let item = ConsumableItem.itemMockConfig(nameKey: created.name,
+                                                     descriptionKey: created.itemDescription,
                                                      price: created.price,
                                                      rarity: created.rarity,
                                                      profile: profile,
@@ -108,53 +197,14 @@ extension ShopView {
             fetchData()
         }
         
-        // MARK: - Mock data method
-        
-        internal func addSamples() {
-            guard items.isEmpty else { return }
-            let items = [ConsumableItem.itemMockConfig(name: "One Minute",
-                                                       description: "One minute is a whole 60 seconds!",
-                                                       price: 1,
-                                                       profile: profile),
-                         
-                         ConsumableItem.itemMockConfig(name: "Three Minutes",
-                                                       description: "Three minutes is a whole 180 seconds!",
-                                                       price: 3,
-                                                       rarity: .common,
-                                                       profile: profile,
-                                                       enabled: false),
-                         
-                         ConsumableItem.itemMockConfig(name: "Five Minutes",
-                                                       description: "Five minutes is a whole 300 seconds!",
-                                                       price: 5,
-                                                       rarity: .uncommon,
-                                                       profile: profile,
-                                                       enabled: false),
-                         ConsumableItem.itemMockConfig(name: "Seven Minutes",
-                                                       description: "Seven minutes is a whole 420 seconds!",
-                                                       price: 7,
-                                                       rarity: .uncommon,
-                                                       profile: profile,
-                                                       enabled: false),
-                         ConsumableItem.itemMockConfig(name: "Ten Minutes",
-                                                       description: "Ten minutes is a whole 600 seconds!",
-                                                       price: 10,
-                                                       rarity: .rare,
-                                                       profile: profile,
-                                                       enabled: false)]
-            for item in items {
-                modelContext.insert(item)
-            }
-            fetchData()
-        }
-        
         // MARK: - Load data method
         
         private func fetchData(filterReset: Bool = false) {
             do {
                 // Gets items from SwiftData DB for current enable status
-                let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.enabled == enableStatus && !$0.archived }, sortBy: [SortDescriptor(\.price)])
-                items = try modelContext.fetch(descriptor)
+                let descriptor = FetchDescriptor<ConsumableItem>(sortBy: [SortDescriptor(\.price)])
+                allItems = try modelContext.fetch(descriptor)
+                items = allItems.filter { $0.enabled == enableStatus && !$0.archived }
                 
                 // Check for .all tag selection or enable status changes (filterReset)
                 if rarityFilter != .all && !filterReset {
@@ -178,7 +228,7 @@ extension ShopView {
         
         // First app launch case
         private func createProfile() {
-            let profile = Profile(name: Texts.ProfilePage.user, balance: 10, items: items)
+            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, items: items)
             modelContext.insert(profile)
             fetchProfileData()
         }
@@ -196,5 +246,59 @@ extension ShopView {
             createProfile()
         }
         
+        // MARK: - Mock data method
+        
+        internal func addSamples() {
+            guard allItems.isEmpty else { return }
+            let items = [
+                ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle,
+                                              descriptionKey: Content.Common.oneMinuteDescription,
+                                              price: 1,
+                                              profile: profile,
+                                              applications: [RuleItem.threeHours.rawValue : 3,
+                                                             RuleItem.fiveHours.rawValue : 5,
+                                                             RuleItem.sevenHours.rawValue : 7]
+                                             ),
+                         
+                ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle,
+                                              descriptionKey: Content.Common.threeMinutesDescription,
+                                              price: 3,
+                                              rarity: .common,
+                                              profile: profile,
+                                              requirement: [RuleItem.oneHour.rawValue : 3],
+                                              applications: [RuleItem.fiveHours.rawValue : 5,
+                                                             RuleItem.tenHours.rawValue : 10],
+                                              enabled: false),
+                         
+                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
+                                              descriptionKey: Content.Uncommon.fiveMinutesDescription,
+                                              price: 5,
+                                              rarity: .uncommon,
+                                              profile: profile,
+                                              requirement: [RuleItem.oneHour.rawValue : 2, RuleItem.threeHours.rawValue : 1],
+                                              applications: [RuleItem.sevenHours.rawValue : 7],
+                                              enabled: false),
+                
+                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
+                                              descriptionKey: Content.Uncommon.sevenMinutesDescription,
+                                              price: 7,
+                                              rarity: .uncommon,
+                                              profile: profile,
+                                              requirement: [RuleItem.fiveHours.rawValue : 1, RuleItem.oneHour.rawValue : 2],
+                                              applications: [RuleItem.tenHours.rawValue : 10],
+                                              enabled: false),
+                
+                ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,
+                                              descriptionKey: Content.Rare.tenMinutesDescription,
+                                              price: 10,
+                                              rarity: .rare,
+                                              profile: profile,
+                                              requirement: [RuleItem.sevenHours.rawValue : 1, RuleItem.threeHours.rawValue : 1],
+                                              enabled: false)]
+            for item in items {
+                modelContext.insert(item)
+            }
+            fetchData()
+        }
     }
 }

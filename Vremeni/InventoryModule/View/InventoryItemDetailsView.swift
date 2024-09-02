@@ -60,11 +60,11 @@ struct InventoryItemDetailsView: View {
                 .padding(.top, 10)
             
             HStack(spacing: 5) {
-                Rarity.rarityToImage(rarity: item.rarity)
+                item.rarity.image
                     .resizable()
                     .scaledToFit()
                     .frame(width: 25)
-                Text(item.rarity.rawValue)
+                Text(item.rarity.name)
                     .font(.body())
             }
         }
@@ -79,7 +79,7 @@ struct InventoryItemDetailsView: View {
                          content: viewModel.valCalculation(for: item))
             
             ParameterRow(title: Texts.ItemCreatePage.applicationRules,
-                         content: Texts.ItemCreatePage.null)
+                         contentArray: viewModel.applicationDesctiption(item: item))
             
         }
     }
@@ -92,7 +92,11 @@ struct InventoryItemDetailsView: View {
         let modelContext = ModelContext(container)
         let viewModel = InventoryView.InventoryViewModel(modelContext: modelContext)
         
-        let example = ConsumableItem.itemMockConfig(name: "One Minute", description: "One minute is a whole 60 seconds!", price: 50, rarity: .uncommon, profile: Profile.configMockProfile())
+        let example = ConsumableItem.itemMockConfig(
+            nameKey: Content.Common.oneMinuteTitle,
+            descriptionKey: Content.Common.oneMinuteDescription,
+            price: 50, rarity: .uncommon,
+            profile: Profile.configMockProfile())
         return InventoryItemDetailsView(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")

@@ -12,17 +12,8 @@ enum BannerType {
     case added(message: String)
     case archived(message: String)
     case ready(message: String)
-    
-    internal var backgroundColor: Color {
-        switch self {
-        case .added:
-            Color.yellow
-        case .archived:
-            Color.red
-        case .ready:
-            Color.green
-        }
-    }
+    case reset(message: String)
+    case unlocked(message: String)
     
     internal var image: Image {
         switch self {
@@ -32,12 +23,16 @@ enum BannerType {
             Image.Banner.archived
         case .ready:
             Image.Banner.ready
+        case .reset:
+            Image.Banner.reset
+        case .unlocked:
+            Image.Banner.unlocked
         }
     }
     
     internal var message: String {
         switch self {
-        case let .added(message), let .archived(message), let .ready(message):
+        case let .added(message), let .archived(message), let .ready(message), let .reset(message: message), let .unlocked(message: message):
             return message
         }
     }

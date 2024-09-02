@@ -43,7 +43,7 @@ struct UpgradeMachineRowView: View {
     
     private var name: some View {
         HStack(spacing: 5) {
-            Text(type.rawValue)
+            Text(type.name)
                 .font(.body())
                 .foregroundStyle(Color.LabelColors.labelPrimary)
         }
@@ -67,7 +67,7 @@ struct UpgradeMachineRowView: View {
     }
     
     private var limitPrice: some View {
-        let subtitle = "Limit has been reached"
+        let subtitle = Texts.MachinePage.limit
         return Text(subtitle)
             .font(.headline())
             .foregroundStyle(Color.LabelColors.labelPrimary)

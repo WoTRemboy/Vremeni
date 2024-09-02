@@ -8,6 +8,7 @@
 import Foundation
 import SwiftData
 import SwiftUI
+import UserNotifications
 
 extension ProfileView {
     
@@ -17,6 +18,10 @@ extension ProfileView {
         
         private(set) var profile = Profile.configMockProfile()
         private(set) var version: String = String()
+        
+        internal var notificationsEnabled: Bool = false
+        internal var showingNotificationAlert: Bool = false
+        private(set) var notificationsStatus: NotificationStatus = .prohibited
         
         private var items = [ConsumableItem]()
         private var unlockedItems = [ConsumableItem]()
@@ -40,6 +45,10 @@ extension ProfileView {
             actualRarities.filter { inventoryRarityCount(for: $0) > 0 }
         }
         
+        internal var inventoryBalance: Int {
+            readyItems.reduce(0) { $0 + (Int($1.price) * $1.count) }
+        }
+        
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
         }
@@ -48,6 +57,7 @@ extension ProfileView {
             fetchProfileData()
             fetchItemsData()
             fetchArchivedItemsData()
+            readNotificationStatus()
         }
         
         internal func updateItemsOnAppear() {
@@ -79,12 +89,65 @@ extension ProfileView {
             guard profile.balance > 0 else { return 0 }
             let rarityItems = readyItems.filter { $0.rarity == rarity }
             let valuation = rarityItems.reduce(0) { $0 + (Int($1.price) * $1.count) }
-            return Int(Float(valuation) / Float(profile.balance) * 100)
+            return Int(Float(valuation) / Float(inventoryBalance) * 100)
         }
         
         internal func inventoryRarityCount(for rarity: Rarity) -> Int {
             let rarityItems = readyItems.filter { $0.rarity == rarity }
             return rarityItems.reduce(0) { $0 + $1.count }
+        }
+        
+        internal func valuationCount(for rarity: Rarity) -> Int {
+            let rarityItems = readyItems.filter { $0.rarity == rarity }
+            return rarityItems.reduce(0) { $0 + ($1.count * Int($1.price)) }
+        }
+        
+        internal func changeTheme(theme: Theme) {
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                if let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
+                    UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
+                        window.overrideUserInterfaceStyle = theme.userInterfaceStyle
+                    })
+                }
+            }
+        }
+        
+        internal func selectShape(_ theme: Theme) -> (CGSize, CGFloat) {
+            switch theme {
+            case .systemDefault:
+                (CGSize(width: 0, height: 0), 90)
+            case .light:
+                (CGSize(width: 150, height: -150), 180)
+            case .dark:
+                (CGSize(width: 30, height: -25), 180)
+            }
+        }
+        
+        private func readNotificationStatus() {
+            let defaults = UserDefaults.standard
+            let rawValue = defaults.string(forKey: Texts.UserDefaults.notifications) ?? String()
+            notificationsStatus = NotificationStatus(rawValue: rawValue) ?? .prohibited
+            
+            guard notificationsStatus == .allowed else { return }
+            notificationsEnabled = true
+        }
+        
+        internal func setNotificationsStatus(allowed: Bool) {
+            let defaults = UserDefaults.standard
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
+                if success {
+                    self.notificationsStatus = allowed ? .allowed : .disabled
+                    print("Notifications are set to \(allowed).")
+                } else if let error {
+                    print(error.localizedDescription)
+                } else {
+                    self.notificationsStatus = .prohibited
+                    self.notificationsEnabled = false
+                    self.showingNotificationAlert = true
+                    print("Notifications are prohibited.")
+                }
+                defaults.set(self.notificationsStatus.rawValue, forKey: Texts.UserDefaults.notifications)
+            }
         }
         
         internal func updateVersionOnAppear() {
@@ -121,8 +184,8 @@ extension ProfileView {
             } catch {
                 print("Failed to save context after reset")
             }
-            
-            profile.resetBalance()
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            profile.resetStacks()
             addSamples()
         }
         
@@ -139,36 +202,43 @@ extension ProfileView {
         }
         
         internal func addSamples() {
-            let items = [ConsumableItem.itemMockConfig(name: "One Minute",
-                                                       description: "One minute is a whole 60 seconds!",
-                                                       price: 1,
-                                                       profile: profile),
+            let items = [
+                ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle,
+                                              descriptionKey: Content.Common.oneMinuteDescription,
+                                              price: 1,
+                                              profile: profile),
                          
-                         ConsumableItem.itemMockConfig(name: "Three Minutes",
-                                                       description: "Three minutes is a whole 180 seconds!",
-                                                       price: 3,
-                                                       rarity: .common,
-                                                       profile: profile,
-                                                       enabled: false),
+                ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle,
+                                              descriptionKey: Content.Common.threeMinutesDescription,
+                                              price: 3,
+                                              rarity: .common,
+                                              profile: profile,
+                                              requirement: [RuleItem.oneHour.rawValue : 3],
+                                              enabled: false),
                          
-                         ConsumableItem.itemMockConfig(name: "Five Minutes",
-                                                       description: "Five minutes is a whole 300 seconds!",
-                                                       price: 5,
-                                                       rarity: .uncommon,
-                                                       profile: profile,
-                                                       enabled: false),
-                         ConsumableItem.itemMockConfig(name: "Seven Minutes",
-                                                       description: "Seven minutes is a whole 420 seconds!",
-                                                       price: 7,
-                                                       rarity: .uncommon,
-                                                       profile: profile,
-                                                       enabled: false),
-                         ConsumableItem.itemMockConfig(name: "Ten Minutes",
-                                                       description: "Ten minutes is a whole 600 seconds!",
-                                                       price: 10,
-                                                       rarity: .rare,
-                                                       profile: profile,
-                                                       enabled: false)]
+                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
+                                              descriptionKey: Content.Uncommon.fiveMinutesDescription,
+                                              price: 5,
+                                              rarity: .uncommon,
+                                              profile: profile,
+                                              requirement: [RuleItem.oneHour.rawValue : 2, RuleItem.threeHours.rawValue : 1],
+                                              enabled: false),
+                
+                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
+                                              descriptionKey: Content.Uncommon.sevenMinutesDescription,
+                                              price: 7,
+                                              rarity: .uncommon,
+                                              profile: profile,
+                                              requirement: [RuleItem.fiveHours.rawValue : 1, RuleItem.oneHour.rawValue : 2],
+                                              enabled: false),
+                
+                ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,
+                                              descriptionKey: Content.Rare.tenMinutesDescription,
+                                              price: 10,
+                                              rarity: .rare,
+                                              profile: profile,
+                                              requirement: [RuleItem.sevenHours.rawValue : 1, RuleItem.threeHours.rawValue : 1],
+                                              enabled: false)]
             for item in items {
                 modelContext.insert(item)
             }

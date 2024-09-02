@@ -9,10 +9,15 @@ import SwiftUI
 import SwiftData
 
 struct ProfileView: View {
-    
+        
+    @EnvironmentObject private var bannerService: BannerViewModel
     @State private var viewModel: ProfileViewModel
+    
     @State private var showingUsernameSheet = false
-    @State private var showingAlert = false
+    @State private var showingThemeSheet = false
+
+    @State private var showingResetAlert = false
+    @State private var showingLanguageAlert = false
     
     init(modelContext: ModelContext) {
         let viewModel = ProfileViewModel(modelContext: modelContext)
@@ -77,6 +82,12 @@ struct ProfileView: View {
     
     private var contentSection: some View {
         Section(Texts.ProfilePage.content) {
+            NavigationLink(destination: ProfileAboutView(viewModel: viewModel),
+                           label: {
+                LinkRow(title: Texts.ProfilePage.About.title,
+                        image: Image.ProfilePage.about)
+            })
+            
             NavigationLink(destination: ArchiveView(viewModel: viewModel)) {
                 LinkRow(title: Texts.ProfilePage.archive,
                         image: Image.ProfilePage.archive)
@@ -87,18 +98,19 @@ struct ProfileView: View {
     
     private var resetButton: some View {
         Button {
-            showingAlert = true
+            showingResetAlert = true
         } label: {
             LinkRow(title: Texts.ProfilePage.reset,
                     image: Image.ProfilePage.reset,
                     chevron: true)
         }
         .confirmationDialog(Texts.ProfilePage.resetContent,
-                            isPresented: $showingAlert,
+                            isPresented: $showingResetAlert,
                             titleVisibility: .visible) {
             Button(role: .destructive) {
                 withAnimation {
                     viewModel.resetProgress()
+                    bannerService.setBanner(banner: .reset(message: Texts.Banner.reset))
                 }
             } label: {
                 Text(Texts.ProfilePage.resetButton)
@@ -108,18 +120,67 @@ struct ProfileView: View {
     
     private var appSection: some View {
         Section(Texts.ProfilePage.app) {
-            
-            NavigationLink(destination: ProfileAboutView(viewModel: viewModel),
-                           label: {
-                LinkRow(title: Texts.ProfilePage.About.title,
-                        image: Image.ProfilePage.about)
-            })
-            
-            NavigationLink(destination: Text(Texts.ProfilePage.settings),
-                           label: {
-                LinkRow(title: Texts.ProfilePage.settings,
-                        image: Image.ProfilePage.settings)
-            })
+            notificationToggle
+            appearanceButton
+            languageButton
+        }
+    }
+    
+    private var notificationToggle: some View {
+        Toggle(isOn: $viewModel.notificationsEnabled) {
+            LinkRow(title: Texts.ProfilePage.notifications,
+                    image: Image.ProfilePage.notifications)
+        }
+        .onChange(of: viewModel.notificationsEnabled) { _, newValue in
+            viewModel.setNotificationsStatus(allowed: newValue)
+        }
+        .alert(isPresented: $viewModel.showingNotificationAlert) {
+            Alert(
+                title: Text(Texts.ProfilePage.notificationsTitle),
+                message: Text(Texts.ProfilePage.notificationsContent),
+                primaryButton: .default(Text(Texts.ProfilePage.settings)) {
+                    guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                    UIApplication.shared.open(url)
+                },
+                secondaryButton: .cancel(Text(Texts.ProfilePage.cancel))
+            )
+        }
+    }
+    
+    private var appearanceButton: some View {
+        Button {
+            showingThemeSheet = true
+        } label: {
+            LinkRow(title: Texts.ProfilePage.appearance,
+                    image: Image.ProfilePage.appearance,
+                    chevron: true)
+        }
+        .sheet(isPresented: $showingThemeSheet) {
+            ThemeChangeView(viewModel: viewModel)
+                .presentationDetents([.height(350)])
+                .interactiveDismissDisabled()
+        }
+    }
+    
+    private var languageButton: some View {
+        Button {
+            showingLanguageAlert = true
+        } label: {
+            LinkRow(title: Texts.ProfilePage.language,
+                    image: Image.ProfilePage.language,
+                    details: Texts.ProfilePage.languageDetails,
+                    chevron: true)
+        }
+        .alert(isPresented: $showingLanguageAlert) {
+            Alert(
+                title: Text(Texts.ProfilePage.languageTitle),
+                message: Text(Texts.ProfilePage.languageContent),
+                primaryButton: .default(Text(Texts.ProfilePage.settings)) {
+                    guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                    UIApplication.shared.open(url)
+                },
+                secondaryButton: .cancel(Text(Texts.ProfilePage.cancel))
+            )
         }
     }
 }
@@ -129,8 +190,10 @@ struct ProfileView: View {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
+        let environmentObject = BannerViewModel()
         
         return ProfileView(modelContext: modelContext)
+            .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")
     }

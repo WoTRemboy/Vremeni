@@ -42,7 +42,7 @@ struct ItemListRow: View {
                 .font(.body())
                 .foregroundStyle(Color.LabelColors.labelPrimary)
             
-            Rarity.rarityToImage(rarity: item.rarity)
+            item.rarity.image
                 .resizable()
                 .scaledToFit()
                 .frame(height: 17)
@@ -70,6 +70,12 @@ struct ItemListRow: View {
 }
 
 #Preview {
-    let example = MachineItem(name: "Item name", itemDescription: "Item description", image: "8.square", price: 8, parent: ConsumableItem.itemMockConfig(name: "", price: 1, profile: Profile.configMockProfile()))
+    let example = MachineItem(
+        nameKey: "Item name",
+        descriptionKey: "Item description",
+        image: "8.square", price: 8,
+        parent: ConsumableItem.itemMockConfig(
+            nameKey: Content.Common.oneMinuteTitle,
+            price: 1, profile: Profile.configMockProfile()), applications: [RuleItem.sevenHours.rawValue : 7])
     return ItemListRow(item: example)
 }
