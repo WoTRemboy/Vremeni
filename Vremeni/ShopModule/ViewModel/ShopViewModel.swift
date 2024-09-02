@@ -116,13 +116,35 @@ extension ShopView {
             }
         }
         
+        // Checks that all conditions are met
         internal func unlockButtonAvailable(for item: ConsumableItem) -> Bool {
+            // Items collection requirements check
             for requirement in item.requirement {
                 guard researchTypeDefinition(for: requirement.key, of: requirement.value) == .completed else { return false }
             }
+            // Coins requirement check
             guard researchTypeDefinition(for: item.price) == .completed else { return false }
             
             return true
+        }
+        
+        // Configures rule description for Details Page
+        internal func ruleDesctiption(item: ConsumableItem) -> String {
+            // For the first item (One Hours) there are no requirements
+            guard !item.requirement.isEmpty else { return Texts.ItemCreatePage.null }
+            
+            var rule = String()
+            let requirements = item.requirement.sorted { $0.value > $1.value }
+            for (number, requirement) in requirements.enumerated() {
+                // Checks if this requirement is the last one
+                let newRow = number < (requirements.count - 1) ? "\n" : String()
+                // Setups requirement string
+                let requirementName = NSLocalizedString(requirement.key, comment: String())
+                let reqString = "\(requirementName) × \(requirement.value)" + newRow
+                rule.append(reqString)
+            }
+            
+            return rule
         }
         
         // MARK: - Calculation methods
