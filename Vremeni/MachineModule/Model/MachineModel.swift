@@ -15,9 +15,17 @@ final class MachineItem: Identifiable {
     
     // General
     var id = UUID()
-    var name: String
-    var itemDescription: String
+    var nameKey: String
+    var descriptionKey: String
     var image: String
+    
+    // General localized
+    var name: String {
+        NSLocalizedString(nameKey, comment: String())
+    }
+    var itemDescription: String {
+        NSLocalizedString(descriptionKey, comment: String())
+    }
     
     // Valuation
     var price: Float
@@ -35,12 +43,12 @@ final class MachineItem: Identifiable {
     var started: Date = Date()
     var target: Date = Date()
     
-    init(id: UUID = UUID(), name: String, itemDescription: String, image: String,
+    init(id: UUID = UUID(), nameKey: String, descriptionKey: String, image: String,
          price: Float, percent: Double = 0, inProgress: Bool = false,
          type: VremeniType = .minutes, rarity: Rarity = .common, parent: ConsumableItem) {
         self.id = id
-        self.name = name
-        self.itemDescription = itemDescription
+        self.nameKey = nameKey
+        self.descriptionKey = descriptionKey
         self.image = image
         self.price = price
         self.percent = percent
@@ -99,7 +107,7 @@ extension MachineItem {
         let profile = profile
         let parent = ConsumableItem.itemMockConfig(nameKey: name, price: price, profile: profile)
         
-        return MachineItem(name: name, itemDescription: description, image: image, price: price, rarity: rarity, parent: parent)
+        return MachineItem(nameKey: name, descriptionKey: description, image: image, price: price, rarity: rarity, parent: parent)
     }
 }
 

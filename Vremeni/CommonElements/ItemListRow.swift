@@ -71,8 +71,8 @@ struct ItemListRow: View {
 
 #Preview {
     let example = MachineItem(
-        name: "Item name",
-        itemDescription: "Item description",
+        nameKey: "Item name",
+        descriptionKey: "Item description",
         image: "8.square", price: 8,
         parent: ConsumableItem.itemMockConfig(
             nameKey: Content.Common.oneMinuteTitle,
