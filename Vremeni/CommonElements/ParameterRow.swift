@@ -29,6 +29,9 @@ struct ParameterRow: View {
                 .foregroundStyle(Color.LabelColors.labelDisable)
             
             HStack {
+                if researchType != nil {
+                    trailingIcon
+                }
                 VStack(spacing: 0) {
                     titleView
                     contentView
@@ -38,9 +41,7 @@ struct ParameterRow: View {
                     trailingView
                 }
                 
-                if researchType != nil {
-                    trailingIcon
-                }
+                
             }
         }
     }
@@ -78,7 +79,7 @@ struct ParameterRow: View {
             .scaledToFit()
         
             .frame(width: 22)
-            .padding(.trailing)
+            .padding(.leading)
             .padding(.top, 14)
         
             .foregroundStyle(
