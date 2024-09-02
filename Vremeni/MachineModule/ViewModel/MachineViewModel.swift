@@ -108,6 +108,22 @@ extension MachineView {
             selectedType = selected
         }
         
+        internal func applicationDesctiption(item: MachineItem) -> [String] {
+            // For the first item (One Hours) there are no requirements
+            guard !item.applications.isEmpty else { return [Texts.ItemCreatePage.null] }
+            
+            var items = [String]()
+            let applications = item.applications.sorted { $0.value < $1.value }
+            for application in applications {
+                // Setups application string
+                let applicationName = NSLocalizedString(application.key, comment: String())
+                let reqString = applicationName
+                items.append(reqString)
+            }
+            
+            return items
+        }
+        
         internal func slotLimitReached() -> Bool {
             profile.internalMachines >= slotsLimit
         }

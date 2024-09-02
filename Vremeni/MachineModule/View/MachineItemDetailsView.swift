@@ -86,7 +86,7 @@ struct MachineItemDetailsView: View {
             }
             
             ParameterRow(title: Texts.ItemCreatePage.applicationRules,
-                         content: Texts.ItemCreatePage.null)
+                         contentArray: viewModel.applicationDesctiption(item: item))
             
         }
     }

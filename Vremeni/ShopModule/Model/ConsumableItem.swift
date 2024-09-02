@@ -96,8 +96,9 @@ extension ConsumableItem {
     
     // Creating a MachineItem instanse and adding it to the Machine (Shop Module)
     internal func addToMachine() {
-        let child = MachineItem(nameKey: nameKey, descriptionKey: descriptionKey, image: image,
-                                price: price, rarity: rarity, parent: self)
+        let child = MachineItem(nameKey: nameKey, descriptionKey: descriptionKey,
+                                image: image, price: price, rarity: rarity,
+                                parent: self, applications: self.applications)
         machineItems.append(child)
         inMachine = true
     }

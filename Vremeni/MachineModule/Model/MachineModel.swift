@@ -39,13 +39,16 @@ final class MachineItem: Identifiable {
     // Data base relationship
     var parent: ConsumableItem
     
+    // Research applications (Item name + Price)
+    var applications: [String: Int]
+    
     // Progress checks
     var started: Date = Date()
     var target: Date = Date()
     
     init(id: UUID = UUID(), nameKey: String, descriptionKey: String, image: String,
          price: Float, percent: Double = 0, inProgress: Bool = false,
-         type: VremeniType = .minutes, rarity: Rarity = .common, parent: ConsumableItem) {
+         type: VremeniType = .minutes, rarity: Rarity = .common, parent: ConsumableItem, applications: [String: Int]) {
         self.id = id
         self.nameKey = nameKey
         self.descriptionKey = descriptionKey
@@ -56,6 +59,7 @@ final class MachineItem: Identifiable {
         self.type = type
         self.rarity = rarity
         self.parent = parent
+        self.applications = applications
     }
 }
 
@@ -98,7 +102,8 @@ extension MachineItem {
     // Configurates MachineItem mock data
     static internal func itemMockConfig(name: String, description: String = String(),
                                         price: Float, inProgress: Bool = false,
-                                        rarity: Rarity = .common, profile: Profile) -> MachineItem {
+                                        rarity: Rarity = .common, profile: Profile,
+                                        applications: [String: Int] = [:]) -> MachineItem {
         let name = name
         let description = description
         let image = "\(Int(price)).square"
@@ -106,8 +111,9 @@ extension MachineItem {
         let rarity = rarity
         let profile = profile
         let parent = ConsumableItem.itemMockConfig(nameKey: name, price: price, profile: profile)
+        let applications = applications
         
-        return MachineItem(nameKey: name, descriptionKey: description, image: image, price: price, rarity: rarity, parent: parent)
+        return MachineItem(nameKey: name, descriptionKey: description, image: image, price: price, rarity: rarity, parent: parent, applications: applications)
     }
 }
 
