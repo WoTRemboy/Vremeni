@@ -79,7 +79,7 @@ struct InventoryItemDetailsView: View {
                          content: viewModel.valCalculation(for: item))
             
             ParameterRow(title: Texts.ItemCreatePage.applicationRules,
-                         content: Texts.ItemCreatePage.null)
+                         contentArray: viewModel.applicationDesctiption(item: item))
             
         }
     }
