@@ -128,7 +128,7 @@ extension ShopView {
             return true
         }
         
-        // Configures rule description for Details Page
+        // Configures research rule description for Details Page
         internal func ruleDesctiption(item: ConsumableItem) -> [String] {
             // For the first item (One Hours) there are no requirements
             guard !item.requirement.isEmpty else { return [Texts.ItemCreatePage.null] }
@@ -145,6 +145,7 @@ extension ShopView {
             return rule
         }
         
+        // Configures application rules description for Details Page
         internal func applicationDesctiption(item: ConsumableItem) -> [String] {
             // For the first item (One Hours) there are no requirements
             guard !item.applications.isEmpty else { return [Texts.ItemCreatePage.null] }
