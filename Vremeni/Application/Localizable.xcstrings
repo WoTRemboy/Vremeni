@@ -355,6 +355,23 @@
         }
       }
     },
+    "InventoryPageResult" : {
+      "comment" : "Result",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Result"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Результат"
+          }
+        }
+      }
+    },
     "InventoryPageTitle" : {
       "comment" : "Inventory",
       "localizations" : {
