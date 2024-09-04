@@ -26,8 +26,13 @@ struct InventoryView: View {
         NavigationStack {
             ZStack {
                 ScrollView {
-                    collection
-                        .padding(.horizontal)
+                    if searchText.isEmpty {
+                        collection
+                            .padding(.horizontal)
+                    } else {
+                        isSearchingContent
+                            .padding(.horizontal)
+                    }
                 }
                 .onAppear(perform: {
                     viewModel.updateOnAppear()
@@ -84,6 +89,30 @@ struct InventoryView: View {
             }
             .sheet(item: $selected) { item in
                 InventoryItemDetailsView(item: item, viewModel: viewModel)
+            }
+        }
+    }
+    
+    private var isSearchingContent: some View {
+        let columns = Array(
+            repeating: GridItem(.flexible(), spacing: spacing),
+            count: itemsInRows)
+        
+        return LazyVGrid(columns: columns, spacing: spacing) {
+            Section {
+                ForEach(searchResults) { item in
+                    InventoryGridCell(item: item, viewModel: viewModel)
+                        .onTapGesture {
+                            selected = item
+                        }
+                }
+                .sheet(item: $selected) { item in
+                    InventoryItemDetailsView(item: item, viewModel: viewModel)
+                }
+            } header: {
+                if !searchResults.isEmpty {
+                    SectionHeader(Texts.InventoryPage.result)
+                }
             }
         }
     }

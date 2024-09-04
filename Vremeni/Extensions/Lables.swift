@@ -132,6 +132,7 @@ final class Texts {
         static let placeholderSubtitle = NSLocalizedString("InventoryPagePlaceholderSubtitle", comment: "Get some Items from Fair via Machine")
         
         static let filter = "Filter"
+        static let result = "Result"
         static let valuation = NSLocalizedString("InventoryPageValuation", comment: "Valuation")
     }
     
