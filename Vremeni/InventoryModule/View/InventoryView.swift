@@ -28,10 +28,10 @@ struct InventoryView: View {
                 ScrollView {
                     if searchText.isEmpty {
                         collection
-                            .padding(.horizontal)
+                            .padding([.horizontal, .bottom])
                     } else {
                         isSearchingContent
-                            .padding(.horizontal)
+                            .padding([.horizontal, .bottom])
                     }
                 }
                 .onAppear(perform: {

@@ -40,7 +40,7 @@ struct MachineView: View {
         NavigationStack {
             ScrollView {
                 collection
-                .padding(.horizontal)
+                    .padding([.horizontal, .bottom])
             }
             // Collection view data update
             .onAppear(perform: {
