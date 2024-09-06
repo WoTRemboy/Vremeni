@@ -25,7 +25,7 @@ struct ArchiveView: View {
             ZStack {
                 ScrollView {
                     collection
-                        .padding(.horizontal)
+                        .padding([.horizontal, .bottom])
                 }
                 .onAppear {
                     viewModel.updateItemsOnAppear()
