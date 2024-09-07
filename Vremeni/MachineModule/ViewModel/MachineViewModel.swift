@@ -129,7 +129,7 @@ extension MachineView {
         }
         
         internal func isPurchaseUnavailable() -> Bool {
-            guard selectedType != .money else { return true }
+            guard selectedType != .money else { return false }
             return profile.balance < Int(internalPrice) || profile.internalMachines >= slotsLimit
         }
         

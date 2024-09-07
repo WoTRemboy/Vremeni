@@ -12,8 +12,10 @@ struct MachineView: View {
     
     // MARK: - Properties
     
-    // Banner viewModel
-    @EnvironmentObject var bannerService: BannerViewModel
+    // Banner service
+    @EnvironmentObject private var bannerService: BannerViewModel
+    // StoreKit service
+    @EnvironmentObject private var storeKitService: StoreKitManager
     // Machine viewModel
     @State private var viewModel: MachineViewModel
     
@@ -58,6 +60,9 @@ struct MachineView: View {
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.visible, for: .tabBar)
+        }
+        .task {
+            await storeKitService.fetchProducts()
         }
         .tabItem {
             Image.TabBar.machine
@@ -142,6 +147,7 @@ struct MachineView: View {
             .sheet(isPresented: $showingUpgradeSheet, content: {
                 BuyWorkshopView(viewModel: viewModel)
                     .presentationDetents([.medium])
+                    .environmentObject(storeKitService)
             })
     }
     
@@ -199,9 +205,11 @@ struct MachineView: View {
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
         let environmentObject = BannerViewModel()
+        let environmentObject2 = StoreKitManager()
         
         return MachineView(modelContext: modelContext)
             .environmentObject(environmentObject)
+            .environmentObject(environmentObject2)
     } catch {
         fatalError("Failed to create model container.")
     }

@@ -10,6 +10,7 @@ import SwiftData
 
 struct BuyWorkshopView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject private var storeKitService: StoreKitManager
     
     private let viewModel: MachineView.MachineViewModel
     
@@ -35,6 +36,9 @@ struct BuyWorkshopView: View {
                     topBarBalanceView
                 }
             }
+        }
+        .task {
+            await storeKitService.fetchProducts()
         }
     }
     
@@ -71,9 +75,21 @@ struct BuyWorkshopView: View {
     private var buyButton: some View {
         VStack {
             Button(action: {
-                withAnimation(.snappy) {
-                    viewModel.slotPurchase()
-                    dismiss()
+                switch viewModel.selectedType {
+                case .coins:
+                    withAnimation(.snappy) {
+                        viewModel.slotPurchase()
+                        dismiss()
+                    }
+                case .money:
+                    Task {
+                        do {
+                            guard let product = storeKitService.products.first else { return }
+                            try await storeKitService.purchase(product)
+                        } catch {
+                            print(error)
+                        }
+                    }
                 }
             }) {
                 Text(Texts.MachinePage.purchase)
@@ -100,8 +116,10 @@ struct BuyWorkshopView: View {
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
         let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
+        let enviromentObject = StoreKitManager()
         
         return BuyWorkshopView(viewModel: viewModel)
+            .environmentObject(enviromentObject)
     } catch {
         fatalError("Failed to create model container.")
     }
