@@ -14,8 +14,6 @@ struct MachineView: View {
     
     // Banner service
     @EnvironmentObject private var bannerService: BannerViewModel
-    // StoreKit service
-    @EnvironmentObject private var storeKitService: StoreKitManager
     // Machine viewModel
     @State private var viewModel: MachineViewModel
     
@@ -60,9 +58,6 @@ struct MachineView: View {
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.visible, for: .tabBar)
-        }
-        .task {
-            await storeKitService.fetchProducts()
         }
         .tabItem {
             Image.TabBar.machine
@@ -147,7 +142,6 @@ struct MachineView: View {
             .sheet(isPresented: $showingUpgradeSheet, content: {
                 BuyWorkshopView(viewModel: viewModel)
                     .presentationDetents([.medium])
-                    .environmentObject(storeKitService)
             })
     }
     

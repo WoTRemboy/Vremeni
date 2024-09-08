@@ -24,7 +24,7 @@ extension MachineView {
         private let targetPercent: CGFloat = 100
         
         private(set) var selectedType: UpgrageMethod = .coins
-        private(set) var price: String = String()
+        private(set) var price: String = Texts.MachinePage.Upgrade.null
         private(set) var readyNotification: (ready: Bool, name: String?) = (false, nil)
         private(set) var notificationStatus: NotificationStatus = .prohibited
         
@@ -35,6 +35,7 @@ extension MachineView {
             self.modelContext = modelContext
             NotificationCenter.default.addObserver(self, selector: #selector(handleResetProgress), name: .resetProgressNotification, object: nil)
             NotificationCenter.default.addObserver(self, selector: #selector(handleStartTimers), name: .startProgressNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(handleAddSlot), name: .addSlotNotification, object: nil)
         }
         
         @objc private func handleResetProgress() {
@@ -43,6 +44,10 @@ extension MachineView {
         
         @objc private func handleStartTimers() {
             startTimers()
+        }
+        
+        @objc private func handleAddSlot() {
+            slotPurchase(real: true)
         }
         
         internal func updateOnAppear() {
@@ -137,8 +142,12 @@ extension MachineView {
             return profile.balance < Int(internalPrice) || profile.internalMachines >= slotsLimit
         }
         
-        internal func slotPurchase() {
-            profile.slotPurchase(price: internalPrice)
+        internal func slotPurchase(real: Bool) {
+            if real {
+                profile.slotPurchase()
+            } else {
+                profile.slotPurchase(internalPrice: internalPrice)
+            }
         }
         
         internal func isSlotAvailable() -> Bool {

@@ -102,7 +102,6 @@ struct ShopView: View {
                 Text(Texts.ShopPage.title)
             }
             MachineView(modelContext: modelContext)
-                .environmentObject(StoreKitManager())
             InventoryView(modelContext: modelContext)
             ProfileView(modelContext: modelContext)
         }

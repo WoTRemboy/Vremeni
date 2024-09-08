@@ -18,8 +18,10 @@ struct VremeniApp: App {
     @AppStorage(Texts.UserDefaults.notifications) private var notificationsEnabled: NotificationStatus = .prohibited
     // UserDefaults for current app theme
     @AppStorage(Texts.UserDefaults.theme) private var userTheme: Theme = .systemDefault
-    // Banner viewModel
+    // Banner manager
     @StateObject private var bannerService = BannerViewModel()
+    // StoreKit manager
+    @StateObject private var storeKitService = StoreKitManager()
     // SwiftData container
     private let container: ModelContainer
     
@@ -36,8 +38,13 @@ struct VremeniApp: App {
                     BannerView(type: type)
                 }
             }
-            // Banner viewModel environment
+            .task {
+                await storeKitService.fetchProducts()
+            }
+            // Banner manager environment
             .environmentObject(bannerService)
+            // StoreKit manager environment
+            .environmentObject(storeKitService)
             // App theme style setup
             .onAppear {
                 setTheme(style: userTheme.userInterfaceStyle)

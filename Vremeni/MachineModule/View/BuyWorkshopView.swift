@@ -28,7 +28,7 @@ struct BuyWorkshopView: View {
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)
             }
-            .navigationTitle(Texts.MachinePage.upgrade)
+            .navigationTitle(Texts.MachinePage.Upgrade.upgrade)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -86,7 +86,7 @@ struct BuyWorkshopView: View {
                 try await storeKitService.restorePurchases()
             }
         } label: {
-            Text(Texts.MachinePage.restore)
+            Text(Texts.MachinePage.Upgrade.restore)
         }
     }
     
@@ -95,7 +95,7 @@ struct BuyWorkshopView: View {
             switch viewModel.selectedType {
             case .coins:
                 withAnimation(.snappy) {
-                    viewModel.slotPurchase()
+                    viewModel.slotPurchase(real: false)
                     dismiss()
                 }
             case .money:
@@ -103,13 +103,14 @@ struct BuyWorkshopView: View {
                     do {
                         guard let product = storeKitService.products.first else { return }
                         try await storeKitService.purchase(product)
+                        dismiss()
                     } catch {
                         print(error)
                     }
                 }
             }
         }) {
-            Text(Texts.MachinePage.purchase)
+            Text(Texts.MachinePage.Upgrade.purchase)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
         .frame(height: 50)

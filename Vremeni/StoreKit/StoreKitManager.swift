@@ -8,7 +8,7 @@
 import StoreKit
 
 final class StoreKitManager: ObservableObject {
-    @Published var products: [Product] = []
+    @Published internal var products: [Product] = []
     
     init() {
         listenForTransactionUpdates()
@@ -55,6 +55,9 @@ final class StoreKitManager: ObservableObject {
     
     private func handlePurchase(_ transaction: Transaction) async {
         await transaction.finish()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            NotificationCenter.default.post(name: .addSlotNotification, object: nil)
+        }
     }
     
     private func listenForTransactionUpdates() {
