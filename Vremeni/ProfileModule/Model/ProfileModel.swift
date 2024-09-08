@@ -45,9 +45,13 @@ extension Profile: Equatable {
         balance -= Int(price)
     }
     
-    internal func slotPurchase(price: Double) {
-        balance -= Int(price)
+    internal func slotPurchase(internalPrice: Double) {
+        balance -= Int(internalPrice)
         internalMachines += 1
+    }
+    
+    internal func slotPurchase() {
+        donateMachines += 1
     }
     
     internal func resetStacks() {

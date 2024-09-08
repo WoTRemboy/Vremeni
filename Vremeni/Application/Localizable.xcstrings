@@ -355,6 +355,23 @@
         }
       }
     },
+    "InventoryPageResult" : {
+      "comment" : "Result",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Result"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Результат"
+          }
+        }
+      }
+    },
     "InventoryPageTitle" : {
       "comment" : "Inventory",
       "localizations" : {
@@ -797,6 +814,23 @@
         }
       }
     },
+    "MachinePageRestore" : {
+      "comment" : "Restore Purchases",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Purchases"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Восстановить покупки"
+          }
+        }
+      }
+    },
     "MachinePageReward" : {
       "comment" : "Reward",
       "localizations" : {
@@ -895,6 +929,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Внутренняя валюта"
+          }
+        }
+      }
+    },
+    "MachinePageUpgradeNull" : {
+      "comment" : "Null",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Null"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет цены"
           }
         }
       }

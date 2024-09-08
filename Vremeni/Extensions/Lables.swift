@@ -109,10 +109,6 @@ final class Texts {
         static let emptyTitle = NSLocalizedString("MachinePageAddItem", comment: "Add an Item")
         static let queue = NSLocalizedString("MachinePageQueue", comment: "Queue")
         
-        static let upgrade = NSLocalizedString("MachinePageUpgrade", comment: "Upgrade")
-        static let purchase = NSLocalizedString("MachinePagePurchase", comment: "Purchase")
-        static let limit = NSLocalizedString("MachinePageLimit", comment: "Limit has been reached")
-        
         static let targetTime = NSLocalizedString("MachinePageTargetTime", comment: "Target time")
         static let potentialTime = NSLocalizedString("MachinePagePotentialTarget", comment: "Potential target")
         static let reward = NSLocalizedString("MachinePageReward", comment: "Reward")
@@ -121,8 +117,13 @@ final class Texts {
         static let continueProgress = NSLocalizedString("MachinePageContinue", comment: "Continue")
         
         enum Upgrade {
+            static let upgrade = NSLocalizedString("MachinePageUpgrade", comment: "Upgrade")
+            static let purchase = NSLocalizedString("MachinePagePurchase", comment: "Purchase")
+            static let limit = NSLocalizedString("MachinePageLimit", comment: "Limit has been reached")
+            static let restore = NSLocalizedString("MachinePageRestore", comment: "Restore Purchases")
             static let coins = NSLocalizedString("MachinePageUpgradeCoins", comment: "Local currency")
             static let real = NSLocalizedString("MachinePageUpgradeReal", comment: "Real currency")
+            static let null = NSLocalizedString("MachinePageUpgradeNull", comment: "Null")
         }
     }
     
@@ -132,6 +133,7 @@ final class Texts {
         static let placeholderSubtitle = NSLocalizedString("InventoryPagePlaceholderSubtitle", comment: "Get some Items from Fair via Machine")
         
         static let filter = "Filter"
+        static let result = NSLocalizedString("InventoryPageResult", comment: "Result")
         static let valuation = NSLocalizedString("InventoryPageValuation", comment: "Valuation")
     }
     
@@ -253,4 +255,5 @@ extension Notification.Name {
     static let startProgressNotification = Notification.Name("startProgressNotification")
     static let inventoryUpdateNotification = Notification.Name("inventoryUpdateNotification")
     static let userNotificationUpdate = Notification.Name("userNotificationUpdate")
+    static let addSlotNotification = Notification.Name("addSlotNotification")
 }

@@ -12,8 +12,8 @@ struct MachineView: View {
     
     // MARK: - Properties
     
-    // Banner viewModel
-    @EnvironmentObject var bannerService: BannerViewModel
+    // Banner service
+    @EnvironmentObject private var bannerService: BannerViewModel
     // Machine viewModel
     @State private var viewModel: MachineViewModel
     
@@ -40,7 +40,7 @@ struct MachineView: View {
         NavigationStack {
             ScrollView {
                 collection
-                .padding(.horizontal)
+                    .padding([.horizontal, .bottom])
             }
             // Collection view data update
             .onAppear(perform: {
@@ -199,9 +199,11 @@ struct MachineView: View {
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
         let environmentObject = BannerViewModel()
+        let environmentObject2 = StoreKitManager()
         
         return MachineView(modelContext: modelContext)
             .environmentObject(environmentObject)
+            .environmentObject(environmentObject2)
     } catch {
         fatalError("Failed to create model container.")
     }

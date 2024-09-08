@@ -55,7 +55,7 @@ struct ShopView: View {
                         } else {
                             // Collecion with locked items
                             researchCollection
-                                .padding(.horizontal)
+                                .padding([.horizontal, .bottom])
                                 .padding(.top, 8)
                                 .transition(.move(edge: .trailing))
                         }
