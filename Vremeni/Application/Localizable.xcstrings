@@ -814,6 +814,23 @@
         }
       }
     },
+    "MachinePageRestore" : {
+      "comment" : "Restore Purchases",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Purchases"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Восстановить покупки"
+          }
+        }
+      }
+    },
     "MachinePageReward" : {
       "comment" : "Reward",
       "localizations" : {

@@ -25,6 +25,14 @@ final class StoreKitManager: ObservableObject {
         }
     }
     
+    internal func restorePurchases() async throws {
+        do {
+            try await AppStore.sync()
+        } catch {
+            print(error)
+        }
+    }
+    
     internal func purchase(_ product: Product) async throws {
         let result = try await product.purchase()
 

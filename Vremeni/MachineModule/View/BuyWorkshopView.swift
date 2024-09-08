@@ -22,7 +22,11 @@ struct BuyWorkshopView: View {
         NavigationStack {
             ZStack {
                 options
-                buyButton
+                VStack(spacing: 10) {
+                    restoreButton
+                    buyButton
+                }
+                .frame(maxHeight: .infinity, alignment: .bottom)
             }
             .navigationTitle(Texts.MachinePage.upgrade)
             .navigationBarTitleDisplayMode(.inline)
@@ -72,8 +76,17 @@ struct BuyWorkshopView: View {
         .scrollDisabled(true)
     }
     
+    private var restoreButton: some View {
+        Button {
+            Task {
+                try await storeKitService.restorePurchases()
+            }
+        } label: {
+            Text(Texts.MachinePage.restore)
+        }
+    }
+    
     private var buyButton: some View {
-        VStack {
             Button(action: {
                 switch viewModel.selectedType {
                 case .coins:
@@ -104,9 +117,7 @@ struct BuyWorkshopView: View {
             .tint(Color.green)
             
             .disabled(viewModel.isPurchaseUnavailable())
-        }
-        .frame(maxHeight: .infinity, alignment: .bottom)
-        .padding(.bottom)
+        .padding(.bottom, 5)
     }
 }
 
