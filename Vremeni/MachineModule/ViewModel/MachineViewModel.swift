@@ -24,12 +24,12 @@ extension MachineView {
         private let targetPercent: CGFloat = 100
         
         private(set) var selectedType: UpgrageMethod = .coins
+        private(set) var price: String = String()
         private(set) var readyNotification: (ready: Bool, name: String?) = (false, nil)
         private(set) var notificationStatus: NotificationStatus = .prohibited
         
         private let slotsLimit = 3
         internal let internalPrice: Double = 1
-        internal let donatePrice: Double = 0.99
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
@@ -126,6 +126,10 @@ extension MachineView {
         
         internal func slotLimitReached() -> Bool {
             profile.internalMachines >= slotsLimit
+        }
+        
+        internal func setPrice(for value: String) {
+            price = value
         }
         
         internal func isPurchaseUnavailable() -> Bool {

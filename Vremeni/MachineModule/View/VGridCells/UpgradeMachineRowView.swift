@@ -88,8 +88,7 @@ struct UpgradeMachineRowView: View {
     }
     
     private var realCurrencyPrice: some View {
-        let price = viewModel.donatePrice
-        return Text("$" + String(price))
+        Text(viewModel.price)
             .font(.headline())
             .foregroundStyle(Color.LabelColors.labelPrimary)
     }

@@ -40,6 +40,10 @@ struct BuyWorkshopView: View {
                     topBarBalanceView
                 }
             }
+            .onAppear {
+                guard let product = storeKitService.products.first else { return }
+                viewModel.setPrice(for: product.displayPrice)
+            }
         }
         .task {
             await storeKitService.fetchProducts()
@@ -87,36 +91,37 @@ struct BuyWorkshopView: View {
     }
     
     private var buyButton: some View {
-            Button(action: {
-                switch viewModel.selectedType {
-                case .coins:
-                    withAnimation(.snappy) {
-                        viewModel.slotPurchase()
-                        dismiss()
-                    }
-                case .money:
-                    Task {
-                        do {
-                            guard let product = storeKitService.products.first else { return }
-                            try await storeKitService.purchase(product)
-                        } catch {
-                            print(error)
-                        }
+        Button(action: {
+            switch viewModel.selectedType {
+            case .coins:
+                withAnimation(.snappy) {
+                    viewModel.slotPurchase()
+                    dismiss()
+                }
+            case .money:
+                Task {
+                    do {
+                        guard let product = storeKitService.products.first else { return }
+                        try await storeKitService.purchase(product)
+                    } catch {
+                        print(error)
                     }
                 }
-            }) {
-                Text(Texts.MachinePage.purchase)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
-            .frame(height: 50)
-            .padding(.horizontal)
-            .minimumScaleFactor(0.4)
-            
-            .foregroundStyle(Color.green)
-            .buttonStyle(.bordered)
-            .tint(Color.green)
-            
-            .disabled(viewModel.isPurchaseUnavailable())
+        }) {
+            Text(Texts.MachinePage.purchase)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        }
+        .frame(height: 50)
+        .padding(.horizontal)
+        .minimumScaleFactor(0.4)
+        
+        .foregroundStyle(Color.green)
+        .buttonStyle(.bordered)
+        .tint(Color.green)
+        
+        .disabled(viewModel.isPurchaseUnavailable())
+        .animation(.easeInOut, value: viewModel.selectedType)
         .padding(.bottom, 5)
     }
 }
