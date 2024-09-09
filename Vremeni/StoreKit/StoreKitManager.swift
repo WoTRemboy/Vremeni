@@ -33,23 +33,29 @@ final class StoreKitManager: ObservableObject {
         }
     }
     
-    internal func purchase(_ product: Product) async throws {
-        let result = try await product.purchase()
-
-        switch result {
-        case .success(let verificationResult):
-            switch verificationResult {
-            case .verified(let transaction):
-                await handlePurchase(transaction)
-            case .unverified(_, let error):
-                throw error
+    internal func purchaseUpgrade() async throws {
+        guard let product = products.first else { return }
+        
+        do {
+            let result = try await product.purchase()
+            
+            switch result {
+            case .success(let verificationResult):
+                switch verificationResult {
+                case .verified(let transaction):
+                    await handlePurchase(transaction)
+                case .unverified(_, let error):
+                    throw error
+                }
+            case .pending:
+                print("Purchase pending...")
+            case .userCancelled:
+                print("User cancelled the purchase.")
+            @unknown default:
+                fatalError("Unknown purchase result.")
             }
-        case .pending:
-            print("Purchase pending...")
-        case .userCancelled:
-            print("User cancelled the purchase.")
-        @unknown default:
-            fatalError("Unknown purchase result.")
+        } catch {
+            print(error)
         }
     }
     

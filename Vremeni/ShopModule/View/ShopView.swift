@@ -49,7 +49,7 @@ struct ShopView: View {
                         if viewModel.enableStatus {
                             // Collecion with available items
                             availableCollection
-                                .padding(.horizontal)
+                                .padding([.horizontal, .bottom])
                                 .padding(.top, 8)
                                 .transition(.move(edge: .leading))
                         } else {
