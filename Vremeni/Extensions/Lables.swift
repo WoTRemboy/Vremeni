@@ -224,6 +224,7 @@ final class Texts {
             static let pups = NSLocalizedString("ProfilePageAboutPups", comment: "Artyom T.")
             static let email = NSLocalizedString("ProfilePageAboutEmail", comment: "Email")
             static let emailContent = "vremeni@icloud.com"
+            static let realEmail = "vremeni_time@icloud.com"
             
             static let directorLink = "https://t.me/Vremeni34"
             static let developLink = "https://www.linkedin.com/in/voityvit/"
