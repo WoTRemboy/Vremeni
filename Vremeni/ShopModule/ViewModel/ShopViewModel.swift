@@ -229,7 +229,7 @@ extension ShopView {
         
         // First app launch case
         private func createProfile() {
-            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, items: items)
+            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, premium: false, items: items)
             modelContext.insert(profile)
             fetchProfileData()
         }
