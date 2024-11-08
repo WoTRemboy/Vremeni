@@ -13,6 +13,22 @@
       ],
       "filename" : "Group 114 (2).svg",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "SplashScreenLightRu.svg",
+      "idiom" : "universal",
+      "locale" : "ru"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "SplashScreenDarkRu.svg",
+      "idiom" : "universal",
+      "locale" : "ru"
     }
   ],
   "info" : {
