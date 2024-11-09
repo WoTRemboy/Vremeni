@@ -67,6 +67,25 @@ final class Texts {
         static let placeholderTitleLocked = NSLocalizedString("ShopPagePlaceholderTitleLocked", comment: "Congratulations!")
         static let placeholderSubtitleLocked = NSLocalizedString("ShopPagePlaceholderSubtitleLocked", comment: "You have unlocked all Items")
         
+        enum Premium {
+            static let title = NSLocalizedString("ShopPagePremiumTitle", comment: "Subscriprion")
+            static let premium = NSLocalizedString("ShopPageVremeniPremium", comment: "Vremeni Premium")
+            static let description = NSLocalizedString("ShopPagePremiumDescription", comment: "Discover more content and exciting features with a Premium subscription.")
+            
+            static let annual = NSLocalizedString("ShopPagePremiumAnnual", comment: "Annual")
+            static let monthly = NSLocalizedString("ShopPagePremiumMonthly", comment: "Monthly")
+            
+            static let included = NSLocalizedString("ShopPagePremiumIncluded", comment: "What's Included")
+            static let contentTitle = NSLocalizedString("ShopPagePremiumContentTitle", comment: "Extended Content")
+            static let contentDescription = NSLocalizedString("ShopPagePremiumContentDescription", comment: "Unlock exclusive items, including special rarity.")
+            static let machineTitle = NSLocalizedString("ShopPagePremiumMachineTitle", comment: "Machine Upgrades")
+            static let machineDescription = NSLocalizedString("ShopPagePremiumMachineDescription", comment: "Add machine slots and boost your production.")
+            static let constructorTitle = NSLocalizedString("ShopPagePremiumConstructorTitle", comment: "Item Constructor")
+            static let constructorContent = NSLocalizedString("ShopPagePremiumConstructorContent", comment: "Try the ability to create your own items with rules.")
+            
+            static let subscribe = NSLocalizedString("ShopPagePremiumSubscribe", comment: "Subscribe for")
+        }
+        
         enum Rule {
             static let title = NSLocalizedString("ShopPageRuleTitle", comment: "Rule")
             static let reward = NSLocalizedString("ShopPageRuleReward", comment: "Reward")

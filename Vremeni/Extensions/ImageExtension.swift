@@ -16,6 +16,15 @@ extension Image {
         static let vCoin = Image("VCoin")
         static let filter = Image(systemName: "line.3.horizontal.decrease.circle")
         static let filledFilter = Image(systemName: "line.3.horizontal.decrease.circle.fill")
+        static let plus = Image(systemName: "plus")
+        static let premium = Image(systemName: "star")
+        
+        enum Premium {
+            static let logo = Image("PremiumLogo")
+            static let content = Image("ExtendedContentPremium")
+            static let machine = Image("MachineUpgradePremium")
+            static let constructor = Image("ItemConstructorPremium")
+        }
         
         enum Research {
             static let check = Image(systemName: "checkmark.circle")
