@@ -46,6 +46,7 @@
 		6324BA462C6A522A00A2610A /* ArchiveDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6324BA452C6A522A00A2610A /* ArchiveDetailsView.swift */; };
 		633571FF2C6EA425005E5D26 /* StatsPieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633571FE2C6EA425005E5D26 /* StatsPieChartView.swift */; };
 		633572012C6F547D005E5D26 /* StatsBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633572002C6F547D005E5D26 /* StatsBarChartView.swift */; };
+		63552F7C2CE01A1700DE9944 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63552F7B2CE01A1200DE9944 /* ViewExtension.swift */; };
 		635D59332C7E460F00EA2550 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 635D59322C7E460F00EA2550 /* Localizable.xcstrings */; };
 		635D59372C7E668700EA2550 /* ContentLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635D59362C7E668700EA2550 /* ContentLabels.swift */; };
 		63611A472C83CD68001C1973 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 63611A462C83CD68001C1973 /* InfoPlist.xcstrings */; };
@@ -142,6 +143,7 @@
 		6324BA452C6A522A00A2610A /* ArchiveDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveDetailsView.swift; sourceTree = "<group>"; };
 		633571FE2C6EA425005E5D26 /* StatsPieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPieChartView.swift; sourceTree = "<group>"; };
 		633572002C6F547D005E5D26 /* StatsBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsBarChartView.swift; sourceTree = "<group>"; };
+		63552F7B2CE01A1200DE9944 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		635D59322C7E460F00EA2550 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		635D59362C7E668700EA2550 /* ContentLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLabels.swift; sourceTree = "<group>"; };
 		63611A462C83CD68001C1973 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 		631AF4072C516E7E00DFD63C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				63552F7B2CE01A1200DE9944 /* ViewExtension.swift */,
 				631AF4082C516EC100DFD63C /* FontExtension.swift */,
 				631AF40A2C516ECF00DFD63C /* ColorExtension.swift */,
 				631AF40C2C516EDD00DFD63C /* ImageExtension.swift */,
@@ -810,6 +813,7 @@
 				631AF4152C5176D400DFD63C /* ShopView.swift in Sources */,
 				631AF4302C5273B300DFD63C /* ProgressBar.swift in Sources */,
 				631AF3D12C4FC82C00DFD63C /* VremeniApp.swift in Sources */,
+				63552F7C2CE01A1700DE9944 /* ViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,12 +19,16 @@ struct PremiumBuyView: View {
     
     internal var body: some View {
         NavigationStack {
-            Form {
-                imageTitleDesc
-                subscriprionButtons
-                includedLabels
+            ZStack(alignment: .bottom) {
+                Form {
+                    imageTitleDesc
+                    subscriprionButtons
+                    includedLabels
+                }
+                .padding(.bottom, hasNotch() ? 100 : 80)
                 actionButton
             }
+            .edgesIgnoringSafeArea(.bottom)
             .scrollIndicators(.hidden)
             .toolbarTitleDisplayMode(.inline)
             .navigationTitle(Texts.ShopPage.Premium.title)
@@ -102,19 +106,26 @@ struct PremiumBuyView: View {
     }
     
     private var actionButton: some View {
-        Button {
-           
-        } label: {
-            Text(Texts.ShopPage.Premium.subscribe)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        ZStack(alignment: hasNotch() ? .top : .center) {
+            Rectangle()
+                .fill(Color.BackColors.backiOSPrimary)
+                .frame(maxWidth: .infinity, maxHeight: hasNotch() ? 100 : 80)
+            
+            Button {
+               
+            } label: {
+                Text(Texts.ShopPage.Premium.subscribe)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+            .frame(height: 50)
+            .frame(maxWidth: .infinity)
+            .minimumScaleFactor(0.4)
+            
+            .foregroundStyle(Color.blue)
+            .tint(Color.blue)
+            .buttonStyle(.bordered)
+            .padding()
         }
-        .frame(height: 50)
-        .frame(maxWidth: .infinity)
-        .minimumScaleFactor(0.4)
-        
-        .foregroundStyle(Color.blue)
-        .tint(Color.blue)
-        .buttonStyle(.bordered)
     }
 }
 
