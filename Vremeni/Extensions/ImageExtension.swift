@@ -21,6 +21,8 @@ extension Image {
         
         enum Premium {
             static let logo = Image("PremiumLogo")
+            static let uncheck = Image(systemName: "circle")
+            static let check = Image(systemName: "checkmark.circle.fill")
             static let content = Image("ExtendedContentPremium")
             static let machine = Image("MachineUpgradePremium")
             static let constructor = Image("ItemConstructorPremium")

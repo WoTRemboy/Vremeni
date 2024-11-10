@@ -72,19 +72,21 @@ struct PremiumBuyView: View {
     private var subscriprionButtons: some View {
         Section {
             Button {
-                
+                viewModel.changeSubType(to: .annual)
             } label: {
-                LinkRow(title: Texts.ShopPage.Premium.annual,
-                        image: Image.ProfilePage.person,
-                        details: viewModel.profile.name)
+                SubscriptionTypeTableCell(type: .annual, viewModel: viewModel)
+            }
+            
+            Button {
+                viewModel.changeSubType(to: .monthly)
+            } label: {
+                SubscriptionTypeTableCell(type: .monthly, viewModel: viewModel)
             }
             
             Button {
                 
             } label: {
-                LinkRow(title: Texts.ShopPage.Premium.monthly,
-                        image: Image.ProfilePage.person,
-                        details: viewModel.profile.name)
+                Text(Texts.ShopPage.Premium.restore)
             }
         }
     }

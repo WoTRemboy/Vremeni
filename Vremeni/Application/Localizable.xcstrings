@@ -49,6 +49,12 @@
         }
       }
     },
+    "3 947 RUB/year" : {
+
+    },
+    "199,16 RUB/month" : {
+
+    },
     "BannerAdded" : {
       "comment" : "Added to Machine.",
       "localizations" : {
@@ -2714,6 +2720,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ежемесячно"
+          }
+        }
+      }
+    },
+    "ShopPagePremiumRestore" : {
+      "comment" : "Restore Purchases",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Purchases"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Восстановить покупки"
           }
         }
       }
