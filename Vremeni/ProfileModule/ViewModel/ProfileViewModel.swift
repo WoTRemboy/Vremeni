@@ -102,6 +102,38 @@ extension ProfileView {
             return rarityItems.reduce(0) { $0 + ($1.count * Int($1.price)) }
         }
         
+        internal func ruleDesctiption(item: ConsumableItem) -> [String] {
+            // For the first item (One Hours) there are no requirements
+            guard !item.requirement.isEmpty else { return [Texts.ItemCreatePage.null] }
+            
+            var rule = [String]()
+            let requirements = item.requirement.sorted { $0.value > $1.value }
+            for requirement in requirements {
+                // Setups requirement string
+                let requirementName = NSLocalizedString(requirement.key, comment: String())
+                let reqString = "\(requirementName) × \(requirement.value)"
+                rule.append(reqString)
+            }
+            
+            return rule
+        }
+        
+        internal func applicationDesctiption(item: ConsumableItem) -> [String] {
+            // For the first item (One Hours) there are no requirements
+            guard !item.applications.isEmpty else { return [Texts.ItemCreatePage.null] }
+            
+            var items = [String]()
+            let applications = item.applications.sorted { $0.value < $1.value }
+            for application in applications {
+                // Setups application string
+                let applicationName = NSLocalizedString(application.key, comment: String())
+                let reqString = applicationName
+                items.append(reqString)
+            }
+            
+            return items
+        }
+        
         internal func changeTheme(theme: Theme) {
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                 if let window = windowScene.windows.first(where: { $0.isKeyWindow }) {

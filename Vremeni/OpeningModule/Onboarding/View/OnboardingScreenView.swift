@@ -34,15 +34,15 @@ struct OnboardingScreenView: View {
     private var skipButton: some View {
         HStack {
             Spacer()
-            Button {
-                viewModel.skipSteps()
-            } label: {
-                Text(Texts.OnboardingPage.skip)
-                    .font(.body())
-                    .foregroundStyle(viewModel.buttonType == .nextPage ? Color.LabelColors.labelSecondary : Color.clear)
-                    .padding(.horizontal)
-            }
-            .padding(.top)
+            Text(Texts.OnboardingPage.skip)
+                .font(.body)
+                .foregroundStyle(viewModel.buttonType == .nextPage ? Color.labelSecondary : Color.clear)
+                .padding(.horizontal)
+                .padding(.top)
+            
+                .onTapGesture {
+                    viewModel.skipSteps()
+                }
         }
         .disabled(viewModel.buttonType == .getStarted)
         .animation(.easeInOut, value: viewModel.buttonType)
@@ -76,14 +76,17 @@ struct OnboardingScreenView: View {
         HStack {
             ForEach(0 ..< viewModel.stepsCount, id: \.self) { step in
                 if step == viewModel.currentStep {
-                    Rectangle()
-                        .frame(width: 20, height: 10)
-                        .clipShape(.buttonBorder)
+                    Circle()
+                        .frame(width: 15, height: 15)
                         .foregroundStyle(Color.Tints.blue)
+                        .transition(.scale)
+                        .animation(.easeInOut(duration: 0.3), value: viewModel.currentStep)
                 } else {
                     Circle()
                         .frame(width: 10, height: 10)
-                        .foregroundStyle(Color.LabelColors.labelDisable)
+                        .foregroundStyle(Color.labelDisable)
+                        .transition(.scale)
+                        .animation(.easeInOut(duration: 0.3), value: viewModel.currentStep)
                 }
             }
         }

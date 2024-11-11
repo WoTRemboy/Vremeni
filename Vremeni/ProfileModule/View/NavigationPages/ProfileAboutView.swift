@@ -88,7 +88,7 @@ struct ProfileAboutView: View {
     }
     
     private var email: some View {
-        Link(destination: URL(string: "mailto:\(Texts.ProfilePage.About.emailContent)")!, label: {
+        Link(destination: URL(string: "mailto:\(Texts.ProfilePage.About.realEmail)")!, label: {
             
             LinkRow(title: Texts.ProfilePage.About.email,
                     image: Image.ProfilePage.About.email,

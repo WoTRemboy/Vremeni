@@ -78,10 +78,10 @@ struct ArchiveDetailsView: View {
                          content: item.itemDescription.isEmpty ? Texts.ItemCreatePage.null : item.itemDescription)
             
             ParameterRow(title: Texts.ItemCreatePage.receiveRules,
-                         content: Texts.ItemCreatePage.null)
+                         contentArray: viewModel.ruleDesctiption(item: item))
             
             ParameterRow(title: Texts.ItemCreatePage.applicationRules,
-                         content: Texts.ItemCreatePage.null)
+                         contentArray: viewModel.applicationDesctiption(item: item))
             
         }
     }
@@ -118,7 +118,10 @@ struct ArchiveDetailsView: View {
             nameKey: Content.Common.oneMinuteTitle,
             descriptionKey: Content.Common.oneMinuteDescription,
             price: 50, rarity: .uncommon,
-            profile: Profile.configMockProfile())
+            profile: Profile.configMockProfile(),
+            requirement: [RuleItem.oneHour.rawValue : 3],
+            applications: [RuleItem.oneHour.rawValue : 1,
+                           RuleItem.threeHours.rawValue : 3])
         return ArchiveDetailsView(item: example, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")

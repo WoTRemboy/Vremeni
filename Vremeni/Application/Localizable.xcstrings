@@ -49,6 +49,12 @@
         }
       }
     },
+    "3,490.00 RUB/month" : {
+
+    },
+    "499.00 RUB/month" : {
+
+    },
     "BannerAdded" : {
       "comment" : "Added to Machine.",
       "localizations" : {
@@ -351,6 +357,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Нет витрины"
+          }
+        }
+      }
+    },
+    "InventoryPageResult" : {
+      "comment" : "Result",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Result"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Результат"
           }
         }
       }
@@ -797,6 +820,23 @@
         }
       }
     },
+    "MachinePageRestore" : {
+      "comment" : "Restore Purchases",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Purchases"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Восстановить покупки"
+          }
+        }
+      }
+    },
     "MachinePageReward" : {
       "comment" : "Reward",
       "localizations" : {
@@ -895,6 +935,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Внутренняя валюта"
+          }
+        }
+      }
+    },
+    "MachinePageUpgradeNull" : {
+      "comment" : "Null",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Null"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет цены"
           }
         }
       }
@@ -2497,6 +2554,244 @@
         }
       }
     },
+    "ShopPagePremiumAnnual" : {
+      "comment" : "Annual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annual"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ежегодно"
+          }
+        }
+      }
+    },
+    "ShopPagePremiumConstructorContent" : {
+      "comment" : "Try the ability to create your own items with rules.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try creating custom items with unique rules to personalize your experience."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Попробуйте создать свои собственные предметы с правилами."
+          }
+        }
+      }
+    },
+    "ShopPagePremiumConstructorTitle" : {
+      "comment" : "Item Constructor",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Item Constructor"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Конструктор предметов"
+          }
+        }
+      }
+    },
+    "ShopPagePremiumContentDescription" : {
+      "comment" : "Unlock exclusive items, including special rarity.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unlock a variety of unique items, some with exclusive and special rarities."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Откройте эксклюзивные предметы, включая особую редкость."
+          }
+        }
+      }
+    },
+    "ShopPagePremiumContentTitle" : {
+      "comment" : "Extended Content",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extended Content"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Больше контента"
+          }
+        }
+      }
+    },
+    "ShopPagePremiumDescription" : {
+      "comment" : "Discover more content and exciting features with a Premium subscription.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discover more content and exciting features with a Premium subscription."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Исследуйте больше возможностей и содержимого с Премиум подпиской."
+          }
+        }
+      }
+    },
+    "ShopPagePremiumFree" : {
+      "comment" : "3 Days Free",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 Days Free"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 дня бесплатно"
+          }
+        }
+      }
+    },
+    "ShopPagePremiumIncluded" : {
+      "comment" : "What's Included",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What's Included"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Что входит"
+          }
+        }
+      }
+    },
+    "ShopPagePremiumMachineDescription" : {
+      "comment" : "Add machine slots and boost your production.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add additional machine slots to increase capacity and boost your production."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавьте места в мастерскую для повышения производительности."
+          }
+        }
+      }
+    },
+    "ShopPagePremiumMachineTitle" : {
+      "comment" : "Machine Upgrades",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Machine Upgrades"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Улучшение мастерской"
+          }
+        }
+      }
+    },
+    "ShopPagePremiumMonthly" : {
+      "comment" : "Monthly",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monthly"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ежемесячно"
+          }
+        }
+      }
+    },
+    "ShopPagePremiumRestore" : {
+      "comment" : "Restore Purchases",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Purchases"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Восстановить покупки"
+          }
+        }
+      }
+    },
+    "ShopPagePremiumSubscribe" : {
+      "comment" : "Subscribe for",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subscribe for"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подписаться за"
+          }
+        }
+      }
+    },
+    "ShopPagePremiumTitle" : {
+      "comment" : "Subscriprion",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subscription"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подписка"
+          }
+        }
+      }
+    },
     "ShopPageResearch" : {
       "comment" : "Research",
       "localizations" : {
@@ -2714,6 +3009,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ярмарка"
+          }
+        }
+      }
+    },
+    "ShopPageVremeniPremium" : {
+      "comment" : "Vremeni Premium",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vremeni Premium"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Времени Премиум"
           }
         }
       }

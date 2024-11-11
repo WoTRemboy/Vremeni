@@ -31,6 +31,7 @@ final class ConsumableItem: Identifiable {
     // Valuation
     var price: Float
     var count: Int
+    var premium: Bool
     
     // Item type
     var type: VremeniType
@@ -55,7 +56,7 @@ final class ConsumableItem: Identifiable {
     var archived: Bool
     
     init(id: UUID = UUID(), nameKey: String, descriptionKey: String,
-         image: String, price: Float, count: Int = 0, type: VremeniType = .minutes,
+         image: String, price: Float, count: Int = 0, premium: Bool, type: VremeniType = .minutes,
          rarity: Rarity = .common, machineItems: [MachineItem] = [],
          profile: Profile, requirement: [String: Int], applications: [String: Int],
          enabled: Bool = false, inMachine: Bool = false,
@@ -67,6 +68,7 @@ final class ConsumableItem: Identifiable {
         self.image = image
         self.price = price
         self.count = count
+        self.premium = premium
         self.type = type
         self.rarity = rarity
         self.machineItems = machineItems
@@ -116,7 +118,7 @@ extension ConsumableItem {
     // Mock ConsumableItem configuration method
     static internal func itemMockConfig(nameKey: String, descriptionKey: String = String(),
                                         price: Float, count: Int = 0,
-                                        rarity: Rarity = .common,
+                                        premium: Bool = false, rarity: Rarity = .common,
                                         profile: Profile, requirement: [String: Int] = [:],
                                         applications: [String: Int] = [:],
                                         enabled: Bool = true,
@@ -135,7 +137,7 @@ extension ConsumableItem {
         let applications = applications
         
         return ConsumableItem(nameKey: nameKey, descriptionKey: descriptionKey,
-                              image: image, price: price, count: count, rarity: rarity,
+                              image: image, price: price, count: count, premium: premium, rarity: rarity,
                               profile: profile, requirement: requirement, applications: applications, enabled: enable, ready: ready,
                               archived: archived)
     }

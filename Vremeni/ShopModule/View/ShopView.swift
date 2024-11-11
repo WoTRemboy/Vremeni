@@ -22,6 +22,7 @@ struct ShopView: View {
     
     // Show and dismiss add item sheet page
     @State private var showingAddItemSheet = false
+    @State private var showingPremiumSheet = false
     // Search bar result property
     @State private var searchText = String()
     
@@ -49,13 +50,13 @@ struct ShopView: View {
                         if viewModel.enableStatus {
                             // Collecion with available items
                             availableCollection
-                                .padding(.horizontal)
+                                .padding([.horizontal, .bottom])
                                 .padding(.top, 8)
                                 .transition(.move(edge: .leading))
                         } else {
                             // Collecion with locked items
                             researchCollection
-                                .padding(.horizontal)
+                                .padding([.horizontal, .bottom])
                                 .padding(.top, 8)
                                 .transition(.move(edge: .trailing))
                         }
@@ -92,6 +93,9 @@ struct ShopView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         toolBarButtonPlus
                     }
+                    ToolbarItem(placement: .topBarTrailing) {
+                        toolBarButtonPremium
+                    }
                 }
                 .toolbarBackground(.visible, for: .tabBar)
                 
@@ -109,9 +113,22 @@ struct ShopView: View {
     
     // MARK: - Toolbar views
     
+    private var toolBarButtonPremium: some View {
+        Button {
+            showingPremiumSheet.toggle()
+        } label: {
+            Image.ShopPage.premium
+        }
+        .sheet(isPresented: $showingPremiumSheet) {
+            PremiumBuyView(viewModel: viewModel)
+        }
+    }
+    
     private var toolBarButtonPlus: some View {
-        Button(Texts.ShopPage.addItem, systemImage: "plus") {
+        Button {
             showingAddItemSheet.toggle()
+        } label: {
+            Image.ShopPage.plus
         }
         .sheet(isPresented: $showingAddItemSheet) {
             ConsumableItemCreate(viewModel: viewModel)

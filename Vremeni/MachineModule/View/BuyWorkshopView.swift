@@ -10,6 +10,7 @@ import SwiftData
 
 struct BuyWorkshopView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject private var storeKitService: StoreKitManager
     
     private let viewModel: MachineView.MachineViewModel
     
@@ -21,9 +22,13 @@ struct BuyWorkshopView: View {
         NavigationStack {
             ZStack {
                 options
-                buyButton
+                VStack(spacing: 10) {
+                    restoreButton
+                    buyButton
+                }
+                .frame(maxHeight: .infinity, alignment: .bottom)
             }
-            .navigationTitle(Texts.MachinePage.upgrade)
+            .navigationTitle(Texts.MachinePage.Upgrade.upgrade)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -35,6 +40,13 @@ struct BuyWorkshopView: View {
                     topBarBalanceView
                 }
             }
+            .onAppear {
+                guard let product = storeKitService.products.first else { return }
+                viewModel.setPrice(for: product.displayPrice)
+            }
+        }
+        .task {
+            await storeKitService.fetchProducts()
         }
     }
     
@@ -68,28 +80,44 @@ struct BuyWorkshopView: View {
         .scrollDisabled(true)
     }
     
+    private var restoreButton: some View {
+        Button {
+            Task {
+                try await storeKitService.restorePurchases()
+            }
+        } label: {
+            Text(Texts.MachinePage.Upgrade.restore)
+        }
+    }
+    
     private var buyButton: some View {
-        VStack {
-            Button(action: {
+        Button(action: {
+            switch viewModel.selectedType {
+            case .coins:
                 withAnimation(.snappy) {
-                    viewModel.slotPurchase()
+                    viewModel.slotPurchase(real: false)
                     dismiss()
                 }
-            }) {
-                Text(Texts.MachinePage.purchase)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            case .money:
+                Task {
+                    try await storeKitService.purchaseUpgrade()
+                    dismiss()
+                }
             }
-            .frame(height: 50)
-            .padding(.horizontal)
-            .minimumScaleFactor(0.4)
-            
-            .foregroundStyle(Color.green)
-            .buttonStyle(.bordered)
-            .tint(Color.green)
-            
-            .disabled(viewModel.isPurchaseUnavailable())
+        }) {
+            Text(Texts.MachinePage.Upgrade.purchase)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
-        .frame(maxHeight: .infinity, alignment: .bottom)
+        .frame(height: 50)
+        .padding(.horizontal)
+        .minimumScaleFactor(0.4)
+        
+        .foregroundStyle(Color.green)
+        .buttonStyle(.bordered)
+        .tint(Color.green)
+        
+        .disabled(viewModel.isPurchaseUnavailable())
+        .animation(.easeInOut, value: viewModel.selectedType)
         .padding(.bottom)
     }
 }
@@ -100,8 +128,10 @@ struct BuyWorkshopView: View {
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
         let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
+        let enviromentObject = StoreKitManager()
         
         return BuyWorkshopView(viewModel: viewModel)
+            .environmentObject(enviromentObject)
     } catch {
         fatalError("Failed to create model container.")
     }

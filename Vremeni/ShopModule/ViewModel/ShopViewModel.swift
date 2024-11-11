@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 // MARK: - View Extension is a way to make SwiftData compatible with MVVM
 
@@ -22,6 +23,8 @@ extension ShopView {
         private(set) var items = [ConsumableItem]()
         private(set) var allItems = [ConsumableItem]()
         private(set) var profile = Profile.configMockProfile()
+        
+        private(set) var currentSubType: SubscriptionType = .annual
         
         // Array property for storing all current enable status items
         private(set) var unfilteredItems = [ConsumableItem]()
@@ -128,7 +131,7 @@ extension ShopView {
             return true
         }
         
-        // Configures rule description for Details Page
+        // Configures research rule description for Details Page
         internal func ruleDesctiption(item: ConsumableItem) -> [String] {
             // For the first item (One Hours) there are no requirements
             guard !item.requirement.isEmpty else { return [Texts.ItemCreatePage.null] }
@@ -145,6 +148,7 @@ extension ShopView {
             return rule
         }
         
+        // Configures application rules description for Details Page
         internal func applicationDesctiption(item: ConsumableItem) -> [String] {
             // For the first item (One Hours) there are no requirements
             guard !item.applications.isEmpty else { return [Texts.ItemCreatePage.null] }
@@ -159,6 +163,14 @@ extension ShopView {
             }
             
             return items
+        }
+        
+        // MARK: - Premium Type selection method
+        
+        internal func changeSubType(to type: SubscriptionType) {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                currentSubType = type
+            }
         }
         
         // MARK: - Calculation methods
@@ -228,7 +240,7 @@ extension ShopView {
         
         // First app launch case
         private func createProfile() {
-            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, items: items)
+            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, premium: false, items: items)
             modelContext.insert(profile)
             fetchProfileData()
         }

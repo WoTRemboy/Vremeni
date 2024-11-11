@@ -14,14 +14,16 @@ final class Profile: Identifiable {
     var id = UUID()
     var name: String
     var balance: Int
+    var premium: Bool
     var internalMachines: Int
     var donateMachines: Int
     @Relationship(deleteRule: .cascade) var items: [ConsumableItem]
     
-    init(id: UUID = UUID(), name: String, balance: Int, items: [ConsumableItem]) {
+    init(id: UUID = UUID(), name: String, balance: Int, premium: Bool, items: [ConsumableItem]) {
         self.id = id
         self.name = name
         self.balance = balance
+        self.premium = premium
         self.items = items
         self.internalMachines = 1
         self.donateMachines = 0
@@ -45,9 +47,13 @@ extension Profile: Equatable {
         balance -= Int(price)
     }
     
-    internal func slotPurchase(price: Double) {
-        balance -= Int(price)
+    internal func slotPurchase(internalPrice: Double) {
+        balance -= Int(internalPrice)
         internalMachines += 1
+    }
+    
+    internal func slotPurchase() {
+        donateMachines += 1
     }
     
     internal func resetStacks() {
@@ -56,7 +62,7 @@ extension Profile: Equatable {
     }
     
     internal static func configMockProfile() -> Profile {
-        Profile(name: "Mock User", balance: 228, items: [])
+        Profile(name: "Mock User", balance: 228, premium: false, items: [])
     }
 }
 

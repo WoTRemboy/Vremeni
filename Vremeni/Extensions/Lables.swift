@@ -67,6 +67,27 @@ final class Texts {
         static let placeholderTitleLocked = NSLocalizedString("ShopPagePlaceholderTitleLocked", comment: "Congratulations!")
         static let placeholderSubtitleLocked = NSLocalizedString("ShopPagePlaceholderSubtitleLocked", comment: "You have unlocked all Items")
         
+        enum Premium {
+            static let title = NSLocalizedString("ShopPagePremiumTitle", comment: "Subscriprion")
+            static let premium = NSLocalizedString("ShopPageVremeniPremium", comment: "Vremeni Premium")
+            static let description = NSLocalizedString("ShopPagePremiumDescription", comment: "Discover more content and exciting features with a Premium subscription.")
+            
+            static let annual = NSLocalizedString("ShopPagePremiumAnnual", comment: "Annual")
+            static let free = NSLocalizedString("ShopPagePremiumFree", comment: "3 Days Free")
+            static let monthly = NSLocalizedString("ShopPagePremiumMonthly", comment: "Monthly")
+            static let restore = NSLocalizedString("ShopPagePremiumRestore", comment: "Restore Purchases")
+            
+            static let included = NSLocalizedString("ShopPagePremiumIncluded", comment: "What's Included")
+            static let contentTitle = NSLocalizedString("ShopPagePremiumContentTitle", comment: "Extended Content")
+            static let contentDescription = NSLocalizedString("ShopPagePremiumContentDescription", comment: "Unlock exclusive items, including special rarity.")
+            static let machineTitle = NSLocalizedString("ShopPagePremiumMachineTitle", comment: "Machine Upgrades")
+            static let machineDescription = NSLocalizedString("ShopPagePremiumMachineDescription", comment: "Add machine slots and boost your production.")
+            static let constructorTitle = NSLocalizedString("ShopPagePremiumConstructorTitle", comment: "Item Constructor")
+            static let constructorContent = NSLocalizedString("ShopPagePremiumConstructorContent", comment: "Try the ability to create your own items with rules.")
+            
+            static let subscribe = NSLocalizedString("ShopPagePremiumSubscribe", comment: "Subscribe for")
+        }
+        
         enum Rule {
             static let title = NSLocalizedString("ShopPageRuleTitle", comment: "Rule")
             static let reward = NSLocalizedString("ShopPageRuleReward", comment: "Reward")
@@ -109,10 +130,6 @@ final class Texts {
         static let emptyTitle = NSLocalizedString("MachinePageAddItem", comment: "Add an Item")
         static let queue = NSLocalizedString("MachinePageQueue", comment: "Queue")
         
-        static let upgrade = NSLocalizedString("MachinePageUpgrade", comment: "Upgrade")
-        static let purchase = NSLocalizedString("MachinePagePurchase", comment: "Purchase")
-        static let limit = NSLocalizedString("MachinePageLimit", comment: "Limit has been reached")
-        
         static let targetTime = NSLocalizedString("MachinePageTargetTime", comment: "Target time")
         static let potentialTime = NSLocalizedString("MachinePagePotentialTarget", comment: "Potential target")
         static let reward = NSLocalizedString("MachinePageReward", comment: "Reward")
@@ -121,8 +138,13 @@ final class Texts {
         static let continueProgress = NSLocalizedString("MachinePageContinue", comment: "Continue")
         
         enum Upgrade {
+            static let upgrade = NSLocalizedString("MachinePageUpgrade", comment: "Upgrade")
+            static let purchase = NSLocalizedString("MachinePagePurchase", comment: "Purchase")
+            static let limit = NSLocalizedString("MachinePageLimit", comment: "Limit has been reached")
+            static let restore = NSLocalizedString("MachinePageRestore", comment: "Restore Purchases")
             static let coins = NSLocalizedString("MachinePageUpgradeCoins", comment: "Local currency")
             static let real = NSLocalizedString("MachinePageUpgradeReal", comment: "Real currency")
+            static let null = NSLocalizedString("MachinePageUpgradeNull", comment: "Null")
         }
     }
     
@@ -132,6 +154,7 @@ final class Texts {
         static let placeholderSubtitle = NSLocalizedString("InventoryPagePlaceholderSubtitle", comment: "Get some Items from Fair via Machine")
         
         static let filter = "Filter"
+        static let result = NSLocalizedString("InventoryPageResult", comment: "Result")
         static let valuation = NSLocalizedString("InventoryPageValuation", comment: "Valuation")
     }
     
@@ -222,6 +245,7 @@ final class Texts {
             static let pups = NSLocalizedString("ProfilePageAboutPups", comment: "Artyom T.")
             static let email = NSLocalizedString("ProfilePageAboutEmail", comment: "Email")
             static let emailContent = "vremeni@icloud.com"
+            static let realEmail = "vremeni_time@icloud.com"
             
             static let directorLink = "https://t.me/Vremeni34"
             static let developLink = "https://www.linkedin.com/in/voityvit/"
@@ -253,4 +277,5 @@ extension Notification.Name {
     static let startProgressNotification = Notification.Name("startProgressNotification")
     static let inventoryUpdateNotification = Notification.Name("inventoryUpdateNotification")
     static let userNotificationUpdate = Notification.Name("userNotificationUpdate")
+    static let addSlotNotification = Notification.Name("addSlotNotification")
 }
