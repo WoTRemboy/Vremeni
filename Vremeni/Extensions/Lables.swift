@@ -73,6 +73,7 @@ final class Texts {
             static let description = NSLocalizedString("ShopPagePremiumDescription", comment: "Discover more content and exciting features with a Premium subscription.")
             
             static let annual = NSLocalizedString("ShopPagePremiumAnnual", comment: "Annual")
+            static let free = NSLocalizedString("ShopPagePremiumFree", comment: "3 Days Free")
             static let monthly = NSLocalizedString("ShopPagePremiumMonthly", comment: "Monthly")
             static let restore = NSLocalizedString("ShopPagePremiumRestore", comment: "Restore Purchases")
             

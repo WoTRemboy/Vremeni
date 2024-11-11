@@ -7,11 +7,15 @@
 
 import SwiftUI
 import SwiftData
+import StoreKit
 
 struct PremiumBuyView: View {
     
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var storeKitService: StoreKitManager
+    
     private var viewModel: ShopView.ShopViewModel
+    @State private var isSubscribed: Bool = false
     
     init(viewModel: ShopView.ShopViewModel) {
         self.viewModel = viewModel
@@ -22,11 +26,16 @@ struct PremiumBuyView: View {
             ZStack(alignment: .bottom) {
                 Form {
                     imageTitleDesc
-                    subscriprionButtons
+                    if storeKitService.isPremiumNotPurchased() {
+                        subscriprionButtons
+                    }
                     includedLabels
                 }
                 .padding(.bottom, hasNotch() ? 100 : 80)
-                actionButton
+                
+                if storeKitService.isPremiumNotPurchased() {
+                    actionButton
+                }
             }
             .edgesIgnoringSafeArea(.bottom)
             .scrollIndicators(.hidden)
@@ -129,6 +138,19 @@ struct PremiumBuyView: View {
             .padding()
         }
     }
+    
+    private func buy(product: Product) async {
+        guard let product = storeKitService.subscriptions.first(where: { $0.id == product.id }) else { return }
+        do {
+            if try await storeKitService.purchase(product) != nil {
+                withAnimation {
+                    isSubscribed = true
+                }
+            }
+        } catch {
+            print("Purchase failed: \(error.localizedDescription)")
+        }
+    }
 }
 
 #Preview {
@@ -137,8 +159,10 @@ struct PremiumBuyView: View {
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
+        let environmentObject = StoreKitManager()
         
         return PremiumBuyView(viewModel: viewModel)
+            .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")
     }

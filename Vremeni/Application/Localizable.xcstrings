@@ -49,10 +49,10 @@
         }
       }
     },
-    "3 947 RUB/year" : {
+    "3,490.00 RUB/month" : {
 
     },
-    "199,16 RUB/month" : {
+    "499.00 RUB/month" : {
 
     },
     "BannerAdded" : {
@@ -2652,6 +2652,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Исследуйте больше возможностей и содержимого с Премиум подпиской."
+          }
+        }
+      }
+    },
+    "ShopPagePremiumFree" : {
+      "comment" : "3 Days Free",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 Days Free"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 дня бесплатно"
           }
         }
       }

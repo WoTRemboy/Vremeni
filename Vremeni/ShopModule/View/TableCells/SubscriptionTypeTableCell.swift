@@ -22,7 +22,7 @@ struct SubscriptionTypeTableCell: View {
         HStack {
             leftLabel
             Spacer()
-                Text("199,16 RUB/month")
+            Text(type == .annual ? "3,490.00 RUB/month" : "499.00 RUB/month")
                     .font(.regularBody())
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
@@ -45,7 +45,6 @@ struct SubscriptionTypeTableCell: View {
                         .resizable()
                         .scaledToFit()
                         .foregroundStyle(Color.LabelColors.labelSecondary)
-                        .transition(.scale)
                         .frame(width: 20)
                 }
             }
@@ -58,7 +57,7 @@ struct SubscriptionTypeTableCell: View {
                 
                 if type == .annual {
                     HStack {
-                        Text("3 947 RUB/year")
+                        Text(Texts.ShopPage.Premium.free)
                             .font(.lightFootnote())
                             .foregroundStyle(Color.LabelColors.labelSecondary)
                             .lineLimit(1)
