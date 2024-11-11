@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 // MARK: - View Extension is a way to make SwiftData compatible with MVVM
 
@@ -22,6 +23,8 @@ extension ShopView {
         private(set) var items = [ConsumableItem]()
         private(set) var allItems = [ConsumableItem]()
         private(set) var profile = Profile.configMockProfile()
+        
+        private(set) var currentSubType: SubscriptionType = .annual
         
         // Array property for storing all current enable status items
         private(set) var unfilteredItems = [ConsumableItem]()
@@ -162,6 +165,14 @@ extension ShopView {
             return items
         }
         
+        // MARK: - Premium Type selection method
+        
+        internal func changeSubType(to type: SubscriptionType) {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                currentSubType = type
+            }
+        }
+        
         // MARK: - Calculation methods
         
         // Returns filtered elements by rarity
@@ -229,7 +240,7 @@ extension ShopView {
         
         // First app launch case
         private func createProfile() {
-            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, items: items)
+            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, premium: false, items: items)
             modelContext.insert(profile)
             fetchProfileData()
         }

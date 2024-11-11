@@ -100,13 +100,8 @@ struct BuyWorkshopView: View {
                 }
             case .money:
                 Task {
-                    do {
-                        guard let product = storeKitService.products.first else { return }
-                        try await storeKitService.purchase(product)
-                        dismiss()
-                    } catch {
-                        print(error)
-                    }
+                    try await storeKitService.purchaseUpgrade()
+                    dismiss()
                 }
             }
         }) {
@@ -123,7 +118,7 @@ struct BuyWorkshopView: View {
         
         .disabled(viewModel.isPurchaseUnavailable())
         .animation(.easeInOut, value: viewModel.selectedType)
-        .padding(.bottom, 5)
+        .padding(.bottom)
     }
 }
 

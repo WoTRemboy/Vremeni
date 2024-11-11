@@ -141,7 +141,8 @@ struct MachineView: View {
             // Shows Upgrade sheet menu
             .sheet(isPresented: $showingUpgradeSheet, content: {
                 BuyWorkshopView(viewModel: viewModel)
-                    .presentationDetents([.medium])
+                    .presentationDetents([.height(400)])
+                    .interactiveDismissDisabled()
             })
     }
     

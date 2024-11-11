@@ -10,13 +10,15 @@ import SwiftUI
 struct LinkRow: View {
     
     private let title: String
+    private let description: String?
     private let image: Image
     private let details: String?
     private let chevron: Bool
     
-    init(title: String, image: Image,
+    init(title: String, description: String? = nil, image: Image,
          details: String? = nil, chevron: Bool = false) {
         self.title = title
+        self.description = description
         self.image = image
         self.details = details
         self.chevron = chevron
@@ -44,23 +46,30 @@ struct LinkRow: View {
     }
     
     private var leftLabel: some View {
-        Label(
-            title: {
+        HStack(alignment: (description != nil) ? .top : .center, spacing: 16) {
+            image
+                .resizable()
+                .scaledToFit()
+                .clipShape(.buttonBorder)
+                .padding(.top, (description != nil) ? 3 : 0)
+                .frame(width: 30)
+            
+            VStack(alignment: .leading) {
                 Text(title)
                     .font(.regularBody())
                     .foregroundStyle(Color.LabelColors.labelPrimary)
-            },
-            icon: {
-                image
-                    .resizable()
-                    .scaledToFit()
-                    .clipShape(.buttonBorder)
+                
+                if let description {
+                    Text(description)
+                        .font(.lightFootnote())
+                        .foregroundStyle(Color.LabelColors.labelSecondary)
+                }
             }
-        )
+        }
     }
 }
 
 
 #Preview {
-    LinkRow(title: "Title", image: Image.ProfilePage.About.email, details: "hi", chevron: true)
+    LinkRow(title: "Title", description: "Unlimited posting, priority order, stealth mode, permanent view history and more.", image: Image.ProfilePage.About.email, details: "hi", chevron: true)
 }
