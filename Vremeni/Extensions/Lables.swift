@@ -84,6 +84,8 @@ final class Texts {
             static let machineDescription = NSLocalizedString("ShopPagePremiumMachineDescription", comment: "Add machine slots and boost your production.")
             static let constructorTitle = NSLocalizedString("ShopPagePremiumConstructorTitle", comment: "Item Constructor")
             static let constructorContent = NSLocalizedString("ShopPagePremiumConstructorContent", comment: "Try the ability to create your own items with rules.")
+            static let cloudTitle = NSLocalizedString("ShopPagePremiumCloudTitle", comment: "iCloud Backup")
+            static let cloudDescription = NSLocalizedString("ShopPagePremiumCloudDescription", comment: "Save your progress in the cloud with synchronization across devices.")
             
             static let subscribe = NSLocalizedString("ShopPagePremiumSubscribe", comment: "Subscribe for")
         }

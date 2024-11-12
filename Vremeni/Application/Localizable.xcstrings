@@ -2571,6 +2571,40 @@
         }
       }
     },
+    "ShopPagePremiumCloudDescription" : {
+      "comment" : "Save your progress in the cloud with synchronization across devices.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save your progress in the cloud with synchronization across devices."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Храните свой прогресс в облаке с последующей синхронизацией."
+          }
+        }
+      }
+    },
+    "ShopPagePremiumCloudTitle" : {
+      "comment" : "iCloud Backup",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud Backup"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранение в iCloud"
+          }
+        }
+      }
+    },
     "ShopPagePremiumConstructorContent" : {
       "comment" : "Try the ability to create your own items with rules.",
       "localizations" : {

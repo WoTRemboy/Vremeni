@@ -106,13 +106,17 @@ struct PremiumBuyView: View {
                     description: Texts.ShopPage.Premium.contentDescription,
                     image: Image.ShopPage.Premium.content)
             
+            LinkRow(title: Texts.ShopPage.Premium.constructorTitle,
+                    description:  Texts.ShopPage.Premium.constructorContent,
+                    image: Image.ShopPage.Premium.constructor)
+            
             LinkRow(title: Texts.ShopPage.Premium.machineTitle,
                     description:  Texts.ShopPage.Premium.machineDescription,
                     image: Image.ShopPage.Premium.machine)
             
-            LinkRow(title: Texts.ShopPage.Premium.constructorTitle,
-                    description:  Texts.ShopPage.Premium.constructorContent,
-                    image: Image.ShopPage.Premium.constructor)
+            LinkRow(title: Texts.ShopPage.Premium.cloudTitle,
+                    description:  Texts.ShopPage.Premium.cloudDescription,
+                    image: Image.ShopPage.Premium.cloud)
         }
     }
     
