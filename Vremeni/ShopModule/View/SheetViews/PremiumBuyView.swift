@@ -72,6 +72,8 @@ struct PremiumBuyView: View {
             Text(Texts.ShopPage.Premium.description)
                 .font(.subhead())
                 .multilineTextAlignment(.center)
+                .foregroundStyle(Color.LabelColors.labelPrimary)
+            
                 .padding(.top, -5)
                 .padding([.horizontal, .bottom])
         }
@@ -96,12 +98,14 @@ struct PremiumBuyView: View {
                 
             } label: {
                 Text(Texts.ShopPage.Premium.restore)
+                    .foregroundStyle(Color.blue)
             }
         }
     }
     
     private var includedLabels: some View {
-        Section(Texts.ShopPage.Premium.included) {
+        Section(header: Text(Texts.ShopPage.Premium.included)
+            .foregroundStyle(Color.LabelColors.labelTertiary)) {
             LinkRow(title: Texts.ShopPage.Premium.contentTitle,
                     description: Texts.ShopPage.Premium.contentDescription,
                     image: Image.ShopPage.Premium.content)

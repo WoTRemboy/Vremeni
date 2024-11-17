@@ -46,6 +46,12 @@ extension ShopView {
             }
         }
         
+        internal var premium: Bool {
+            get {
+                profile.premium
+            }
+        }
+        
         // MARK: - Initialization
         
         init(modelContext: ModelContext) {
@@ -196,6 +202,7 @@ extension ShopView {
             let item = ConsumableItem.itemMockConfig(nameKey: created.name,
                                                      descriptionKey: created.itemDescription,
                                                      price: created.price,
+                                                     premium: created.premium,
                                                      rarity: created.rarity,
                                                      profile: profile,
                                                      enabled: created.enabled)
@@ -266,7 +273,7 @@ extension ShopView {
                 ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle,
                                               descriptionKey: Content.Common.oneMinuteDescription,
                                               price: 1,
-                                              profile: profile,
+                                              premium: false, profile: profile,
                                               applications: [RuleItem.threeHours.rawValue : 3,
                                                              RuleItem.fiveHours.rawValue : 5,
                                                              RuleItem.sevenHours.rawValue : 7]
@@ -275,7 +282,7 @@ extension ShopView {
                 ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle,
                                               descriptionKey: Content.Common.threeMinutesDescription,
                                               price: 3,
-                                              rarity: .common,
+                                              premium: false, rarity: .common,
                                               profile: profile,
                                               requirement: [RuleItem.oneHour.rawValue : 3],
                                               applications: [RuleItem.fiveHours.rawValue : 5,
@@ -285,7 +292,7 @@ extension ShopView {
                 ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
                                               descriptionKey: Content.Uncommon.fiveMinutesDescription,
                                               price: 5,
-                                              rarity: .uncommon,
+                                              premium: true, rarity: .uncommon,
                                               profile: profile,
                                               requirement: [RuleItem.oneHour.rawValue : 2, RuleItem.threeHours.rawValue : 1],
                                               applications: [RuleItem.sevenHours.rawValue : 7],
@@ -294,7 +301,7 @@ extension ShopView {
                 ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
                                               descriptionKey: Content.Uncommon.sevenMinutesDescription,
                                               price: 7,
-                                              rarity: .uncommon,
+                                              premium: false, rarity: .uncommon,
                                               profile: profile,
                                               requirement: [RuleItem.fiveHours.rawValue : 1, RuleItem.oneHour.rawValue : 2],
                                               applications: [RuleItem.tenHours.rawValue : 10],
@@ -303,7 +310,7 @@ extension ShopView {
                 ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,
                                               descriptionKey: Content.Rare.tenMinutesDescription,
                                               price: 10,
-                                              rarity: .rare,
+                                              premium: true, rarity: .rare,
                                               profile: profile,
                                               requirement: [RuleItem.sevenHours.rawValue : 1, RuleItem.threeHours.rawValue : 1],
                                               enabled: false)]

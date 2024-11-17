@@ -128,6 +128,7 @@ extension ConsumableItem {
         let image = "\(Int(price)).square"
         let price = price
         let count = count
+        let premium = premium
         let enable = enabled
         let ready = ready
         let archived = archived
