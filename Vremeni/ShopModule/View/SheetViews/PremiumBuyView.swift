@@ -85,13 +85,13 @@ struct PremiumBuyView: View {
             Button {
                 viewModel.changeSubType(to: .annual)
             } label: {
-                SubscriptionTypeTableCell(type: .annual, viewModel: viewModel)
+                SubscriptionTypeTableCell(type: .annual, price: storeKitService.subscriptions.last?.displayPrice, viewModel: viewModel)
             }
             
             Button {
                 viewModel.changeSubType(to: .monthly)
             } label: {
-                SubscriptionTypeTableCell(type: .monthly, viewModel: viewModel)
+                SubscriptionTypeTableCell(type: .monthly, price: storeKitService.subscriptions.first?.displayPrice, viewModel: viewModel)
             }
             
             Button {
@@ -131,7 +131,9 @@ struct PremiumBuyView: View {
                 .frame(maxWidth: .infinity, maxHeight: hasNotch() ? 100 : 80)
             
             Button {
-               
+                Task {
+                    await buy(id: viewModel.currentSubType.rawValue)
+                }
             } label: {
                 Text(Texts.ShopPage.Premium.subscribe)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -147,8 +149,8 @@ struct PremiumBuyView: View {
         }
     }
     
-    private func buy(product: Product) async {
-        guard let product = storeKitService.subscriptions.first(where: { $0.id == product.id }) else { return }
+    private func buy(id: String) async {
+        guard let product = storeKitService.subscriptions.first(where: { $0.id == id }) else { return }
         do {
             if try await storeKitService.purchase(product) != nil {
                 withAnimation {

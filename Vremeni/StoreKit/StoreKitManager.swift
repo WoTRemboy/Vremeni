@@ -20,7 +20,7 @@ final class StoreKitManager: ObservableObject {
     @Published private(set) var purchasedSubscription: [Product] = []
     @Published private(set) var subscriptionGroupStatus: RenewalState?
     
-    private let subscriptionsIDs = ["Vremeni_Premium_Subscription_Annual", "Vremeni_Premium_Subscription_Monthly"]
+    private let subscriptionsIDs = [SubscriptionType.annual.rawValue, SubscriptionType.monthly.rawValue]
     
     private var updateListenerTask: Task<Void, Error>? = nil
     
@@ -47,7 +47,6 @@ final class StoreKitManager: ObservableObject {
     internal func requestProducts() async {
         do {
             subscriptions = try await Product.products(for: subscriptionsIDs)
-            print(subscriptions)
         } catch {
             print("Failed product request from app store server: \(error)")
         }
