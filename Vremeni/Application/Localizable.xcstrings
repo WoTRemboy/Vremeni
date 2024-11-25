@@ -406,19 +406,36 @@
         }
       }
     },
-    "ItemCreatePageApplicationRule" : {
-      "comment" : "Application rules",
+    "ItemCreatePageAddItem" : {
+      "comment" : "Add an item",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Application rules"
+            "value" : "Add an item"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Правила применения"
+            "value" : "Добавить"
+          }
+        }
+      }
+    },
+    "ItemCreatePageApplicationRule" : {
+      "comment" : "Application",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Application"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Применение"
           }
         }
       }
@@ -491,6 +508,23 @@
         }
       }
     },
+    "ItemCreatePageItemName" : {
+      "comment" : "Item name",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Item name"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Название предмета"
+          }
+        }
+      }
+    },
     "ItemCreatePageName" : {
       "comment" : "Name",
       "localizations" : {
@@ -521,6 +555,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Нет"
+          }
+        }
+      }
+    },
+    "ItemCreatePagePreview" : {
+      "comment" : "Preview",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Превью"
           }
         }
       }
@@ -560,18 +611,18 @@
       }
     },
     "ItemCreatePageResearchRule" : {
-      "comment" : "Research rule",
+      "comment" : "Research",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Research rule"
+            "value" : "Research"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Правило исследования"
+            "value" : "Исследование"
           }
         }
       }
@@ -623,23 +674,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Всего"
-          }
-        }
-      }
-    },
-    "ItemCreatePageTurnover" : {
-      "comment" : "Turnover (Soon)",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turnover (Soon)"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Оборот (скоро)"
           }
         }
       }

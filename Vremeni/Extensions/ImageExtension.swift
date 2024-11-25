@@ -34,6 +34,10 @@ extension Image {
             static let locked = Image(systemName: "lock.circle")
             static let less = Image(systemName: "lessthan.circle")
         }
+        
+        enum CreatePage {
+            static let addImage = Image(systemName: "plus.viewfinder")
+        }
     }
     
     enum InventoryPage {

@@ -102,11 +102,11 @@ struct ConsumableItemDetails: View {
                          content: item.itemDescription.isEmpty ? Texts.ItemCreatePage.null : item.itemDescription)
             
             // Research rule name row
-            ParameterRow(title: Texts.ItemCreatePage.receiveRules,
+            ParameterRow(title: Texts.ItemCreatePage.research,
                          contentArray: viewModel.ruleDesctiption(item: item))
             
             // Application rule name row
-            ParameterRow(title: Texts.ItemCreatePage.applicationRules,
+            ParameterRow(title: Texts.ItemCreatePage.application,
                          contentArray: viewModel.applicationDesctiption(item: item))
             
         }

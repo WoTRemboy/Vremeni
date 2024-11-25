@@ -75,14 +75,18 @@ struct ConsumableItemCreate: View {
     // Form with general, valuation & turnover sections
     private var form: some View {
         Form {
+            Section(Texts.ItemCreatePage.preview) {
+                TurnoverItemListRow(item: item)
+            }
+            
             // General Section
             Section(Texts.ItemCreatePage.general) {
                 // Sets ConsumableItem name
-                TextField(Texts.ItemCreatePage.name, text: $item.nameKey)
+                TextField(Texts.ItemCreatePage.name, text: $item.nameKey.animation(.easeInOut(duration: 0.2)))
                 // Sets ConsumableItem description
                 TextField(Texts.ItemCreatePage.description, text: $item.descriptionKey, axis: .vertical)
                 // Sets ConsumableItem enable status
-                Toggle(Texts.ShopPage.available, isOn: $item.enabled)
+                Toggle(Texts.ShopPage.available, isOn: $item.enabled.animation(.easeInOut(duration: 0.2)))
             }
             
             // Valuation section
@@ -95,12 +99,27 @@ struct ConsumableItemCreate: View {
                 Slider(value: $item.price, in: 1...1000, step: 1)
             }
             
-            // Turnoiver section
-            Section(Texts.ItemCreatePage.turnover) {
-                // Displays research rules
-                Text(Texts.ItemCreatePage.receiveRules)
-                // Displays application rules
-                Text(Texts.ItemCreatePage.applicationRules)
+            if !item.enabled {
+                // Research section
+                Section(Texts.ItemCreatePage.research) {
+                    Button {
+                        
+                    } label: {
+                        Text(Texts.ItemCreatePage.addItem)
+                            .foregroundStyle(Color.LabelColors.labelSecondary)
+                            .font(.regularBody())
+                    }
+                }
+            }
+            
+            Section(Texts.ItemCreatePage.application) {
+                Button {
+                    
+                } label: {
+                    Text(Texts.ItemCreatePage.addItem)
+                        .foregroundStyle(Color.LabelColors.labelSecondary)
+                        .font(.regularBody())
+                }
             }
         }
     }

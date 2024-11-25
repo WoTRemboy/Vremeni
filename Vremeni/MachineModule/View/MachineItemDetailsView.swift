@@ -85,7 +85,7 @@ struct MachineItemDetailsView: View {
                              content: viewModel.remainingTime(for: item))
             }
             
-            ParameterRow(title: Texts.ItemCreatePage.applicationRules,
+            ParameterRow(title: Texts.ItemCreatePage.application,
                          contentArray: viewModel.applicationDesctiption(item: item))
             
         }
