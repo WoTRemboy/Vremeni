@@ -107,6 +107,7 @@ final class Texts {
         static let title = NSLocalizedString("ItemCreatePageTitle", comment: "New Item")
         static let details = NSLocalizedString("ItemCreatePageDetails", comment: "Details")
         static let cancel = NSLocalizedString("ItemCreatePageCancel", comment: "Cancel")
+        static let done = NSLocalizedString("ItemCreatePageDone", comment: "Done")
         static let save = NSLocalizedString("ItemCreatePageSave", comment: "Save")
         
         static let preview = NSLocalizedString("ItemCreatePagePreview", comment: "Preview")

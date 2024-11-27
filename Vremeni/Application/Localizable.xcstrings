@@ -491,6 +491,23 @@
         }
       }
     },
+    "ItemCreatePageDone" : {
+      "comment" : "Done",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Готово"
+          }
+        }
+      }
+    },
     "ItemCreatePageGeneral" : {
       "comment" : "General",
       "localizations" : {

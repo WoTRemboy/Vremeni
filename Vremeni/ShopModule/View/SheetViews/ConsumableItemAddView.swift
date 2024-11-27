@@ -10,7 +10,9 @@ import SwiftData
 
 struct ConsumableItemAddView: View {
     @Environment(\.dismiss) var dismiss
+    
     @Binding var item: ConsumableItem
+    @State private var searchText = String()
     
     private var viewModel: ShopView.ShopViewModel
     
@@ -21,36 +23,36 @@ struct ConsumableItemAddView: View {
     
     internal var body: some View {
         NavigationStack {
-            list
-                .scrollIndicators(.hidden)
-                .navigationTitle(Texts.ItemCreatePage.researchTitle)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button(Texts.ItemCreatePage.cancel) {
-                            dismiss()
+            ZStack {
+                list
+                    .navigationTitle(Texts.ItemCreatePage.researchTitle)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Button(Texts.ItemCreatePage.cancel) {
+                                dismiss()
+                            }
+                        }
+                        
+                        ToolbarItem(placement: .topBarTrailing) {
+                            item.rarity.image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 20)
                         }
                     }
+                
+                if searchResults.isEmpty {
+                    searchPlaceholder
                 }
+            }
         }
-    }
-    
-    private var empty: some View {
-        PlaceholderView(title: Texts.MachinePage.placeholderTitle,
-                        description: Texts.MachinePage.placeholderSubtitle,
-                        status: .machine)
-    }
-    
-    private var background: some View {
-        Rectangle()
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            .foregroundStyle(Color.clear)
-            .background(Color.BackColors.backiOSPrimary)
+        .searchable(text: $searchText.animation(.easeInOut), prompt: Texts.ShopPage.searchItems)
     }
     
     private var list: some View {
         List {
-            ForEach(viewModel.allItems) { requirement in
+            ForEach(searchResults) { requirement in
                 Button(action: {
                     withAnimation(.snappy) {
                         item.addRequirement(item: requirement)
@@ -60,6 +62,21 @@ struct ConsumableItemAddView: View {
                     TurnoverItemListRow(item: requirement)
                 }
             }
+        }
+        .animation(.easeInOut, value: searchText)
+    }
+    
+    private var searchPlaceholder: some View {
+        PlaceholderView(title: Texts.Placeholder.title,
+                        description: "\(Texts.Placeholder.discription) “\(searchText)“",
+                        status: .search)
+    }
+    
+    private var searchResults: [ConsumableItem] {
+        if searchText.isEmpty {
+            return viewModel.allItems
+        } else {
+            return viewModel.allItems.filter { $0.name.contains(searchText) }
         }
     }
 }
