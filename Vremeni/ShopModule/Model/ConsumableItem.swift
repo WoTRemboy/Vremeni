@@ -115,6 +115,33 @@ extension ConsumableItem {
         count -= price
     }
     
+    internal func addRequirement(item: ConsumableItem) {
+        requirement[item.name, default: 0] += 1
+    }
+    
+    internal func addRequirement(name: String) {
+        requirement[name, default: 0] += 1
+    }
+    
+    internal func reduceRequirement(name: String) {
+        guard requirement[name, default: 0] > 1 else {
+            requirement[name] = nil
+            return
+        }
+        requirement[name, default: 2] -= 1
+    }
+    
+    internal func removeRequirement(at offsets: IndexSet) {
+        let keys = Array(requirement.keys.sorted())
+        
+        for offset in offsets {
+            if offset < keys.count {
+                let keyToRemove = keys[offset]
+                requirement.removeValue(forKey: keyToRemove)
+            }
+        }
+    }
+    
     // Mock ConsumableItem configuration method
     static internal func itemMockConfig(nameKey: String, descriptionKey: String = String(),
                                         price: Float, count: Int = 0,
@@ -128,6 +155,7 @@ extension ConsumableItem {
         let image = "\(Int(price)).square"
         let price = price
         let count = count
+        let premium = premium
         let enable = enabled
         let ready = ready
         let archived = archived

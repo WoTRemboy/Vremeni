@@ -78,7 +78,7 @@ struct InventoryItemDetailsView: View {
             ParameterRow(title: Texts.InventoryPage.valuation,
                          content: viewModel.valCalculation(for: item))
             
-            ParameterRow(title: Texts.ItemCreatePage.applicationRules,
+            ParameterRow(title: Texts.ItemCreatePage.application,
                          contentArray: viewModel.applicationDesctiption(item: item))
             
         }

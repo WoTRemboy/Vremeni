@@ -84,6 +84,8 @@ final class Texts {
             static let machineDescription = NSLocalizedString("ShopPagePremiumMachineDescription", comment: "Add machine slots and boost your production.")
             static let constructorTitle = NSLocalizedString("ShopPagePremiumConstructorTitle", comment: "Item Constructor")
             static let constructorContent = NSLocalizedString("ShopPagePremiumConstructorContent", comment: "Try the ability to create your own items with rules.")
+            static let cloudTitle = NSLocalizedString("ShopPagePremiumCloudTitle", comment: "iCloud Backup")
+            static let cloudDescription = NSLocalizedString("ShopPagePremiumCloudDescription", comment: "Save your progress in the cloud with synchronization across devices.")
             
             static let subscribe = NSLocalizedString("ShopPagePremiumSubscribe", comment: "Subscribe for")
         }
@@ -105,7 +107,11 @@ final class Texts {
         static let title = NSLocalizedString("ItemCreatePageTitle", comment: "New Item")
         static let details = NSLocalizedString("ItemCreatePageDetails", comment: "Details")
         static let cancel = NSLocalizedString("ItemCreatePageCancel", comment: "Cancel")
+        static let done = NSLocalizedString("ItemCreatePageDone", comment: "Done")
         static let save = NSLocalizedString("ItemCreatePageSave", comment: "Save")
+        
+        static let preview = NSLocalizedString("ItemCreatePagePreview", comment: "Preview")
+        static let itemName = NSLocalizedString("ItemCreatePageItemName", comment: "Item name")
         
         static let price = NSLocalizedString("ItemCreatePagePrice", comment: "Price")
         static let total = NSLocalizedString("ItemCreatePageTotal", comment: "Total")
@@ -115,9 +121,11 @@ final class Texts {
         static let description = NSLocalizedString("ItemCreatePageDescription", comment: "Description")
         static let rarity = NSLocalizedString("ItemCreatePageRarity", comment: "Rarity")
         static let valuation = NSLocalizedString("ItemCreatePageValuation", comment: "Valuation")
-        static let turnover = NSLocalizedString("ItemCreatePageTurnover", comment: "Turnover (Soon)")
-        static let receiveRules = NSLocalizedString("ItemCreatePageResearchRule", comment: "Research rule")
-        static let applicationRules = NSLocalizedString("ItemCreatePageApplicationRule", comment: "Application rules")
+
+        static let researchTitle = NSLocalizedString("ItemCreatePageResearchTitle", comment: "Research Items")
+        static let research = NSLocalizedString("ItemCreatePageResearchRule", comment: "Research")
+        static let application = NSLocalizedString("ItemCreatePageApplicationRule", comment: "Application")
+        static let addItem = NSLocalizedString("ItemCreatePageAddItem", comment: "Add an item")
         static let null = NSLocalizedString("ItemCreatePageNull", comment: "Null")
     }
     

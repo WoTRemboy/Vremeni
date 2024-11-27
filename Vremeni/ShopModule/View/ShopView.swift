@@ -75,6 +75,8 @@ struct ShopView: View {
                     }
                 }
                 .animation(.easeInOut, value: viewModel.enableStatus)
+                .animation(.easeInOut, value: searchText)
+                .animation(.easeInOut, value: viewModel.rarityFilter)
                 // ScrollView params
                 .scrollDisabled(viewModel.items.isEmpty)
                 .scrollDismissesKeyboard(.immediately)

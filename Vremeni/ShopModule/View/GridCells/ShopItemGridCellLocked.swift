@@ -110,7 +110,11 @@ struct ShopItemGridCellLocked: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
             .sheet(item: $selected) { item in
-                RuleView(item: item, viewModel: viewModel)
+                if (item.premium && viewModel.premium) || !item.premium {
+                    RuleView(item: item, viewModel: viewModel)
+                } else {
+                    PremiumBuyView(viewModel: viewModel)
+                }
             }
             // Button layout params
             .frame(height: 40)

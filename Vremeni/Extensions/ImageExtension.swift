@@ -26,12 +26,19 @@ extension Image {
             static let content = Image("ExtendedContentPremium")
             static let machine = Image("MachineUpgradePremium")
             static let constructor = Image("ItemConstructorPremium")
+            static let cloud = Image("CloudBackupPremium")
         }
         
         enum Research {
             static let check = Image(systemName: "checkmark.circle")
             static let locked = Image(systemName: "lock.circle")
             static let less = Image(systemName: "lessthan.circle")
+        }
+        
+        enum CreatePage {
+            static let addImage = Image(systemName: "plus.viewfinder")
+            static let addRequirement = Image(systemName: "plus.circle.fill")
+            static let reduceRequirement = Image(systemName: "minus.circle.fill")
         }
     }
     

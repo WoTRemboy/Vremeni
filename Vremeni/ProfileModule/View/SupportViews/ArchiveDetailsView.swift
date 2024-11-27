@@ -77,10 +77,10 @@ struct ArchiveDetailsView: View {
             ParameterRow(title: Texts.ItemCreatePage.description,
                          content: item.itemDescription.isEmpty ? Texts.ItemCreatePage.null : item.itemDescription)
             
-            ParameterRow(title: Texts.ItemCreatePage.receiveRules,
+            ParameterRow(title: Texts.ItemCreatePage.research,
                          contentArray: viewModel.ruleDesctiption(item: item))
             
-            ParameterRow(title: Texts.ItemCreatePage.applicationRules,
+            ParameterRow(title: Texts.ItemCreatePage.application,
                          contentArray: viewModel.applicationDesctiption(item: item))
             
         }
