@@ -121,6 +121,7 @@ final class Texts {
         static let rarity = NSLocalizedString("ItemCreatePageRarity", comment: "Rarity")
         static let valuation = NSLocalizedString("ItemCreatePageValuation", comment: "Valuation")
 
+        static let researchTitle = NSLocalizedString("ItemCreatePageResearchTitle", comment: "Research Items")
         static let research = NSLocalizedString("ItemCreatePageResearchRule", comment: "Research")
         static let application = NSLocalizedString("ItemCreatePageApplicationRule", comment: "Application")
         static let addItem = NSLocalizedString("ItemCreatePageAddItem", comment: "Add an item")

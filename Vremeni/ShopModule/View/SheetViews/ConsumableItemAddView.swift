@@ -10,10 +10,12 @@ import SwiftData
 
 struct ConsumableItemAddView: View {
     @Environment(\.dismiss) var dismiss
+    @Binding var item: ConsumableItem
     
     private var viewModel: ShopView.ShopViewModel
     
-    init(viewModel: ShopView.ShopViewModel) {
+    init(item: Binding<ConsumableItem>, viewModel: ShopView.ShopViewModel) {
+        self._item = item
         self.viewModel = viewModel
     }
     
@@ -21,7 +23,7 @@ struct ConsumableItemAddView: View {
         NavigationStack {
             list
                 .scrollIndicators(.hidden)
-                .navigationTitle(Texts.MachinePage.queue)
+                .navigationTitle(Texts.ItemCreatePage.researchTitle)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
@@ -48,15 +50,14 @@ struct ConsumableItemAddView: View {
     
     private var list: some View {
         List {
-            ForEach(viewModel.allItems) { item in
+            ForEach(viewModel.allItems) { requirement in
                 Button(action: {
                     withAnimation(.snappy) {
-                        
+                        item.addRequirement(item: requirement)
                         dismiss()
                     }
-                    
                 }) {
-//                        ItemListRow(item: item)
+                    TurnoverItemListRow(item: requirement)
                 }
             }
         }
@@ -70,7 +71,9 @@ struct ConsumableItemAddView: View {
         let modelContext = ModelContext(container)
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         
-        return ConsumableItemAddView(viewModel: viewModel)
+        let example = ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle, price: 1, profile: Profile.configMockProfile())
+        
+        return ConsumableItemAddView(item: .constant(example), viewModel: viewModel)
             .modelContainer(container)
     } catch {
         fatalError("Failed to create model container.")

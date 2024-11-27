@@ -37,6 +37,8 @@ extension Image {
         
         enum CreatePage {
             static let addImage = Image(systemName: "plus.viewfinder")
+            static let addRequirement = Image(systemName: "plus")
+            static let reduceRequirement = Image(systemName: "minus")
         }
     }
     

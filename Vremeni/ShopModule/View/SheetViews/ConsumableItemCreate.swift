@@ -13,7 +13,10 @@ struct ConsumableItemCreate: View {
     // MARK: - Properties
     
     @Environment(\.dismiss) var dismiss
+    
     @State private var item: ConsumableItem
+    @State private var showingResearchItemList = false
+    @State private var showingApplicationItemList = false
 
     private var viewModel: ShopView.ShopViewModel
     
@@ -102,23 +105,34 @@ struct ConsumableItemCreate: View {
             if !item.enabled {
                 // Research section
                 Section(Texts.ItemCreatePage.research) {
+                    ForEach(item.requirement.sorted(by: { $0.key < $1.key }), id: \.key) { requirement in
+                        ResearchItemListRow(item: item, name: requirement.key, count: requirement.value)
+                    }
+                    .onDelete(perform: item.removeRequirement)
+                    
                     Button {
-                        
+                        showingResearchItemList.toggle()
                     } label: {
                         Text(Texts.ItemCreatePage.addItem)
                             .foregroundStyle(Color.LabelColors.labelSecondary)
                             .font(.regularBody())
+                    }
+                    .sheet(isPresented: $showingResearchItemList) {
+                        ConsumableItemAddView(item: $item, viewModel: viewModel)
                     }
                 }
             }
             
             Section(Texts.ItemCreatePage.application) {
                 Button {
-                    
+                    //showingApplicationItemList.toggle()
                 } label: {
                     Text(Texts.ItemCreatePage.addItem)
                         .foregroundStyle(Color.LabelColors.labelSecondary)
                         .font(.regularBody())
+                }
+                .sheet(isPresented: $showingApplicationItemList) {
+                    ConsumableItemAddView(item: $item, viewModel: viewModel)
                 }
             }
         }

@@ -627,6 +627,23 @@
         }
       }
     },
+    "ItemCreatePageResearchTitle" : {
+      "comment" : "Research Items",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Research Items"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Список предметов"
+          }
+        }
+      }
+    },
     "ItemCreatePageSave" : {
       "comment" : "Save",
       "localizations" : {
