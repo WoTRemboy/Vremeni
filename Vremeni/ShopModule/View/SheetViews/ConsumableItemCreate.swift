@@ -16,7 +16,6 @@ struct ConsumableItemCreate: View {
     
     @State private var item: ConsumableItem
     @State private var showingResearchItemList = false
-    @State private var showingApplicationItemList = false
 
     private var viewModel: ShopView.ShopViewModel
     
@@ -36,6 +35,7 @@ struct ConsumableItemCreate: View {
             // main content form view
             form
                 .scrollDismissesKeyboard(.immediately)
+                .scrollIndicators(.hidden)
             
                 // Navigation bar params
                 .navigationTitle(Texts.ItemCreatePage.title)
@@ -120,19 +120,6 @@ struct ConsumableItemCreate: View {
                     .sheet(isPresented: $showingResearchItemList) {
                         ConsumableItemAddView(item: $item, viewModel: viewModel)
                     }
-                }
-            }
-            
-            Section(Texts.ItemCreatePage.application) {
-                Button {
-                    //showingApplicationItemList.toggle()
-                } label: {
-                    Text(Texts.ItemCreatePage.addItem)
-                        .foregroundStyle(Color.LabelColors.labelSecondary)
-                        .font(.regularBody())
-                }
-                .sheet(isPresented: $showingApplicationItemList) {
-                    ConsumableItemAddView(item: $item, viewModel: viewModel)
                 }
             }
         }

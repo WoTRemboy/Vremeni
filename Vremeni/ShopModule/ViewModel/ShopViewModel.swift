@@ -205,6 +205,7 @@ extension ShopView {
                                                      premium: created.premium,
                                                      rarity: created.rarity,
                                                      profile: profile,
+                                                     requirement: created.requirement,
                                                      enabled: created.enabled)
             modelContext.insert(item)
             fetchData()
