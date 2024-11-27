@@ -52,17 +52,21 @@ struct ResearchItemListRow: View {
                 animateChange = true
             }
             item.reduceRequirement(name: name)
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 withAnimation {
                     animateChange = false
                 }
             }
+            
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.impactOccurred()
         } label: {
             Image.ShopPage.CreatePage.reduceRequirement
                 .resizable()
                 .scaledToFit()
-                .frame(width: 15)
-                .foregroundStyle(Color.blue)
+                .frame(height: 20)
+                .foregroundStyle(Color.white, Color.IconColors.blue)
         }
         .buttonStyle(.plain)
     }
@@ -81,17 +85,21 @@ struct ResearchItemListRow: View {
                 animateChange = true
             }
             item.addRequirement(name: name)
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 withAnimation {
                     animateChange = false
                 }
             }
+            
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.impactOccurred()
         } label: {
             Image.ShopPage.CreatePage.addRequirement
                 .resizable()
                 .scaledToFit()
-                .frame(height: 15)
-                .foregroundStyle(Color.blue)
+                .frame(height: 20)
+                .foregroundStyle(Color.white, Color.IconColors.blue)
         }
         .buttonStyle(.plain)
     }
