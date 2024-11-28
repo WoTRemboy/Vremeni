@@ -82,11 +82,10 @@ struct ProfileView: View {
     
     private var contentSection: some View {
         Section(Texts.ProfilePage.content) {
-            NavigationLink(destination: ProfileAboutView(viewModel: viewModel),
-                           label: {
+            NavigationLink(destination: ProfileAboutView(viewModel: viewModel)) {
                 LinkRow(title: Texts.ProfilePage.About.title,
                         image: Image.ProfilePage.about)
-            })
+            }
             
             NavigationLink(destination: ArchiveView(viewModel: viewModel)) {
                 LinkRow(title: Texts.ProfilePage.archive,
@@ -120,6 +119,7 @@ struct ProfileView: View {
     
     private var appSection: some View {
         Section(Texts.ProfilePage.app) {
+            iconChooserButton
             notificationToggle
             appearanceButton
             languageButton
@@ -144,6 +144,14 @@ struct ProfileView: View {
                 },
                 secondaryButton: .cancel(Text(Texts.ProfilePage.cancel))
             )
+        }
+    }
+    
+    private var iconChooserButton: some View {
+        NavigationLink(destination: IconChooserView()
+            .environmentObject(IconChangerViewModel())) {
+            LinkRow(title: "Icon",
+                    image: Image.ProfilePage.balance)
         }
     }
     
