@@ -8,24 +8,38 @@
 import SwiftUI
 
 struct IconImage: View {
-    var icon: Icon
+    
+    private var icon: Icon
+    private var selected: Bool
+    
+    init(icon: Icon, selected: Bool) {
+        self.icon = icon
+        self.selected = selected
+    }
 
-    var body: some View {
-        Label {
-            Text(icon.rawValue)
-        } icon: {
-            Image(uiImage: UIImage(named: icon.rawValue + "Preview") ?? UIImage())
+    internal var body: some View {
+        VStack {
+            Image(uiImage: UIImage(named: icon.rawValue + Texts.ProfilePage.preview) ?? UIImage())
                 .resizable()
                 .scaledToFit()
-                .frame(minHeight: 57, maxHeight: 1024)
-                .cornerRadius(10)
-                .shadow(radius: 10)
-                .padding()
+            
+                .cornerRadius(16)
+                .frame(height: 70)
+            
+                .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(selected ? Color.blue : Color.LabelColors.labelDisable,
+                                    lineWidth: selected ? 2 : 1)
+                    )
+            
+            Text(icon.name)
+                .lineLimit(1)
+                .font(Font.system(size: 15, weight: .regular))
+                .foregroundStyle(selected ? Color.blue : Color.LabelColors.labelPrimary)
         }
-            .labelStyle(.iconOnly)
     }
 }
 
 #Preview {
-    IconImage(icon: Icon.primary)
+    IconImage(icon: Icon.primary, selected: true)
 }

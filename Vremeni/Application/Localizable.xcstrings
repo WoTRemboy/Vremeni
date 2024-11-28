@@ -1715,6 +1715,23 @@
         }
       }
     },
+    "ProfilePageDefaultIcon" : {
+      "comment" : "Default",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Default"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Стандарт"
+          }
+        }
+      }
+    },
     "ProfilePageDone" : {
       "comment" : "Done",
       "localizations" : {
@@ -1745,6 +1762,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ошибка"
+          }
+        }
+      }
+    },
+    "ProfilePageImposter" : {
+      "comment" : "Imposter",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imposter"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Самозванец"
           }
         }
       }
@@ -1881,6 +1915,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Требуется доступ"
+          }
+        }
+      }
+    },
+    "ProfilePagePremium" : {
+      "comment" : "Premium",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Премиум"
           }
         }
       }
@@ -2214,7 +2265,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Theme"
+            "value" : "Appearance"
           }
         },
         "ru" : {
@@ -2479,9 +2530,6 @@
           }
         }
       }
-    },
-    "Select an icon:" : {
-
     },
     "ShopPageAdd" : {
       "comment" : "Add",

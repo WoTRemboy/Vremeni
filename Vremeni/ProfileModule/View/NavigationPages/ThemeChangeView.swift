@@ -28,6 +28,8 @@ struct ThemeChangeView: View {
             VStack(spacing: 16) {
                 planet
                 picker
+                separator
+                iconChooser
                 Spacer()
             }
             .onAppear {
@@ -83,7 +85,20 @@ struct ThemeChangeView: View {
         }
         .pickerStyle(.segmented)
         .padding(.top, 25)
-        .padding(.horizontal)
+        .padding([.horizontal, .bottom])
+    }
+    
+    private var separator: some View {
+        Rectangle()
+            .padding(.horizontal)
+            .frame(height: 1)
+            .foregroundStyle(Color.LabelColors.labelDisable)
+    }
+    
+    private var iconChooser: some View {
+        IconChooserView()
+            .environmentObject(IconChangerViewModel())
+            .padding(.top)
     }
 }
 

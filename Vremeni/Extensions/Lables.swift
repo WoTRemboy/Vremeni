@@ -201,6 +201,10 @@ final class Texts {
         static let light = NSLocalizedString("ProfilePageLight", comment: "Light")
         static let dark = NSLocalizedString("ProfilePageDark", comment: "Dark")
         static let done = NSLocalizedString("ProfilePageDone", comment: "Done")
+        static let defaultIcon = NSLocalizedString("ProfilePageDefaultIcon", comment: "Default")
+        static let premium = NSLocalizedString("ProfilePagePremium", comment: "Premium")
+        static let imposter = NSLocalizedString("ProfilePageImposter", comment: "Imposter")
+        static let preview = "Preview"
         
         static let language = NSLocalizedString("ProfilePageLanguage", comment: "Language")
         static let languageDetails = NSLocalizedString("ProfilePageLanguageDetails", comment: "English")

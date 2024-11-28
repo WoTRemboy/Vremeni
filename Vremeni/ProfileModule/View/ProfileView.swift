@@ -119,7 +119,6 @@ struct ProfileView: View {
     
     private var appSection: some View {
         Section(Texts.ProfilePage.app) {
-            iconChooserButton
             notificationToggle
             appearanceButton
             languageButton
@@ -147,14 +146,6 @@ struct ProfileView: View {
         }
     }
     
-    private var iconChooserButton: some View {
-        NavigationLink(destination: IconChooserView()
-            .environmentObject(IconChangerViewModel())) {
-            LinkRow(title: "Icon",
-                    image: Image.ProfilePage.balance)
-        }
-    }
-    
     private var appearanceButton: some View {
         Button {
             showingThemeSheet = true
@@ -165,7 +156,7 @@ struct ProfileView: View {
         }
         .sheet(isPresented: $showingThemeSheet) {
             ThemeChangeView(viewModel: viewModel)
-                .presentationDetents([.height(350)])
+                .presentationDetents([.height(480)])
                 .interactiveDismissDisabled()
         }
     }
