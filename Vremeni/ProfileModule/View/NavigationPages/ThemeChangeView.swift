@@ -18,9 +18,11 @@ struct ThemeChangeView: View {
     @State private var circleSize: CGFloat = 0
     
     private var viewModel: ProfileView.ProfileViewModel
+    private var iconVM: IconChangerViewModel
     
-    init(viewModel: ProfileView.ProfileViewModel) {
+    init(viewModel: ProfileView.ProfileViewModel, iconVM: IconChangerViewModel) {
         self.viewModel = viewModel
+        self.iconVM = iconVM
     }
     
     internal var body: some View {
@@ -28,6 +30,8 @@ struct ThemeChangeView: View {
             VStack(spacing: 16) {
                 planet
                 picker
+                separator
+                iconChooser
                 Spacer()
             }
             .onAppear {
@@ -83,7 +87,20 @@ struct ThemeChangeView: View {
         }
         .pickerStyle(.segmented)
         .padding(.top, 25)
-        .padding(.horizontal)
+        .padding([.horizontal, .bottom])
+    }
+    
+    private var separator: some View {
+        Rectangle()
+            .padding(.horizontal)
+            .frame(height: 1)
+            .foregroundStyle(Color.LabelColors.labelDisable)
+    }
+    
+    private var iconChooser: some View {
+        IconChooserView()
+            .environmentObject(iconVM)
+            .padding(.top)
     }
 }
 
@@ -93,7 +110,7 @@ struct ThemeChangeView: View {
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
         let viewModel = ProfileView.ProfileViewModel(modelContext: modelContext)
-        return ThemeChangeView(viewModel: viewModel)
+        return ThemeChangeView(viewModel: viewModel, iconVM: IconChangerViewModel())
     } catch {
         fatalError("Failed to create model container.")
     }

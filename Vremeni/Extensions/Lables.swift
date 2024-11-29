@@ -86,6 +86,8 @@ final class Texts {
             static let constructorContent = NSLocalizedString("ShopPagePremiumConstructorContent", comment: "Try the ability to create your own items with rules.")
             static let cloudTitle = NSLocalizedString("ShopPagePremiumCloudTitle", comment: "iCloud Backup")
             static let cloudDescription = NSLocalizedString("ShopPagePremiumCloudDescription", comment: "Save your progress in the cloud with synchronization across devices.")
+            static let iconTitle = NSLocalizedString("ShopPagePremiumIconTitle", comment: "Icon Selection")
+            static let iconDescription = NSLocalizedString("ShopPagePremiumIconDescription", comment: "Select an application icon from the proposed options in Appearance.")
             
             static let subscribe = NSLocalizedString("ShopPagePremiumSubscribe", comment: "Subscribe for")
         }
@@ -201,6 +203,10 @@ final class Texts {
         static let light = NSLocalizedString("ProfilePageLight", comment: "Light")
         static let dark = NSLocalizedString("ProfilePageDark", comment: "Dark")
         static let done = NSLocalizedString("ProfilePageDone", comment: "Done")
+        static let defaultIcon = NSLocalizedString("ProfilePageDefaultIcon", comment: "Default")
+        static let premium = NSLocalizedString("ProfilePagePremium", comment: "Premium")
+        static let imposter = NSLocalizedString("ProfilePageImposter", comment: "Imposter")
+        static let preview = "Preview"
         
         static let language = NSLocalizedString("ProfilePageLanguage", comment: "Language")
         static let languageDetails = NSLocalizedString("ProfilePageLanguageDetails", comment: "English")

@@ -19,6 +19,8 @@ struct ProfileView: View {
     @State private var showingResetAlert = false
     @State private var showingLanguageAlert = false
     
+    private var iconVM = IconChangerViewModel()
+    
     init(modelContext: ModelContext) {
         let viewModel = ProfileViewModel(modelContext: modelContext)
         _viewModel = State(initialValue: viewModel)
@@ -82,11 +84,11 @@ struct ProfileView: View {
     
     private var contentSection: some View {
         Section(Texts.ProfilePage.content) {
-            NavigationLink(destination: ProfileAboutView(viewModel: viewModel),
-                           label: {
+            NavigationLink(destination: ProfileAboutView(viewModel: viewModel)
+                .environmentObject(iconVM)) {
                 LinkRow(title: Texts.ProfilePage.About.title,
                         image: Image.ProfilePage.about)
-            })
+            }
             
             NavigationLink(destination: ArchiveView(viewModel: viewModel)) {
                 LinkRow(title: Texts.ProfilePage.archive,
@@ -156,8 +158,8 @@ struct ProfileView: View {
                     chevron: true)
         }
         .sheet(isPresented: $showingThemeSheet) {
-            ThemeChangeView(viewModel: viewModel)
-                .presentationDetents([.height(350)])
+            ThemeChangeView(viewModel: viewModel, iconVM: iconVM)
+                .presentationDetents([.height(480)])
                 .interactiveDismissDisabled()
         }
     }
