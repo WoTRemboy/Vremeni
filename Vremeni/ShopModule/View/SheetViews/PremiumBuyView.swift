@@ -106,22 +106,26 @@ struct PremiumBuyView: View {
     private var includedLabels: some View {
         Section(header: Text(Texts.ShopPage.Premium.included)
             .foregroundStyle(Color.LabelColors.labelTertiary)) {
-            LinkRow(title: Texts.ShopPage.Premium.contentTitle,
-                    description: Texts.ShopPage.Premium.contentDescription,
-                    image: Image.ShopPage.Premium.content)
-            
-            LinkRow(title: Texts.ShopPage.Premium.constructorTitle,
-                    description:  Texts.ShopPage.Premium.constructorContent,
-                    image: Image.ShopPage.Premium.constructor)
-            
-            LinkRow(title: Texts.ShopPage.Premium.machineTitle,
-                    description:  Texts.ShopPage.Premium.machineDescription,
-                    image: Image.ShopPage.Premium.machine)
-            
-            LinkRow(title: Texts.ShopPage.Premium.cloudTitle,
-                    description:  Texts.ShopPage.Premium.cloudDescription,
-                    image: Image.ShopPage.Premium.cloud)
-        }
+                LinkRow(title: Texts.ShopPage.Premium.contentTitle,
+                        description: Texts.ShopPage.Premium.contentDescription,
+                        image: Image.ShopPage.Premium.content)
+                
+                LinkRow(title: Texts.ShopPage.Premium.cloudTitle,
+                        description:  Texts.ShopPage.Premium.cloudDescription,
+                        image: Image.ShopPage.Premium.cloud)
+                
+                LinkRow(title: Texts.ShopPage.Premium.machineTitle,
+                        description:  Texts.ShopPage.Premium.machineDescription,
+                        image: Image.ShopPage.Premium.machine)
+                
+                LinkRow(title: Texts.ShopPage.Premium.constructorTitle,
+                        description:  Texts.ShopPage.Premium.constructorContent,
+                        image: Image.ShopPage.Premium.constructor)
+                
+                LinkRow(title: Texts.ShopPage.Premium.iconTitle,
+                        description:  Texts.ShopPage.Premium.iconDescription,
+                        image: Image.ShopPage.Premium.icon)
+            }
     }
     
     private var actionButton: some View {

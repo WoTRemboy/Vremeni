@@ -10,6 +10,7 @@ import SwiftData
 
 struct ProfileAboutView: View {
     
+    @EnvironmentObject private var iconVM: IconChangerViewModel
     private var viewModel: ProfileView.ProfileViewModel
     
     init(viewModel: ProfileView.ProfileViewModel) {
@@ -42,7 +43,7 @@ struct ProfileAboutView: View {
     
     private var version: some View {
         HStack(spacing: 10) {
-            Image.ProfilePage.About.appIcon
+            iconVM.previewIcon
                 .resizable()
                 .frame(width: 60, height: 60)
                 .clipShape(.buttonBorder)
@@ -106,6 +107,7 @@ struct ProfileAboutView: View {
         
         let viewModel = ProfileView.ProfileViewModel(modelContext: modelContext)
         return ProfileAboutView(viewModel: viewModel)
+            .environmentObject(IconChangerViewModel())
     } catch {
         fatalError("Failed to create model container.")
     }

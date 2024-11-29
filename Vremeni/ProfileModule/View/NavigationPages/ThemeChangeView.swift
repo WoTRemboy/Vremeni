@@ -18,9 +18,11 @@ struct ThemeChangeView: View {
     @State private var circleSize: CGFloat = 0
     
     private var viewModel: ProfileView.ProfileViewModel
+    private var iconVM: IconChangerViewModel
     
-    init(viewModel: ProfileView.ProfileViewModel) {
+    init(viewModel: ProfileView.ProfileViewModel, iconVM: IconChangerViewModel) {
         self.viewModel = viewModel
+        self.iconVM = iconVM
     }
     
     internal var body: some View {
@@ -97,7 +99,7 @@ struct ThemeChangeView: View {
     
     private var iconChooser: some View {
         IconChooserView()
-            .environmentObject(IconChangerViewModel())
+            .environmentObject(iconVM)
             .padding(.top)
     }
 }
@@ -108,7 +110,7 @@ struct ThemeChangeView: View {
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
         let viewModel = ProfileView.ProfileViewModel(modelContext: modelContext)
-        return ThemeChangeView(viewModel: viewModel)
+        return ThemeChangeView(viewModel: viewModel, iconVM: IconChangerViewModel())
     } catch {
         fatalError("Failed to create model container.")
     }

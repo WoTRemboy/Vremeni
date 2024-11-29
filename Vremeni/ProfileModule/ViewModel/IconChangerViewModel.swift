@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 final class IconChangerViewModel: ObservableObject, Equatable {
@@ -19,6 +20,10 @@ final class IconChangerViewModel: ObservableObject, Equatable {
         } else {
             appIcon = .primary
         }
+    }
+    
+    internal var previewIcon: Image {
+        Image(appIcon.rawValue + Texts.ProfilePage.preview)
     }
 
     static func == (lhs: IconChangerViewModel, rhs: IconChangerViewModel) -> Bool {

@@ -27,6 +27,7 @@ extension Image {
             static let machine = Image("MachineUpgradePremium")
             static let constructor = Image("ItemConstructorPremium")
             static let cloud = Image("CloudBackupPremium")
+            static let icon = Image("IconSelectPremium")
         }
         
         enum Research {

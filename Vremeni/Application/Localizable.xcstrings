@@ -2820,6 +2820,40 @@
         }
       }
     },
+    "ShopPagePremiumIconDescription" : {
+      "comment" : "Select an application icon from the proposed options in Appearance.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select an application icon from the proposed options in Appearance."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите значок приложения из вариантов в Оформлении."
+          }
+        }
+      }
+    },
+    "ShopPagePremiumIconTitle" : {
+      "comment" : "Icon Selection",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icon Selection"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Альтернативные иконки"
+          }
+        }
+      }
+    },
     "ShopPagePremiumIncluded" : {
       "comment" : "What's Included",
       "localizations" : {
