@@ -21,7 +21,7 @@ struct IconChooserView: View {
                     IconImage(icon: icon, selected: viewModel.appIcon == icon)
                 }
                 .buttonStyle(.plain)
-                .animation(.easeInOut(duration: 0.2), value: viewModel.appIcon)
+                .animation(.easeInOut(duration: 0.1), value: viewModel.appIcon)
             }
         }
     }
