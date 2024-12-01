@@ -73,9 +73,9 @@ extension ShopView {
             guard profile.balance >= Int(item.price) else { return }
             item.unlockItem()
             
-            for requirement in item.requirement {
-                let consItem = allItems.first(where: { $0.nameKey == requirement.key })
-                consItem?.reduceCount(for: requirement.value)
+            for requirement in item.requirements {
+                let consItem = allItems.first(where: { $0.nameKey == requirement.item.nameKey })
+                consItem?.reduceCount(for: Int(requirement.item.price))
             }
             profile.unlockItem(for: item.price)
             fetchData()
@@ -128,8 +128,8 @@ extension ShopView {
         // Checks that all conditions are met
         internal func unlockButtonAvailable(for item: ConsumableItem) -> Bool {
             // Items collection requirements check
-            for requirement in item.requirement {
-                guard researchTypeDefinition(for: requirement.key, of: requirement.value) == .completed else { return false }
+            for requirement in item.requirements {
+                guard researchTypeDefinition(for: requirement.item.nameKey, of: requirement.quantity) == .completed else { return false }
             }
             // Coins requirement check
             guard researchTypeDefinition(for: item.price) == .completed else { return false }
@@ -140,14 +140,13 @@ extension ShopView {
         // Configures research rule description for Details Page
         internal func ruleDesctiption(item: ConsumableItem) -> [String] {
             // For the first item (One Hours) there are no requirements
-            guard !item.requirement.isEmpty else { return [Texts.ItemCreatePage.null] }
+            guard !item.requirements.isEmpty else { return [Texts.ItemCreatePage.null] }
             
             var rule = [String]()
-            let requirements = item.requirement.sorted { $0.value > $1.value }
+            let requirements = item.requirements.sorted { $0.item.price < $1.item.price }
             for requirement in requirements {
                 // Setups requirement string
-                let requirementName = NSLocalizedString(requirement.key, comment: String())
-                let reqString = "\(requirementName) × \(requirement.value)"
+                let reqString = "\(requirement.item.name) × \(requirement.quantity)"
                 rule.append(reqString)
             }
             
@@ -205,7 +204,7 @@ extension ShopView {
                                                      premium: created.premium,
                                                      rarity: created.rarity,
                                                      profile: profile,
-                                                     requirement: created.requirement,
+                                                     requirements: created.requirements,
                                                      enabled: created.enabled)
             modelContext.insert(item)
             fetchData()
@@ -285,7 +284,7 @@ extension ShopView {
                                               price: 3,
                                               premium: false, rarity: .common,
                                               profile: profile,
-                                              requirement: [RuleItem.oneHour.rawValue : 3],
+                                              requirements: [] /*[RuleItem.oneHour.rawValue : 3]*/,
                                               applications: [RuleItem.fiveHours.rawValue : 5,
                                                              RuleItem.tenHours.rawValue : 10],
                                               enabled: false),
@@ -295,7 +294,7 @@ extension ShopView {
                                               price: 5,
                                               premium: true, rarity: .uncommon,
                                               profile: profile,
-                                              requirement: [RuleItem.oneHour.rawValue : 2, RuleItem.threeHours.rawValue : 1],
+                                              requirements: [] /*[RuleItem.oneHour.rawValue : 2, RuleItem.threeHours.rawValue : 1]*/,
                                               applications: [RuleItem.sevenHours.rawValue : 7],
                                               enabled: false),
                 
@@ -304,7 +303,7 @@ extension ShopView {
                                               price: 7,
                                               premium: false, rarity: .uncommon,
                                               profile: profile,
-                                              requirement: [RuleItem.fiveHours.rawValue : 1, RuleItem.oneHour.rawValue : 2],
+                                              requirements: [] /*[RuleItem.fiveHours.rawValue : 1, RuleItem.oneHour.rawValue : 2]*/,
                                               applications: [RuleItem.tenHours.rawValue : 10],
                                               enabled: false),
                 
@@ -313,7 +312,7 @@ extension ShopView {
                                               price: 10,
                                               premium: true, rarity: .rare,
                                               profile: profile,
-                                              requirement: [RuleItem.sevenHours.rawValue : 1, RuleItem.threeHours.rawValue : 1],
+                                              requirements: [] /*[RuleItem.sevenHours.rawValue : 1, RuleItem.threeHours.rawValue : 1]*/,
                                               enabled: false)]
             for item in items {
                 modelContext.insert(item)

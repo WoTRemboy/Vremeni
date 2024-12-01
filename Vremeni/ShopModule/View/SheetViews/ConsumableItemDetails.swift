@@ -164,7 +164,7 @@ struct ConsumableItemDetails: View {
             price: 3,
             rarity: .common,
             profile: Profile.configMockProfile(),
-            requirement: [RuleItem.oneHour.rawValue : 3],
+            requirements: [],
             applications: [RuleItem.oneHour.rawValue : 1,
                            RuleItem.threeHours.rawValue : 3],
             enabled: false)

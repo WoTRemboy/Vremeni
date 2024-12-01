@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6306D8792C7CE1D100F58C79 /* ThemeChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6306D8782C7CE1D100F58C79 /* ThemeChangeView.swift */; };
 		63194D1B2C63E01000CAA0AB /* InventoryGridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63194D1A2C63E01000CAA0AB /* InventoryGridViewCell.swift */; };
+		631A26232CFB7D1400881DA8 /* RequirementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631A26222CFB7D0900881DA8 /* RequirementModel.swift */; };
 		631A5FD92C5A548C002331F7 /* ConsumableItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631A5FD82C5A548C002331F7 /* ConsumableItemDetails.swift */; };
 		631AF3D12C4FC82C00DFD63C /* VremeniApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */; };
 		631AF3D52C4FC82D00DFD63C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 631AF3D42C4FC82D00DFD63C /* Assets.xcassets */; };
@@ -111,6 +112,7 @@
 /* Begin PBXFileReference section */
 		6306D8782C7CE1D100F58C79 /* ThemeChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ThemeChangeView.swift; path = Vremeni/ProfileModule/View/NavigationPages/ThemeChangeView.swift; sourceTree = SOURCE_ROOT; };
 		63194D1A2C63E01000CAA0AB /* InventoryGridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryGridViewCell.swift; sourceTree = "<group>"; };
+		631A26222CFB7D0900881DA8 /* RequirementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequirementModel.swift; sourceTree = "<group>"; };
 		631A5FD82C5A548C002331F7 /* ConsumableItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumableItemDetails.swift; sourceTree = "<group>"; };
 		631AF3CD2C4FC82C00DFD63C /* Vremeni.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vremeni.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		631AF3D02C4FC82C00DFD63C /* VremeniApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VremeniApp.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 		631AF4022C516D0100DFD63C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				631A26222CFB7D0900881DA8 /* RequirementModel.swift */,
 				631AF4162C5176DE00DFD63C /* ConsumableItem.swift */,
 				63C5F1B32CE0D4AD0043A483 /* SubscriptionModel.swift */,
 				631F26572C66188300FEAD1A /* RuleModel.swift */,
@@ -819,6 +822,7 @@
 				6306D8792C7CE1D100F58C79 /* ThemeChangeView.swift in Sources */,
 				634C03ED2CF8814C00CFF706 /* IconChooserView.swift in Sources */,
 				631AF4192C517F7900DFD63C /* ShopItemGridCell.swift in Sources */,
+				631A26232CFB7D1400881DA8 /* RequirementModel.swift in Sources */,
 				631AF4212C5250BB00DFD63C /* InventoryView.swift in Sources */,
 				635D59372C7E668700EA2550 /* ContentLabels.swift in Sources */,
 				638620B52C60D11B00453944 /* MachineItemDetailsView.swift in Sources */,
@@ -1040,7 +1044,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.6.2;
+				MARKETING_VERSION = 0.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1078,7 +1082,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.6.2;
+				MARKETING_VERSION = 0.6.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

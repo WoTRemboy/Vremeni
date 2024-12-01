@@ -12,13 +12,11 @@ struct ResearchItemListRow: View {
     @State private var animateChange = false
     
     private let item: ConsumableItem
-    private let name: String
-    private let count: Int
+    private let requirement: Requirement
     
-    init(item: ConsumableItem, name: String, count: Int) {
+    init(item: ConsumableItem, requirement: Requirement) {
         self.item = item
-        self.name = name
-        self.count = count
+        self.requirement = requirement
     }
     
     internal var body: some View {
@@ -31,7 +29,7 @@ struct ResearchItemListRow: View {
     
     private var nameLabel: some View {
         HStack(spacing: 5) {
-            Text(name)
+            Text(requirement.item.name)
                 .font(.body())
                 .foregroundStyle(Color.LabelColors.labelPrimary)
                 .lineLimit(1)
@@ -51,7 +49,7 @@ struct ResearchItemListRow: View {
             withAnimation {
                 animateChange = true
             }
-            item.reduceRequirement(name: name)
+            item.reduceRequirement(requirement: requirement)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 withAnimation {
@@ -72,7 +70,7 @@ struct ResearchItemListRow: View {
     }
 
     private var countLabel: some View {
-        Text(String(count))
+        Text(String(requirement.quantity))
             .font(.regularBody())
             .foregroundStyle(Color.LabelColors.labelPrimary)
             .scaleEffect(animateChange ? 1.2 : 1.0)
@@ -84,7 +82,7 @@ struct ResearchItemListRow: View {
             withAnimation {
                 animateChange = true
             }
-            item.addRequirement(name: name)
+            item.addRequirement(item: requirement.item)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 withAnimation {
@@ -106,8 +104,10 @@ struct ResearchItemListRow: View {
 }
 
 #Preview {
-    let example = ConsumableItem(nameKey: "Item name", descriptionKey: "Item Description", image: "", price: 200, premium: true, profile: Profile.configMockProfile(), requirement: ["": 0], applications: ["": 0])
+    let requirementItem = ConsumableItem(nameKey: "Requirement", descriptionKey: "Requirement Description", image: "", price: 200, premium: true, profile: Profile.configMockProfile(), requirements: [], applications: ["": 0])
+    let requirement = Requirement(item: requirementItem, quantity: 1)
     
+    let example = ConsumableItem(nameKey: "Item name", descriptionKey: "Item Description", image: "", price: 200, premium: true, profile: Profile.configMockProfile(), requirements: [requirement], applications: ["": 0])
     
-    return ResearchItemListRow(item: example, name: "Requirement name", count: 0)
+    ResearchItemListRow(item: example, requirement: requirement)
 }

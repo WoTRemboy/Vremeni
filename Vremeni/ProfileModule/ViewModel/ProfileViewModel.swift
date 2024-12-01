@@ -104,14 +104,14 @@ extension ProfileView {
         
         internal func ruleDesctiption(item: ConsumableItem) -> [String] {
             // For the first item (One Hours) there are no requirements
-            guard !item.requirement.isEmpty else { return [Texts.ItemCreatePage.null] }
+            guard !item.requirements.isEmpty else { return [Texts.ItemCreatePage.null] }
             
             var rule = [String]()
-            let requirements = item.requirement.sorted { $0.value > $1.value }
+            let requirements = item.requirements.sorted { $0.item.price > $1.item.price}
             for requirement in requirements {
                 // Setups requirement string
-                let requirementName = NSLocalizedString(requirement.key, comment: String())
-                let reqString = "\(requirementName) × \(requirement.value)"
+                let requirementName = NSLocalizedString(requirement.item.nameKey, comment: String())
+                let reqString = "\(requirementName) × \(requirement.quantity)"
                 rule.append(reqString)
             }
             
@@ -245,7 +245,7 @@ extension ProfileView {
                                               price: 3,
                                               rarity: .common,
                                               profile: profile,
-                                              requirement: [RuleItem.oneHour.rawValue : 3],
+                                              requirements: [] /*[RuleItem.oneHour.rawValue : 3]*/,
                                               enabled: false),
                          
                 ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
@@ -253,7 +253,7 @@ extension ProfileView {
                                               price: 5,
                                               rarity: .uncommon,
                                               profile: profile,
-                                              requirement: [RuleItem.oneHour.rawValue : 2, RuleItem.threeHours.rawValue : 1],
+                                              requirements: [] /*[RuleItem.oneHour.rawValue : 2, RuleItem.threeHours.rawValue : 1]*/,
                                               enabled: false),
                 
                 ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
@@ -261,7 +261,7 @@ extension ProfileView {
                                               price: 7,
                                               rarity: .uncommon,
                                               profile: profile,
-                                              requirement: [RuleItem.fiveHours.rawValue : 1, RuleItem.oneHour.rawValue : 2],
+                                              requirements: [] /*[RuleItem.fiveHours.rawValue : 1, RuleItem.oneHour.rawValue : 2]*/,
                                               enabled: false),
                 
                 ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,
@@ -269,7 +269,7 @@ extension ProfileView {
                                               price: 10,
                                               rarity: .rare,
                                               profile: profile,
-                                              requirement: [RuleItem.sevenHours.rawValue : 1, RuleItem.threeHours.rawValue : 1],
+                                              requirements: [] /*[RuleItem.sevenHours.rawValue : 1, RuleItem.threeHours.rawValue : 1]*/,
                                               enabled: false)]
             for item in items {
                 modelContext.insert(item)

@@ -59,6 +59,7 @@ struct TurnoverItemListRow: View {
 }
 
 #Preview {
-    let example = ConsumableItem(nameKey: "Item name", descriptionKey: "Item Description", image: "", price: 200, premium: true, profile: Profile.configMockProfile(), requirement: ["": 0], applications: ["": 0])
+    let example = ConsumableItem(nameKey: "Item name", descriptionKey: "Item Description", image: "", price: 200, premium: true, profile: Profile.configMockProfile(), requirements: [], applications: ["": 0])
+    
     return TurnoverItemListRow(item: example)
 }
