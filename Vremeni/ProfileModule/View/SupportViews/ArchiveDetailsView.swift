@@ -119,7 +119,7 @@ struct ArchiveDetailsView: View {
             descriptionKey: Content.Common.oneMinuteDescription,
             price: 50, rarity: .uncommon,
             profile: Profile.configMockProfile(),
-            requirement: [RuleItem.oneHour.rawValue : 3],
+            requirements: [],
             applications: [RuleItem.oneHour.rawValue : 1,
                            RuleItem.threeHours.rawValue : 3])
         return ArchiveDetailsView(item: example, viewModel: viewModel)

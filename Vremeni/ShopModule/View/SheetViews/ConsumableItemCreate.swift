@@ -135,8 +135,8 @@ struct ConsumableItemCreate: View {
     
     private var researchSection: some View {
         Section(Texts.ItemCreatePage.research) {
-            ForEach(item.requirement.sorted(by: { $0.key < $1.key }), id: \.key) { requirement in
-                ResearchItemListRow(item: item, name: requirement.key, count: requirement.value)
+            ForEach(item.requirements, id: \.self) { requirement in
+                ResearchItemListRow(item: item, requirement: requirement)
             }
             .onDelete(perform: item.removeRequirement)
             
