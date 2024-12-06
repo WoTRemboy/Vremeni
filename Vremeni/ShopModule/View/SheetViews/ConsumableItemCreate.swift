@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct ConsumableItemCreate: View {
     
@@ -17,6 +18,9 @@ struct ConsumableItemCreate: View {
     @State private var item: ConsumableItem
     @State private var showingResearchItemList = false
     @State private var isKeyboardVisible = false
+    
+    @State private var selectedPhoto: PhotosPickerItem?
+    @State private var selectedPhotoData: Data?
     
     private var viewModel: ShopView.ShopViewModel
     
@@ -52,6 +56,13 @@ struct ConsumableItemCreate: View {
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         saveDoneButton
+                    }
+                }
+                .task(id: selectedPhoto) {
+                    if let data = try? await selectedPhoto?.loadTransferable(type: Data.self) {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            selectedPhotoData = data
+                        }
                     }
                 }
         }
@@ -107,7 +118,13 @@ struct ConsumableItemCreate: View {
     
     private var previewSection: some View {
         Section(Texts.ItemCreatePage.preview) {
-            TurnoverItemListRow(item: item)
+            PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
+                if let selectedPhotoData, let uiImage = UIImage(data: selectedPhotoData) {
+                    TurnoverItemListRow(item: item, image: Image(uiImage: uiImage))
+                } else {
+                    TurnoverItemListRow(item: item)
+                }
+            }
         }
     }
     

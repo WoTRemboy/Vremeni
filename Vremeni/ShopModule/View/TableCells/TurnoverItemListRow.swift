@@ -9,17 +9,19 @@ import SwiftUI
 
 struct TurnoverItemListRow: View {
     private let item: ConsumableItem
+    private let image: Image?
     
-    init(item: ConsumableItem) {
+    init(item: ConsumableItem, image: Image? = nil) {
         self.item = item
+        self.image = image
     }
     
     internal var body: some View {
         HStack(spacing: 10) {
-            (item.image.isEmpty ? Image.ShopPage.CreatePage.addImage : Image(systemName: item.image))
+            (image ?? Image.ShopPage.CreatePage.addImage)
                 .resizable()
-                .scaledToFit()
-                .frame(height: 60)
+                .frame(width: 60, height: 60)
+                .clipShape(.buttonBorder)
                 .fontWeight(.light)
                 .foregroundStyle(Color.LabelColors.labelSecondary, Color.LabelColors.labelDisable)
             
