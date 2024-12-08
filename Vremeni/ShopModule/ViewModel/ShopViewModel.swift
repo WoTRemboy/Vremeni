@@ -201,6 +201,7 @@ extension ShopView {
             let item = ConsumableItem.itemMockConfig(nameKey: created.name,
                                                      descriptionKey: created.itemDescription,
                                                      price: created.price,
+                                                     image: created.image,
                                                      premium: created.premium,
                                                      rarity: created.rarity,
                                                      profile: profile,

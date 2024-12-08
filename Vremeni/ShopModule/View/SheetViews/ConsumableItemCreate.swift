@@ -20,7 +20,6 @@ struct ConsumableItemCreate: View {
     @State private var isKeyboardVisible = false
     
     @State private var selectedPhoto: PhotosPickerItem?
-    @State private var selectedPhotoData: Data?
     
     private var viewModel: ShopView.ShopViewModel
     
@@ -61,7 +60,7 @@ struct ConsumableItemCreate: View {
                 .task(id: selectedPhoto) {
                     if let data = try? await selectedPhoto?.loadTransferable(type: Data.self) {
                         withAnimation(.easeInOut(duration: 0.3)) {
-                            selectedPhotoData = data
+                            item.image = data
                         }
                     }
                 }
@@ -119,7 +118,7 @@ struct ConsumableItemCreate: View {
     private var previewSection: some View {
         Section(Texts.ItemCreatePage.preview) {
             PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
-                if let selectedPhotoData, let uiImage = UIImage(data: selectedPhotoData) {
+                if let image = item.image, let uiImage = UIImage(data: image) {
                     TurnoverItemListRow(item: item, image: Image(uiImage: uiImage))
                 } else {
                     TurnoverItemListRow(item: item)

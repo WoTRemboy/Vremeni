@@ -32,11 +32,15 @@ struct InventoryGridCell: View {
     }
     
     private var itemImage: some View {
-        Image(systemName: item.image)
-            .resizable()
-            .scaledToFit()
-            .fontWeight(.light)
-            .foregroundStyle(Color.accentColor, Color.cyan)
+        if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+            Image(uiImage: uiImage)
+                .resizable()
+                .scaledToFit()
+        } else {
+            Image.Placeholder.placeholder1to1
+                .resizable()
+                .scaledToFit()
+        }
     }
     
     private var itemName: some View {

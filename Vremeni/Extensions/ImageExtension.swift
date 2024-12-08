@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 extension Image {
     enum SplashScreen {
@@ -103,4 +104,9 @@ extension Image {
         static let archive = Image(systemName: "archivebox")
         static let stats = Image(systemName: "chart.xyaxis.line")
     }
+}
+
+
+extension UIImage {
+    static let placeholder = UIImage(named: "Placeholder1to1")
 }

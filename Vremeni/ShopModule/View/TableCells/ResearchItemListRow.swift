@@ -104,10 +104,10 @@ struct ResearchItemListRow: View {
 }
 
 #Preview {
-    let requirementItem = ConsumableItem(nameKey: "Requirement", descriptionKey: "Requirement Description", image: "", price: 200, premium: true, profile: Profile.configMockProfile(), requirements: [], applications: ["": 0])
+    let requirementItem = ConsumableItem(nameKey: "Requirement", descriptionKey: "Requirement Description", image: nil, price: 200, premium: true, profile: Profile.configMockProfile(), requirements: [], applications: ["": 0])
     let requirement = Requirement(item: requirementItem, quantity: 1)
     
-    let example = ConsumableItem(nameKey: "Item name", descriptionKey: "Item Description", image: "", price: 200, premium: true, profile: Profile.configMockProfile(), requirements: [requirement], applications: ["": 0])
+    let example = ConsumableItem(nameKey: "Item name", descriptionKey: "Item Description", image: nil, price: 200, premium: true, profile: Profile.configMockProfile(), requirements: [requirement], applications: ["": 0])
     
     ResearchItemListRow(item: example, requirement: requirement)
 }
