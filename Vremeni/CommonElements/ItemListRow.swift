@@ -15,14 +15,18 @@ struct ItemListRow: View {
     }
     
     internal var body: some View {
-        HStack(spacing: 10) {
-            Image(systemName: item.image)
-                .resizable()
-                .scaledToFit()
-                .frame(height: 60)
-                .fontWeight(.light)
-                .foregroundStyle(Color.accentColor, Color.cyan)
-                .padding(.leading, -6)
+        HStack(spacing: 16) {
+            if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .clipShape(.buttonBorder)
+                    .frame(width: 60, height: 60)
+            } else {
+                Image.Placeholder.placeholder1to1
+                    .resizable()
+                    .clipShape(.buttonBorder)
+                    .frame(width: 60, height: 60)
+            }
             
             VStack(alignment: .leading, spacing: 5) {
                 name
@@ -73,7 +77,7 @@ struct ItemListRow: View {
     let example = MachineItem(
         nameKey: "Item name",
         descriptionKey: "Item description",
-        image: "8.square", price: 8,
+        image: nil, price: 8,
         parent: ConsumableItem.itemMockConfig(
             nameKey: Content.Common.oneMinuteTitle,
             price: 1, profile: Profile.configMockProfile()), applications: [RuleItem.sevenHours.rawValue : 7])

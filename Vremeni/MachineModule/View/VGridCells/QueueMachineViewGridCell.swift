@@ -35,11 +35,15 @@ struct QueueMachineViewGridCell: View {
     private var content: some View {
         HStack(spacing: 16) {
             VStack(spacing: 10) {
-                Image(systemName: item.image)
-                    .resizable()
-                    .scaledToFit()
-                    .fontWeight(.light)
-                    .foregroundStyle(Color.accentColor, Color.cyan)
+                if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .clipShape(.buttonBorder)
+                } else {
+                    Image.Placeholder.placeholder1to1
+                        .resizable()
+                        .clipShape(.buttonBorder)
+                }
                 itemImageName
             }
             
