@@ -71,13 +71,13 @@ struct ConsumableItemDetails: View {
             if let imageData = item.image, let uiImage = UIImage(data: imageData) {
                 Image(uiImage: uiImage)
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 200)
+                    .clipShape(.buttonBorder)
+                    .frame(width: 200, height: 200)
             } else {
                 Image.Placeholder.placeholder1to1
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 200)
+                    .clipShape(.buttonBorder)
+                    .frame(width: 200, height: 200)
             }
             
             // Item name

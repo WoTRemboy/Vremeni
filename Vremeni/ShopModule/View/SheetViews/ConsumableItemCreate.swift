@@ -58,9 +58,16 @@ struct ConsumableItemCreate: View {
                     }
                 }
                 .task(id: selectedPhoto) {
-                    if let data = try? await selectedPhoto?.loadTransferable(type: Data.self) {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            item.image = data
+                    if let data = try? await selectedPhoto?.loadTransferable(type: Data.self),
+                       let uiImage = UIImage(data: data) {
+                        
+                        if let croppedImage = viewModel.cropToSquare(image: uiImage),
+                           let resizedImage = viewModel.resizeImage(image: croppedImage, targetSize: CGSize(width: 300, height: 300)) {
+                            if let resizedData = resizedImage.jpegData(compressionQuality: 0.8) {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    item.image = resizedData
+                                }
+                            }
                         }
                     }
                 }
@@ -118,10 +125,10 @@ struct ConsumableItemCreate: View {
     private var previewSection: some View {
         Section(Texts.ItemCreatePage.preview) {
             PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
-                if let image = item.image, let uiImage = UIImage(data: image) {
-                    TurnoverItemListRow(item: item, image: Image(uiImage: uiImage))
-                } else {
+                if let image = item.image, let _ = UIImage(data: image) {
                     TurnoverItemListRow(item: item)
+                } else {
+                    TurnoverItemListRow(item: item, preview: true)
                 }
             }
         }
@@ -130,7 +137,7 @@ struct ConsumableItemCreate: View {
     private var generalSection: some View {
         Section(Texts.ItemCreatePage.general) {
             // Sets ConsumableItem name
-            TextField(Texts.ItemCreatePage.name, text: $item.nameKey.animation(.easeInOut(duration: 0.2)))
+            TextField(Texts.ItemCreatePage.name, text: $item.nameKey)
             // Sets ConsumableItem description
             TextField(Texts.ItemCreatePage.description, text: $item.descriptionKey, axis: .vertical)
             // Sets ConsumableItem enable status

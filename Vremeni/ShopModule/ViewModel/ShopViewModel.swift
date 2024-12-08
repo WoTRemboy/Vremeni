@@ -217,6 +217,27 @@ extension ShopView {
             fetchData()
         }
         
+        internal func cropToSquare(image: UIImage) -> UIImage? {
+            let originalSize = image.size
+            let minSide = min(originalSize.width, originalSize.height)
+            
+            let xOffset = (originalSize.width - minSide) / 2
+            let yOffset = (originalSize.height - minSide) / 2
+            
+            let cropRect = CGRect(x: xOffset, y: yOffset, width: minSide, height: minSide)
+            
+            guard let cgImage = image.cgImage?.cropping(to: cropRect) else { return nil }
+            
+            return UIImage(cgImage: cgImage, scale: image.scale, orientation: image.imageOrientation)
+        }
+        
+        internal func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+            let renderer = UIGraphicsImageRenderer(size: targetSize)
+            return renderer.image { _ in
+                image.draw(in: CGRect(origin: .zero, size: targetSize))
+            }
+        }
+        
         // MARK: - Load data method
         
         private func fetchData(filterReset: Bool = false) {

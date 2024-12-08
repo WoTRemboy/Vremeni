@@ -21,7 +21,7 @@ struct InventoryGridCell: View {
         GeometryReader { reader in
             VStack(spacing: 5) {
                 itemImage
-                    .frame(width: reader.size.width)
+                    .frame(width: reader.size.width, height: reader.size.width)
                 itemName
                     .frame(width: reader.size.width, height: 25, alignment: .leading)
                 countView
@@ -35,11 +35,11 @@ struct InventoryGridCell: View {
         if let imageData = item.image, let uiImage = UIImage(data: imageData) {
             Image(uiImage: uiImage)
                 .resizable()
-                .scaledToFit()
+                .clipShape(.buttonBorder)
         } else {
             Image.Placeholder.placeholder1to1
                 .resizable()
-                .scaledToFit()
+                .clipShape(.buttonBorder)
         }
     }
     
