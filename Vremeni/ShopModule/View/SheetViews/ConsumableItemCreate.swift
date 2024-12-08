@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct ConsumableItemCreate: View {
     
@@ -17,6 +18,8 @@ struct ConsumableItemCreate: View {
     @State private var item: ConsumableItem
     @State private var showingResearchItemList = false
     @State private var isKeyboardVisible = false
+    
+    @State private var selectedPhoto: PhotosPickerItem?
     
     private var viewModel: ShopView.ShopViewModel
     
@@ -52,6 +55,20 @@ struct ConsumableItemCreate: View {
                     }
                     ToolbarItem(placement: .topBarTrailing) {
                         saveDoneButton
+                    }
+                }
+                .task(id: selectedPhoto) {
+                    if let data = try? await selectedPhoto?.loadTransferable(type: Data.self),
+                       let uiImage = UIImage(data: data) {
+                        
+                        if let croppedImage = viewModel.cropToSquare(image: uiImage),
+                           let resizedImage = viewModel.resizeImage(image: croppedImage, targetSize: CGSize(width: 300, height: 300)) {
+                            if let resizedData = resizedImage.jpegData(compressionQuality: 0.8) {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    item.image = resizedData
+                                }
+                            }
+                        }
                     }
                 }
         }
@@ -107,14 +124,20 @@ struct ConsumableItemCreate: View {
     
     private var previewSection: some View {
         Section(Texts.ItemCreatePage.preview) {
-            TurnoverItemListRow(item: item)
+            PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
+                if let image = item.image, let _ = UIImage(data: image) {
+                    TurnoverItemListRow(item: item)
+                } else {
+                    TurnoverItemListRow(item: item, preview: true)
+                }
+            }
         }
     }
     
     private var generalSection: some View {
         Section(Texts.ItemCreatePage.general) {
             // Sets ConsumableItem name
-            TextField(Texts.ItemCreatePage.name, text: $item.nameKey.animation(.easeInOut(duration: 0.2)))
+            TextField(Texts.ItemCreatePage.name, text: $item.nameKey)
             // Sets ConsumableItem description
             TextField(Texts.ItemCreatePage.description, text: $item.descriptionKey, axis: .vertical)
             // Sets ConsumableItem enable status

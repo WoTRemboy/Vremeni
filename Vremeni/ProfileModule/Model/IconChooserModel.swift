@@ -7,8 +7,8 @@
 
 enum Icon: String, CaseIterable, Identifiable {
     case primary = "AppIcon"
+    case beta = "AppIconBeta"
     case premium = "AppIconPremium"
-    case collab = "AppIconCollab"
 
     internal var id: String { self.rawValue }
     
@@ -16,10 +16,10 @@ enum Icon: String, CaseIterable, Identifiable {
         switch self {
         case .primary:
             Texts.ProfilePage.defaultIcon
+        case .beta:
+            Texts.ProfilePage.beta
         case .premium:
             Texts.ProfilePage.premium
-        case .collab:
-            Texts.ProfilePage.imposter
         }
     }
 }

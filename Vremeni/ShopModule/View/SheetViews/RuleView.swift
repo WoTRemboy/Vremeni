@@ -54,13 +54,19 @@ struct RuleView: View {
     
     private var itemInfoNew: some View {
         HStack(spacing: 10) {
-            Image(systemName: item.image)
-                .resizable()
-                .fontWeight(.light)
-                .frame(width: 80, height: 80)
-                .clipShape(.buttonBorder)
-                .padding(.leading, -2.5)
-                .foregroundStyle(Color.blue, Color.cyan)
+            if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .frame(width: 80, height: 80)
+                    .clipShape(.buttonBorder)
+                    .padding(.leading, -2.5)
+            } else {
+                Image.Placeholder.placeholder1to1
+                    .resizable()
+                    .frame(width: 80, height: 80)
+                    .clipShape(.buttonBorder)
+                    .padding(.leading, -2.5)
+            }
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(item.name)

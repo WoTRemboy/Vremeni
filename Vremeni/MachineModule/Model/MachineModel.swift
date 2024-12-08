@@ -17,7 +17,9 @@ final class MachineItem: Identifiable {
     var id = UUID()
     var nameKey: String
     var descriptionKey: String
-    var image: String
+    
+    @Attribute(.externalStorage)
+    var image: Data?
     
     // General localized
     var name: String {
@@ -46,7 +48,7 @@ final class MachineItem: Identifiable {
     var started: Date = Date()
     var target: Date = Date()
     
-    init(id: UUID = UUID(), nameKey: String, descriptionKey: String, image: String,
+    init(id: UUID = UUID(), nameKey: String, descriptionKey: String, image: Data? = nil,
          price: Float, percent: Double = 0, inProgress: Bool = false,
          type: VremeniType = .minutes, rarity: Rarity = .common, parent: ConsumableItem, applications: [String: Int]) {
         self.id = id
@@ -101,12 +103,13 @@ extension MachineItem {
     
     // Configurates MachineItem mock data
     static internal func itemMockConfig(name: String, description: String = String(),
-                                        price: Float, inProgress: Bool = false,
+                                        price: Float, image: Data? = nil,
+                                        inProgress: Bool = false,
                                         rarity: Rarity = .common, profile: Profile,
                                         applications: [String: Int] = [:]) -> MachineItem {
         let name = name
         let description = description
-        let image = "\(Int(price)).square"
+        let image = image
         let price = price
         let rarity = rarity
         let profile = profile

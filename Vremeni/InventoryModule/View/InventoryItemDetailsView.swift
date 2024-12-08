@@ -48,12 +48,18 @@ struct InventoryItemDetailsView: View {
     
     private var itemHead: some View {
         VStack(spacing: 5) {
-            Image(systemName: item.image)
-                .resizable()
-                .fontWeight(.light)
-                .scaledToFit()
-                .frame(width: 200)
-                .foregroundStyle(Color.accentColor, Color.cyan)
+            if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .clipShape(.buttonBorder)
+                    .frame(width: 200, height: 200)
+            } else {
+                Image.Placeholder.placeholder1to1
+                    .resizable()
+                    .clipShape(.buttonBorder)
+                    .frame(width: 200, height: 200)
+            }
+            
             
             Text(item.name)
                 .font(.segmentTitle())

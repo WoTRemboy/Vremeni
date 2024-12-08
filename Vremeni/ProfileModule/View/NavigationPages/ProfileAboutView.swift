@@ -42,12 +42,11 @@ struct ProfileAboutView: View {
     }
     
     private var version: some View {
-        HStack(spacing: 10) {
+        HStack(spacing: 16) {
             iconVM.previewIcon
                 .resizable()
                 .frame(width: 60, height: 60)
                 .clipShape(.buttonBorder)
-                .padding(.leading, -2.5)
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(Texts.Common.title)

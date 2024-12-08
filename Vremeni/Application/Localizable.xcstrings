@@ -1721,13 +1721,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Default"
+            "value" : "Plain"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Стандарт"
+            "value" : "Минимализм"
           }
         }
       }
@@ -1767,18 +1767,18 @@
       }
     },
     "ProfilePageImposter" : {
-      "comment" : "Imposter",
+      "comment" : "Beta",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Imposter"
+            "value" : "Focus"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Самозванец"
+            "value" : "Концентрация"
           }
         }
       }

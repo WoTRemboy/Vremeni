@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 extension Image {
     enum SplashScreen {
@@ -50,6 +51,7 @@ extension Image {
     enum ProfilePage {
         static let person = Image("PersonProfile")
         static let balance = Image("BalanceProfile")
+        static let stats = Image("StatsProfile")
         static let archive = Image("ArchiveProfile")
         static let reset = Image("ResetProfile")
         static let about = Image("AboutProfile")
@@ -103,4 +105,9 @@ extension Image {
         static let archive = Image(systemName: "archivebox")
         static let stats = Image(systemName: "chart.xyaxis.line")
     }
+}
+
+
+extension UIImage {
+    static let placeholder = UIImage(named: "Placeholder1to1")
 }
