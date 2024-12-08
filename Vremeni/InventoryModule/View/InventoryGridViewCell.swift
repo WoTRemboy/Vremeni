@@ -35,10 +35,12 @@ struct InventoryGridCell: View {
         if let imageData = item.image, let uiImage = UIImage(data: imageData) {
             Image(uiImage: uiImage)
                 .resizable()
+                .scaledToFit()
                 .clipShape(.buttonBorder)
         } else {
             Image.Placeholder.placeholder1to1
                 .resizable()
+                .scaledToFit()
                 .clipShape(.buttonBorder)
         }
     }
