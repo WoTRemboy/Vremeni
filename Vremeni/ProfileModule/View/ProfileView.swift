@@ -30,7 +30,6 @@ struct ProfileView: View {
         NavigationStack {
             Form {
                 profileSection
-                statsSection
                 contentSection
                 appSection
             }
@@ -63,6 +62,11 @@ struct ProfileView: View {
                     .presentationDetents([.height(150)])
             })
             
+            NavigationLink(destination: ChartsDetailsView(viewModel: viewModel)) {
+                LinkRow(title: Texts.ProfilePage.stats,
+                        image: Image.ProfilePage.stats)
+            }
+            
             LinkRow(title: Texts.ProfilePage.balance,
                     image: Image.ProfilePage.balance,
                     details: String(viewModel.profile.balance))
@@ -88,7 +92,7 @@ struct ProfileView: View {
                 .environmentObject(iconVM)) {
                 LinkRow(title: Texts.ProfilePage.About.title,
                         image: Image.ProfilePage.about)
-            }
+                }
             
             NavigationLink(destination: ArchiveView(viewModel: viewModel)) {
                 LinkRow(title: Texts.ProfilePage.archive,
