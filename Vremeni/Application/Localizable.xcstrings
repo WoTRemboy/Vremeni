@@ -1664,6 +1664,23 @@
         }
       }
     },
+    "ProfilePageCloud" : {
+      "comment" : "Sync",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Синхронизация"
+          }
+        }
+      }
+    },
     "ProfilePageContent" : {
       "comment" : "Content",
       "localizations" : {

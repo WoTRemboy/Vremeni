@@ -194,6 +194,7 @@ final class Texts {
         
         static let app = NSLocalizedString("ProfilePageApplication", comment: "Application")
         static let notifications = NSLocalizedString("ProfilePageNotifications", comment: "Notifications")
+        static let cloud = NSLocalizedString("ProfilePageCloud", comment: "Sync")
         static let notificationsTitle = NSLocalizedString("ProfilePageNotificationsTitle", comment: "Notification Access Required")
         static let notificationsContent = NSLocalizedString("ProfilePageNotificationsContent", comment: "Please enable notifications in Settings.")
         

@@ -90,11 +90,7 @@ struct ProfileView: View {
     
     private var contentSection: some View {
         Section(Texts.ProfilePage.content) {
-            NavigationLink(destination: ProfileAboutView(viewModel: viewModel)
-                .environmentObject(iconVM)) {
-                LinkRow(title: Texts.ProfilePage.About.title,
-                        image: Image.ProfilePage.about)
-                }
+            cloudToggle
             
             NavigationLink(destination: ArchiveView(viewModel: viewModel)) {
                 LinkRow(title: Texts.ProfilePage.archive,
@@ -128,6 +124,12 @@ struct ProfileView: View {
     
     private var appSection: some View {
         Section(Texts.ProfilePage.app) {
+            NavigationLink(destination: ProfileAboutView(viewModel: viewModel)
+                .environmentObject(iconVM)) {
+                LinkRow(title: Texts.ProfilePage.About.title,
+                        image: Image.ProfilePage.about)
+                }
+            
             notificationToggle
             appearanceButton
             languageButton
@@ -152,6 +154,13 @@ struct ProfileView: View {
                 },
                 secondaryButton: .cancel(Text(Texts.ProfilePage.cancel))
             )
+        }
+    }
+    
+    private var cloudToggle: some View {
+        Toggle(isOn: $viewModel.notificationsEnabled) {
+            LinkRow(title: Texts.ProfilePage.cloud,
+                    image: Image.ProfilePage.cloud)
         }
     }
     
