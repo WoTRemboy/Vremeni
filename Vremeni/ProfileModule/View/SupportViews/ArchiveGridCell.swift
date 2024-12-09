@@ -40,10 +40,12 @@ struct ArchiveGridCell: View {
                     Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFit()
+                        .clipShape(.buttonBorder)
                 } else {
                     Image.Placeholder.placeholder1to1
                         .resizable()
                         .scaledToFit()
+                        .clipShape(.buttonBorder)
                 }
                 itemRarity
             }

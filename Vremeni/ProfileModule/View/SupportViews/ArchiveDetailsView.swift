@@ -54,11 +54,13 @@ struct ArchiveDetailsView: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFit()
+                    .clipShape(.buttonBorder)
                     .frame(width: 200)
             } else {
                 Image.Placeholder.placeholder1to1
                     .resizable()
                     .scaledToFit()
+                    .clipShape(.buttonBorder)
                     .frame(width: 200)
             }
             
