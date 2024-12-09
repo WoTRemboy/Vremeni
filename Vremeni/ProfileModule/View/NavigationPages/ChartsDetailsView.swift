@@ -62,6 +62,7 @@ struct ChartsDetailsView: View {
                 trailingContent: "\(viewModel.rarityPercent(for: rarity))%")
             }
         }
+        .padding(.bottom, 8)
     }
     
     private var inventoryChart: some View {
@@ -75,12 +76,13 @@ struct ChartsDetailsView: View {
         VStack {
             SectionHeader(Texts.ProfilePage.Stats.balance)
                 .padding(.leading)
-            ForEach(viewModel.inventoryRarities) { rarity in
+            ForEach(viewModel.rariries) { rarity in
                 ParameterRow(title: rarity.name,
                              content: "\(Texts.ProfilePage.Stats.valuation): \(viewModel.valuationCount(for: rarity))",
                              trailingContent: "\(viewModel.valuationPercent(for: rarity))%")
             }
         }
+        .padding(.bottom, 8)
     }
 }
 
