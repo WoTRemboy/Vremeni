@@ -62,23 +62,25 @@ struct ProfileView: View {
                     .presentationDetents([.height(150)])
             })
             
-            NavigationLink(destination: ChartsDetailsView(viewModel: viewModel)) {
-                LinkRow(title: Texts.ProfilePage.stats,
+            NavigationLink(destination: ChartsDetailsView(type: .inventory, viewModel: viewModel)) {
+                LinkRow(title: Texts.ProfilePage.balance,
+                        image: Image.ProfilePage.balance,
+                        details: String(viewModel.profile.balance))
+            }
+
+            NavigationLink(destination: ChartsDetailsView(type: .research, viewModel: viewModel)) {
+                LinkRow(title: Texts.ProfilePage.progress,
                         image: Image.ProfilePage.stats)
             }
-            
-            LinkRow(title: Texts.ProfilePage.balance,
-                    image: Image.ProfilePage.balance,
-                    details: String(viewModel.profile.balance))
         }
     }
     
     private var statsSection: some View {
-        Section(Texts.ProfilePage.stats) {
+        Section(Texts.ProfilePage.progress) {
             StatisticsChartView(viewModel: viewModel)
                 .frame(maxWidth: .infinity, idealHeight: 300, alignment: .center)
                 .overlay {
-                    NavigationLink(destination: ChartsDetailsView(viewModel: viewModel)) {
+                    NavigationLink(destination: ChartsDetailsView(type: .research, viewModel: viewModel)) {
                         EmptyView()
                     }
                     .opacity(0)

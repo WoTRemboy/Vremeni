@@ -2022,18 +2022,18 @@
       }
     },
     "ProfilePageStats" : {
-      "comment" : "Stats",
+      "comment" : "Progress",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stats"
+            "value" : "Progress"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Статистика"
+            "value" : "Прогресс"
           }
         }
       }

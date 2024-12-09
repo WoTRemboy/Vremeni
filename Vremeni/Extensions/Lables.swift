@@ -180,7 +180,7 @@ final class Texts {
         static let username = NSLocalizedString("ProfilePageUsername", comment: "Username")
         static let balance = NSLocalizedString("ProfilePageBalance", comment: "Balance")
         
-        static let stats = NSLocalizedString("ProfilePageStats", comment: "Stats")
+        static let progress = NSLocalizedString("ProfilePageStats", comment: "Progress")
         static let charts = NSLocalizedString("ProfilePageCharts", comment: "Charts")
         static let count = NSLocalizedString("ProfilePageCount", comment: "Count")
         static let unlocked = NSLocalizedString("ProfilePageUnlocked", comment: "Unlocked")
