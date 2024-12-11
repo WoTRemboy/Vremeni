@@ -33,7 +33,7 @@ final class MachineItem: Identifiable {
     var price: Float
     // Progress status
     var percent: Double
-    var inProgress: Bool
+    var status: MachineStatus
     
     // MashineItem type
     var type: VremeniType
@@ -49,7 +49,7 @@ final class MachineItem: Identifiable {
     var target: Date = Date()
     
     init(id: UUID = UUID(), nameKey: String, descriptionKey: String, image: Data? = nil,
-         price: Float, percent: Double = 0, inProgress: Bool = false,
+         price: Float, percent: Double = 0, status: MachineStatus = .queued,
          type: VremeniType = .minutes, rarity: Rarity = .common, parent: ConsumableItem, applications: [String: Int]) {
         self.id = id
         self.nameKey = nameKey
@@ -57,7 +57,7 @@ final class MachineItem: Identifiable {
         self.image = image
         self.price = price
         self.percent = percent
-        self.inProgress = inProgress
+        self.status = status
         self.type = type
         self.rarity = rarity
         self.parent = parent
@@ -73,17 +73,17 @@ extension MachineItem {
         parent.ready = true
         // Adds item valuation to Profile balance
         parent.countPlus()
-        inProgress = false
+        status = .queued
     }
     
     // Begins workshop processing
     internal func progressStart() {
-        inProgress = true
+        status = .processing
     }
     
     // Ends/Cancels workshop processing
     internal func progressDismiss() {
-        inProgress = false
+        status = .queued
     }
     
     // Sets start and target dates
@@ -134,4 +134,10 @@ enum UpgrageMethod: String {
             Texts.MachinePage.Upgrade.real
         }
     }
+}
+
+enum MachineStatus: Codable {
+    case queued
+    case pending
+    case processing
 }

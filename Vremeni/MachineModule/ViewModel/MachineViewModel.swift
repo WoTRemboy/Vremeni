@@ -84,7 +84,7 @@ extension MachineView {
         }
         
         internal func deleteItem(item: MachineItem) {
-            item.inProgress = false
+            item.status = .queued
             item.parent.machineItems.removeAll(where: { $0.id == item.id })
             modelContext.delete(item)
             fetchData()
@@ -92,7 +92,7 @@ extension MachineView {
         
         internal func startTimers() {
             updateOnAppear()
-            for item in items.filter({ $0.inProgress }) {
+            for item in items.filter({ $0.status == .processing }) {
                 startProgress(for: item)
             }
         }
@@ -151,7 +151,7 @@ extension MachineView {
         }
         
         internal func isSlotAvailable() -> Bool {
-            let progressItems = items.filter({ $0.inProgress })
+            let progressItems = items.filter({ $0.status == .processing })
             let availableMachines = profile.internalMachines + profile.donateMachines
             return progressItems.count < availableMachines
         }
@@ -170,7 +170,7 @@ extension MachineView {
         }
         
         internal func activateMachineProgress() {
-            let children = items.filter { $0.inProgress }
+            let children = items.filter { $0.status == .processing }
             for child in children {
                 startProgress(for: child)
             }

@@ -78,7 +78,7 @@ struct MachineView: View {
             Section(header: sectionHeader) {
                 ForEach(viewModel.items) { item in
                     // In case item in workshop progress exists
-                    if item.inProgress {
+                    if item.status == .processing {
                         // MachineItem progress cell
                         MachineViewGridCell(item: item, viewModel: viewModel)
                             .onTapGesture {
@@ -102,7 +102,7 @@ struct MachineView: View {
             }
             
             // In case there are items in queue
-            if !viewModel.items.filter({ !$0.inProgress }).isEmpty {
+            if !viewModel.items.filter({ $0.status != .processing }).isEmpty {
                 queueSection
             }
         }
@@ -113,7 +113,7 @@ struct MachineView: View {
     private var addNewItemCell: some View {
         VStack {
             // Workshop is empty
-            if viewModel.items.filter({ $0.inProgress }).isEmpty {
+            if viewModel.items.filter({ $0.status == .processing }).isEmpty {
                 // Regular cell
                 EmptyMachineViewGridCell()
             // There is MachineItem in progress
@@ -151,7 +151,7 @@ struct MachineView: View {
     private var queueSection: some View {
         Section(header: secondSectionHeader) {
             ForEach(viewModel.items) { item in
-                if !item.inProgress {
+                if item.status != .processing {
                     // In case progress is not 0
                     if item.percent != 0 {
                         // Paused progress item cell
