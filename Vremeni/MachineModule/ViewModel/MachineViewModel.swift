@@ -28,7 +28,7 @@ extension MachineView {
         private(set) var readyNotification: (ready: Bool, name: String?) = (false, nil)
         private(set) var notificationStatus: NotificationStatus = .prohibited
         
-        private let slotsLimit = 3
+        private let slotsLimit = 1
         internal let internalPrice: Double = 1
         
         internal var processingItems: [MachineItem] {
@@ -68,22 +68,26 @@ extension MachineView {
             readNotificationStatus()
         }
         
-        internal func setPending(for item: MachineItem) {
-            //item.setMachineTime()
-            item.pendingStart()
-            fetchData()
-        }
-        
-        internal func setWorkshop(item: MachineItem) {
-            item.setMachineTime()
-            item.progressStart()
-            startProgress(for: item)
+        internal func setWorkshop(item: MachineItem, queued: Bool = true) {
+            if processingItems.isEmpty {
+                queued ? item.setMachineTime() : nil
+                item.progressStart()
+                startProgress(for: item)
+            } else {
+                item.setPendingTime(front: processingItems.isEmpty ? pendingItems.first : processingItems.first)
+                item.pendingStart()
+            }
             fetchData()
         }
         
         internal func progressDismiss(item: MachineItem) {
             item.progressDismiss()
             stopProgress(for: item)
+            if let pending = pendingItems.first {
+                notificationRemove(for: pending.id)
+                setWorkshop(item: pending)
+                notificationSetup(for: pending)
+            }
             fetchData()
         }
         
@@ -94,6 +98,9 @@ extension MachineView {
             withAnimation(.bouncy) {
                 item.readyToggle()
                 deleteItem(item: item)
+                
+                guard let pending = pendingItems.first else { return }
+                setWorkshop(item: pending, queued: false)
             }
         }
         
@@ -102,7 +109,6 @@ extension MachineView {
         }
         
         internal func deleteItem(item: MachineItem) {
-            item.status = .queued
             item.parent.machineItems.removeAll(where: { $0.id == item.id })
             modelContext.delete(item)
             fetchData()
@@ -123,7 +129,7 @@ extension MachineView {
         }
         
         internal func remainingTime(for item: MachineItem) -> String {
-            item.setMachineTime()
+            item.status == .pending ? item.setPendingTime(front: processingItems.isEmpty ? pendingItems.first : processingItems.first) : item.setMachineTime()
             return Date.itemShortFormatter.string(from: item.target)
         }
         
@@ -169,9 +175,8 @@ extension MachineView {
         }
         
         internal func isSlotAvailable() -> Bool {
-            let progressItems = items.filter({ $0.status == .processing })
             let availableMachines = profile.internalMachines + profile.donateMachines
-            return progressItems.count < availableMachines
+            return pendingItems.count < availableMachines
         }
         
         internal func percentTimeElapsed(for item: MachineItem) {

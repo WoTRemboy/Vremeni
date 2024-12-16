@@ -20,7 +20,7 @@ struct MachineAddItemsView: View {
     internal var body: some View {
         NavigationStack {
             ZStack {
-                if viewModel.items.filter({ $0.status != .processing }).isEmpty {
+                if viewModel.queuedItems.isEmpty {
                     background
                     empty
                 } else {

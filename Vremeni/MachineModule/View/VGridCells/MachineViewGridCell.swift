@@ -124,11 +124,11 @@ struct MachineViewGridCell: View {
             .minimumScaleFactor(0.4)
             .buttonStyle(.bordered)
             .tint(Color.orange)
-            .disabled(paused && !viewModel.isSlotAvailable())
+            .disabled(paused && !viewModel.processingItems.isEmpty && !viewModel.isSlotAvailable())
             
             Button(action: {
                 withAnimation(.snappy) {
-                    viewModel.stopProgress(for: item)
+                    viewModel.progressDismiss(item: item)
                     viewModel.notificationRemove(for: item.id)
                     viewModel.deleteItem(item: item)
                 }

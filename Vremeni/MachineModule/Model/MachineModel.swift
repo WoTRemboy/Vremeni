@@ -105,6 +105,21 @@ extension MachineItem {
         }
     }
     
+    internal func setPendingTime(front: MachineItem?) {
+        // When it's first time
+        guard let front else { return }
+        if percent == 0 {
+            started = front.target
+            target = front.target.addingTimeInterval(TimeInterval(price * 60))
+        // Resumes after pause
+        } else {
+            let passedTime = TimeInterval((price * 60) * Float(percent / 100))
+            let remainTime = (price * 60) * Float(1 - percent / 100)
+            started = front.target.addingTimeInterval(-passedTime)
+            target = front.target.addingTimeInterval(TimeInterval(remainTime))
+        }
+    }
+    
     // Configurates MachineItem mock data
     static internal func itemMockConfig(name: String, description: String = String(),
                                         price: Float, image: Data? = nil,

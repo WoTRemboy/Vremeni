@@ -129,10 +129,11 @@ struct QueueMachineViewGridCell: View {
             .minimumScaleFactor(0.4)
             .buttonStyle(.bordered)
             .tint(Color.green)
-            .disabled(!viewModel.isSlotAvailable())
+            .disabled(!viewModel.processingItems.isEmpty && !viewModel.isSlotAvailable())
             
             Button(action: {
                 withAnimation(.snappy) {
+                    viewModel.notificationRemove(for: item.id)
                     viewModel.deleteItem(item: item)
                 }
             }) {

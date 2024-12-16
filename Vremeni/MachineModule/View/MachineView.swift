@@ -76,34 +76,35 @@ struct MachineView: View {
         return LazyVGrid(columns: columns, spacing: spacing) {
             // Workshop section
             Section(header: sectionHeader) {
-                ForEach(viewModel.items) { item in
-                    // In case item in workshop progress exists
-                    if item.status == .processing {
-                        // MachineItem progress cell
-                        MachineViewGridCell(item: item, viewModel: viewModel)
-                            .onTapGesture {
-                                selected = item
-                            }
-                        // Shows item progress details
-                            .sheet(item: $selected) { item in
-                                MachineItemDetailsView(item: item, viewModel: viewModel)
-                            }
-                    }
+                ForEach(viewModel.processingItems) { item in
+                    // MachineItem progress cell
+                    MachineViewGridCell(item: item, viewModel: viewModel)
+                        .onTapGesture {
+                            selected = item
+                        }
+                    // Shows item progress details
+                        .sheet(item: $selected) { item in
+                            MachineItemDetailsView(item: item, viewModel: viewModel)
+                        }
                 }
                 
-                // Add new MachineItem to workshop (regular & compact vers)
                 addNewItemCell
                 
-                // All workshop cell are busy
-                if !viewModel.isSlotAvailable() {
-                    // Upgrade workshop cell
-                    upgradeCell
-                }
+                // Add new MachineItem to workshop (regular & compact vers)
+                if viewModel.processingItems.isEmpty, !viewModel.isSlotAvailable(), viewModel.pendingItems.isEmpty {
+                        // Upgrade workshop cell
+                        upgradeCell
+                    }
             }
             
             // In case there are items in queue
             if !viewModel.pendingItems.isEmpty {
                 pendingSection
+    
+                if !viewModel.isSlotAvailable() {
+                    // Upgrade workshop cell
+                    upgradeCell
+                }
             }
             
             if !viewModel.queuedItems.isEmpty {

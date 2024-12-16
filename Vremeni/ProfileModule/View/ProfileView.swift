@@ -75,22 +75,9 @@ struct ProfileView: View {
         }
     }
     
-    private var statsSection: some View {
-        Section(Texts.ProfilePage.progress) {
-            StatisticsChartView(viewModel: viewModel)
-                .frame(maxWidth: .infinity, idealHeight: 300, alignment: .center)
-                .overlay {
-                    NavigationLink(destination: ChartsDetailsView(type: .research, viewModel: viewModel)) {
-                        EmptyView()
-                    }
-                    .opacity(0)
-                }
-        }
-    }
-    
     private var contentSection: some View {
         Section(Texts.ProfilePage.content) {
-            cloudToggle
+            //cloudToggle
             
             NavigationLink(destination: ArchiveView(viewModel: viewModel)) {
                 LinkRow(title: Texts.ProfilePage.archive,
