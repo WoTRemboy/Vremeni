@@ -17,8 +17,10 @@ struct MachineView: View {
     // Machine viewModel
     @State private var viewModel: MachineViewModel
     
-    // Selected item for sheet display
-    @State private var selected: MachineItem? = nil
+    // Selected items for sheet display
+    @State private var selectedQueued: MachineItem? = nil
+    @State private var selectedPending: MachineItem? = nil
+    @State private var selectedProcessing: MachineItem? = nil
     // Sheet display toggles
     @State private var showingAddItemList = false
     @State private var showingUpgradeSheet = false
@@ -80,10 +82,10 @@ struct MachineView: View {
                     // MachineItem progress cell
                     MachineViewGridCell(item: item, viewModel: viewModel)
                         .onTapGesture {
-                            selected = item
+                            selectedProcessing = item
                         }
                     // Shows item progress details
-                        .sheet(item: $selected) { item in
+                        .sheet(item: $selectedProcessing) { item in
                             MachineItemDetailsView(item: item, viewModel: viewModel)
                         }
                 }
@@ -161,20 +163,20 @@ struct MachineView: View {
                     // Paused progress item cell
                     MachineViewGridCell(item: item, paused: true, viewModel: viewModel)
                         .onTapGesture {
-                            selected = item
+                            selectedPending = item
                         }
                     // Shows paused item details
-                        .sheet(item: $selected) { item in
-                            MachineItemDetailsView(item: item, viewModel: viewModel)
+                        .sheet(item: $selectedPending) { item in
+                            //MachineItemDetailsView(item: item, viewModel: viewModel)
                         }
                 } else {
                     // Resular queue item cell
                     QueueMachineViewGridCell(item: item, viewModel: viewModel)
                         .onTapGesture {
-                            selected = item
+                            selectedPending = item
                         }
                     // Shows queue item details
-                        .sheet(item: $selected) { item in
+                        .sheet(item: $selectedPending) { item in
                             MachineItemDetailsView(item: item, viewModel: viewModel)
                         }
                 }
@@ -192,20 +194,20 @@ struct MachineView: View {
                     // Paused progress item cell
                     MachineViewGridCell(item: item, paused: true, viewModel: viewModel)
                         .onTapGesture {
-                            selected = item
+                            selectedQueued = item
                         }
                     // Shows paused item details
-                        .sheet(item: $selected) { item in
+                        .sheet(item: $selectedQueued) { item in
                             MachineItemDetailsView(item: item, viewModel: viewModel)
                         }
                 } else {
                     // Resular queue item cell
                     QueueMachineViewGridCell(item: item, viewModel: viewModel)
                         .onTapGesture {
-                            selected = item
+                            selectedQueued = item
                         }
                     // Shows queue item details
-                        .sheet(item: $selected) { item in
+                        .sheet(item: $selectedQueued) { item in
                             MachineItemDetailsView(item: item, viewModel: viewModel)
                         }
                 }

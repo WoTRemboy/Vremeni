@@ -86,7 +86,7 @@ struct MachineItemDetailsView: View {
                 ParameterRow(title: Texts.MachinePage.targetTime,
                              content: Date.itemFormatter.string(from: item.target))
             } else {
-                ParameterRow(title: Texts.MachinePage.potentialTime,
+                ParameterRow(title: item.status == .queued ? Texts.MachinePage.potentialTime : Texts.MachinePage.targetTime,
                              content: viewModel.remainingTime(for: item))
             }
             
