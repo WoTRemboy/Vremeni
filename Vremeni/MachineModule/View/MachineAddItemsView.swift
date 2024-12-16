@@ -20,7 +20,7 @@ struct MachineAddItemsView: View {
     internal var body: some View {
         NavigationStack {
             ZStack {
-                if viewModel.items.filter({ !$0.inProgress }).isEmpty {
+                if viewModel.queuedItems.isEmpty {
                     background
                     empty
                 } else {
@@ -56,7 +56,7 @@ struct MachineAddItemsView: View {
     private var list: some View {
         List {
             ForEach(viewModel.items) { item in
-                if !item.inProgress {
+                if item.status != .processing {
                     Button(action: {
                         withAnimation(.snappy) {
                             viewModel.setWorkshop(item: item)

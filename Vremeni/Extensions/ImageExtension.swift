@@ -56,6 +56,7 @@ extension Image {
         static let reset = Image("ResetProfile")
         static let about = Image("AboutProfile")
         static let notifications = Image("NotificationsProfile")
+        static let cloud = Image("CloudProfile")
         static let appearance = Image("AppearanceProfile")
         static let language = Image("LanguageProfile")
         static let settings = Image("SettingsProfile")

@@ -10,10 +10,11 @@ import SwiftData
 
 struct ChartsDetailsView: View {
     
-    @State private var selectedChartType: ChartType = .research
+    private var selectedChartType: ChartType = .research
     private var viewModel: ProfileView.ProfileViewModel
     
-    init(viewModel: ProfileView.ProfileViewModel) {
+    init(type: ChartType, viewModel: ProfileView.ProfileViewModel) {
+        self.selectedChartType = type
         self.viewModel = viewModel
     }
     
@@ -21,22 +22,16 @@ struct ChartsDetailsView: View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    picker
-                    
                     switch selectedChartType {
                     case .research:
                         researchChart
-                            .transition(.move(edge: .leading))
                         researchStats
-                            .transition(.move(edge: .leading))
                         
                     case .inventory:
                         inventoryChart
-                            .transition(.move(edge: .trailing))
                         
                         if viewModel.inventoryRarities.count > 0 {
                             inventoryStats
-                                .transition(.move(edge: .trailing))
                         }
                     }
                     Spacer()
@@ -52,21 +47,9 @@ struct ChartsDetailsView: View {
         }
     }
     
-    private var picker: some View {
-        Picker(Texts.ProfilePage.Stats.type, selection: $selectedChartType.animation()) {
-            ForEach(ChartType.allCases) {
-                Text($0.name)
-            }
-        }
-        .pickerStyle(.segmented)
-        .padding(.horizontal)
-    }
-    
     private var researchChart: some View {
-        StatsBarChartView(type: .research, viewModel: viewModel)
-            .frame(minHeight: 130,
-                   idealHeight: CGFloat(100 * viewModel.actualRarities.count)
-            )
+        StatisticsChartView(viewModel: viewModel)
+            .frame(maxWidth: .infinity, idealHeight: 300, alignment: .center)
     }
     
     private var researchStats: some View {
@@ -79,6 +62,7 @@ struct ChartsDetailsView: View {
                 trailingContent: "\(viewModel.rarityPercent(for: rarity))%")
             }
         }
+        .padding(.bottom, 8)
     }
     
     private var inventoryChart: some View {
@@ -92,12 +76,13 @@ struct ChartsDetailsView: View {
         VStack {
             SectionHeader(Texts.ProfilePage.Stats.balance)
                 .padding(.leading)
-            ForEach(viewModel.inventoryRarities) { rarity in
+            ForEach(viewModel.rariries) { rarity in
                 ParameterRow(title: rarity.name,
                              content: "\(Texts.ProfilePage.Stats.valuation): \(viewModel.valuationCount(for: rarity))",
                              trailingContent: "\(viewModel.valuationPercent(for: rarity))%")
             }
         }
+        .padding(.bottom, 8)
     }
 }
 
@@ -109,7 +94,7 @@ struct ChartsDetailsView: View {
         
         let viewModel = ProfileView.ProfileViewModel(modelContext: modelContext)
         viewModel.addSamples()
-        return ChartsDetailsView(viewModel: viewModel)
+        return ChartsDetailsView(type: .research, viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")
     }

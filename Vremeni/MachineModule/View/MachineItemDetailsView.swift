@@ -82,11 +82,11 @@ struct MachineItemDetailsView: View {
             ParameterRow(title: Texts.ItemCreatePage.description,
                          content: item.itemDescription.isEmpty ? Texts.ItemCreatePage.null : item.itemDescription)
             
-            if item.inProgress {
+            if item.status == .processing {
                 ParameterRow(title: Texts.MachinePage.targetTime,
                              content: Date.itemFormatter.string(from: item.target))
             } else {
-                ParameterRow(title: Texts.MachinePage.potentialTime,
+                ParameterRow(title: item.status == .queued ? Texts.MachinePage.potentialTime : Texts.MachinePage.targetTime,
                              content: viewModel.remainingTime(for: item))
             }
             
@@ -99,7 +99,7 @@ struct MachineItemDetailsView: View {
     private var buyButton: some View {
         Button(action: {
             withAnimation(.snappy) {
-                if item.inProgress {
+                if item.status == .processing {
                     viewModel.progressDismiss(item: item)
                     viewModel.notificationRemove(for: item.id)
                 } else {
@@ -111,7 +111,7 @@ struct MachineItemDetailsView: View {
                 dismiss()
             }
         }) {
-            if item.inProgress {
+            if item.status == .processing {
                 Text(Texts.MachinePage.pause)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             } else {
@@ -124,7 +124,7 @@ struct MachineItemDetailsView: View {
         .minimumScaleFactor(0.4)
         .buttonStyle(.bordered)
         .tint(item.percent != 0 ? Color.orange : Color.green)
-        .disabled(!item.inProgress && !viewModel.isSlotAvailable())
+        .disabled((item.status != .processing) && !viewModel.isSlotAvailable())
     }
 }
 

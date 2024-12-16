@@ -797,6 +797,23 @@
         }
       }
     },
+    "MachinePagePending" : {
+      "comment" : "Pending",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pending"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ожидание"
+          }
+        }
+      }
+    },
     "MachinePagePlaceholderSubtitle" : {
       "comment" : "Add some Items from the Fair",
       "localizations" : {
@@ -1664,6 +1681,23 @@
         }
       }
     },
+    "ProfilePageCloud" : {
+      "comment" : "Sync",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Синхронизация"
+          }
+        }
+      }
+    },
     "ProfilePageContent" : {
       "comment" : "Content",
       "localizations" : {
@@ -2022,18 +2056,18 @@
       }
     },
     "ProfilePageStats" : {
-      "comment" : "Stats",
+      "comment" : "Progress",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stats"
+            "value" : "Progress"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Статистика"
+            "value" : "Прогресс"
           }
         }
       }

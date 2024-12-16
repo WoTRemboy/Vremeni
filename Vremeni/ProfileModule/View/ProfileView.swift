@@ -62,37 +62,22 @@ struct ProfileView: View {
                     .presentationDetents([.height(150)])
             })
             
-            NavigationLink(destination: ChartsDetailsView(viewModel: viewModel)) {
-                LinkRow(title: Texts.ProfilePage.stats,
+            NavigationLink(destination: ChartsDetailsView(type: .inventory, viewModel: viewModel)) {
+                LinkRow(title: Texts.ProfilePage.balance,
+                        image: Image.ProfilePage.balance,
+                        details: String(viewModel.profile.balance))
+            }
+
+            NavigationLink(destination: ChartsDetailsView(type: .research, viewModel: viewModel)) {
+                LinkRow(title: Texts.ProfilePage.progress,
                         image: Image.ProfilePage.stats)
             }
-            
-            LinkRow(title: Texts.ProfilePage.balance,
-                    image: Image.ProfilePage.balance,
-                    details: String(viewModel.profile.balance))
-        }
-    }
-    
-    private var statsSection: some View {
-        Section(Texts.ProfilePage.stats) {
-            StatisticsChartView(viewModel: viewModel)
-                .frame(maxWidth: .infinity, idealHeight: 300, alignment: .center)
-                .overlay {
-                    NavigationLink(destination: ChartsDetailsView(viewModel: viewModel)) {
-                        EmptyView()
-                    }
-                    .opacity(0)
-                }
         }
     }
     
     private var contentSection: some View {
         Section(Texts.ProfilePage.content) {
-            NavigationLink(destination: ProfileAboutView(viewModel: viewModel)
-                .environmentObject(iconVM)) {
-                LinkRow(title: Texts.ProfilePage.About.title,
-                        image: Image.ProfilePage.about)
-                }
+            //cloudToggle
             
             NavigationLink(destination: ArchiveView(viewModel: viewModel)) {
                 LinkRow(title: Texts.ProfilePage.archive,
@@ -126,6 +111,12 @@ struct ProfileView: View {
     
     private var appSection: some View {
         Section(Texts.ProfilePage.app) {
+            NavigationLink(destination: ProfileAboutView(viewModel: viewModel)
+                .environmentObject(iconVM)) {
+                LinkRow(title: Texts.ProfilePage.About.title,
+                        image: Image.ProfilePage.about)
+                }
+            
             notificationToggle
             appearanceButton
             languageButton
@@ -150,6 +141,13 @@ struct ProfileView: View {
                 },
                 secondaryButton: .cancel(Text(Texts.ProfilePage.cancel))
             )
+        }
+    }
+    
+    private var cloudToggle: some View {
+        Toggle(isOn: $viewModel.notificationsEnabled) {
+            LinkRow(title: Texts.ProfilePage.cloud,
+                    image: Image.ProfilePage.cloud)
         }
     }
     

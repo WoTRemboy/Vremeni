@@ -17,7 +17,8 @@ struct ShopView: View {
     private let modelContext: ModelContext
     
     // Selected item to show & dismiss details sheet page
-    @State private var selected: ConsumableItem? = nil
+    @State private var selectedResearched: ConsumableItem? = nil
+    @State private var selectedLocked: ConsumableItem? = nil
     @Environment(\.dismissSearch) private var dismissSearch
     
     // Show and dismiss add item sheet page
@@ -191,11 +192,11 @@ struct ShopView: View {
                 // Available item cell
                 ShopItemGridCell(item: item, viewModel: viewModel)
                     .onTapGesture {
-                        selected = item
+                        selectedResearched = item
                     }
             }
             // Item details sheet param
-            .sheet(item: $selected) { item in
+            .sheet(item: $selectedResearched) { item in
                 ConsumableItemDetails(item: item, viewModel: viewModel)
             }
         }
@@ -210,11 +211,11 @@ struct ShopView: View {
             ForEach(searchResults) { item in
                 ShopItemGridCellLocked(item: item, viewModel: viewModel)
                     .onTapGesture {
-                        selected = item
+                        selectedLocked = item
                     }
             }
             // Item details sheet param
-            .sheet(item: $selected) { item in
+            .sheet(item: $selectedLocked) { item in
                 ConsumableItemDetails(item: item, viewModel: viewModel)
             }
         }
