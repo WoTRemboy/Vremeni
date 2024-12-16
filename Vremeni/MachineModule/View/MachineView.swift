@@ -84,7 +84,7 @@ struct MachineView: View {
                             .onTapGesture {
                                 selected = item
                             }
-                            // Shows item progress details
+                        // Shows item progress details
                             .sheet(item: $selected) { item in
                                 MachineItemDetailsView(item: item, viewModel: viewModel)
                             }
@@ -102,7 +102,11 @@ struct MachineView: View {
             }
             
             // In case there are items in queue
-            if !viewModel.items.filter({ $0.status != .processing }).isEmpty {
+            if !viewModel.pendingItems.isEmpty {
+                pendingSection
+            }
+            
+            if !viewModel.queuedItems.isEmpty {
                 queueSection
             }
         }
@@ -113,10 +117,10 @@ struct MachineView: View {
     private var addNewItemCell: some View {
         VStack {
             // Workshop is empty
-            if viewModel.items.filter({ $0.status == .processing }).isEmpty {
+            if viewModel.processingItems.isEmpty {
                 // Regular cell
                 EmptyMachineViewGridCell()
-            // There is MachineItem in progress
+                // There is MachineItem in progress
             } else if viewModel.isSlotAvailable() {
                 // Compact cell
                 EmptyMachiveViewCompactCell()
@@ -138,7 +142,7 @@ struct MachineView: View {
             .onTapGesture {
                 showingUpgradeSheet.toggle()
             }
-            // Shows Upgrade sheet menu
+        // Shows Upgrade sheet menu
             .sheet(isPresented: $showingUpgradeSheet, content: {
                 BuyWorkshopView(viewModel: viewModel)
                     .presentationDetents([.height(400)])
@@ -146,34 +150,63 @@ struct MachineView: View {
             })
     }
     
+    // MARK: - Pending section view
+    
+    private var pendingSection: some View {
+        Section(header: pendingSectionHeader) {
+            ForEach(viewModel.pendingItems) { item in
+                // In case progress is not 0
+                if item.percent != 0 {
+                    // Paused progress item cell
+                    MachineViewGridCell(item: item, paused: true, viewModel: viewModel)
+                        .onTapGesture {
+                            selected = item
+                        }
+                    // Shows paused item details
+                        .sheet(item: $selected) { item in
+                            MachineItemDetailsView(item: item, viewModel: viewModel)
+                        }
+                } else {
+                    // Resular queue item cell
+                    QueueMachineViewGridCell(item: item, viewModel: viewModel)
+                        .onTapGesture {
+                            selected = item
+                        }
+                    // Shows queue item details
+                        .sheet(item: $selected) { item in
+                            MachineItemDetailsView(item: item, viewModel: viewModel)
+                        }
+                }
+            }
+        }
+    }
+    
     // MARK: - Queue section view
     
     private var queueSection: some View {
-        Section(header: secondSectionHeader) {
-            ForEach(viewModel.items) { item in
-                if item.status != .processing {
-                    // In case progress is not 0
-                    if item.percent != 0 {
-                        // Paused progress item cell
-                        MachineViewGridCell(item: item, paused: true, viewModel: viewModel)
-                            .onTapGesture {
-                                selected = item
-                            }
-                            // Shows paused item details
-                            .sheet(item: $selected) { item in
-                                MachineItemDetailsView(item: item, viewModel: viewModel)
-                            }
-                    } else {
-                        // Resular queue item cell
-                        QueueMachineViewGridCell(item: item, viewModel: viewModel)
-                            .onTapGesture {
-                                selected = item
-                            }
-                            // Shows queue item details
-                            .sheet(item: $selected) { item in
-                                MachineItemDetailsView(item: item, viewModel: viewModel)
-                            }
-                    }
+        Section(header: queueSectionHeader) {
+            ForEach(viewModel.queuedItems) { item in
+                // In case progress is not 0
+                if item.percent != 0 {
+                    // Paused progress item cell
+                    MachineViewGridCell(item: item, paused: true, viewModel: viewModel)
+                        .onTapGesture {
+                            selected = item
+                        }
+                    // Shows paused item details
+                        .sheet(item: $selected) { item in
+                            MachineItemDetailsView(item: item, viewModel: viewModel)
+                        }
+                } else {
+                    // Resular queue item cell
+                    QueueMachineViewGridCell(item: item, viewModel: viewModel)
+                        .onTapGesture {
+                            selected = item
+                        }
+                    // Shows queue item details
+                        .sheet(item: $selected) { item in
+                            MachineItemDetailsView(item: item, viewModel: viewModel)
+                        }
                 }
             }
         }
@@ -186,8 +219,13 @@ struct MachineView: View {
         SectionHeader(Texts.MachinePage.workshop)
     }
     
+    // Pending section header
+    private var pendingSectionHeader: some View {
+        SectionHeader(Texts.MachinePage.pending)
+    }
+    
     // Queue section header
-    private var secondSectionHeader: some View {
+    private var queueSectionHeader: some View {
         SectionHeader(Texts.MachinePage.queue)
     }
 }

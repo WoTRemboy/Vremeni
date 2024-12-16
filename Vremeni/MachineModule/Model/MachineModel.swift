@@ -76,6 +76,10 @@ extension MachineItem {
         status = .queued
     }
     
+    internal func pendingStart() {
+        status = .pending
+    }
+    
     // Begins workshop processing
     internal func progressStart() {
         status = .processing

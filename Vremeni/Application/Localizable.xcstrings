@@ -797,6 +797,23 @@
         }
       }
     },
+    "MachinePagePending" : {
+      "comment" : "Pending",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pending"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ожидание"
+          }
+        }
+      }
+    },
     "MachinePagePlaceholderSubtitle" : {
       "comment" : "Add some Items from the Fair",
       "localizations" : {

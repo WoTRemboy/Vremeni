@@ -12,11 +12,13 @@ struct MachineViewGridCell: View {
     
     private let item: MachineItem
     private let paused: Bool
+    private let type: MachineStatus
     private let viewModel: MachineView.MachineViewModel
     
-    init(item: MachineItem, paused: Bool = false, viewModel: MachineView.MachineViewModel) {
+    init(item: MachineItem, paused: Bool = false, type: MachineStatus = .queued, viewModel: MachineView.MachineViewModel) {
         self.item = item
         self.paused = paused
+        self.type = type
         self.viewModel = viewModel
     }
     

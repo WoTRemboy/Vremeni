@@ -31,6 +31,18 @@ extension MachineView {
         private let slotsLimit = 3
         internal let internalPrice: Double = 1
         
+        internal var processingItems: [MachineItem] {
+            items.filter({ $0.status == .processing })
+        }
+        
+        internal var pendingItems: [MachineItem] {
+            items.filter({ $0.status == .pending })
+        }
+        
+        internal var queuedItems: [MachineItem] {
+            items.filter({ $0.status == .queued })
+        }
+        
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
             NotificationCenter.default.addObserver(self, selector: #selector(handleResetProgress), name: .resetProgressNotification, object: nil)
@@ -54,6 +66,12 @@ extension MachineView {
             fetchProfileData()
             fetchData()
             readNotificationStatus()
+        }
+        
+        internal func setPending(for item: MachineItem) {
+            //item.setMachineTime()
+            item.pendingStart()
+            fetchData()
         }
         
         internal func setWorkshop(item: MachineItem) {

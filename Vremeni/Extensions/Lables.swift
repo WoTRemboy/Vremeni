@@ -138,6 +138,7 @@ final class Texts {
         
         static let workshop = NSLocalizedString("MachinePageWorkshop", comment: "Workshop")
         static let emptyTitle = NSLocalizedString("MachinePageAddItem", comment: "Add an Item")
+        static let pending = NSLocalizedString("MachinePagePending", comment: "Pending")
         static let queue = NSLocalizedString("MachinePageQueue", comment: "Queue")
         
         static let targetTime = NSLocalizedString("MachinePageTargetTime", comment: "Target time")
