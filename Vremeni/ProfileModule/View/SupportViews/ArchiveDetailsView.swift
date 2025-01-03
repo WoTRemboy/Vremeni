@@ -10,14 +10,16 @@ import SwiftData
 
 struct ArchiveDetailsView: View {
     
-    @Environment(\.dismiss) var dismiss
-    
     private let item: ConsumableItem
     private var viewModel: ProfileView.ProfileViewModel
+    private var onDismiss: () -> Void
         
-    init(item: ConsumableItem, viewModel: ProfileView.ProfileViewModel) {
+    init(item: ConsumableItem,
+         viewModel: ProfileView.ProfileViewModel,
+         onDismiss: @escaping () -> Void) {
         self.item = item
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
         
     internal var body: some View {
@@ -41,7 +43,7 @@ struct ArchiveDetailsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(Texts.ItemCreatePage.cancel) {
-                        dismiss()
+                        onDismiss()
                     }
                 }
             }
@@ -97,7 +99,7 @@ struct ArchiveDetailsView: View {
         Button(action: {
             withAnimation(.snappy) {
                 viewModel.unarchiveItem(item: item)
-                dismiss()
+                onDismiss()
             }
         }) {
             Text(Texts.ProfilePage.Archive.restore)
@@ -129,7 +131,7 @@ struct ArchiveDetailsView: View {
             requirements: [],
             applications: [RuleItem.oneHour.rawValue : 1,
                            RuleItem.threeHours.rawValue : 3])
-        return ArchiveDetailsView(item: example, viewModel: viewModel)
+        return ArchiveDetailsView(item: example, viewModel: viewModel, onDismiss: {})
     } catch {
         fatalError("Failed to create model container.")
     }

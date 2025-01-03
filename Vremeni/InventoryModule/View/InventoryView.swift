@@ -58,11 +58,11 @@ struct InventoryView: View {
                     toolBarProgressView
                 }
             }
-            .toolbarBackground(.visible, for: .tabBar)
         }
-        .tabItem {
-            Image.TabBar.inventory
-            Text(Texts.InventoryPage.title)
+        .sheet(item: $selected) { item in
+            InventoryItemDetailsView(item: item, viewModel: viewModel) {
+                selected = nil
+            }
         }
     }
     
@@ -87,9 +87,6 @@ struct InventoryView: View {
                     }
                 }
             }
-            .sheet(item: $selected) { item in
-                InventoryItemDetailsView(item: item, viewModel: viewModel)
-            }
         }
     }
     
@@ -105,9 +102,6 @@ struct InventoryView: View {
                         .onTapGesture {
                             selected = item
                         }
-                }
-                .sheet(item: $selected) { item in
-                    InventoryItemDetailsView(item: item, viewModel: viewModel)
                 }
             } header: {
                 if !searchResults.isEmpty {

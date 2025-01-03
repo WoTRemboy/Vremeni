@@ -11,14 +11,16 @@ import StoreKit
 
 struct PremiumBuyView: View {
     
-    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var storeKitService: StoreKitManager
     
     private var viewModel: ShopView.ShopViewModel
+    private var onDismiss: () -> Void
     @State private var isSubscribed: Bool = false
     
-    init(viewModel: ShopView.ShopViewModel) {
+    init(viewModel: ShopView.ShopViewModel,
+         onDismiss: @escaping () -> Void) {
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
     
     internal var body: some View {
@@ -51,7 +53,7 @@ struct PremiumBuyView: View {
     
     private var cancelButton: some View {
         Button(Texts.ItemCreatePage.cancel) {
-            dismiss()
+            onDismiss()
         }
         .foregroundStyle(Color.blue)
     }
@@ -175,7 +177,7 @@ struct PremiumBuyView: View {
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         let environmentObject = StoreKitManager()
         
-        return PremiumBuyView(viewModel: viewModel)
+        return PremiumBuyView(viewModel: viewModel, onDismiss: {})
             .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")

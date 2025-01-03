@@ -9,14 +9,17 @@ import SwiftUI
 import SwiftData
 
 struct InventoryItemDetailsView: View {
-    @Environment(\.dismiss) var dismiss
     
     private let item: ConsumableItem
     private var viewModel: InventoryView.InventoryViewModel
+    private var onDismiss: () -> Void
     
-    init(item: ConsumableItem, viewModel: InventoryView.InventoryViewModel) {
+    init(item: ConsumableItem,
+         viewModel: InventoryView.InventoryViewModel,
+         onDismiss: @escaping () -> Void) {
         self.item = item
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
     
     internal var body: some View {
@@ -39,7 +42,7 @@ struct InventoryItemDetailsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(Texts.ItemCreatePage.cancel) {
-                        dismiss()
+                        onDismiss()
                     }
                 }
             }
@@ -103,7 +106,7 @@ struct InventoryItemDetailsView: View {
             descriptionKey: Content.Common.oneMinuteDescription,
             price: 50, rarity: .uncommon,
             profile: Profile.configMockProfile())
-        return InventoryItemDetailsView(item: example, viewModel: viewModel)
+        return InventoryItemDetailsView(item: example, viewModel: viewModel, onDismiss: {})
     } catch {
         fatalError("Failed to create model container.")
     }

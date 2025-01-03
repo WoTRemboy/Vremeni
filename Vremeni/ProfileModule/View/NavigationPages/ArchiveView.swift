@@ -58,7 +58,9 @@ struct ArchiveView: View {
                         }
             }
             .sheet(item: $selected) { item in
-                ArchiveDetailsView(item: item, viewModel: viewModel)
+                ArchiveDetailsView(item: item, viewModel: viewModel) {
+                    selected = nil
+                }
             }
         }
     }

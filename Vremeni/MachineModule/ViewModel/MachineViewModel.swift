@@ -22,6 +22,7 @@ extension MachineView {
         
         private let updateInterval: TimeInterval = 0.3
         private let targetPercent: CGFloat = 100
+        private(set) var availableToShow = true
         
         private(set) var selectedType: UpgrageMethod = .coins
         private(set) var price: String = Texts.MachinePage.Upgrade.null
@@ -66,6 +67,13 @@ extension MachineView {
             fetchProfileData()
             fetchData()
             readNotificationStatus()
+        }
+        
+        internal func showDelayStart() {
+            availableToShow = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.availableToShow.toggle()
+            }
         }
         
         internal func setWorkshop(item: MachineItem, queued: Bool = true) {

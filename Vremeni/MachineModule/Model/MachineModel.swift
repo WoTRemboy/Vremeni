@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 // MARK: - MachineItem Model
 
@@ -73,21 +74,27 @@ extension MachineItem {
         parent.ready = true
         // Adds item valuation to Profile balance
         parent.countPlus()
-        status = .queued
+        progressDismiss()
     }
     
     internal func pendingStart() {
-        status = .pending
+        withAnimation {
+            status = .pending
+        }
     }
     
     // Begins workshop processing
     internal func progressStart() {
-        status = .processing
+        withAnimation {
+            status = .processing
+        }
     }
     
     // Ends/Cancels workshop processing
     internal func progressDismiss() {
-        status = .queued
+        withAnimation {
+            status = .queued
+        }
     }
     
     // Sets start and target dates

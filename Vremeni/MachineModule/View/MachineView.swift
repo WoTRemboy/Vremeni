@@ -24,7 +24,7 @@ struct MachineView: View {
     // Sheet display toggles
     @State private var showingAddItemList = false
     @State private var showingUpgradeSheet = false
-
+    
     // Collection params
     private let spacing: CGFloat = 16
     private let itemsInRows = 1
@@ -45,9 +45,10 @@ struct MachineView: View {
                     .padding([.horizontal, .bottom])
             }
             // Collection view data update
-            .onAppear(perform: {
+            .onAppear {
                 viewModel.updateOnAppear()
-            })
+                viewModel.showDelayStart()
+            }
             // Shows ready banner when item is ready
             .onChange(of: viewModel.readyNotification.ready) {
                 guard let name = viewModel.readyNotification.name else { return }
@@ -59,11 +60,39 @@ struct MachineView: View {
             // Toolbar params
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(.visible, for: .tabBar)
         }
-        .tabItem {
-            Image.TabBar.machine
-            Text(Texts.MachinePage.title)
+        // Shows item progress details
+        .sheet(item: $selectedProcessing) { item in
+            MachineItemDetailsView(item: item, viewModel: viewModel) {
+                selectedProcessing = nil
+            }
+        }
+        // Shows queue item details
+        .sheet(item: $selectedPending) { item in
+            MachineItemDetailsView(item: item, viewModel: viewModel) {
+                selectedPending = nil
+            }
+        }
+        // Shows paused item details
+        .sheet(item: $selectedQueued) { item in
+            MachineItemDetailsView(item: item, viewModel: viewModel) {
+                selectedQueued = nil
+            }
+        }
+        // Shows Queue sheet menu
+        .sheet(isPresented: $showingAddItemList) {
+            MachineAddItemsView(viewModel: viewModel) {
+                showingAddItemList.toggle()
+            }
+                .presentationDetents([.medium])
+        }
+        // Shows Upgrade sheet menu
+        .sheet(isPresented: $showingUpgradeSheet) {
+            BuyWorkshopView(viewModel: viewModel) {
+                showingUpgradeSheet.toggle()
+            }
+                .presentationDetents([.height(400)])
+                .interactiveDismissDisabled()
         }
     }
     
@@ -84,28 +113,25 @@ struct MachineView: View {
                         .onTapGesture {
                             selectedProcessing = item
                         }
-                    // Shows item progress details
-                        .sheet(item: $selectedProcessing) { item in
-                            MachineItemDetailsView(item: item, viewModel: viewModel)
-                        }
+                    
                 }
                 
                 addNewItemCell
                 
                 // Add new MachineItem to workshop (regular & compact vers)
                 if viewModel.processingItems.isEmpty, !viewModel.isSlotAvailable(), viewModel.pendingItems.isEmpty {
-                        // Upgrade workshop cell
-                        upgradeCell
-                    }
+                    // Upgrade workshop cell
+                    //upgradeCell
+                }
             }
             
             // In case there are items in queue
             if !viewModel.pendingItems.isEmpty {
                 pendingSection
-    
+                
                 if !viewModel.isSlotAvailable() {
                     // Upgrade workshop cell
-                    upgradeCell
+                    //upgradeCell
                 }
             }
             
@@ -133,11 +159,6 @@ struct MachineView: View {
         .onTapGesture {
             showingAddItemList.toggle()
         }
-        // Shows Queue sheet menu
-        .sheet(isPresented: $showingAddItemList, content: {
-            MachineAddItemsView(viewModel: viewModel)
-                .presentationDetents([.medium])
-        })
     }
     
     private var upgradeCell: some View {
@@ -145,12 +166,6 @@ struct MachineView: View {
             .onTapGesture {
                 showingUpgradeSheet.toggle()
             }
-        // Shows Upgrade sheet menu
-            .sheet(isPresented: $showingUpgradeSheet, content: {
-                BuyWorkshopView(viewModel: viewModel)
-                    .presentationDetents([.height(400)])
-                    .interactiveDismissDisabled()
-            })
     }
     
     // MARK: - Pending section view
@@ -163,22 +178,17 @@ struct MachineView: View {
                     // Paused progress item cell
                     MachineViewGridCell(item: item, paused: true, viewModel: viewModel)
                         .onTapGesture {
+                            guard viewModel.availableToShow else { return }
                             selectedPending = item
-                        }
-                    // Shows paused item details
-                        .sheet(item: $selectedPending) { item in
-                            //MachineItemDetailsView(item: item, viewModel: viewModel)
                         }
                 } else {
                     // Resular queue item cell
                     QueueMachineViewGridCell(item: item, viewModel: viewModel)
                         .onTapGesture {
+                            guard viewModel.availableToShow else { return }
                             selectedPending = item
                         }
-                    // Shows queue item details
-                        .sheet(item: $selectedPending) { item in
-                            MachineItemDetailsView(item: item, viewModel: viewModel)
-                        }
+                    
                 }
             }
         }
@@ -194,21 +204,15 @@ struct MachineView: View {
                     // Paused progress item cell
                     MachineViewGridCell(item: item, paused: true, viewModel: viewModel)
                         .onTapGesture {
+                            guard viewModel.availableToShow else { return }
                             selectedQueued = item
-                        }
-                    // Shows paused item details
-                        .sheet(item: $selectedQueued) { item in
-                            MachineItemDetailsView(item: item, viewModel: viewModel)
                         }
                 } else {
                     // Resular queue item cell
                     QueueMachineViewGridCell(item: item, viewModel: viewModel)
                         .onTapGesture {
+                            guard viewModel.availableToShow else { return }
                             selectedQueued = item
-                        }
-                    // Shows queue item details
-                        .sheet(item: $selectedQueued) { item in
-                            MachineItemDetailsView(item: item, viewModel: viewModel)
                         }
                 }
             }

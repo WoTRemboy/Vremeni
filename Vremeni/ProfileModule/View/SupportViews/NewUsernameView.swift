@@ -10,17 +10,18 @@ import SwiftData
 
 struct NewUsernameView: View {
     
-    @Environment(\.dismiss) var dismiss
     private var viewModel: ProfileView.ProfileViewModel
+    private var onDismiss: () -> Void
     
     @FocusState private var keyboardFocused
     @State private var username: String
     private var currentName: String
     
-    init(username: String, viewModel: ProfileView.ProfileViewModel) {
+    init(username: String, viewModel: ProfileView.ProfileViewModel, onDismiss: @escaping () -> Void) {
         self.username = username
         self.currentName = username
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
     
     internal var body: some View {
@@ -66,7 +67,7 @@ struct NewUsernameView: View {
     private var cancelButton: some View {
         Button(action: {
             withAnimation(.snappy) {
-                dismiss()
+                onDismiss()
             }
         }) {
             Text(Texts.ProfilePage.cancel)
@@ -85,7 +86,7 @@ struct NewUsernameView: View {
         Button(action: {
             withAnimation(.snappy) {
                 viewModel.changeNickname(to: username)
-                dismiss()
+                onDismiss()
             }
         }) {
             Text(Texts.ProfilePage.accept)
@@ -110,7 +111,7 @@ struct NewUsernameView: View {
         let modelContext = ModelContext(container)
         
         let viewModel = ProfileView.ProfileViewModel(modelContext: modelContext)
-        return NewUsernameView(username: "User228", viewModel: viewModel)
+        return NewUsernameView(username: "User228", viewModel: viewModel, onDismiss: {})
     } catch {
         fatalError("Failed to create model container.")
     }

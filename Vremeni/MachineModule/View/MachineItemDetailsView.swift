@@ -9,14 +9,17 @@ import SwiftUI
 import SwiftData
 
 struct MachineItemDetailsView: View {
-    @Environment(\.dismiss) var dismiss
     
     private let item: MachineItem
     private var viewModel: MachineView.MachineViewModel
+    private var onDismiss: () -> Void
     
-    init(item: MachineItem, viewModel: MachineView.MachineViewModel) {
+    init(item: MachineItem,
+         viewModel: MachineView.MachineViewModel,
+         onDismiss: @escaping () -> Void) {
         self.item = item
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
     
     internal var body: some View {
@@ -41,7 +44,7 @@ struct MachineItemDetailsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(Texts.ItemCreatePage.cancel) {
-                        dismiss()
+                        onDismiss()
                     }
                 }
             }
@@ -108,7 +111,7 @@ struct MachineItemDetailsView: View {
                         viewModel.notificationSetup(for: item)
                     }
                 }
-                dismiss()
+                onDismiss()
             }
         }) {
             if item.status == .processing {
@@ -136,7 +139,7 @@ struct MachineItemDetailsView: View {
         let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
         
         let example = MachineItem.itemMockConfig(name: "One Minute", description: "One minute is a whole 60 seconds!", price: 50, rarity: .uncommon, profile: Profile.configMockProfile())
-        return MachineItemDetailsView(item: example, viewModel: viewModel)
+        return MachineItemDetailsView(item: example, viewModel: viewModel, onDismiss: {})
     } catch {
         fatalError("Failed to create model container.")
     }
