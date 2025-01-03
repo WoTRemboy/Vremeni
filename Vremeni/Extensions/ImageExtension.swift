@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 extension Image {
     enum SplashScreen {
@@ -26,12 +27,20 @@ extension Image {
             static let content = Image("ExtendedContentPremium")
             static let machine = Image("MachineUpgradePremium")
             static let constructor = Image("ItemConstructorPremium")
+            static let cloud = Image("CloudBackupPremium")
+            static let icon = Image("IconSelectPremium")
         }
         
         enum Research {
             static let check = Image(systemName: "checkmark.circle")
             static let locked = Image(systemName: "lock.circle")
             static let less = Image(systemName: "lessthan.circle")
+        }
+        
+        enum CreatePage {
+            static let addImage = Image(systemName: "plus.viewfinder")
+            static let addRequirement = Image(systemName: "plus.circle.fill")
+            static let reduceRequirement = Image(systemName: "minus.circle.fill")
         }
     }
     
@@ -42,10 +51,12 @@ extension Image {
     enum ProfilePage {
         static let person = Image("PersonProfile")
         static let balance = Image("BalanceProfile")
+        static let stats = Image("StatsProfile")
         static let archive = Image("ArchiveProfile")
         static let reset = Image("ResetProfile")
         static let about = Image("AboutProfile")
         static let notifications = Image("NotificationsProfile")
+        static let cloud = Image("CloudProfile")
         static let appearance = Image("AppearanceProfile")
         static let language = Image("LanguageProfile")
         static let settings = Image("SettingsProfile")
@@ -95,4 +106,9 @@ extension Image {
         static let archive = Image(systemName: "archivebox")
         static let stats = Image(systemName: "chart.xyaxis.line")
     }
+}
+
+
+extension UIImage {
+    static let placeholder = UIImage(named: "Placeholder1to1")
 }

@@ -12,11 +12,13 @@ struct MachineViewGridCell: View {
     
     private let item: MachineItem
     private let paused: Bool
+    private let type: MachineStatus
     private let viewModel: MachineView.MachineViewModel
     
-    init(item: MachineItem, paused: Bool = false, viewModel: MachineView.MachineViewModel) {
+    init(item: MachineItem, paused: Bool = false, type: MachineStatus = .queued, viewModel: MachineView.MachineViewModel) {
         self.item = item
         self.paused = paused
+        self.type = type
         self.viewModel = viewModel
     }
     
@@ -37,11 +39,17 @@ struct MachineViewGridCell: View {
     private var content: some View {
         HStack(spacing: 16) {
             VStack(spacing: 10) {
-                Image(systemName: item.image)
-                    .resizable()
-                    .scaledToFit()
-                    .fontWeight(.light)
-                    .foregroundStyle(Color.accentColor, Color.cyan)
+                if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(.buttonBorder)
+                } else {
+                    Image.Placeholder.placeholder1to1
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(.buttonBorder)
+                }
                 progressBar
                     .padding(.horizontal, 4)
                     .padding(.bottom, -9)
@@ -116,11 +124,11 @@ struct MachineViewGridCell: View {
             .minimumScaleFactor(0.4)
             .buttonStyle(.bordered)
             .tint(Color.orange)
-            .disabled(paused && !viewModel.isSlotAvailable())
+            .disabled(paused && !viewModel.processingItems.isEmpty && !viewModel.isSlotAvailable())
             
             Button(action: {
                 withAnimation(.snappy) {
-                    viewModel.stopProgress(for: item)
+                    viewModel.progressDismiss(item: item)
                     viewModel.notificationRemove(for: item.id)
                     viewModel.deleteItem(item: item)
                 }

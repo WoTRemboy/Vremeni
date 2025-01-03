@@ -13,16 +13,19 @@ struct ConsumableItemDetails: View {
     // MARK: - Properties
     
     @EnvironmentObject var bannerService: BannerViewModel
-    @Environment(\.dismiss) var dismiss
     
     private let item: ConsumableItem
     private var viewModel: ShopView.ShopViewModel
+    private var onDismiss: () -> Void
     
     // MARK: - Initialization
     
-    init(item: ConsumableItem, viewModel: ShopView.ShopViewModel) {
+    init(item: ConsumableItem,
+         viewModel: ShopView.ShopViewModel,
+         onDismiss: @escaping () -> Void) {
         self.item = item
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
     
     // MARK: - Body view
@@ -55,7 +58,7 @@ struct ConsumableItemDetails: View {
                 // Dismiss button
                 ToolbarItem(placement: .topBarLeading) {
                     Button(Texts.ItemCreatePage.cancel) {
-                        dismiss()
+                        onDismiss()
                     }
                 }
             }
@@ -68,12 +71,17 @@ struct ConsumableItemDetails: View {
     private var itemHead: some View {
         VStack(spacing: 5) {
             // Item image
-            Image(systemName: item.image)
-                .resizable()
-                .fontWeight(.light)
-                .scaledToFit()
-                .frame(width: 200)
-                .foregroundStyle(Color.accentColor, Color.cyan)
+            if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .clipShape(.buttonBorder)
+                    .frame(width: 200, height: 200)
+            } else {
+                Image.Placeholder.placeholder1to1
+                    .resizable()
+                    .clipShape(.buttonBorder)
+                    .frame(width: 200, height: 200)
+            }
             
             // Item name
             Text(item.name)
@@ -102,11 +110,11 @@ struct ConsumableItemDetails: View {
                          content: item.itemDescription.isEmpty ? Texts.ItemCreatePage.null : item.itemDescription)
             
             // Research rule name row
-            ParameterRow(title: Texts.ItemCreatePage.receiveRules,
+            ParameterRow(title: Texts.ItemCreatePage.research,
                          contentArray: viewModel.ruleDesctiption(item: item))
             
             // Application rule name row
-            ParameterRow(title: Texts.ItemCreatePage.applicationRules,
+            ParameterRow(title: Texts.ItemCreatePage.application,
                          contentArray: viewModel.applicationDesctiption(item: item))
             
         }
@@ -122,7 +130,7 @@ struct ConsumableItemDetails: View {
                     bannerService.setBanner(banner: .added(message: Texts.Banner.added))
                 }
             }
-            dismiss()
+            onDismiss()
         }) {
             // Button definition depending on enable status
             if item.enabled {
@@ -164,12 +172,12 @@ struct ConsumableItemDetails: View {
             price: 3,
             rarity: .common,
             profile: Profile.configMockProfile(),
-            requirement: [RuleItem.oneHour.rawValue : 3],
+            requirements: [],
             applications: [RuleItem.oneHour.rawValue : 1,
                            RuleItem.threeHours.rawValue : 3],
             enabled: false)
         
-        return ConsumableItemDetails(item: example, viewModel: viewModel)
+        return ConsumableItemDetails(item: example, viewModel: viewModel, onDismiss: {})
             .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")

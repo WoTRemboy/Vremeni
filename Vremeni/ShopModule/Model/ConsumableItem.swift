@@ -18,7 +18,9 @@ final class ConsumableItem: Identifiable {
     var id = UUID()
     var nameKey: String
     var descriptionKey: String
-    var image: String
+    
+    @Attribute(.externalStorage)
+    var image: Data?
     
     // General localized
     var name: String {
@@ -37,8 +39,8 @@ final class ConsumableItem: Identifiable {
     var type: VremeniType
     var rarity: Rarity
     
-    // Research requirements (Item name + Count)
-    var requirement: [String: Int]
+    // Research requirements
+    @Relationship(deleteRule: .cascade) var requirements: [Requirement]
     
     // Research applications (Item name + Price)
     var applications: [String: Int]
@@ -56,9 +58,9 @@ final class ConsumableItem: Identifiable {
     var archived: Bool
     
     init(id: UUID = UUID(), nameKey: String, descriptionKey: String,
-         image: String, price: Float, count: Int = 0, premium: Bool, type: VremeniType = .minutes,
+         image: Data? = nil, price: Float, count: Int = 0, premium: Bool, type: VremeniType = .minutes,
          rarity: Rarity = .common, machineItems: [MachineItem] = [],
-         profile: Profile, requirement: [String: Int], applications: [String: Int],
+         profile: Profile, requirements: [Requirement] = [], applications: [String: Int],
          enabled: Bool = false, inMachine: Bool = false,
          ready: Bool = false, archived: Bool = false) {
         
@@ -73,7 +75,7 @@ final class ConsumableItem: Identifiable {
         self.rarity = rarity
         self.machineItems = machineItems
         self.profile = profile
-        self.requirement = requirement
+        self.requirements = requirements
         self.applications = applications
         self.enabled = enabled
         self.inMachine = inMachine
@@ -117,28 +119,29 @@ extension ConsumableItem {
     
     // Mock ConsumableItem configuration method
     static internal func itemMockConfig(nameKey: String, descriptionKey: String = String(),
-                                        price: Float, count: Int = 0,
+                                        price: Float, count: Int = 0, image: Data? = nil,
                                         premium: Bool = false, rarity: Rarity = .common,
-                                        profile: Profile, requirement: [String: Int] = [:],
+                                        profile: Profile, requirements: [Requirement] = [],
                                         applications: [String: Int] = [:],
                                         enabled: Bool = true,
                                         ready: Bool = false, archived: Bool = false) -> ConsumableItem {
         let nameKey = nameKey
         let descriptionKey = descriptionKey
-        let image = "\(Int(price)).square"
+        let image = image
         let price = price
         let count = count
+        let premium = premium
         let enable = enabled
         let ready = ready
         let archived = archived
         let rarity = rarity
         let profile = profile
-        let requirement = requirement
+        let requirements = requirements
         let applications = applications
         
         return ConsumableItem(nameKey: nameKey, descriptionKey: descriptionKey,
                               image: image, price: price, count: count, premium: premium, rarity: rarity,
-                              profile: profile, requirement: requirement, applications: applications, enabled: enable, ready: ready,
+                              profile: profile, requirements: requirements, applications: applications, enabled: enable, ready: ready,
                               archived: archived)
     }
 }

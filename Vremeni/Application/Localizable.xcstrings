@@ -49,12 +49,6 @@
         }
       }
     },
-    "3,490.00 RUB/month" : {
-
-    },
-    "499.00 RUB/month" : {
-
-    },
     "BannerAdded" : {
       "comment" : "Added to Machine.",
       "localizations" : {
@@ -412,19 +406,36 @@
         }
       }
     },
-    "ItemCreatePageApplicationRule" : {
-      "comment" : "Application rules",
+    "ItemCreatePageAddItem" : {
+      "comment" : "Add an item",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Application rules"
+            "value" : "Add an item"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Правила применения"
+            "value" : "Добавить"
+          }
+        }
+      }
+    },
+    "ItemCreatePageApplicationRule" : {
+      "comment" : "Application",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Application"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Применение"
           }
         }
       }
@@ -480,6 +491,23 @@
         }
       }
     },
+    "ItemCreatePageDone" : {
+      "comment" : "Done",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Готово"
+          }
+        }
+      }
+    },
     "ItemCreatePageGeneral" : {
       "comment" : "General",
       "localizations" : {
@@ -493,6 +521,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Основное"
+          }
+        }
+      }
+    },
+    "ItemCreatePageItemName" : {
+      "comment" : "Item name",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Item name"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Название предмета"
           }
         }
       }
@@ -527,6 +572,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Нет"
+          }
+        }
+      }
+    },
+    "ItemCreatePagePreview" : {
+      "comment" : "Preview",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Превью"
           }
         }
       }
@@ -566,18 +628,35 @@
       }
     },
     "ItemCreatePageResearchRule" : {
-      "comment" : "Research rule",
+      "comment" : "Research",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Research rule"
+            "value" : "Research"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Правило исследования"
+            "value" : "Исследование"
+          }
+        }
+      }
+    },
+    "ItemCreatePageResearchTitle" : {
+      "comment" : "Research Items",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Research Items"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Список предметов"
           }
         }
       }
@@ -629,23 +708,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Всего"
-          }
-        }
-      }
-    },
-    "ItemCreatePageTurnover" : {
-      "comment" : "Turnover (Soon)",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Turnover (Soon)"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Оборот (скоро)"
           }
         }
       }
@@ -731,6 +793,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Пауза"
+          }
+        }
+      }
+    },
+    "MachinePagePending" : {
+      "comment" : "Pending",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pending"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ожидание"
           }
         }
       }
@@ -1602,6 +1681,23 @@
         }
       }
     },
+    "ProfilePageCloud" : {
+      "comment" : "Sync",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Синхронизация"
+          }
+        }
+      }
+    },
     "ProfilePageContent" : {
       "comment" : "Content",
       "localizations" : {
@@ -1653,6 +1749,23 @@
         }
       }
     },
+    "ProfilePageDefaultIcon" : {
+      "comment" : "Default",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plain"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Минимализм"
+          }
+        }
+      }
+    },
     "ProfilePageDone" : {
       "comment" : "Done",
       "localizations" : {
@@ -1683,6 +1796,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ошибка"
+          }
+        }
+      }
+    },
+    "ProfilePageImposter" : {
+      "comment" : "Beta",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Focus"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Концентрация"
           }
         }
       }
@@ -1823,6 +1953,23 @@
         }
       }
     },
+    "ProfilePagePremium" : {
+      "comment" : "Premium",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premium"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Премиум"
+          }
+        }
+      }
+    },
     "ProfilePageProfile" : {
       "comment" : "Profile",
       "localizations" : {
@@ -1909,18 +2056,18 @@
       }
     },
     "ProfilePageStats" : {
-      "comment" : "Stats",
+      "comment" : "Progress",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stats"
+            "value" : "Progress"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Статистика"
+            "value" : "Прогресс"
           }
         }
       }
@@ -2152,7 +2299,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Theme"
+            "value" : "Appearance"
           }
         },
         "ru" : {
@@ -2571,6 +2718,40 @@
         }
       }
     },
+    "ShopPagePremiumCloudDescription" : {
+      "comment" : "Save your progress in the cloud with synchronization across devices.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save your progress in the cloud with synchronization across devices."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Храните свой прогресс в облаке с последующей синхронизацией."
+          }
+        }
+      }
+    },
+    "ShopPagePremiumCloudTitle" : {
+      "comment" : "iCloud Backup",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iCloud Backup"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранение в iCloud"
+          }
+        }
+      }
+    },
     "ShopPagePremiumConstructorContent" : {
       "comment" : "Try the ability to create your own items with rules.",
       "localizations" : {
@@ -2669,6 +2850,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "3 дня бесплатно"
+          }
+        }
+      }
+    },
+    "ShopPagePremiumIconDescription" : {
+      "comment" : "Select an application icon from the proposed options in Appearance.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select an application icon from the proposed options in Appearance."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите значок приложения из вариантов в Оформлении."
+          }
+        }
+      }
+    },
+    "ShopPagePremiumIconTitle" : {
+      "comment" : "Icon Selection",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icon Selection"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Альтернативные иконки"
           }
         }
       }

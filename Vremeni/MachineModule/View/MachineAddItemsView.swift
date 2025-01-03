@@ -9,18 +9,20 @@ import SwiftUI
 import SwiftData
 
 struct MachineAddItemsView: View {
-    @Environment(\.dismiss) var dismiss
     
     private let viewModel: MachineView.MachineViewModel
+    private var onDismiss: () -> Void
     
-    init(viewModel: MachineView.MachineViewModel) {
+    init(viewModel: MachineView.MachineViewModel,
+         onDismiss: @escaping () -> Void) {
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
     
     internal var body: some View {
         NavigationStack {
             ZStack {
-                if viewModel.items.filter({ !$0.inProgress }).isEmpty {
+                if viewModel.queuedItems.isEmpty {
                     background
                     empty
                 } else {
@@ -33,7 +35,7 @@ struct MachineAddItemsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(Texts.ItemCreatePage.cancel) {
-                        dismiss()
+                        onDismiss()
                     }
                 }
             }
@@ -56,11 +58,11 @@ struct MachineAddItemsView: View {
     private var list: some View {
         List {
             ForEach(viewModel.items) { item in
-                if !item.inProgress {
+                if item.status != .processing {
                     Button(action: {
                         withAnimation(.snappy) {
                             viewModel.setWorkshop(item: item)
-                            dismiss()
+                            onDismiss()
                         }
                         if viewModel.notificationStatus == .allowed {
                             viewModel.notificationSetup(for: item)
@@ -82,7 +84,7 @@ struct MachineAddItemsView: View {
         let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
         viewModel.addSamples()
         
-        return MachineAddItemsView(viewModel: viewModel)
+        return MachineAddItemsView(viewModel: viewModel, onDismiss: {})
     } catch {
         fatalError("Failed to create model container.")
     }

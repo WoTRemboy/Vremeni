@@ -10,14 +10,16 @@ import SwiftData
 
 struct ArchiveDetailsView: View {
     
-    @Environment(\.dismiss) var dismiss
-    
     private let item: ConsumableItem
     private var viewModel: ProfileView.ProfileViewModel
+    private var onDismiss: () -> Void
         
-    init(item: ConsumableItem, viewModel: ProfileView.ProfileViewModel) {
+    init(item: ConsumableItem,
+         viewModel: ProfileView.ProfileViewModel,
+         onDismiss: @escaping () -> Void) {
         self.item = item
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
         
     internal var body: some View {
@@ -41,7 +43,7 @@ struct ArchiveDetailsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(Texts.ItemCreatePage.cancel) {
-                        dismiss()
+                        onDismiss()
                     }
                 }
             }
@@ -50,12 +52,19 @@ struct ArchiveDetailsView: View {
     
     private var itemHead: some View {
         VStack(spacing: 5) {
-            Image(systemName: item.image)
-                .resizable()
-                .fontWeight(.light)
-                .scaledToFit()
-                .frame(width: 200)
-                .foregroundStyle(Color.accentColor, Color.cyan)
+            if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(.buttonBorder)
+                    .frame(width: 200)
+            } else {
+                Image.Placeholder.placeholder1to1
+                    .resizable()
+                    .scaledToFit()
+                    .clipShape(.buttonBorder)
+                    .frame(width: 200)
+            }
             
             Text(item.name)
                 .font(.segmentTitle())
@@ -77,10 +86,10 @@ struct ArchiveDetailsView: View {
             ParameterRow(title: Texts.ItemCreatePage.description,
                          content: item.itemDescription.isEmpty ? Texts.ItemCreatePage.null : item.itemDescription)
             
-            ParameterRow(title: Texts.ItemCreatePage.receiveRules,
+            ParameterRow(title: Texts.ItemCreatePage.research,
                          contentArray: viewModel.ruleDesctiption(item: item))
             
-            ParameterRow(title: Texts.ItemCreatePage.applicationRules,
+            ParameterRow(title: Texts.ItemCreatePage.application,
                          contentArray: viewModel.applicationDesctiption(item: item))
             
         }
@@ -90,7 +99,7 @@ struct ArchiveDetailsView: View {
         Button(action: {
             withAnimation(.snappy) {
                 viewModel.unarchiveItem(item: item)
-                dismiss()
+                onDismiss()
             }
         }) {
             Text(Texts.ProfilePage.Archive.restore)
@@ -119,10 +128,10 @@ struct ArchiveDetailsView: View {
             descriptionKey: Content.Common.oneMinuteDescription,
             price: 50, rarity: .uncommon,
             profile: Profile.configMockProfile(),
-            requirement: [RuleItem.oneHour.rawValue : 3],
+            requirements: [],
             applications: [RuleItem.oneHour.rawValue : 1,
                            RuleItem.threeHours.rawValue : 3])
-        return ArchiveDetailsView(item: example, viewModel: viewModel)
+        return ArchiveDetailsView(item: example, viewModel: viewModel, onDismiss: {})
     } catch {
         fatalError("Failed to create model container.")
     }

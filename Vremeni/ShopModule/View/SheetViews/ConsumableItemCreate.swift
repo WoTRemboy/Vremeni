@@ -7,23 +7,29 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct ConsumableItemCreate: View {
     
     // MARK: - Properties
     
-    @Environment(\.dismiss) var dismiss
     @State private var item: ConsumableItem
-
+    @State private var showingResearchItemList = false
+    @State private var isKeyboardVisible = false
+    
+    @State private var selectedPhoto: PhotosPickerItem?
+    
     private var viewModel: ShopView.ShopViewModel
+    private var onDismiss: () -> Void
     
     // MARK: - Initialization
     
-    init(viewModel: ShopView.ShopViewModel) {
+    init(viewModel: ShopView.ShopViewModel, onDismiss: @escaping () -> Void) {
         self.viewModel = viewModel
         self.item = ConsumableItem.itemMockConfig(
             nameKey: String(), price: 1,
             profile: viewModel.profile, enabled: false)
+        self.onDismiss = onDismiss
     }
     
     // MARK: - Body View
@@ -32,19 +38,37 @@ struct ConsumableItemCreate: View {
         NavigationStack {
             // main content form view
             form
-                .scrollDismissesKeyboard(.immediately)
+                .scrollIndicators(.hidden)
             
-                // Navigation bar params
+            // Set up keyboard observer
+                .onAppear(perform: setupKeyboardObserver)
+                .onDisappear(perform: removeKeyboardObserver)
+            
+            // Navigation bar params
                 .navigationTitle(Texts.ItemCreatePage.title)
                 .navigationBarTitleDisplayMode(.inline)
             
-                // ToolBar buttons
+            // ToolBar buttons
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         cancelButton
                     }
                     ToolbarItem(placement: .topBarTrailing) {
-                        saveButton
+                        saveDoneButton
+                    }
+                }
+                .task(id: selectedPhoto) {
+                    if let data = try? await selectedPhoto?.loadTransferable(type: Data.self),
+                       let uiImage = UIImage(data: data) {
+                        
+                        if let croppedImage = viewModel.cropToSquare(image: uiImage),
+                           let resizedImage = viewModel.resizeImage(image: croppedImage, targetSize: CGSize(width: 300, height: 300)) {
+                            if let resizedData = resizedImage.jpegData(compressionQuality: 0.8) {
+                                withAnimation(.easeInOut(duration: 0.3)) {
+                                    item.image = resizedData
+                                }
+                            }
+                        }
                     }
                 }
         }
@@ -55,19 +79,28 @@ struct ConsumableItemCreate: View {
     // Dismiss button
     private var cancelButton: some View {
         Button(Texts.ItemCreatePage.cancel) {
-            dismiss()
+            onDismiss()
         }
     }
     
     // Button with save item action
-    private var saveButton: some View {
-        Button(Texts.ItemCreatePage.save) {
-            withAnimation(.snappy) {
-                viewModel.saveItem(item)
-                dismiss()
+    private var saveDoneButton: some View {
+        Button {
+            if isKeyboardVisible {
+                // Hide keyboard on "Done"
+                hideKeyboard()
+            } else {
+                withAnimation(.snappy) {
+                    viewModel.saveItem(item)
+                    onDismiss()
+                }
             }
+        } label: {
+            Text(isKeyboardVisible ? Texts.ItemCreatePage.done : Texts.ItemCreatePage.save)
+                .animation(.easeInOut(duration: 0.3))
         }
-        .disabled(item.name.isEmpty)
+        // Disable Save when name is empty
+        .disabled(!isKeyboardVisible && item.name.isEmpty)
     }
     
     // MARK: - Content form view
@@ -75,32 +108,73 @@ struct ConsumableItemCreate: View {
     // Form with general, valuation & turnover sections
     private var form: some View {
         Form {
-            // General Section
-            Section(Texts.ItemCreatePage.general) {
-                // Sets ConsumableItem name
-                TextField(Texts.ItemCreatePage.name, text: $item.nameKey)
-                // Sets ConsumableItem description
-                TextField(Texts.ItemCreatePage.description, text: $item.descriptionKey, axis: .vertical)
-                // Sets ConsumableItem enable status
-                Toggle(Texts.ShopPage.available, isOn: $item.enabled)
-            }
+            previewSection
+            generalSection
+            valuationSection
             
-            // Valuation section
-            Section(Texts.ItemCreatePage.valuation) {
-                // Sets ConsumableItem rarity value
-                picker
-                // Displays ConsumableItem price value
-                totalPriceView
-                // Sets ConsumableItem price value
-                Slider(value: $item.price, in: 1...1000, step: 1)
+            if !item.enabled {
+                researchSection
+                    .transition(.move(edge: .trailing))
             }
+        }
+        
+        .animation(.easeInOut(duration: 0.2), value: item.enabled)
+        
+    }
+    
+    private var previewSection: some View {
+        Section(Texts.ItemCreatePage.preview) {
+            PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()) {
+                if let image = item.image, let _ = UIImage(data: image) {
+                    TurnoverItemListRow(item: item)
+                } else {
+                    TurnoverItemListRow(item: item, preview: true)
+                }
+            }
+        }
+    }
+    
+    private var generalSection: some View {
+        Section(Texts.ItemCreatePage.general) {
+            // Sets ConsumableItem name
+            TextField(Texts.ItemCreatePage.name, text: $item.nameKey)
+            // Sets ConsumableItem description
+            TextField(Texts.ItemCreatePage.description, text: $item.descriptionKey, axis: .vertical)
+            // Sets ConsumableItem enable status
+            Toggle(Texts.ShopPage.available, isOn: $item.enabled)
+        }
+    }
+    
+    private var valuationSection: some View {
+        Section(Texts.ItemCreatePage.valuation) {
+            // Sets ConsumableItem rarity value
+            picker
+            // Displays ConsumableItem price value
+            totalPriceView
+            // Sets ConsumableItem price value
+            Slider(value: $item.price, in: 1...1000, step: 1)
+        }
+    }
+    
+    private var researchSection: some View {
+        Section(Texts.ItemCreatePage.research) {
+            ForEach(item.requirements, id: \.self) { requirement in
+                ResearchItemListRow(item: item, requirement: requirement)
+            }
+            .onDelete(perform: item.removeRequirement)
             
-            // Turnoiver section
-            Section(Texts.ItemCreatePage.turnover) {
-                // Displays research rules
-                Text(Texts.ItemCreatePage.receiveRules)
-                // Displays application rules
-                Text(Texts.ItemCreatePage.applicationRules)
+            Button {
+                hideKeyboard()
+                showingResearchItemList.toggle()
+            } label: {
+                Text(Texts.ItemCreatePage.addItem)
+                    .foregroundStyle(Color.LabelColors.labelSecondary)
+                    .font(.regularBody())
+            }
+            .sheet(isPresented: $showingResearchItemList) {
+                ConsumableItemAddView(item: $item, viewModel: viewModel) {
+                    showingResearchItemList.toggle()
+                }
             }
         }
     }
@@ -134,6 +208,26 @@ struct ConsumableItemCreate: View {
                 .frame(width: 17)
         }
     }
+    
+    // MARK: - Keyboard Handling
+    
+    private func setupKeyboardObserver() {
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { _ in
+            isKeyboardVisible = true
+        }
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { _ in
+            isKeyboardVisible = false
+        }
+    }
+    
+    private func removeKeyboardObserver() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
 
 // MARK: - Preview
@@ -145,7 +239,7 @@ struct ConsumableItemCreate: View {
         let modelContext = ModelContext(container)
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         
-        return ConsumableItemCreate(viewModel: viewModel)
+        return ConsumableItemCreate(viewModel: viewModel, onDismiss: {})
             .modelContainer(container)
     } catch {
         fatalError("Failed to create model container.")

@@ -11,14 +11,16 @@ import StoreKit
 
 struct PremiumBuyView: View {
     
-    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var storeKitService: StoreKitManager
     
     private var viewModel: ShopView.ShopViewModel
+    private var onDismiss: () -> Void
     @State private var isSubscribed: Bool = false
     
-    init(viewModel: ShopView.ShopViewModel) {
+    init(viewModel: ShopView.ShopViewModel,
+         onDismiss: @escaping () -> Void) {
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
     
     internal var body: some View {
@@ -51,7 +53,7 @@ struct PremiumBuyView: View {
     
     private var cancelButton: some View {
         Button(Texts.ItemCreatePage.cancel) {
-            dismiss()
+            onDismiss()
         }
         .foregroundStyle(Color.blue)
     }
@@ -72,6 +74,8 @@ struct PremiumBuyView: View {
             Text(Texts.ShopPage.Premium.description)
                 .font(.subhead())
                 .multilineTextAlignment(.center)
+                .foregroundStyle(Color.LabelColors.labelPrimary)
+            
                 .padding(.top, -5)
                 .padding([.horizontal, .bottom])
         }
@@ -83,37 +87,47 @@ struct PremiumBuyView: View {
             Button {
                 viewModel.changeSubType(to: .annual)
             } label: {
-                SubscriptionTypeTableCell(type: .annual, viewModel: viewModel)
+                SubscriptionTypeTableCell(type: .annual, price: storeKitService.subscriptions.last?.displayPrice, viewModel: viewModel)
             }
             
             Button {
                 viewModel.changeSubType(to: .monthly)
             } label: {
-                SubscriptionTypeTableCell(type: .monthly, viewModel: viewModel)
+                SubscriptionTypeTableCell(type: .monthly, price: storeKitService.subscriptions.first?.displayPrice, viewModel: viewModel)
             }
             
             Button {
                 
             } label: {
                 Text(Texts.ShopPage.Premium.restore)
+                    .foregroundStyle(Color.blue)
             }
         }
     }
     
     private var includedLabels: some View {
-        Section(Texts.ShopPage.Premium.included) {
-            LinkRow(title: Texts.ShopPage.Premium.contentTitle,
-                    description: Texts.ShopPage.Premium.contentDescription,
-                    image: Image.ShopPage.Premium.content)
-            
-            LinkRow(title: Texts.ShopPage.Premium.machineTitle,
-                    description:  Texts.ShopPage.Premium.machineDescription,
-                    image: Image.ShopPage.Premium.machine)
-            
-            LinkRow(title: Texts.ShopPage.Premium.constructorTitle,
-                    description:  Texts.ShopPage.Premium.constructorContent,
-                    image: Image.ShopPage.Premium.constructor)
-        }
+        Section(header: Text(Texts.ShopPage.Premium.included)
+            .foregroundStyle(Color.LabelColors.labelTertiary)) {
+                LinkRow(title: Texts.ShopPage.Premium.contentTitle,
+                        description: Texts.ShopPage.Premium.contentDescription,
+                        image: Image.ShopPage.Premium.content)
+                
+                LinkRow(title: Texts.ShopPage.Premium.cloudTitle,
+                        description:  Texts.ShopPage.Premium.cloudDescription,
+                        image: Image.ShopPage.Premium.cloud)
+                
+                LinkRow(title: Texts.ShopPage.Premium.machineTitle,
+                        description:  Texts.ShopPage.Premium.machineDescription,
+                        image: Image.ShopPage.Premium.machine)
+                
+                LinkRow(title: Texts.ShopPage.Premium.constructorTitle,
+                        description:  Texts.ShopPage.Premium.constructorContent,
+                        image: Image.ShopPage.Premium.constructor)
+                
+                LinkRow(title: Texts.ShopPage.Premium.iconTitle,
+                        description:  Texts.ShopPage.Premium.iconDescription,
+                        image: Image.ShopPage.Premium.icon)
+            }
     }
     
     private var actionButton: some View {
@@ -123,7 +137,9 @@ struct PremiumBuyView: View {
                 .frame(maxWidth: .infinity, maxHeight: hasNotch() ? 100 : 80)
             
             Button {
-               
+                Task {
+                    await buy(id: viewModel.currentSubType.rawValue)
+                }
             } label: {
                 Text(Texts.ShopPage.Premium.subscribe)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -139,8 +155,8 @@ struct PremiumBuyView: View {
         }
     }
     
-    private func buy(product: Product) async {
-        guard let product = storeKitService.subscriptions.first(where: { $0.id == product.id }) else { return }
+    private func buy(id: String) async {
+        guard let product = storeKitService.subscriptions.first(where: { $0.id == id }) else { return }
         do {
             if try await storeKitService.purchase(product) != nil {
                 withAnimation {
@@ -161,7 +177,7 @@ struct PremiumBuyView: View {
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         let environmentObject = StoreKitManager()
         
-        return PremiumBuyView(viewModel: viewModel)
+        return PremiumBuyView(viewModel: viewModel, onDismiss: {})
             .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")

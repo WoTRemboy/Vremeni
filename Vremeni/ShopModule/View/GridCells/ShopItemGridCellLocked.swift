@@ -46,11 +46,17 @@ struct ShopItemGridCellLocked: View {
         HStack(spacing: 16) {
             // ConsumableItem image, name & rarity icon
             VStack(spacing: 10) {
-                Image(systemName: item.image)
-                    .resizable()
-                    .scaledToFit()
-                    .fontWeight(.light)
-                    .foregroundStyle(Color.accentColor, Color.cyan)
+                if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(.buttonBorder)
+                } else {
+                    Image.Placeholder.placeholder1to1
+                        .resizable()
+                        .scaledToFit()
+                        .clipShape(.buttonBorder)
+                }
                 itemName
             }
             
@@ -110,7 +116,13 @@ struct ShopItemGridCellLocked: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
             .sheet(item: $selected) { item in
-                RuleView(item: item, viewModel: viewModel)
+                if (item.premium && viewModel.premium) || !item.premium {
+                    RuleView(item: item, viewModel: viewModel)
+                } else {
+                    PremiumBuyView(viewModel: viewModel) {
+                        selected = nil
+                    }
+                }
             }
             // Button layout params
             .frame(height: 40)

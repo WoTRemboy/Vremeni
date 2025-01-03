@@ -9,14 +9,17 @@ import SwiftUI
 import SwiftData
 
 struct InventoryItemDetailsView: View {
-    @Environment(\.dismiss) var dismiss
     
     private let item: ConsumableItem
     private var viewModel: InventoryView.InventoryViewModel
+    private var onDismiss: () -> Void
     
-    init(item: ConsumableItem, viewModel: InventoryView.InventoryViewModel) {
+    init(item: ConsumableItem,
+         viewModel: InventoryView.InventoryViewModel,
+         onDismiss: @escaping () -> Void) {
         self.item = item
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
     
     internal var body: some View {
@@ -39,7 +42,7 @@ struct InventoryItemDetailsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(Texts.ItemCreatePage.cancel) {
-                        dismiss()
+                        onDismiss()
                     }
                 }
             }
@@ -48,12 +51,18 @@ struct InventoryItemDetailsView: View {
     
     private var itemHead: some View {
         VStack(spacing: 5) {
-            Image(systemName: item.image)
-                .resizable()
-                .fontWeight(.light)
-                .scaledToFit()
-                .frame(width: 200)
-                .foregroundStyle(Color.accentColor, Color.cyan)
+            if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .clipShape(.buttonBorder)
+                    .frame(width: 200, height: 200)
+            } else {
+                Image.Placeholder.placeholder1to1
+                    .resizable()
+                    .clipShape(.buttonBorder)
+                    .frame(width: 200, height: 200)
+            }
+            
             
             Text(item.name)
                 .font(.segmentTitle())
@@ -78,7 +87,7 @@ struct InventoryItemDetailsView: View {
             ParameterRow(title: Texts.InventoryPage.valuation,
                          content: viewModel.valCalculation(for: item))
             
-            ParameterRow(title: Texts.ItemCreatePage.applicationRules,
+            ParameterRow(title: Texts.ItemCreatePage.application,
                          contentArray: viewModel.applicationDesctiption(item: item))
             
         }
@@ -97,7 +106,7 @@ struct InventoryItemDetailsView: View {
             descriptionKey: Content.Common.oneMinuteDescription,
             price: 50, rarity: .uncommon,
             profile: Profile.configMockProfile())
-        return InventoryItemDetailsView(item: example, viewModel: viewModel)
+        return InventoryItemDetailsView(item: example, viewModel: viewModel, onDismiss: {})
     } catch {
         fatalError("Failed to create model container.")
     }

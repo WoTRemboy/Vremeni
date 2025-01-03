@@ -46,6 +46,12 @@ extension ShopView {
             }
         }
         
+        internal var premium: Bool {
+            get {
+                profile.premium
+            }
+        }
+        
         // MARK: - Initialization
         
         init(modelContext: ModelContext) {
@@ -67,9 +73,9 @@ extension ShopView {
             guard profile.balance >= Int(item.price) else { return }
             item.unlockItem()
             
-            for requirement in item.requirement {
-                let consItem = allItems.first(where: { $0.nameKey == requirement.key })
-                consItem?.reduceCount(for: requirement.value)
+            for requirement in item.requirements {
+                let consItem = allItems.first(where: { $0.nameKey == requirement.item.nameKey })
+                consItem?.reduceCount(for: Int(requirement.quantity))
             }
             profile.unlockItem(for: item.price)
             fetchData()
@@ -122,8 +128,8 @@ extension ShopView {
         // Checks that all conditions are met
         internal func unlockButtonAvailable(for item: ConsumableItem) -> Bool {
             // Items collection requirements check
-            for requirement in item.requirement {
-                guard researchTypeDefinition(for: requirement.key, of: requirement.value) == .completed else { return false }
+            for requirement in item.requirements {
+                guard researchTypeDefinition(for: requirement.item.nameKey, of: requirement.quantity) == .completed else { return false }
             }
             // Coins requirement check
             guard researchTypeDefinition(for: item.price) == .completed else { return false }
@@ -134,14 +140,13 @@ extension ShopView {
         // Configures research rule description for Details Page
         internal func ruleDesctiption(item: ConsumableItem) -> [String] {
             // For the first item (One Hours) there are no requirements
-            guard !item.requirement.isEmpty else { return [Texts.ItemCreatePage.null] }
+            guard !item.requirements.isEmpty else { return [Texts.ItemCreatePage.null] }
             
             var rule = [String]()
-            let requirements = item.requirement.sorted { $0.value > $1.value }
+            let requirements = item.requirements.sorted { $0.item.price < $1.item.price }
             for requirement in requirements {
                 // Setups requirement string
-                let requirementName = NSLocalizedString(requirement.key, comment: String())
-                let reqString = "\(requirementName) × \(requirement.value)"
+                let reqString = "\(requirement.item.name) × \(requirement.quantity)"
                 rule.append(reqString)
             }
             
@@ -196,8 +201,11 @@ extension ShopView {
             let item = ConsumableItem.itemMockConfig(nameKey: created.name,
                                                      descriptionKey: created.itemDescription,
                                                      price: created.price,
+                                                     image: created.image,
+                                                     premium: created.premium,
                                                      rarity: created.rarity,
                                                      profile: profile,
+                                                     requirements: created.requirements,
                                                      enabled: created.enabled)
             modelContext.insert(item)
             fetchData()
@@ -207,6 +215,27 @@ extension ShopView {
         internal func archiveItem(item: ConsumableItem) {
             item.archiveItem()
             fetchData()
+        }
+        
+        internal func cropToSquare(image: UIImage) -> UIImage? {
+            let originalSize = image.size
+            let minSide = min(originalSize.width, originalSize.height)
+            
+            let xOffset = (originalSize.width - minSide) / 2
+            let yOffset = (originalSize.height - minSide) / 2
+            
+            let cropRect = CGRect(x: xOffset, y: yOffset, width: minSide, height: minSide)
+            
+            guard let cgImage = image.cgImage?.cropping(to: cropRect) else { return nil }
+            
+            return UIImage(cgImage: cgImage, scale: image.scale, orientation: image.imageOrientation)
+        }
+        
+        internal func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+            let renderer = UIGraphicsImageRenderer(size: targetSize)
+            return renderer.image { _ in
+                image.draw(in: CGRect(origin: .zero, size: targetSize))
+            }
         }
         
         // MARK: - Load data method
@@ -262,51 +291,52 @@ extension ShopView {
         
         internal func addSamples() {
             guard allItems.isEmpty else { return }
-            let items = [
-                ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle,
-                                              descriptionKey: Content.Common.oneMinuteDescription,
-                                              price: 1,
-                                              profile: profile,
-                                              applications: [RuleItem.threeHours.rawValue : 3,
-                                                             RuleItem.fiveHours.rawValue : 5,
-                                                             RuleItem.sevenHours.rawValue : 7]
-                                             ),
-                         
-                ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle,
-                                              descriptionKey: Content.Common.threeMinutesDescription,
-                                              price: 3,
-                                              rarity: .common,
-                                              profile: profile,
-                                              requirement: [RuleItem.oneHour.rawValue : 3],
-                                              applications: [RuleItem.fiveHours.rawValue : 5,
-                                                             RuleItem.tenHours.rawValue : 10],
-                                              enabled: false),
-                         
-                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
-                                              descriptionKey: Content.Uncommon.fiveMinutesDescription,
-                                              price: 5,
-                                              rarity: .uncommon,
-                                              profile: profile,
-                                              requirement: [RuleItem.oneHour.rawValue : 2, RuleItem.threeHours.rawValue : 1],
-                                              applications: [RuleItem.sevenHours.rawValue : 7],
-                                              enabled: false),
-                
-                ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
-                                              descriptionKey: Content.Uncommon.sevenMinutesDescription,
-                                              price: 7,
-                                              rarity: .uncommon,
-                                              profile: profile,
-                                              requirement: [RuleItem.fiveHours.rawValue : 1, RuleItem.oneHour.rawValue : 2],
-                                              applications: [RuleItem.tenHours.rawValue : 10],
-                                              enabled: false),
-                
-                ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,
-                                              descriptionKey: Content.Rare.tenMinutesDescription,
-                                              price: 10,
-                                              rarity: .rare,
-                                              profile: profile,
-                                              requirement: [RuleItem.sevenHours.rawValue : 1, RuleItem.threeHours.rawValue : 1],
-                                              enabled: false)]
+            let oneMinute = ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle,
+                                                        descriptionKey: Content.Common.oneMinuteDescription,
+                                                        price: 1,
+                                                        premium: false, profile: profile,
+                                                        applications: [RuleItem.threeHours.rawValue : 3,
+                                                                       RuleItem.fiveHours.rawValue : 5,
+                                                                       RuleItem.sevenHours.rawValue : 7]
+                                                       )
+            
+            let threeMinutes = ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle,
+                                                           descriptionKey: Content.Common.threeMinutesDescription,
+                                                           price: 3,
+                                                           premium: false, rarity: .common,
+                                                           profile: profile,
+                                                           requirements: [Requirement(item: oneMinute, quantity: 3)],
+                                                           applications: [RuleItem.fiveHours.rawValue : 5,
+                                                                          RuleItem.tenHours.rawValue : 10],
+                                                           enabled: false)
+            
+            let fiveMinutes = ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
+                                                            descriptionKey: Content.Uncommon.fiveMinutesDescription,
+                                                            price: 5,
+                                                            premium: false, rarity: .uncommon,
+                                                            profile: profile,
+                                                            requirements: [Requirement(item: oneMinute, quantity: 2), Requirement(item: threeMinutes, quantity: 1)],
+                                                            applications: [RuleItem.sevenHours.rawValue : 7],
+                                                            enabled: false)
+            
+            let sevenMinutes = ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
+                                                             descriptionKey: Content.Uncommon.sevenMinutesDescription,
+                                                             price: 7,
+                                                             premium: false, rarity: .uncommon,
+                                                             profile: profile,
+                                                             requirements: [Requirement(item: fiveMinutes, quantity: 1), Requirement(item: oneMinute, quantity: 2)],
+                                                             applications: [RuleItem.tenHours.rawValue : 10],
+                                                             enabled: false)
+            
+            let tenMinutes = ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,
+                                                           descriptionKey: Content.Rare.tenMinutesDescription,
+                                                           price: 10,
+                                                           premium: false, rarity: .rare,
+                                                           profile: profile,
+                                                           requirements: [Requirement(item: sevenMinutes, quantity: 1), Requirement(item: threeMinutes, quantity: 1)],
+                                                           enabled: false)
+            
+            let items = [oneMinute, threeMinutes, fiveMinutes, sevenMinutes, tenMinutes]
             for item in items {
                 modelContext.insert(item)
             }

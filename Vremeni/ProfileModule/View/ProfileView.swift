@@ -19,6 +19,8 @@ struct ProfileView: View {
     @State private var showingResetAlert = false
     @State private var showingLanguageAlert = false
     
+    private var iconVM = IconChangerViewModel()
+    
     init(modelContext: ModelContext) {
         let viewModel = ProfileViewModel(modelContext: modelContext)
         _viewModel = State(initialValue: viewModel)
@@ -28,7 +30,6 @@ struct ProfileView: View {
         NavigationStack {
             Form {
                 profileSection
-                statsSection
                 contentSection
                 appSection
             }
@@ -38,11 +39,6 @@ struct ProfileView: View {
             .scrollIndicators(.hidden)
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(.visible, for: .tabBar)
-        }
-        .tabItem {
-            Image.TabBar.profile
-            Text(Texts.ProfilePage.title)
         }
     }
     
@@ -56,37 +52,30 @@ struct ProfileView: View {
                         details: viewModel.profile.name,
                         chevron: true)
             }
-            .sheet(isPresented: $showingUsernameSheet, content: {
-                NewUsernameView(username: viewModel.profile.name, viewModel: viewModel)
-                    .presentationDetents([.height(150)])
-            })
-            
-            LinkRow(title: Texts.ProfilePage.balance,
-                    image: Image.ProfilePage.balance,
-                    details: String(viewModel.profile.balance))
-        }
-    }
-    
-    private var statsSection: some View {
-        Section(Texts.ProfilePage.stats) {
-            StatisticsChartView(viewModel: viewModel)
-                .frame(maxWidth: .infinity, idealHeight: 300, alignment: .center)
-                .overlay {
-                    NavigationLink(destination: ChartsDetailsView(viewModel: viewModel)) {
-                        EmptyView()
-                    }
-                    .opacity(0)
+            .sheet(isPresented: $showingUsernameSheet) {
+                NewUsernameView(username: viewModel.profile.name,
+                                viewModel: viewModel) {
+                    showingUsernameSheet.toggle()
                 }
+                    .presentationDetents([.height(150)])
+            }
+            
+            NavigationLink(destination: ChartsDetailsView(type: .inventory, viewModel: viewModel)) {
+                LinkRow(title: Texts.ProfilePage.balance,
+                        image: Image.ProfilePage.balance,
+                        details: String(viewModel.profile.balance))
+            }
+
+            NavigationLink(destination: ChartsDetailsView(type: .research, viewModel: viewModel)) {
+                LinkRow(title: Texts.ProfilePage.progress,
+                        image: Image.ProfilePage.stats)
+            }
         }
     }
     
     private var contentSection: some View {
         Section(Texts.ProfilePage.content) {
-            NavigationLink(destination: ProfileAboutView(viewModel: viewModel),
-                           label: {
-                LinkRow(title: Texts.ProfilePage.About.title,
-                        image: Image.ProfilePage.about)
-            })
+            //cloudToggle
             
             NavigationLink(destination: ArchiveView(viewModel: viewModel)) {
                 LinkRow(title: Texts.ProfilePage.archive,
@@ -120,6 +109,12 @@ struct ProfileView: View {
     
     private var appSection: some View {
         Section(Texts.ProfilePage.app) {
+            NavigationLink(destination: ProfileAboutView(viewModel: viewModel)
+                .environmentObject(iconVM)) {
+                LinkRow(title: Texts.ProfilePage.About.title,
+                        image: Image.ProfilePage.about)
+                }
+            
             notificationToggle
             appearanceButton
             languageButton
@@ -147,6 +142,13 @@ struct ProfileView: View {
         }
     }
     
+    private var cloudToggle: some View {
+        Toggle(isOn: $viewModel.notificationsEnabled) {
+            LinkRow(title: Texts.ProfilePage.cloud,
+                    image: Image.ProfilePage.cloud)
+        }
+    }
+    
     private var appearanceButton: some View {
         Button {
             showingThemeSheet = true
@@ -156,8 +158,10 @@ struct ProfileView: View {
                     chevron: true)
         }
         .sheet(isPresented: $showingThemeSheet) {
-            ThemeChangeView(viewModel: viewModel)
-                .presentationDetents([.height(350)])
+            ThemeChangeView(viewModel: viewModel, iconVM: iconVM) {
+                showingThemeSheet.toggle()
+            }
+                .presentationDetents([.height(480)])
                 .interactiveDismissDisabled()
         }
     }

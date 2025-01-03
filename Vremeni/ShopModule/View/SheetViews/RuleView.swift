@@ -54,13 +54,19 @@ struct RuleView: View {
     
     private var itemInfoNew: some View {
         HStack(spacing: 10) {
-            Image(systemName: item.image)
-                .resizable()
-                .fontWeight(.light)
-                .frame(width: 80, height: 80)
-                .clipShape(.buttonBorder)
-                .padding(.leading, -2.5)
-                .foregroundStyle(Color.blue, Color.cyan)
+            if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .frame(width: 80, height: 80)
+                    .clipShape(.buttonBorder)
+                    .padding(.leading, -2.5)
+            } else {
+                Image.Placeholder.placeholder1to1
+                    .resizable()
+                    .frame(width: 80, height: 80)
+                    .clipShape(.buttonBorder)
+                    .padding(.leading, -2.5)
+            }
             
             VStack(alignment: .leading, spacing: 5) {
                 Text(item.name)
@@ -94,11 +100,11 @@ struct RuleView: View {
     
     private var conditionRows: some View {
         VStack(spacing: 14) {
-            ForEach(item.requirement.sorted(by: { $0.value > $1.value }), id: \.key) { requirement in
-                ParameterRow(title: NSLocalizedString(requirement.key, comment: String()),
-                             content: viewModel.researchContentSetup(for: requirement.key),
-                             trailingContent: viewModel.researchTrailingSetup(for: requirement.key, of: requirement.value),
-                             researchType: viewModel.researchTypeDefinition(for: requirement.key, of: requirement.value))
+            ForEach(item.requirements.sorted { $0.item.price < $1.item.price }, id: \.self) { requirement in
+                ParameterRow(title: NSLocalizedString(requirement.item.name, comment: String()),
+                             content: viewModel.researchContentSetup(for: requirement.item.nameKey),
+                             trailingContent: viewModel.researchTrailingSetup(for: requirement.item.nameKey, of: requirement.quantity),
+                             researchType: viewModel.researchTypeDefinition(for: requirement.item.nameKey, of: requirement.quantity))
             }
             
             ParameterRow(title: Texts.ShopPage.Rule.coins,
@@ -142,13 +148,13 @@ struct RuleView: View {
         let modelContext = ModelContext(container)
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         
-        let requirements = ["One Hour": 2, "Three Hours": 1]
+        let requirements: [Requirement] = []
         
         let example = ConsumableItem.itemMockConfig(
             nameKey: Content.Uncommon.fiveMinutesTitle,
             descriptionKey: Content.Uncommon.fiveMinutesDescription,
             price: 5, rarity: .uncommon,
-            profile: Profile.configMockProfile(), requirement: requirements)
+            profile: Profile.configMockProfile(), requirements: requirements)
         
         return RuleView(item: example, viewModel: viewModel)
     } catch {

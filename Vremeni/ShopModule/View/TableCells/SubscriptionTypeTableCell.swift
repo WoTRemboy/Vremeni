@@ -11,10 +11,12 @@ import SwiftData
 struct SubscriptionTypeTableCell: View {
     
     private let type: SubscriptionType
+    private let price: String?
     private var viewModel: ShopView.ShopViewModel
     
-    init(type: SubscriptionType, viewModel: ShopView.ShopViewModel) {
+    init(type: SubscriptionType, price: String?, viewModel: ShopView.ShopViewModel) {
         self.type = type
+        self.price = price
         self.viewModel = viewModel
     }
     
@@ -22,7 +24,7 @@ struct SubscriptionTypeTableCell: View {
         HStack {
             leftLabel
             Spacer()
-            Text(type == .annual ? "3,490.00 RUB/month" : "499.00 RUB/month")
+            Text(price ?? "$--")
                     .font(.regularBody())
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
@@ -76,7 +78,7 @@ struct SubscriptionTypeTableCell: View {
         let modelContext = ModelContext(container)
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         
-        return SubscriptionTypeTableCell(type: .annual, viewModel: viewModel)
+        return SubscriptionTypeTableCell(type: .annual, price: "3,490.00 RUB/year", viewModel: viewModel)
     } catch {
         fatalError("Failed to create model container.")
     }

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 // MARK: - MachineItem Model
 
@@ -17,7 +18,9 @@ final class MachineItem: Identifiable {
     var id = UUID()
     var nameKey: String
     var descriptionKey: String
-    var image: String
+    
+    @Attribute(.externalStorage)
+    var image: Data?
     
     // General localized
     var name: String {
@@ -31,7 +34,7 @@ final class MachineItem: Identifiable {
     var price: Float
     // Progress status
     var percent: Double
-    var inProgress: Bool
+    var status: MachineStatus
     
     // MashineItem type
     var type: VremeniType
@@ -46,8 +49,8 @@ final class MachineItem: Identifiable {
     var started: Date = Date()
     var target: Date = Date()
     
-    init(id: UUID = UUID(), nameKey: String, descriptionKey: String, image: String,
-         price: Float, percent: Double = 0, inProgress: Bool = false,
+    init(id: UUID = UUID(), nameKey: String, descriptionKey: String, image: Data? = nil,
+         price: Float, percent: Double = 0, status: MachineStatus = .queued,
          type: VremeniType = .minutes, rarity: Rarity = .common, parent: ConsumableItem, applications: [String: Int]) {
         self.id = id
         self.nameKey = nameKey
@@ -55,7 +58,7 @@ final class MachineItem: Identifiable {
         self.image = image
         self.price = price
         self.percent = percent
-        self.inProgress = inProgress
+        self.status = status
         self.type = type
         self.rarity = rarity
         self.parent = parent
@@ -71,17 +74,27 @@ extension MachineItem {
         parent.ready = true
         // Adds item valuation to Profile balance
         parent.countPlus()
-        inProgress = false
+        progressDismiss()
+    }
+    
+    internal func pendingStart() {
+        withAnimation {
+            status = .pending
+        }
     }
     
     // Begins workshop processing
     internal func progressStart() {
-        inProgress = true
+        withAnimation {
+            status = .processing
+        }
     }
     
     // Ends/Cancels workshop processing
     internal func progressDismiss() {
-        inProgress = false
+        withAnimation {
+            status = .queued
+        }
     }
     
     // Sets start and target dates
@@ -99,14 +112,30 @@ extension MachineItem {
         }
     }
     
+    internal func setPendingTime(front: MachineItem?) {
+        // When it's first time
+        guard let front else { return }
+        if percent == 0 {
+            started = front.target
+            target = front.target.addingTimeInterval(TimeInterval(price * 60))
+        // Resumes after pause
+        } else {
+            let passedTime = TimeInterval((price * 60) * Float(percent / 100))
+            let remainTime = (price * 60) * Float(1 - percent / 100)
+            started = front.target.addingTimeInterval(-passedTime)
+            target = front.target.addingTimeInterval(TimeInterval(remainTime))
+        }
+    }
+    
     // Configurates MachineItem mock data
     static internal func itemMockConfig(name: String, description: String = String(),
-                                        price: Float, inProgress: Bool = false,
+                                        price: Float, image: Data? = nil,
+                                        inProgress: Bool = false,
                                         rarity: Rarity = .common, profile: Profile,
                                         applications: [String: Int] = [:]) -> MachineItem {
         let name = name
         let description = description
-        let image = "\(Int(price)).square"
+        let image = image
         let price = price
         let rarity = rarity
         let profile = profile
@@ -131,4 +160,10 @@ enum UpgrageMethod: String {
             Texts.MachinePage.Upgrade.real
         }
     }
+}
+
+enum MachineStatus: Codable {
+    case queued
+    case pending
+    case processing
 }

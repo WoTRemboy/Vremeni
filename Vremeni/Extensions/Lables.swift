@@ -84,6 +84,10 @@ final class Texts {
             static let machineDescription = NSLocalizedString("ShopPagePremiumMachineDescription", comment: "Add machine slots and boost your production.")
             static let constructorTitle = NSLocalizedString("ShopPagePremiumConstructorTitle", comment: "Item Constructor")
             static let constructorContent = NSLocalizedString("ShopPagePremiumConstructorContent", comment: "Try the ability to create your own items with rules.")
+            static let cloudTitle = NSLocalizedString("ShopPagePremiumCloudTitle", comment: "iCloud Backup")
+            static let cloudDescription = NSLocalizedString("ShopPagePremiumCloudDescription", comment: "Save your progress in the cloud with synchronization across devices.")
+            static let iconTitle = NSLocalizedString("ShopPagePremiumIconTitle", comment: "Icon Selection")
+            static let iconDescription = NSLocalizedString("ShopPagePremiumIconDescription", comment: "Select an application icon from the proposed options in Appearance.")
             
             static let subscribe = NSLocalizedString("ShopPagePremiumSubscribe", comment: "Subscribe for")
         }
@@ -105,7 +109,11 @@ final class Texts {
         static let title = NSLocalizedString("ItemCreatePageTitle", comment: "New Item")
         static let details = NSLocalizedString("ItemCreatePageDetails", comment: "Details")
         static let cancel = NSLocalizedString("ItemCreatePageCancel", comment: "Cancel")
+        static let done = NSLocalizedString("ItemCreatePageDone", comment: "Done")
         static let save = NSLocalizedString("ItemCreatePageSave", comment: "Save")
+        
+        static let preview = NSLocalizedString("ItemCreatePagePreview", comment: "Preview")
+        static let itemName = NSLocalizedString("ItemCreatePageItemName", comment: "Item name")
         
         static let price = NSLocalizedString("ItemCreatePagePrice", comment: "Price")
         static let total = NSLocalizedString("ItemCreatePageTotal", comment: "Total")
@@ -115,9 +123,11 @@ final class Texts {
         static let description = NSLocalizedString("ItemCreatePageDescription", comment: "Description")
         static let rarity = NSLocalizedString("ItemCreatePageRarity", comment: "Rarity")
         static let valuation = NSLocalizedString("ItemCreatePageValuation", comment: "Valuation")
-        static let turnover = NSLocalizedString("ItemCreatePageTurnover", comment: "Turnover (Soon)")
-        static let receiveRules = NSLocalizedString("ItemCreatePageResearchRule", comment: "Research rule")
-        static let applicationRules = NSLocalizedString("ItemCreatePageApplicationRule", comment: "Application rules")
+
+        static let researchTitle = NSLocalizedString("ItemCreatePageResearchTitle", comment: "Research Items")
+        static let research = NSLocalizedString("ItemCreatePageResearchRule", comment: "Research")
+        static let application = NSLocalizedString("ItemCreatePageApplicationRule", comment: "Application")
+        static let addItem = NSLocalizedString("ItemCreatePageAddItem", comment: "Add an item")
         static let null = NSLocalizedString("ItemCreatePageNull", comment: "Null")
     }
     
@@ -128,6 +138,7 @@ final class Texts {
         
         static let workshop = NSLocalizedString("MachinePageWorkshop", comment: "Workshop")
         static let emptyTitle = NSLocalizedString("MachinePageAddItem", comment: "Add an Item")
+        static let pending = NSLocalizedString("MachinePagePending", comment: "Pending")
         static let queue = NSLocalizedString("MachinePageQueue", comment: "Queue")
         
         static let targetTime = NSLocalizedString("MachinePageTargetTime", comment: "Target time")
@@ -170,7 +181,7 @@ final class Texts {
         static let username = NSLocalizedString("ProfilePageUsername", comment: "Username")
         static let balance = NSLocalizedString("ProfilePageBalance", comment: "Balance")
         
-        static let stats = NSLocalizedString("ProfilePageStats", comment: "Stats")
+        static let progress = NSLocalizedString("ProfilePageStats", comment: "Progress")
         static let charts = NSLocalizedString("ProfilePageCharts", comment: "Charts")
         static let count = NSLocalizedString("ProfilePageCount", comment: "Count")
         static let unlocked = NSLocalizedString("ProfilePageUnlocked", comment: "Unlocked")
@@ -184,6 +195,7 @@ final class Texts {
         
         static let app = NSLocalizedString("ProfilePageApplication", comment: "Application")
         static let notifications = NSLocalizedString("ProfilePageNotifications", comment: "Notifications")
+        static let cloud = NSLocalizedString("ProfilePageCloud", comment: "Sync")
         static let notificationsTitle = NSLocalizedString("ProfilePageNotificationsTitle", comment: "Notification Access Required")
         static let notificationsContent = NSLocalizedString("ProfilePageNotificationsContent", comment: "Please enable notifications in Settings.")
         
@@ -193,6 +205,10 @@ final class Texts {
         static let light = NSLocalizedString("ProfilePageLight", comment: "Light")
         static let dark = NSLocalizedString("ProfilePageDark", comment: "Dark")
         static let done = NSLocalizedString("ProfilePageDone", comment: "Done")
+        static let defaultIcon = NSLocalizedString("ProfilePageDefaultIcon", comment: "Default")
+        static let premium = NSLocalizedString("ProfilePagePremium", comment: "Premium")
+        static let beta = NSLocalizedString("ProfilePageImposter", comment: "Beta")
+        static let preview = "Preview"
         
         static let language = NSLocalizedString("ProfilePageLanguage", comment: "Language")
         static let languageDetails = NSLocalizedString("ProfilePageLanguageDetails", comment: "English")

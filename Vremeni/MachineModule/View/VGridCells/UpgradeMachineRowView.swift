@@ -20,12 +20,11 @@ struct UpgradeMachineRowView: View {
     
     internal var body: some View {
         HStack {
-            HStack(spacing: 10) {
+            HStack(spacing: 16) {
                 Image(systemName: type == .coins ? "v.square.fill" : "m.square.fill")
                     .resizable()
                     .scaledToFit()
                     .frame(height: 60)
-                    .padding(.leading, -6)
                 
                 VStack(alignment: .leading, spacing: 5) {
                     name

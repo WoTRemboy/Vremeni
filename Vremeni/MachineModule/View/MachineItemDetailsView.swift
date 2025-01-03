@@ -9,14 +9,17 @@ import SwiftUI
 import SwiftData
 
 struct MachineItemDetailsView: View {
-    @Environment(\.dismiss) var dismiss
     
     private let item: MachineItem
     private var viewModel: MachineView.MachineViewModel
+    private var onDismiss: () -> Void
     
-    init(item: MachineItem, viewModel: MachineView.MachineViewModel) {
+    init(item: MachineItem,
+         viewModel: MachineView.MachineViewModel,
+         onDismiss: @escaping () -> Void) {
         self.item = item
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
     
     internal var body: some View {
@@ -41,7 +44,7 @@ struct MachineItemDetailsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(Texts.ItemCreatePage.cancel) {
-                        dismiss()
+                        onDismiss()
                     }
                 }
             }
@@ -50,12 +53,17 @@ struct MachineItemDetailsView: View {
     
     private var itemHead: some View {
         VStack(spacing: 5) {
-            Image(systemName: item.image)
-                .resizable()
-                .fontWeight(.light)
-                .scaledToFit()
-                .frame(width: 200)
-                .foregroundStyle(Color.accentColor, Color.cyan)
+            if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .clipShape(.buttonBorder)
+                    .frame(width: 200, height: 200)
+            } else {
+                Image.Placeholder.placeholder1to1
+                    .resizable()
+                    .clipShape(.buttonBorder)
+                    .frame(width: 200, height: 200)
+            }
             
             Text(item.name)
                 .font(.segmentTitle())
@@ -77,15 +85,15 @@ struct MachineItemDetailsView: View {
             ParameterRow(title: Texts.ItemCreatePage.description,
                          content: item.itemDescription.isEmpty ? Texts.ItemCreatePage.null : item.itemDescription)
             
-            if item.inProgress {
+            if item.status == .processing {
                 ParameterRow(title: Texts.MachinePage.targetTime,
                              content: Date.itemFormatter.string(from: item.target))
             } else {
-                ParameterRow(title: Texts.MachinePage.potentialTime,
+                ParameterRow(title: item.status == .queued ? Texts.MachinePage.potentialTime : Texts.MachinePage.targetTime,
                              content: viewModel.remainingTime(for: item))
             }
             
-            ParameterRow(title: Texts.ItemCreatePage.applicationRules,
+            ParameterRow(title: Texts.ItemCreatePage.application,
                          contentArray: viewModel.applicationDesctiption(item: item))
             
         }
@@ -94,7 +102,7 @@ struct MachineItemDetailsView: View {
     private var buyButton: some View {
         Button(action: {
             withAnimation(.snappy) {
-                if item.inProgress {
+                if item.status == .processing {
                     viewModel.progressDismiss(item: item)
                     viewModel.notificationRemove(for: item.id)
                 } else {
@@ -103,10 +111,10 @@ struct MachineItemDetailsView: View {
                         viewModel.notificationSetup(for: item)
                     }
                 }
-                dismiss()
+                onDismiss()
             }
         }) {
-            if item.inProgress {
+            if item.status == .processing {
                 Text(Texts.MachinePage.pause)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             } else {
@@ -119,7 +127,7 @@ struct MachineItemDetailsView: View {
         .minimumScaleFactor(0.4)
         .buttonStyle(.bordered)
         .tint(item.percent != 0 ? Color.orange : Color.green)
-        .disabled(!item.inProgress && !viewModel.isSlotAvailable())
+        .disabled((item.status != .processing) && !viewModel.isSlotAvailable())
     }
 }
 
@@ -131,7 +139,7 @@ struct MachineItemDetailsView: View {
         let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
         
         let example = MachineItem.itemMockConfig(name: "One Minute", description: "One minute is a whole 60 seconds!", price: 50, rarity: .uncommon, profile: Profile.configMockProfile())
-        return MachineItemDetailsView(item: example, viewModel: viewModel)
+        return MachineItemDetailsView(item: example, viewModel: viewModel, onDismiss: {})
     } catch {
         fatalError("Failed to create model container.")
     }

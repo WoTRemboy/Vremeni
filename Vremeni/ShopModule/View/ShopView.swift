@@ -17,7 +17,8 @@ struct ShopView: View {
     private let modelContext: ModelContext
     
     // Selected item to show & dismiss details sheet page
-    @State private var selected: ConsumableItem? = nil
+    @State private var selectedResearched: ConsumableItem? = nil
+    @State private var selectedLocked: ConsumableItem? = nil
     @Environment(\.dismissSearch) private var dismissSearch
     
     // Show and dismiss add item sheet page
@@ -75,6 +76,8 @@ struct ShopView: View {
                     }
                 }
                 .animation(.easeInOut, value: viewModel.enableStatus)
+                .animation(.easeInOut, value: searchText)
+                .animation(.easeInOut, value: viewModel.rarityFilter)
                 // ScrollView params
                 .scrollDisabled(viewModel.items.isEmpty)
                 .scrollDismissesKeyboard(.immediately)
@@ -97,17 +100,55 @@ struct ShopView: View {
                         toolBarButtonPremium
                     }
                 }
-                .toolbarBackground(.visible, for: .tabBar)
                 
             }
+            .sheet(isPresented: $showingPremiumSheet) {
+                PremiumBuyView(viewModel: viewModel) {
+                    showingPremiumSheet.toggle()
+                }
+            }
+            .sheet(isPresented: $showingAddItemSheet) {
+                ConsumableItemCreate(viewModel: viewModel) {
+                    showingAddItemSheet.toggle()
+                }
+            }
+            // Item details sheet param
+            .sheet(item: $selectedResearched) { item in
+                ConsumableItemDetails(item: item, viewModel: viewModel) {
+                    selectedResearched = nil
+                }
+            }
+            // Item details sheet param
+            .sheet(item: $selectedLocked) { item in
+                ConsumableItemDetails(item: item, viewModel: viewModel) {
+                    selectedLocked = nil
+                }
+            }
+            
+            
             // TabBar params & navigation
             .tabItem {
                 Image.TabBar.shop
                 Text(Texts.ShopPage.title)
             }
+            
             MachineView(modelContext: modelContext)
+                .tabItem {
+                    Image.TabBar.machine
+                    Text(Texts.MachinePage.title)
+                }
+            
             InventoryView(modelContext: modelContext)
+                .tabItem {
+                    Image.TabBar.inventory
+                    Text(Texts.InventoryPage.title)
+                }
+            
             ProfileView(modelContext: modelContext)
+                .tabItem {
+                    Image.TabBar.profile
+                    Text(Texts.ProfilePage.title)
+                }
         }
     }
     
@@ -119,9 +160,6 @@ struct ShopView: View {
         } label: {
             Image.ShopPage.premium
         }
-        .sheet(isPresented: $showingPremiumSheet) {
-            PremiumBuyView(viewModel: viewModel)
-        }
     }
     
     private var toolBarButtonPlus: some View {
@@ -129,9 +167,6 @@ struct ShopView: View {
             showingAddItemSheet.toggle()
         } label: {
             Image.ShopPage.plus
-        }
-        .sheet(isPresented: $showingAddItemSheet) {
-            ConsumableItemCreate(viewModel: viewModel)
         }
     }
     
@@ -189,12 +224,8 @@ struct ShopView: View {
                 // Available item cell
                 ShopItemGridCell(item: item, viewModel: viewModel)
                     .onTapGesture {
-                        selected = item
+                        selectedResearched = item
                     }
-            }
-            // Item details sheet param
-            .sheet(item: $selected) { item in
-                ConsumableItemDetails(item: item, viewModel: viewModel)
             }
         }
     }
@@ -208,12 +239,8 @@ struct ShopView: View {
             ForEach(searchResults) { item in
                 ShopItemGridCellLocked(item: item, viewModel: viewModel)
                     .onTapGesture {
-                        selected = item
+                        selectedLocked = item
                     }
-            }
-            // Item details sheet param
-            .sheet(item: $selected) { item in
-                ConsumableItemDetails(item: item, viewModel: viewModel)
             }
         }
     }

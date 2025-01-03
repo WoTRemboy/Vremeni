@@ -50,7 +50,7 @@ struct SplashScreenView: View {
     private var content: some View {
         ZStack {
             // Background color
-            Color.BackColors.backSplash
+            Color.BackColors.backDefault
                 .ignoresSafeArea()
             
             // Logo image
