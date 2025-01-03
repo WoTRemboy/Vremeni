@@ -100,7 +100,6 @@ struct ShopView: View {
                         toolBarButtonPremium
                     }
                 }
-                .toolbarBackground(.visible, for: .tabBar)
                 
             }
             .sheet(isPresented: $showingPremiumSheet) {

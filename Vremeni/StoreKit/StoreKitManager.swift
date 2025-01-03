@@ -124,9 +124,9 @@ final class StoreKitManager: ObservableObject {
     
     internal func fetchProducts() async {
         do {
-            let storeProducts = try await Product.products(for: ["Vremeni_Machine_Slot_Upgrade"])
+            let _ = try await Product.products(for: ["Vremeni_Machine_Slot_Upgrade"])
             DispatchQueue.main.async {
-                self.products = storeProducts
+//                self.products = storeProducts
             }
         } catch {
             print("Failed to fetch products: \(error)")

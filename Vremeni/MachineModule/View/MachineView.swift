@@ -47,6 +47,7 @@ struct MachineView: View {
             // Collection view data update
             .onAppear {
                 viewModel.updateOnAppear()
+                viewModel.showDelayStart()
             }
             // Shows ready banner when item is ready
             .onChange(of: viewModel.readyNotification.ready) {
@@ -59,7 +60,6 @@ struct MachineView: View {
             // Toolbar params
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(.visible, for: .tabBar)
         }
         // Shows item progress details
         .sheet(item: $selectedProcessing) { item in
@@ -178,12 +178,14 @@ struct MachineView: View {
                     // Paused progress item cell
                     MachineViewGridCell(item: item, paused: true, viewModel: viewModel)
                         .onTapGesture {
+                            guard viewModel.availableToShow else { return }
                             selectedPending = item
                         }
                 } else {
                     // Resular queue item cell
                     QueueMachineViewGridCell(item: item, viewModel: viewModel)
                         .onTapGesture {
+                            guard viewModel.availableToShow else { return }
                             selectedPending = item
                         }
                     
@@ -202,12 +204,14 @@ struct MachineView: View {
                     // Paused progress item cell
                     MachineViewGridCell(item: item, paused: true, viewModel: viewModel)
                         .onTapGesture {
+                            guard viewModel.availableToShow else { return }
                             selectedQueued = item
                         }
                 } else {
                     // Resular queue item cell
                     QueueMachineViewGridCell(item: item, viewModel: viewModel)
                         .onTapGesture {
+                            guard viewModel.availableToShow else { return }
                             selectedQueued = item
                         }
                 }

@@ -39,7 +39,6 @@ struct ProfileView: View {
             .scrollIndicators(.hidden)
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(.visible, for: .tabBar)
         }
     }
     

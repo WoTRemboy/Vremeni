@@ -58,7 +58,6 @@ struct InventoryView: View {
                     toolBarProgressView
                 }
             }
-            .toolbarBackground(.visible, for: .tabBar)
         }
         .sheet(item: $selected) { item in
             InventoryItemDetailsView(item: item, viewModel: viewModel) {
