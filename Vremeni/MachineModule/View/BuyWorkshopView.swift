@@ -9,13 +9,15 @@ import SwiftUI
 import SwiftData
 
 struct BuyWorkshopView: View {
-    @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var storeKitService: StoreKitManager
     
     private let viewModel: MachineView.MachineViewModel
+    private var onDismiss: () -> Void
     
-    init(viewModel: MachineView.MachineViewModel) {
+    init(viewModel: MachineView.MachineViewModel,
+         onDismiss: @escaping () -> Void) {
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
     
     internal var body: some View {
@@ -33,7 +35,7 @@ struct BuyWorkshopView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(Texts.ItemCreatePage.cancel) {
-                        dismiss()
+                        onDismiss()
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
@@ -96,12 +98,12 @@ struct BuyWorkshopView: View {
             case .coins:
                 withAnimation(.snappy) {
                     viewModel.slotPurchase(real: false)
-                    dismiss()
+                    onDismiss()
                 }
             case .money:
                 Task {
                     try await storeKitService.purchaseUpgrade()
-                    dismiss()
+                    onDismiss()
                 }
             }
         }) {
@@ -130,7 +132,7 @@ struct BuyWorkshopView: View {
         let viewModel = MachineView.MachineViewModel(modelContext: modelContext)
         let enviromentObject = StoreKitManager()
         
-        return BuyWorkshopView(viewModel: viewModel)
+        return BuyWorkshopView(viewModel: viewModel, onDismiss: {})
             .environmentObject(enviromentObject)
     } catch {
         fatalError("Failed to create model container.")

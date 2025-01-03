@@ -103,14 +103,53 @@ struct ShopView: View {
                 .toolbarBackground(.visible, for: .tabBar)
                 
             }
+            .sheet(isPresented: $showingPremiumSheet) {
+                PremiumBuyView(viewModel: viewModel) {
+                    showingPremiumSheet.toggle()
+                }
+            }
+            .sheet(isPresented: $showingAddItemSheet) {
+                ConsumableItemCreate(viewModel: viewModel) {
+                    showingAddItemSheet.toggle()
+                }
+            }
+            // Item details sheet param
+            .sheet(item: $selectedResearched) { item in
+                ConsumableItemDetails(item: item, viewModel: viewModel) {
+                    selectedResearched = nil
+                }
+            }
+            // Item details sheet param
+            .sheet(item: $selectedLocked) { item in
+                ConsumableItemDetails(item: item, viewModel: viewModel) {
+                    selectedLocked = nil
+                }
+            }
+            
+            
             // TabBar params & navigation
             .tabItem {
                 Image.TabBar.shop
                 Text(Texts.ShopPage.title)
             }
+            
             MachineView(modelContext: modelContext)
+                .tabItem {
+                    Image.TabBar.machine
+                    Text(Texts.MachinePage.title)
+                }
+            
             InventoryView(modelContext: modelContext)
+                .tabItem {
+                    Image.TabBar.inventory
+                    Text(Texts.InventoryPage.title)
+                }
+            
             ProfileView(modelContext: modelContext)
+                .tabItem {
+                    Image.TabBar.profile
+                    Text(Texts.ProfilePage.title)
+                }
         }
     }
     
@@ -122,9 +161,6 @@ struct ShopView: View {
         } label: {
             Image.ShopPage.premium
         }
-        .sheet(isPresented: $showingPremiumSheet) {
-            PremiumBuyView(viewModel: viewModel)
-        }
     }
     
     private var toolBarButtonPlus: some View {
@@ -132,9 +168,6 @@ struct ShopView: View {
             showingAddItemSheet.toggle()
         } label: {
             Image.ShopPage.plus
-        }
-        .sheet(isPresented: $showingAddItemSheet) {
-            ConsumableItemCreate(viewModel: viewModel)
         }
     }
     
@@ -195,10 +228,6 @@ struct ShopView: View {
                         selectedResearched = item
                     }
             }
-            // Item details sheet param
-            .sheet(item: $selectedResearched) { item in
-                ConsumableItemDetails(item: item, viewModel: viewModel)
-            }
         }
     }
     
@@ -213,10 +242,6 @@ struct ShopView: View {
                     .onTapGesture {
                         selectedLocked = item
                     }
-            }
-            // Item details sheet param
-            .sheet(item: $selectedLocked) { item in
-                ConsumableItemDetails(item: item, viewModel: viewModel)
             }
         }
     }

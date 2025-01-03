@@ -41,10 +41,6 @@ struct ProfileView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.visible, for: .tabBar)
         }
-        .tabItem {
-            Image.TabBar.profile
-            Text(Texts.ProfilePage.title)
-        }
     }
     
     private var profileSection: some View {
@@ -57,10 +53,13 @@ struct ProfileView: View {
                         details: viewModel.profile.name,
                         chevron: true)
             }
-            .sheet(isPresented: $showingUsernameSheet, content: {
-                NewUsernameView(username: viewModel.profile.name, viewModel: viewModel)
+            .sheet(isPresented: $showingUsernameSheet) {
+                NewUsernameView(username: viewModel.profile.name,
+                                viewModel: viewModel) {
+                    showingUsernameSheet.toggle()
+                }
                     .presentationDetents([.height(150)])
-            })
+            }
             
             NavigationLink(destination: ChartsDetailsView(type: .inventory, viewModel: viewModel)) {
                 LinkRow(title: Texts.ProfilePage.balance,
@@ -160,7 +159,9 @@ struct ProfileView: View {
                     chevron: true)
         }
         .sheet(isPresented: $showingThemeSheet) {
-            ThemeChangeView(viewModel: viewModel, iconVM: iconVM)
+            ThemeChangeView(viewModel: viewModel, iconVM: iconVM) {
+                showingThemeSheet.toggle()
+            }
                 .presentationDetents([.height(480)])
                 .interactiveDismissDisabled()
         }

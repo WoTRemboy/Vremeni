@@ -9,16 +9,19 @@ import SwiftUI
 import SwiftData
 
 struct ConsumableItemAddView: View {
-    @Environment(\.dismiss) var dismiss
     
     @Binding var item: ConsumableItem
     @State private var searchText = String()
     
     private var viewModel: ShopView.ShopViewModel
+    private var onDismiss: () -> Void
     
-    init(item: Binding<ConsumableItem>, viewModel: ShopView.ShopViewModel) {
+    init(item: Binding<ConsumableItem>,
+         viewModel: ShopView.ShopViewModel,
+         onDismiss: @escaping () -> Void) {
         self._item = item
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
     
     internal var body: some View {
@@ -30,7 +33,7 @@ struct ConsumableItemAddView: View {
                     .toolbar {
                         ToolbarItem(placement: .topBarLeading) {
                             Button(Texts.ItemCreatePage.cancel) {
-                                dismiss()
+                                onDismiss()
                             }
                         }
                         
@@ -56,7 +59,7 @@ struct ConsumableItemAddView: View {
                 Button(action: {
                     withAnimation(.snappy) {
                         item.addRequirement(item: requirement)
-                        dismiss()
+                        onDismiss()
                     }
                 }) {
                     TurnoverItemListRow(item: requirement)
@@ -90,7 +93,7 @@ struct ConsumableItemAddView: View {
         
         let example = ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle, price: 1, profile: Profile.configMockProfile())
         
-        return ConsumableItemAddView(item: .constant(example), viewModel: viewModel)
+        return ConsumableItemAddView(item: .constant(example), viewModel: viewModel, onDismiss: {})
             .modelContainer(container)
     } catch {
         fatalError("Failed to create model container.")

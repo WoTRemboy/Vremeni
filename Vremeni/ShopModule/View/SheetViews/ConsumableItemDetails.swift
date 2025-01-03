@@ -13,16 +13,19 @@ struct ConsumableItemDetails: View {
     // MARK: - Properties
     
     @EnvironmentObject var bannerService: BannerViewModel
-    @Environment(\.dismiss) var dismiss
     
     private let item: ConsumableItem
     private var viewModel: ShopView.ShopViewModel
+    private var onDismiss: () -> Void
     
     // MARK: - Initialization
     
-    init(item: ConsumableItem, viewModel: ShopView.ShopViewModel) {
+    init(item: ConsumableItem,
+         viewModel: ShopView.ShopViewModel,
+         onDismiss: @escaping () -> Void) {
         self.item = item
         self.viewModel = viewModel
+        self.onDismiss = onDismiss
     }
     
     // MARK: - Body view
@@ -55,7 +58,7 @@ struct ConsumableItemDetails: View {
                 // Dismiss button
                 ToolbarItem(placement: .topBarLeading) {
                     Button(Texts.ItemCreatePage.cancel) {
-                        dismiss()
+                        onDismiss()
                     }
                 }
             }
@@ -127,7 +130,7 @@ struct ConsumableItemDetails: View {
                     bannerService.setBanner(banner: .added(message: Texts.Banner.added))
                 }
             }
-            dismiss()
+            onDismiss()
         }) {
             // Button definition depending on enable status
             if item.enabled {
@@ -174,7 +177,7 @@ struct ConsumableItemDetails: View {
                            RuleItem.threeHours.rawValue : 3],
             enabled: false)
         
-        return ConsumableItemDetails(item: example, viewModel: viewModel)
+        return ConsumableItemDetails(item: example, viewModel: viewModel, onDismiss: {})
             .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")

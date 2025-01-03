@@ -11,7 +11,6 @@ import SwiftData
 struct ThemeChangeView: View {
         
     @Environment(\.colorScheme) private var scheme
-    @Environment(\.dismiss) var dismiss
     
     @AppStorage(Texts.UserDefaults.theme) private var userTheme: Theme = .systemDefault
     @State private var circleOffset: CGSize = .zero
@@ -19,10 +18,14 @@ struct ThemeChangeView: View {
     
     private var viewModel: ProfileView.ProfileViewModel
     private var iconVM: IconChangerViewModel
+    private var onDismiss: () -> Void
     
-    init(viewModel: ProfileView.ProfileViewModel, iconVM: IconChangerViewModel) {
+    init(viewModel: ProfileView.ProfileViewModel,
+         iconVM: IconChangerViewModel,
+         onDismiss: @escaping () -> Void) {
         self.viewModel = viewModel
         self.iconVM = iconVM
+        self.onDismiss = onDismiss
     }
     
     internal var body: some View {
@@ -55,7 +58,7 @@ struct ThemeChangeView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(Texts.ProfilePage.done) {
-                        dismiss()
+                        onDismiss()
                     }
                 }
             }
@@ -110,7 +113,7 @@ struct ThemeChangeView: View {
         let container = try ModelContainer(for: ConsumableItem.self, configurations: config)
         let modelContext = ModelContext(container)
         let viewModel = ProfileView.ProfileViewModel(modelContext: modelContext)
-        return ThemeChangeView(viewModel: viewModel, iconVM: IconChangerViewModel())
+        return ThemeChangeView(viewModel: viewModel, iconVM: IconChangerViewModel(), onDismiss: {})
     } catch {
         fatalError("Failed to create model container.")
     }

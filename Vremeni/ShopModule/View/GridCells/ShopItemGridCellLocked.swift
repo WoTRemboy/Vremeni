@@ -119,7 +119,9 @@ struct ShopItemGridCellLocked: View {
                 if (item.premium && viewModel.premium) || !item.premium {
                     RuleView(item: item, viewModel: viewModel)
                 } else {
-                    PremiumBuyView(viewModel: viewModel)
+                    PremiumBuyView(viewModel: viewModel) {
+                        selected = nil
+                    }
                 }
             }
             // Button layout params

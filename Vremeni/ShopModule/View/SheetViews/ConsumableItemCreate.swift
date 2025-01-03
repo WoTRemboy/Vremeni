@@ -13,8 +13,6 @@ struct ConsumableItemCreate: View {
     
     // MARK: - Properties
     
-    @Environment(\.dismiss) var dismiss
-    
     @State private var item: ConsumableItem
     @State private var showingResearchItemList = false
     @State private var isKeyboardVisible = false
@@ -22,14 +20,16 @@ struct ConsumableItemCreate: View {
     @State private var selectedPhoto: PhotosPickerItem?
     
     private var viewModel: ShopView.ShopViewModel
+    private var onDismiss: () -> Void
     
     // MARK: - Initialization
     
-    init(viewModel: ShopView.ShopViewModel) {
+    init(viewModel: ShopView.ShopViewModel, onDismiss: @escaping () -> Void) {
         self.viewModel = viewModel
         self.item = ConsumableItem.itemMockConfig(
             nameKey: String(), price: 1,
             profile: viewModel.profile, enabled: false)
+        self.onDismiss = onDismiss
     }
     
     // MARK: - Body View
@@ -79,7 +79,7 @@ struct ConsumableItemCreate: View {
     // Dismiss button
     private var cancelButton: some View {
         Button(Texts.ItemCreatePage.cancel) {
-            dismiss()
+            onDismiss()
         }
     }
     
@@ -92,7 +92,7 @@ struct ConsumableItemCreate: View {
             } else {
                 withAnimation(.snappy) {
                     viewModel.saveItem(item)
-                    dismiss()
+                    onDismiss()
                 }
             }
         } label: {
@@ -172,7 +172,9 @@ struct ConsumableItemCreate: View {
                     .font(.regularBody())
             }
             .sheet(isPresented: $showingResearchItemList) {
-                ConsumableItemAddView(item: $item, viewModel: viewModel)
+                ConsumableItemAddView(item: $item, viewModel: viewModel) {
+                    showingResearchItemList.toggle()
+                }
             }
         }
     }
@@ -237,7 +239,7 @@ struct ConsumableItemCreate: View {
         let modelContext = ModelContext(container)
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         
-        return ConsumableItemCreate(viewModel: viewModel)
+        return ConsumableItemCreate(viewModel: viewModel, onDismiss: {})
             .modelContainer(container)
     } catch {
         fatalError("Failed to create model container.")
