@@ -106,6 +106,66 @@ extension Image {
         static let archive = Image(systemName: "archivebox")
         static let stats = Image(systemName: "chart.xyaxis.line")
     }
+    
+    enum Content {
+        enum Common {
+            static let oneMinute = Image("OneMinuteCommon")
+            static let twoMinutes = Image("TwoMinutesCommon")
+            static let threeMinutes = Image("ThreeMinutesCommon")
+            static let fourMinutes = Image("FourMinutesCommon")
+            static let fiveMinutes = Image("FiveMinutesCommon")
+            static let sixMinutes = Image("SixMinutesCommon")
+            static let sevenMinutes = Image("SevenMinutesCommon")
+            static let eightMinutes = Image("EightMinutesCommon")
+            static let nineMinutes = Image("NineMinutesCommon")
+            static let tenMinutes = Image("TenMinutesCommon")
+        }
+        
+        enum Uncommon {
+            static let twelveMinutes = Image("12MinutesUncommon")
+            static let twentyMinutes = Image("20MinutesUncommon")
+            static let thirtyFiveMinutes = Image("35MinutesUncommon")
+            static let oneHourFifteenMinutes = Image("115MinutesUncommon")
+            static let twoHoursThirtyMinutes = Image("230MinutesUncommon")
+            static let fourHours = Image("400MinutesUncommon")
+            static let tenHours = Image("1000MinutesUncommon")
+        }
+        
+        enum Rare {
+            static let fourteenMinutes = Image("14MinutesRare")
+            static let thirtyFourMinutes = Image("34MinutesRare")
+            static let oneHourNinteenMinutes = Image("119MinutesRare")
+            static let twoHoursFourtyNineMinutes = Image("249MinutesRare")
+        }
+        
+        enum Epic {
+            static let fifteenMinutes = Image("15MinutesEpic")
+            static let thirtyMinutes = Image("30MinutesEpic")
+            static let fourtyFiveMinutes = Image("45MinutesEpic")
+            static let oneHour = Image("100MinutesEpic")
+        }
+        
+        enum Legendary {
+            static let seventeenMinutes = Image("17MinutesLegendary")
+            static let thirtyTwoMinutes = Image("32MinutesLegendary")
+            static let fiftyTwoMinutes = Image("52MinutesLegendary")
+            static let oneHourTwentyTwoMinutes = Image("122MinutesLegendary")
+        }
+        
+        enum Mythic {
+            static let ninteenMinutes = Image("19MinutesMythic")
+            static let twentyNineMinutes = Image("29MinutesMythic")
+            static let thirtyNineMinutes = Image("39MinutesMythic")
+            static let fourtyNineMinutes = Image("49MinutesMythic")
+        }
+        
+        enum Exotic {
+            static let oneHourThirtyMinutes = Image("130MinutesExotic")
+            static let threeHours = Image("300MinutesExotic")
+            static let fourHoursThirtyMinutes = Image("430MinutesExotic")
+            static let sixHours = Image("600MinutesExotic")
+        }
+    }
 }
 
 

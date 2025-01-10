@@ -234,7 +234,7 @@ extension ProfileView {
         }
         
         internal func addSamples() {
-            let oneMinute = ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle,
+            let oneMinute = ConsumableItem.itemConfig(nameKey: Content.Common.oneMinuteTitle,
                                                         descriptionKey: Content.Common.oneMinuteDescription,
                                                         price: 1,
                                                         premium: false, profile: profile,
@@ -243,7 +243,7 @@ extension ProfileView {
                                                                        RuleItem.sevenHours.rawValue : 7]
                                                        )
             
-            let threeMinutes = ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle,
+            let threeMinutes = ConsumableItem.itemConfig(nameKey: Content.Common.threeMinutesTitle,
                                                            descriptionKey: Content.Common.threeMinutesDescription,
                                                            price: 3,
                                                            premium: false, rarity: .common,
@@ -253,7 +253,7 @@ extension ProfileView {
                                                                           RuleItem.tenHours.rawValue : 10],
                                                            enabled: false)
             
-            let fiveMinutes = ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
+            let fiveMinutes = ConsumableItem.itemConfig(nameKey: Content.Uncommon.fiveMinutesTitle,
                                                             descriptionKey: Content.Uncommon.fiveMinutesDescription,
                                                             price: 5,
                                                             premium: false, rarity: .uncommon,
@@ -262,7 +262,7 @@ extension ProfileView {
                                                             applications: [RuleItem.sevenHours.rawValue : 7],
                                                             enabled: false)
             
-            let sevenMinutes = ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
+            let sevenMinutes = ConsumableItem.itemConfig(nameKey: Content.Uncommon.sevenMinutesTitle,
                                                              descriptionKey: Content.Uncommon.sevenMinutesDescription,
                                                              price: 7,
                                                              premium: false, rarity: .uncommon,
@@ -271,7 +271,7 @@ extension ProfileView {
                                                              applications: [RuleItem.tenHours.rawValue : 10],
                                                              enabled: false)
             
-            let tenMinutes = ConsumableItem.itemMockConfig(nameKey: Content.Rare.tenMinutesTitle,
+            let tenMinutes = ConsumableItem.itemConfig(nameKey: Content.Rare.tenMinutesTitle,
                                                            descriptionKey: Content.Rare.tenMinutesDescription,
                                                            price: 10,
                                                            premium: false, rarity: .rare,

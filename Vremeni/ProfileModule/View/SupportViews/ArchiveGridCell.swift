@@ -132,7 +132,7 @@ struct ArchiveGridCell: View {
         let modelContext = ModelContext(container)
         
         let viewModel = ProfileView.ProfileViewModel(modelContext: modelContext)
-        let example = ConsumableItem.itemMockConfig(
+        let example = ConsumableItem.itemConfig(
             nameKey: Content.Common.oneMinuteTitle,
             descriptionKey: Content.Common.oneMinuteDescription,
             price: 1, profile: Profile.configMockProfile(),

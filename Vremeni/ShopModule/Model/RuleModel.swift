@@ -31,13 +31,13 @@ extension Rule {
         let price: Float = 5
         
         var requirement = [String: Int]()
-        let one = ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle, price: 1, profile: Profile.configMockProfile())
-        let two = ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle, price: 2, profile: Profile.configMockProfile())
+        let one = ConsumableItem.itemConfig(nameKey: Content.Common.oneMinuteTitle, price: 1, profile: Profile.configMockProfile())
+        let two = ConsumableItem.itemConfig(nameKey: Content.Common.threeMinutesTitle, price: 2, profile: Profile.configMockProfile())
         
         requirement[one.nameKey] = 1
         requirement[two.nameKey] = 2
         
-        let result = ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle, price: 5, profile: Profile.configMockProfile())
+        let result = ConsumableItem.itemConfig(nameKey: Content.Uncommon.fiveMinutesTitle, price: 5, profile: Profile.configMockProfile())
         
         return Rule(price: price, requirement: requirement, result: result)
     }

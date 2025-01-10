@@ -150,7 +150,7 @@ struct RuleView: View {
         
         let requirements: [Requirement] = []
         
-        let example = ConsumableItem.itemMockConfig(
+        let example = ConsumableItem.itemConfig(
             nameKey: Content.Uncommon.fiveMinutesTitle,
             descriptionKey: Content.Uncommon.fiveMinutesDescription,
             price: 5, rarity: .uncommon,

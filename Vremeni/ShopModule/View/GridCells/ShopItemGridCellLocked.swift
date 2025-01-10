@@ -167,7 +167,7 @@ struct ShopItemGridCellLocked: View {
         let modelContext = ModelContext(container)
         
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
-        let example = ConsumableItem.itemMockConfig(
+        let example = ConsumableItem.itemConfig(
             nameKey: Content.Common.oneMinuteTitle,
             descriptionKey: Content.Common.oneMinuteDescription,
             price: 1, profile: Profile.configMockProfile(),

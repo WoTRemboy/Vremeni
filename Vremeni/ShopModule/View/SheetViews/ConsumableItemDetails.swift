@@ -166,7 +166,7 @@ struct ConsumableItemDetails: View {
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         let environmentObject = BannerViewModel()
         
-        let example = ConsumableItem.itemMockConfig(
+        let example = ConsumableItem.itemConfig(
             nameKey: Content.Common.threeMinutesTitle,
             descriptionKey: Content.Common.threeMinutesDescription,
             price: 3,

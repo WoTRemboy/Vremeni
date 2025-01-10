@@ -26,7 +26,7 @@ struct ConsumableItemCreate: View {
     
     init(viewModel: ShopView.ShopViewModel, onDismiss: @escaping () -> Void) {
         self.viewModel = viewModel
-        self.item = ConsumableItem.itemMockConfig(
+        self.item = ConsumableItem.itemConfig(
             nameKey: String(), price: 1,
             profile: viewModel.profile, enabled: false)
         self.onDismiss = onDismiss

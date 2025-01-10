@@ -92,14 +92,14 @@ extension InventoryView {
         
         internal func addSamples() {
             let items = [
-                ConsumableItem.itemMockConfig(
+                ConsumableItem.itemConfig(
                     nameKey: Content.Common.oneMinuteTitle,
                     descriptionKey: Content.Common.oneMinuteDescription,
                     price: 1,
                     profile: profile,
                     ready: true),
                          
-                ConsumableItem.itemMockConfig(
+                ConsumableItem.itemConfig(
                     nameKey: Content.Common.threeMinutesTitle,
                     descriptionKey: Content.Common.threeMinutesDescription,
                     price: 3,
@@ -107,7 +107,7 @@ extension InventoryView {
                     profile: profile,
                     ready: true),
                          
-                ConsumableItem.itemMockConfig(
+                ConsumableItem.itemConfig(
                     nameKey: Content.Uncommon.fiveMinutesTitle,
                     descriptionKey: Content.Uncommon.fiveMinutesDescription,
                     price: 5,
@@ -115,7 +115,7 @@ extension InventoryView {
                     profile: profile,
                     ready: true),
                 
-                ConsumableItem.itemMockConfig(
+                ConsumableItem.itemConfig(
                     nameKey: Content.Uncommon.sevenMinutesTitle,
                     descriptionKey: Content.Uncommon.sevenMinutesDescription,
                     price: 7,

@@ -81,7 +81,7 @@ struct InventoryGridCell: View {
         let modelContext = ModelContext(container)
         
         let viewModel = InventoryView.InventoryViewModel(modelContext: modelContext)
-        let example = ConsumableItem.itemMockConfig(
+        let example = ConsumableItem.itemConfig(
             nameKey: Content.Common.oneMinuteTitle,
             price: 1, profile: Profile.configMockProfile(),
             enabled: true)
