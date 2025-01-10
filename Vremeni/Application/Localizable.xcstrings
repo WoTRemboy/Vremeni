@@ -151,6 +151,40 @@
         }
       }
     },
+    "ContentCommonEightMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eight Minutes is a whole 480 seconds!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Восемь минут - это 480 секунд!"
+          }
+        }
+      }
+    },
+    "ContentCommonEightMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eight Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Восемь минут"
+          }
+        }
+      }
+    },
     "ContentCommonFiveMinutesDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -181,6 +215,74 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Пять минут"
+          }
+        }
+      }
+    },
+    "ContentCommonFourMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Four Minutes is a whole 240 seconds!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Четыре минуты - это 240 секунд!"
+          }
+        }
+      }
+    },
+    "ContentCommonFourMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Four Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Четыре минуты"
+          }
+        }
+      }
+    },
+    "ContentCommonNineMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nine Minutes is a whole 540 seconds!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Девять минут - это 540 секунд!"
+          }
+        }
+      }
+    },
+    "ContentCommonNineMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nine Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Девять минут"
           }
         }
       }
@@ -253,6 +355,40 @@
         }
       }
     },
+    "ContentCommonSixMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Six Minutes is a whole 360 seconds!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шесть минут - это 360 минут!"
+          }
+        }
+      }
+    },
+    "ContentCommonSixMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Six Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Шесть минут"
+          }
+        }
+      }
+    },
     "ContentCommonTenMinutesDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -317,6 +453,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Три минуты"
+          }
+        }
+      }
+    },
+    "ContentCommonTwoMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Two Minutes is a whole 120 seconds!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Две минуты - это 120 секунд!"
+          }
+        }
+      }
+    },
+    "ContentCommonTwoMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Two Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Две минуты"
           }
         }
       }

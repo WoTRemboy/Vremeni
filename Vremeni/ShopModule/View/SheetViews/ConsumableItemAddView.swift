@@ -91,7 +91,7 @@ struct ConsumableItemAddView: View {
         let modelContext = ModelContext(container)
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         
-        let example = ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle, price: 1, profile: Profile.configMockProfile())
+        let example = ConsumableItem.itemConfig(nameKey: Content.Common.oneMinuteTitle, price: 1, profile: Profile.configMockProfile())
         
         return ConsumableItemAddView(item: .constant(example), viewModel: viewModel, onDismiss: {})
             .modelContainer(container)

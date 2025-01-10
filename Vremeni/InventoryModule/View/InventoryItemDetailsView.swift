@@ -101,7 +101,7 @@ struct InventoryItemDetailsView: View {
         let modelContext = ModelContext(container)
         let viewModel = InventoryView.InventoryViewModel(modelContext: modelContext)
         
-        let example = ConsumableItem.itemMockConfig(
+        let example = ConsumableItem.itemConfig(
             nameKey: Content.Common.oneMinuteTitle,
             descriptionKey: Content.Common.oneMinuteDescription,
             price: 50, rarity: .uncommon,

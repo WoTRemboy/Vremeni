@@ -155,7 +155,7 @@ struct ShopItemGridCell: View {
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         let environmentObject = BannerViewModel()
         
-        let example = ConsumableItem.itemMockConfig(
+        let example = ConsumableItem.itemConfig(
             nameKey: Content.Common.oneMinuteTitle,
             price: 1, profile: Profile.configMockProfile(),
             enabled: true)

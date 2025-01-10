@@ -137,7 +137,7 @@ struct ConsumableItemDetails: View {
                 Text(Texts.ShopPage.addToMachine)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             } else {
-                NavigationLink(destination: RuleView(item: item, viewModel: viewModel, details: true),
+                NavigationLink(destination: RuleView(item: item, viewModel: viewModel, details: true, onDismiss: {}),
                                label: {
                     Text(Texts.ShopPage.research)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -166,15 +166,15 @@ struct ConsumableItemDetails: View {
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         let environmentObject = BannerViewModel()
         
-        let example = ConsumableItem.itemMockConfig(
+        let example = ConsumableItem.itemConfig(
             nameKey: Content.Common.threeMinutesTitle,
             descriptionKey: Content.Common.threeMinutesDescription,
             price: 3,
             rarity: .common,
             profile: Profile.configMockProfile(),
             requirements: [],
-            applications: [RuleItem.oneHour.rawValue : 1,
-                           RuleItem.threeHours.rawValue : 3],
+            applications: [RuleItem.oneMinute.nameKey : 1,
+                           RuleItem.threeMinutes.nameKey : 3],
             enabled: false)
         
         return ConsumableItemDetails(item: example, viewModel: viewModel, onDismiss: {})

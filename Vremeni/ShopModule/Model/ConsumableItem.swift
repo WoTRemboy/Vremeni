@@ -118,7 +118,7 @@ extension ConsumableItem {
     }
     
     // Mock ConsumableItem configuration method
-    static internal func itemMockConfig(nameKey: String, descriptionKey: String = String(),
+    static internal func itemConfig(nameKey: String, descriptionKey: String = String(),
                                         price: Float, count: Int = 0, image: Data? = nil,
                                         premium: Bool = false, rarity: Rarity = .common,
                                         profile: Profile, requirements: [Requirement] = [],

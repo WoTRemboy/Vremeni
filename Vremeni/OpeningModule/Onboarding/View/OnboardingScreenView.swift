@@ -20,7 +20,7 @@ struct OnboardingScreenView: View {
     
     internal var body: some View {
         if viewModel.firstLaunch {
-            ShopView(modelContext: modelContext)
+            RootView(modelContext: modelContext)
         } else {
             VStack {
                 skipButton

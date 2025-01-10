@@ -42,113 +42,91 @@ struct ShopView: View {
     // MARK: - Body view
     
     internal var body: some View {
-        TabView {
-            NavigationStack {
-                ZStack {
-                    ScrollView {
-                        enableSegmentedPicker
-                            .padding(.horizontal)
-                        if viewModel.enableStatus {
-                            // Collecion with available items
-                            availableCollection
-                                .padding([.horizontal, .bottom])
-                                .padding(.top, 8)
-                                .transition(.move(edge: .leading))
-                        } else {
-                            // Collecion with locked items
-                            researchCollection
-                                .padding([.horizontal, .bottom])
-                                .padding(.top, 8)
-                                .transition(.move(edge: .trailing))
-                        }
-                    }
+        NavigationStack {
+            ZStack {
+                content
                     .onAppear {
                         viewModel.updateOnAppear()
                     }
-                    // In case of items absence
-                    if viewModel.items.isEmpty {
-                        placeholder
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        // No available <-, but No Locked ->
-                            .transition(.move(edge: viewModel.enableStatus ? .leading : .trailing))
-                    } else if searchResults.isEmpty {
-                        searchPlaceholder
-                    }
-                }
-                .animation(.easeInOut, value: viewModel.enableStatus)
-                .animation(.easeInOut, value: searchText)
-                .animation(.easeInOut, value: viewModel.rarityFilter)
-                // ScrollView params
-                .scrollDisabled(viewModel.items.isEmpty)
-                .scrollDismissesKeyboard(.immediately)
-                .background(Color.BackColors.backDefault)
-                
-                // Navigation title params
-                .navigationTitle(Texts.Common.title)
-                .navigationBarTitleDisplayMode(.inline)
-                .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
-                
-                // ToolBar items
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        toolBarMenuFilter
-                    }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        toolBarButtonPlus
-                    }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        toolBarButtonPremium
-                    }
-                }
-                
-            }
-            .sheet(isPresented: $showingPremiumSheet) {
-                PremiumBuyView(viewModel: viewModel) {
-                    showingPremiumSheet.toggle()
+                // In case of items absence
+                if viewModel.items.isEmpty {
+                    placeholder
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    // No available <-, but No Locked ->
+                        .transition(.move(edge: viewModel.enableStatus ? .leading : .trailing))
+                } else if searchResults.isEmpty {
+                    searchPlaceholder
                 }
             }
-            .sheet(isPresented: $showingAddItemSheet) {
-                ConsumableItemCreate(viewModel: viewModel) {
-                    showingAddItemSheet.toggle()
+            .animation(.easeInOut, value: viewModel.enableStatus)
+            .animation(.easeInOut, value: searchText)
+            .animation(.easeInOut, value: viewModel.rarityFilter)
+            
+            // ScrollView params
+            .scrollDisabled(viewModel.items.isEmpty)
+            .scrollDismissesKeyboard(.immediately)
+            .background(Color.BackColors.backDefault)
+            
+            // Navigation title params
+            .navigationTitle(Texts.Common.title)
+            .navigationBarTitleDisplayMode(.inline)
+            .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
+            
+            // ToolBar items
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    toolBarMenuFilter
                 }
-            }
-            // Item details sheet param
-            .sheet(item: $selectedResearched) { item in
-                ConsumableItemDetails(item: item, viewModel: viewModel) {
-                    selectedResearched = nil
+                ToolbarItem(placement: .topBarTrailing) {
+                    toolBarButtonPlus
                 }
-            }
-            // Item details sheet param
-            .sheet(item: $selectedLocked) { item in
-                ConsumableItemDetails(item: item, viewModel: viewModel) {
-                    selectedLocked = nil
+                ToolbarItem(placement: .topBarTrailing) {
+                    toolBarButtonPremium
                 }
             }
             
-            
-            // TabBar params & navigation
-            .tabItem {
-                Image.TabBar.shop
-                Text(Texts.ShopPage.title)
+        }
+        .sheet(isPresented: $showingPremiumSheet) {
+            PremiumBuyView(viewModel: viewModel) {
+                showingPremiumSheet.toggle()
             }
-            
-            MachineView(modelContext: modelContext)
-                .tabItem {
-                    Image.TabBar.machine
-                    Text(Texts.MachinePage.title)
-                }
-            
-            InventoryView(modelContext: modelContext)
-                .tabItem {
-                    Image.TabBar.inventory
-                    Text(Texts.InventoryPage.title)
-                }
-            
-            ProfileView(modelContext: modelContext)
-                .tabItem {
-                    Image.TabBar.profile
-                    Text(Texts.ProfilePage.title)
-                }
+        }
+        .sheet(isPresented: $showingAddItemSheet) {
+            ConsumableItemCreate(viewModel: viewModel) {
+                showingAddItemSheet.toggle()
+            }
+        }
+        // Item details sheet param
+        .sheet(item: $selectedResearched) { item in
+            ConsumableItemDetails(item: item, viewModel: viewModel) {
+                selectedResearched = nil
+            }
+        }
+        // Item details sheet param
+        .sheet(item: $selectedLocked) { item in
+            ConsumableItemDetails(item: item, viewModel: viewModel) {
+                selectedLocked = nil
+            }
+        }
+    }
+    
+    private var content: some View {
+        ScrollView {
+            enableSegmentedPicker
+                .padding(.horizontal)
+            if viewModel.enableStatus {
+                // Collecion with available items
+                availableCollection
+                    .padding([.horizontal, .bottom])
+                    .padding(.top, 8)
+                    .transition(.move(edge: .leading))
+            } else {
+                // Collecion with locked items
+                researchCollection
+                    .padding([.horizontal, .bottom])
+                    .padding(.top, 8)
+                    .transition(.move(edge: .trailing))
+            }
         }
     }
     
