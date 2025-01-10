@@ -51,6 +51,7 @@
 		6340B2C32D3173C900CCD6B6 /* TabRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6340B2C22D3173C700CCD6B6 /* TabRouter.swift */; };
 		6340B2C52D3173F300CCD6B6 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6340B2C42D3173F100CCD6B6 /* RootView.swift */; };
 		6340B2C72D317BD700CCD6B6 /* ItemsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6340B2C62D317BCA00CCD6B6 /* ItemsGenerator.swift */; };
+		6340B2C92D31B3DB00CCD6B6 /* ResetItemsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6340B2C82D31B3CE00CCD6B6 /* ResetItemsGenerator.swift */; };
 		634C03EB2CF880EE00CFF706 /* IconChooserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C03EA2CF880E900CFF706 /* IconChooserModel.swift */; };
 		634C03ED2CF8814C00CFF706 /* IconChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C03EC2CF8814200CFF706 /* IconChooserView.swift */; };
 		634C03EF2CF8818700CFF706 /* IconChangerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634C03EE2CF8818100CFF706 /* IconChangerViewModel.swift */; };
@@ -162,6 +163,7 @@
 		6340B2C22D3173C700CCD6B6 /* TabRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabRouter.swift; sourceTree = "<group>"; };
 		6340B2C42D3173F100CCD6B6 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		6340B2C62D317BCA00CCD6B6 /* ItemsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsGenerator.swift; sourceTree = "<group>"; };
+		6340B2C82D31B3CE00CCD6B6 /* ResetItemsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetItemsGenerator.swift; sourceTree = "<group>"; };
 		634C03EA2CF880E900CFF706 /* IconChooserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconChooserModel.swift; sourceTree = "<group>"; };
 		634C03EC2CF8814200CFF706 /* IconChooserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconChooserView.swift; sourceTree = "<group>"; };
 		634C03EE2CF8818100CFF706 /* IconChangerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconChangerViewModel.swift; sourceTree = "<group>"; };
@@ -597,8 +599,9 @@
 		6395B7652C5A75C700C0C611 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				634C03EE2CF8818100CFF706 /* IconChangerViewModel.swift */,
 				6395B7662C5A75E500C0C611 /* ProfileViewModel.swift */,
+				634C03EE2CF8818100CFF706 /* IconChangerViewModel.swift */,
+				6340B2C82D31B3CE00CCD6B6 /* ResetItemsGenerator.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -871,6 +874,7 @@
 				633572012C6F547D005E5D26 /* StatsBarChartView.swift in Sources */,
 				631AF4232C5250C400DFD63C /* ProfileView.swift in Sources */,
 				631AF4172C5176DE00DFD63C /* ConsumableItem.swift in Sources */,
+				6340B2C92D31B3DB00CCD6B6 /* ResetItemsGenerator.swift in Sources */,
 				63FEC59D2C6E7F9F00EA1779 /* ChartsDetailsView.swift in Sources */,
 				638620AD2C5D7D0300453944 /* QueueMachineViewGridCell.swift in Sources */,
 				63973ADE2C70B04F00F734FE /* BannerViewModel.swift in Sources */,
@@ -1068,7 +1072,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.6.6;
+				MARKETING_VERSION = 0.6.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1106,7 +1110,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.6.6;
+				MARKETING_VERSION = 0.6.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.remby.Vremeni;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

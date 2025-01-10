@@ -217,6 +217,16 @@ extension ShopView {
             fetchData()
         }
         
+        private func addSamples() {
+            guard allItems.isEmpty else { return }
+            
+            let items = itemGenerator()
+            for item in items {
+                modelContext.insert(item)
+            }
+            fetchData()
+        }
+        
         internal func cropToSquare(image: UIImage) -> UIImage? {
             let originalSize = image.size
             let minSide = min(originalSize.width, originalSize.height)
@@ -246,7 +256,7 @@ extension ShopView {
                 let descriptor = FetchDescriptor<ConsumableItem>(sortBy: [SortDescriptor(\.price)])
                 allItems = try modelContext.fetch(descriptor)
                 items = allItems.filter { $0.enabled == enableStatus && !$0.archived }
-                items.sort { $0.name < $1.name }
+                items.sort { ($0.price < $1.price) && ($0.name < $1.name) }
                 
                 // Check for .all tag selection or enable status changes (filterReset)
                 if rarityFilter != .all && !filterReset {

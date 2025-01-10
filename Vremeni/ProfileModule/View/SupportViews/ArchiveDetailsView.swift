@@ -129,8 +129,8 @@ struct ArchiveDetailsView: View {
             price: 50, rarity: .uncommon,
             profile: Profile.configMockProfile(),
             requirements: [],
-            applications: [RuleItem.oneHour.rawValue : 1,
-                           RuleItem.threeHours.rawValue : 3])
+            applications: [RuleItem.oneMinute.nameKey : 1,
+                           RuleItem.threeMinutes.nameKey : 3])
         return ArchiveDetailsView(item: example, viewModel: viewModel, onDismiss: {})
     } catch {
         fatalError("Failed to create model container.")

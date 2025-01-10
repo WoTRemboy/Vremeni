@@ -108,16 +108,16 @@ extension InventoryView {
                     ready: true),
                          
                 ConsumableItem.itemConfig(
-                    nameKey: Content.Uncommon.fiveMinutesTitle,
-                    descriptionKey: Content.Uncommon.fiveMinutesDescription,
+                    nameKey: Content.Common.fiveMinutesTitle,
+                    descriptionKey: Content.Common.fiveMinutesDescription,
                     price: 5,
                     rarity: .common,
                     profile: profile,
                     ready: true),
                 
                 ConsumableItem.itemConfig(
-                    nameKey: Content.Uncommon.sevenMinutesTitle,
-                    descriptionKey: Content.Uncommon.sevenMinutesDescription,
+                    nameKey: Content.Common.sevenMinutesTitle,
+                    descriptionKey: Content.Common.sevenMinutesDescription,
                     price: 7,
                     rarity: .uncommon,
                     profile: profile,

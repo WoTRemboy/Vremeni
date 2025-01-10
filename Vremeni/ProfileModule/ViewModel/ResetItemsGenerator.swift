@@ -1,5 +1,5 @@
 //
-//  ItemsGenerator.swift
+//  ResetItemsGenerator.swift
 //  Vremeni
 //
 //  Created by Roman Tverdokhleb on 1/10/25.
@@ -7,8 +7,7 @@
 
 import UIKit
 
-extension ShopView.ShopViewModel {
-    // MARK: - Mock data method
+extension ProfileView.ProfileViewModel {
     internal func itemGenerator() -> [ConsumableItem] {
         let oneMinute = ConsumableItem.itemConfig(
             nameKey: Content.Common.oneMinuteTitle,

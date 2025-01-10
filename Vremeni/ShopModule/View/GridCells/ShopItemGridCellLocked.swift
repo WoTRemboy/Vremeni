@@ -12,7 +12,7 @@ struct ShopItemGridCellLocked: View {
     
     // MARK: - Properties
     
-    @State var selected: ConsumableItem? = nil
+    @State private var selected: ConsumableItem? = nil
 
     private let item: ConsumableItem
     private var viewModel: ShopView.ShopViewModel
@@ -93,6 +93,7 @@ struct ShopItemGridCellLocked: View {
                 .lineLimit(1)
                 .font(.ruleTitle())
                 .foregroundStyle(Color.LabelColors.labelPrimary)
+                .minimumScaleFactor(0.4)
             
             // ConsumableItem description
             Text(item.itemDescription)
@@ -117,7 +118,9 @@ struct ShopItemGridCellLocked: View {
             }
             .sheet(item: $selected) { item in
                 if (item.premium && viewModel.premium) || !item.premium {
-                    RuleView(item: item, viewModel: viewModel)
+                    RuleView(item: item, viewModel: viewModel) {
+                        selected = nil
+                    }
                 } else {
                     PremiumBuyView(viewModel: viewModel) {
                         selected = nil
