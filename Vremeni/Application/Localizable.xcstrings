@@ -174,13 +174,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eight Minutes"
+            "value" : "8 Minutes"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Восемь минут"
+            "value" : "8 минут"
           }
         }
       }
@@ -208,13 +208,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Five Minutes"
+            "value" : "5 Minutes"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Пять минут"
+            "value" : "5 минут"
           }
         }
       }
@@ -242,13 +242,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Four Minutes"
+            "value" : "4 Minutes"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Четыре минуты"
+            "value" : "4 минуты"
           }
         }
       }
@@ -276,13 +276,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nine Minutes"
+            "value" : "9 Minutes"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Девять минут"
+            "value" : "9 минут"
           }
         }
       }
@@ -310,13 +310,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "One Minute"
+            "value" : "1 Minute"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Одна минута"
+            "value" : "1 минута"
           }
         }
       }
@@ -344,13 +344,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Seven Minutes"
+            "value" : "7 Minutes"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Семь минут"
+            "value" : "7 минут"
           }
         }
       }
@@ -378,13 +378,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Six Minutes"
+            "value" : "6 Minutes"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Шесть минут"
+            "value" : "6 минут"
           }
         }
       }
@@ -412,13 +412,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ten Minutes"
+            "value" : "10 Minutes"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Десять минут"
+            "value" : "10 минут"
           }
         }
       }
@@ -446,13 +446,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Three Minutes"
+            "value" : "3 Minutes"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Три минуты"
+            "value" : "3 минуты"
           }
         }
       }
@@ -480,13 +480,931 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Two Minutes"
+            "value" : "2 Minutes"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Две минуты"
+            "value" : "2 минуты"
+          }
+        }
+      }
+    },
+    "ContentEpicFifteenMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15 минут описание"
+          }
+        }
+      }
+    },
+    "ContentEpicFifteenMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "15 минут"
+          }
+        }
+      }
+    },
+    "ContentEpicFourtyFiveMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "45 Minutes description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "45 минут описание"
+          }
+        }
+      }
+    },
+    "ContentEpicFourtyFiveMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "45 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "45 минут"
+          }
+        }
+      }
+    },
+    "ContentEpicOneHourDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Hour description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 час описание"
+          }
+        }
+      }
+    },
+    "ContentEpicOneHourTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Hour"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 час"
+          }
+        }
+      }
+    },
+    "ContentEpicThirtyMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 минут описание"
+          }
+        }
+      }
+    },
+    "ContentEpicThirtyMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 минут"
+          }
+        }
+      }
+    },
+    "ContentExoticFourHoursThirtyMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4 Hours 30 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4 часа 30 минут описание"
+          }
+        }
+      }
+    },
+    "ContentExoticFourHoursThirtyMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4 Hours 30 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4 часа 30 минут"
+          }
+        }
+      }
+    },
+    "ContentExoticOneHourThirtyMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Hour 30 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 час 30 минут описание"
+          }
+        }
+      }
+    },
+    "ContentExoticOneHourThirtyMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Hour 30 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 час 30 минут"
+          }
+        }
+      }
+    },
+    "ContentExoticSixHoursDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "6 Hours Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "6 часов описание"
+          }
+        }
+      }
+    },
+    "ContentExoticSixHoursTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "6 Hours"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "6 часов"
+          }
+        }
+      }
+    },
+    "ContentExoticThreeHoursDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 Hours Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 часа описание"
+          }
+        }
+      }
+    },
+    "ContentExoticThreeHoursTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 Hours"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 часа"
+          }
+        }
+      }
+    },
+    "ContentLegendaryFiftyTwoMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "52 Minutes description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "52 минуты описание"
+          }
+        }
+      }
+    },
+    "ContentLegendaryFiftyTwoMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "52 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "52 минуты"
+          }
+        }
+      }
+    },
+    "ContentLegendaryOneHourTwentyTwoMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Hour 22 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 час 22 минуты описание"
+          }
+        }
+      }
+    },
+    "ContentLegendaryOneHourTwentyTwoMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Hour 22 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 час 22 минуты"
+          }
+        }
+      }
+    },
+    "ContentLegendarySeventeenMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "17 Minutes description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "17 минут описание"
+          }
+        }
+      }
+    },
+    "ContentLegendarySeventeenMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "17 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "17 минут"
+          }
+        }
+      }
+    },
+    "ContentLegendaryThirtyTwoMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "32 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "32 минуты описание"
+          }
+        }
+      }
+    },
+    "ContentLegendaryThirtyTwoMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "32 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "32 минуты"
+          }
+        }
+      }
+    },
+    "ContentMythicFourtyNineMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "49 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "49 минут описание"
+          }
+        }
+      }
+    },
+    "ContentMythicFourtyNineMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "49 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "49 минут"
+          }
+        }
+      }
+    },
+    "ContentMythicNineteenMinutes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "19 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "19 минут"
+          }
+        }
+      }
+    },
+    "ContentMythicNineteenMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "19 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "19 минут описание"
+          }
+        }
+      }
+    },
+    "ContentMythicThirtyNineMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "39 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "39 минут описание"
+          }
+        }
+      }
+    },
+    "ContentMythicThirtyNineMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "39 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "39 минут"
+          }
+        }
+      }
+    },
+    "ContentMythicTwentyNineMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "29 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "29 минут описание"
+          }
+        }
+      }
+    },
+    "ContentMythicTwentyNineMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "29 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "29 минут"
+          }
+        }
+      }
+    },
+    "ContentRareFourteenMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "14 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "14 минут описание"
+          }
+        }
+      }
+    },
+    "ContentRareFourteenMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "14 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "14 минут"
+          }
+        }
+      }
+    },
+    "ContentRareOneHourNinteenMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Hour 19 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 час 19 минут описание"
+          }
+        }
+      }
+    },
+    "ContentRareOneHourNinteenMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 hour 19 minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 час 19 минут"
+          }
+        }
+      }
+    },
+    "ContentRareThirtyFourMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "34 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "34 минуты описание"
+          }
+        }
+      }
+    },
+    "ContentRareThirtyFourMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "34 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "34 минуты"
+          }
+        }
+      }
+    },
+    "ContentRareTwoHoursFourtyNineMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 Hours 49 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 часа 49 минут описание"
+          }
+        }
+      }
+    },
+    "ContentRareTwoHoursFourtyNineMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 Hours 49 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 часа 49 минут"
+          }
+        }
+      }
+    },
+    "ContentUncommonFourHoursDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4 Hours Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4 часа описание"
+          }
+        }
+      }
+    },
+    "ContentUncommonFourHoursTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4 Hours"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4 часа"
+          }
+        }
+      }
+    },
+    "ContentUncommonOneHourFifteenMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Hour 15 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 час 15 минут описание"
+          }
+        }
+      }
+    },
+    "ContentUncommonOneHourFifteenMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Hour 15 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 час 15 минут"
+          }
+        }
+      }
+    },
+    "ContentUncommonTenHoursDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "10 Hours Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "10 часов описание"
+          }
+        }
+      }
+    },
+    "ContentUncommonTenHoursTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "10 Hours"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "10 часов"
+          }
+        }
+      }
+    },
+    "ContentUncommonThirtyFiveMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "35 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "35 минут описание"
+          }
+        }
+      }
+    },
+    "ContentUncommonThirtyFiveMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "35 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "35 минут"
+          }
+        }
+      }
+    },
+    "ContentUncommonTwelveMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 Minutes description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 минут описание"
+          }
+        }
+      }
+    },
+    "ContentUncommonTwelveMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 минут"
+          }
+        }
+      }
+    },
+    "ContentUncommonTwentyMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "20 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 минут описание"
+          }
+        }
+      }
+    },
+    "ContentUncommonTwentyMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "20 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "20 минут"
+          }
+        }
+      }
+    },
+    "ContentUncommonTwoHoursThirtyMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 Hours 30 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 часа 30 минут описание"
+          }
+        }
+      }
+    },
+    "ContentUncommonTwoHoursThirtyMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 Hours 30 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2 часа 30 минут описание"
           }
         }
       }
@@ -3387,7 +4305,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fair"
+            "value" : "Shop"
           }
         },
         "ru" : {
