@@ -118,4 +118,18 @@ final class Content {
         static let fourtyNineMinutesTitle = "ContentMythicFourtyNineMinutesTitle"
         static let fourtyNineMinutesDescription = "ContentMythicFourtyNineMinutesDescription"
     }
+    
+    enum Exotic {
+        static let oneHourThirtyMinutesTitle = "ContentExoticOneHourThirtyMinutesTitle"
+        static let oneHourThirtyMinutesDescription = "ContentExoticOneHourThirtyMinutesDescription"
+        
+        static let threeHoursTitle = "ContentExoticThreeHoursTitle"
+        static let threeHoursDescription = "ContentExoticThreeHoursDescription"
+        
+        static let fourHoursThirtyMinutesTitle = "ContentExoticFourHoursThirtyMinutesTitle"
+        static let fourHoursThirtyMinutesDescription = "ContentExoticFourHoursThirtyMinutesDescription"
+        
+        static let sixHoursTitle = "ContentExoticSixHoursTitle"
+        static let sixHoursDescription = "ContentExoticSixHoursDescription"
+    }
 }

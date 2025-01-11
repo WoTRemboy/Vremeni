@@ -508,7 +508,66 @@ extension ProfileView.ProfileViewModel {
         
         let mythicItems = [ninteenMinutes, twentyNineMinutes, thirtyNineMinutes, fourtyNineMinutes]
         
-        let items = commonItems + uncommonItems + rareItems + epicItems + legendaryItems + mythicItems
+        // MARK: - Exotic Tier
+        
+        let oneHourThirtyMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Exotic.oneHourThirtyMinutesTitle,
+            descriptionKey: Content.Exotic.oneHourThirtyMinutesDescription,
+            price: 90,
+            image: UIImage.Content.Exotic.oneHourThirtyMinutes?.pngData(),
+            premium: false,
+            rarity: .exotic,
+            profile: profile,
+            requirements: [Requirement(item: thirtyMinutes, quantity: 1),
+                           Requirement(item: oneHour, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let threeHours = ConsumableItem.itemConfig(
+            nameKey: Content.Exotic.threeHoursTitle,
+            descriptionKey: Content.Exotic.threeHoursDescription,
+            price: 180,
+            image: UIImage.Content.Exotic.threeHours?.pngData(),
+            premium: false,
+            rarity: .exotic,
+            profile: profile,
+            requirements: [Requirement(item: oneHourThirtyMinutes, quantity: 2)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let fourHoursThirtyHours = ConsumableItem.itemConfig(
+            nameKey: Content.Exotic.fourHoursThirtyMinutesTitle,
+            descriptionKey: Content.Exotic.fourHoursThirtyMinutesDescription,
+            price: 270,
+            image: UIImage.Content.Exotic.fourHoursThirtyMinutes?.pngData(),
+            premium: false,
+            rarity: .exotic,
+            profile: profile,
+            requirements: [Requirement(item: oneHourThirtyMinutes, quantity: 1),
+                           Requirement(item: threeHours, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let sixHours = ConsumableItem.itemConfig(
+            nameKey: Content.Exotic.sixHoursTitle,
+            descriptionKey: Content.Exotic.sixHoursDescription,
+            price: 360,
+            image: UIImage.Content.Exotic.sixHours?.pngData(),
+            premium: false,
+            rarity: .exotic,
+            profile: profile,
+            requirements: [Requirement(item: oneHourThirtyMinutes, quantity: 1),
+                           Requirement(item: fourHoursThirtyHours, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let exoticItems = [oneHourThirtyMinutes, threeHours, fourHoursThirtyHours, sixHours]
+        
+        let items = commonItems + uncommonItems + rareItems + epicItems + legendaryItems + mythicItems + exoticItems
         
         return items
     }
