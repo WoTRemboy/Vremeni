@@ -448,7 +448,67 @@ extension ProfileView.ProfileViewModel {
         
         let legendaryItems = [seventeenMinutes, thirtyTwoMinutes, fiftyTwoMinutes, oneHourTwentyTwoMinutes]
         
-        let items = commonItems + uncommonItems + rareItems + epicItems + legendaryItems
+        // MARK: - Mythic Tier
+        
+        let ninteenMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Mythic.ninteenMinutesTitle,
+            descriptionKey: Content.Mythic.ninteenMinutesDescription,
+            price: 19,
+            image: UIImage.Content.Mythic.ninteenMinutes?.pngData(),
+            premium: false,
+            rarity: .mythic,
+            profile: profile,
+            requirements: [Requirement(item: nineMinutes, quantity: 1),
+                           Requirement(item: tenMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let twentyNineMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Mythic.twentyNineMinutesTitle,
+            descriptionKey: Content.Mythic.twentyNineMinutesDescription,
+            price: 29,
+            image: UIImage.Content.Mythic.twentyNineMinutes?.pngData(),
+            premium: false,
+            rarity: .mythic,
+            profile: profile,
+            requirements: [Requirement(item: tenMinutes, quantity: 1),
+                           Requirement(item: ninteenMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let thirtyNineMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Mythic.thirtyNineMinutesTitle,
+            descriptionKey: Content.Mythic.thirtyNineMinutesDescription,
+            price: 39,
+            image: UIImage.Content.Mythic.thirtyNineMinutes?.pngData(),
+            premium: false,
+            rarity: .mythic,
+            profile: profile,
+            requirements: [Requirement(item: tenMinutes, quantity: 1),
+                           Requirement(item: twentyNineMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let fourtyNineMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Mythic.fourtyNineMinutesTitle,
+            descriptionKey: Content.Mythic.fourtyNineMinutesDescription,
+            price: 49,
+            image: UIImage.Content.Mythic.fourtyNineMinutes?.pngData(),
+            premium: false,
+            rarity: .mythic,
+            profile: profile,
+            requirements: [Requirement(item: tenMinutes, quantity: 1),
+                           Requirement(item: thirtyNineMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let mythicItems = [ninteenMinutes, twentyNineMinutes, thirtyNineMinutes, fourtyNineMinutes]
+        
+        let items = commonItems + uncommonItems + rareItems + epicItems + legendaryItems + mythicItems
         
         return items
     }

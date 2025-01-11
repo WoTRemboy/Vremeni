@@ -763,6 +763,142 @@
         }
       }
     },
+    "ContentMythicFourtyNineMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "49 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "49 минут описание"
+          }
+        }
+      }
+    },
+    "ContentMythicFourtyNineMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "49 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "49 минут"
+          }
+        }
+      }
+    },
+    "ContentMythicNineteenMinutes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "19 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "19 минут"
+          }
+        }
+      }
+    },
+    "ContentMythicNineteenMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "19 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "19 минут описание"
+          }
+        }
+      }
+    },
+    "ContentMythicThirtyNineMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "39 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "39 минут описание"
+          }
+        }
+      }
+    },
+    "ContentMythicThirtyNineMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "39 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "39 минут"
+          }
+        }
+      }
+    },
+    "ContentMythicTwentyNineMinutesDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "29 Minutes Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "29 минут описание"
+          }
+        }
+      }
+    },
+    "ContentMythicTwentyNineMinutesTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "29 Minutes"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "29 минут"
+          }
+        }
+      }
+    },
     "ContentRareFourteenMinutesDescription" : {
       "extractionState" : "manual",
       "localizations" : {

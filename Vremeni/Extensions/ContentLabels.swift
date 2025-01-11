@@ -104,4 +104,18 @@ final class Content {
         static let oneHourTwentyTwoMinutesTitle = "ContentLegendaryOneHourTwentyTwoMinutesTitle"
         static let oneHourTwentyTwoMinutesDescription = "ContentLegendaryOneHourTwentyTwoMinutesDescription"
     }
+    
+    enum Mythic {
+        static let ninteenMinutesTitle = "ContentMythicNineteenMinutes"
+        static let ninteenMinutesDescription = "ContentMythicNineteenMinutesDescription"
+        
+        static let twentyNineMinutesTitle = "ContentMythicTwentyNineMinutesTitle"
+        static let twentyNineMinutesDescription = "ContentMythicTwentyNineMinutesDescription"
+        
+        static let thirtyNineMinutesTitle = "ContentMythicThirtyNineMinutesTitle"
+        static let thirtyNineMinutesDescription = "ContentMythicThirtyNineMinutesDescription"
+        
+        static let fourtyNineMinutesTitle = "ContentMythicFourtyNineMinutesTitle"
+        static let fourtyNineMinutesDescription = "ContentMythicFourtyNineMinutesDescription"
+    }
 }
