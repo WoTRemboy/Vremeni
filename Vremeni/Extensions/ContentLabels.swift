@@ -76,4 +76,18 @@ final class Content {
         static let twoHoursFourtyNineMinutesTitle = "ContentRareTwoHoursFourtyNineMinutesTitle"
         static let twoHoursFourtyNineMinutesDescription = "ContentRareTwoHoursFourtyNineMinutesDescription"
     }
+    
+    enum Epic {
+        static let fifteenMinutesTitle = "ContentEpicFifteenMinutesTitle"
+        static let fifteenMinutesDescription = "ContentEpicFifteenMinutesDescription"
+        
+        static let thirtyMinutesTitle = "ContentEpicThirtyMinutesTitle"
+        static let thirtyMinutesDescription = "ContentEpicThirtyMinutesDescription"
+        
+        static let fourtyFiveMinutesTitle = "ContentEpicFourtyFiveMinutesTitle"
+        static let fourtyFiveMinutesDescription = "ContentEpicFourtyFiveMinutesDescription"
+        
+        static let oneHourTitle = "ContentEpicOneHourTitle"
+        static let oneHourDescription = "ContentEpicOneHourDescription"
+    }
 }

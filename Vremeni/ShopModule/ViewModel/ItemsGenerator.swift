@@ -325,7 +325,66 @@ extension ShopView.ShopViewModel {
         
         let rareItems = [fourteenMinutes, thirtyFourMinutes, oneHourNinteenMinutes, twoHoursFourtyNineMinutes]
         
-        let items = commonItems + uncommonItems + rareItems
+        // MARK: - Epic Tier
+        
+        let fifteenMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Epic.fifteenMinutesTitle,
+            descriptionKey: Content.Epic.fifteenMinutesDescription,
+            price: 15,
+            image: UIImage.Content.Epic.fifteenMinutes?.pngData(),
+            premium: false,
+            rarity: .epic,
+            profile: profile,
+            requirements: [Requirement(item: fiveMinutes, quantity: 1),
+                           Requirement(item: tenMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let thirtyMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Epic.thirtyMinutesTitle,
+            descriptionKey: Content.Epic.thirtyMinutesDescription,
+            price: 30,
+            image: UIImage.Content.Epic.thirtyMinutes?.pngData(),
+            premium: false,
+            rarity: .epic,
+            profile: profile,
+            requirements: [Requirement(item: fifteenMinutes, quantity: 2)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let fourtyFiveMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Epic.fourtyFiveMinutesTitle,
+            descriptionKey: Content.Epic.fourtyFiveMinutesDescription,
+            price: 45,
+            image: UIImage.Content.Epic.fourtyFiveMinutes?.pngData(),
+            premium: false,
+            rarity: .epic,
+            profile: profile,
+            requirements: [Requirement(item: fifteenMinutes, quantity: 1),
+                           Requirement(item: thirtyMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let oneHour = ConsumableItem.itemConfig(
+            nameKey: Content.Epic.oneHourTitle,
+            descriptionKey: Content.Epic.oneHourDescription,
+            price: 60,
+            image: UIImage.Content.Epic.oneHour?.pngData(),
+            premium: false,
+            rarity: .epic,
+            profile: profile,
+            requirements: [Requirement(item: fifteenMinutes, quantity: 1),
+                           Requirement(item: fourtyFiveMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let epicItems = [fifteenMinutes, thirtyMinutes, fourtyFiveMinutes, oneHour]
+        
+        let items = commonItems + uncommonItems + rareItems + epicItems
         
         return items
     }
