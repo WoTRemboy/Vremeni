@@ -9,6 +9,9 @@ import UIKit
 
 extension ProfileView.ProfileViewModel {
     internal func itemGenerator() -> [ConsumableItem] {
+        
+        // MARK: - Common Tier
+        
         let oneMinute = ConsumableItem.itemConfig(
             nameKey: Content.Common.oneMinuteTitle,
             descriptionKey: Content.Common.oneMinuteDescription,
@@ -149,7 +152,119 @@ extension ProfileView.ProfileViewModel {
             enabled: false
         )
 
-        let items = [oneMinute, twoMinutes, threeMinutes, fourMinutes, fiveMinutes, sixMinutes, sevenMinutes, eightMinutes, nineMinutes, tenMinutes]
+        let commonItems = [oneMinute, twoMinutes, threeMinutes, fourMinutes, fiveMinutes, sixMinutes, sevenMinutes, eightMinutes, nineMinutes, tenMinutes]
+        
+        // MARK: - Uncommon Tier
+        
+        let twelveMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Uncommon.twelveMinutesTitle,
+            descriptionKey: Content.Uncommon.twelveMinutesDescription,
+            price: 12,
+            image: UIImage.Content.Uncommon.twelveMinutes?.pngData(),
+            premium: false,
+            rarity: .uncommon,
+            profile: profile,
+            requirements: [Requirement(item: twoMinutes, quantity: 1),
+                           Requirement(item: tenMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let twentyMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Uncommon.twentyMinutesTitle,
+            descriptionKey: Content.Uncommon.twentyMinutesDescription,
+            price: 20,
+            image: UIImage.Content.Uncommon.twentyMinutes?.pngData(),
+            premium: false,
+            rarity: .uncommon,
+            profile: profile,
+            requirements: [Requirement(item: eightMinutes, quantity: 1),
+                           Requirement(item: twelveMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let thirtyFiveMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Uncommon.thirtyFiveMinutesTitle,
+            descriptionKey: Content.Uncommon.thirtyFiveMinutesDescription,
+            price: 35,
+            image: UIImage.Content.Uncommon.thirtyFiveMinutes?.pngData(),
+            premium: false,
+            rarity: .uncommon,
+            profile: profile,
+            requirements: [Requirement(item: threeMinutes, quantity: 1),
+                           Requirement(item: twentyMinutes, quantity: 1),
+                           Requirement(item: twelveMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let oneHourFifteenMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Uncommon.oneHourFifteenMinutesTitle,
+            descriptionKey: Content.Uncommon.oneHourFifteenMinutesDescription,
+            price: 75,
+            image: UIImage.Content.Uncommon.oneHourFifteenMinutes?.pngData(),
+            premium: false,
+            rarity: .uncommon,
+            profile: profile,
+            requirements: [Requirement(item: sevenMinutes, quantity: 1),
+                           Requirement(item: twelveMinutes, quantity: 1),
+                           Requirement(item: twentyMinutes, quantity: 1),
+                           Requirement(item: thirtyFiveMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let twoHoursThirtyMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Uncommon.twoHoursThirtyMinutesTitle,
+            descriptionKey: Content.Uncommon.twoHoursThirtyMinutesDescription,
+            price: 150,
+            image: UIImage.Content.Uncommon.twoHoursThirtyMinutes?.pngData(),
+            premium: false,
+            rarity: .uncommon,
+            profile: profile,
+            requirements: [Requirement(item: oneHourFifteenMinutes, quantity: 2)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let fourHours = ConsumableItem.itemConfig(
+            nameKey: Content.Uncommon.fourHoursTitle,
+            descriptionKey: Content.Uncommon.fourHoursDescription,
+            price: 240,
+            image: UIImage.Content.Uncommon.fourHours?.pngData(),
+            premium: false,
+            rarity: .uncommon,
+            profile: profile,
+            requirements: [Requirement(item: threeMinutes, quantity: 1),
+                           Requirement(item: twelveMinutes, quantity: 1),
+                           Requirement(item: oneHourFifteenMinutes, quantity: 1),
+                           Requirement(item: twoHoursThirtyMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let tenHours = ConsumableItem.itemConfig(
+            nameKey: Content.Uncommon.tenHoursTitle,
+            descriptionKey: Content.Uncommon.tenHoursDescription,
+            price: 600,
+            image: UIImage.Content.Uncommon.tenHours?.pngData(),
+            premium: false,
+            rarity: .uncommon,
+            profile: profile,
+            requirements: [Requirement(item: fiveMinutes, quantity: 1),
+                           Requirement(item: twentyMinutes, quantity: 1),
+                           Requirement(item: thirtyFiveMinutes, quantity: 1),
+                           Requirement(item: twoHoursThirtyMinutes, quantity: 2),
+                           Requirement(item: fourHours, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let uncommonItems = [twelveMinutes, twentyMinutes, thirtyFiveMinutes, oneHourFifteenMinutes, twoHoursThirtyMinutes, fourHours, tenHours]
+        
+        let items = commonItems + uncommonItems
+        
         return items
     }
 }

@@ -39,4 +39,27 @@ final class Content {
         static let tenMinutesTitle = "ContentCommonTenMinutesTitle"
         static let tenMinutesDescription = "ContentCommonTenMinutesDescription"
     }
+    
+    enum Uncommon {
+        static let twelveMinutesTitle = "ContentUncommonTwelveMinutesTitle"
+        static let twelveMinutesDescription = "ContentUncommonTwelveMinutesDescription"
+        
+        static let twentyMinutesTitle = "ContentUncommonTwentyMinutesTitle"
+        static let twentyMinutesDescription = "ContentUncommonTwentyMinutesDescription"
+        
+        static let thirtyFiveMinutesTitle = "ContentUncommonThirtyFiveMinutesTitle"
+        static let thirtyFiveMinutesDescription = "ContentUncommonThirtyFiveMinutesDescription"
+        
+        static let oneHourFifteenMinutesTitle = "ContentUncommonOneHourFifteenMinutesTitle"
+        static let oneHourFifteenMinutesDescription = "ContentUncommonOneHourFifteenMinutesDescription"
+        
+        static let twoHoursThirtyMinutesTitle = "ContentUncommonTwoHoursThirtyMinutesTitle"
+        static let twoHoursThirtyMinutesDescription = "ContentUncommonTwoHoursThirtyMinutesDescription"
+        
+        static let fourHoursTitle = "ContentUncommonFourHoursTitle"
+        static let fourHoursDescription = "ContentUncommonFourHoursDescription"
+        
+        static let tenHoursTitle = "ContentUncommonTenHoursTitle"
+        static let tenHoursDescription = "ContentUncommonTenHoursDescription"
+    }
 }
