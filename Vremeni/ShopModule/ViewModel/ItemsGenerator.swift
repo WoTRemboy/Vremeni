@@ -384,7 +384,71 @@ extension ShopView.ShopViewModel {
         
         let epicItems = [fifteenMinutes, thirtyMinutes, fourtyFiveMinutes, oneHour]
         
-        let items = commonItems + uncommonItems + rareItems + epicItems
+        // MARK: - Legendary Tier
+        
+        let seventeenMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Legendary.seventeenMinutesTitle,
+            descriptionKey: Content.Legendary.seventeenMinutesDescription,
+            price: 17,
+            image: UIImage.Content.Legendary.seventeenMinutes?.pngData(),
+            premium: false,
+            rarity: .legendary,
+            profile: profile,
+            requirements: [Requirement(item: sevenMinutes, quantity: 1),
+                           Requirement(item: tenMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let thirtyTwoMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Legendary.thirtyTwoMinutesTitle,
+            descriptionKey: Content.Legendary.thirtyTwoMinutesDescription,
+            price: 32,
+            image: UIImage.Content.Legendary.thirtyTwoMinutes?.pngData(),
+            premium: false,
+            rarity: .legendary,
+            profile: profile,
+            requirements: [Requirement(item: fiveMinutes, quantity: 1),
+                           Requirement(item: tenMinutes, quantity: 1),
+                           Requirement(item: seventeenMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let fiftyTwoMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Legendary.fiftyTwoMinutesTitle,
+            descriptionKey: Content.Legendary.fiftyTwoMinutesDescription,
+            price: 52,
+            image: UIImage.Content.Legendary.fiftyTwoMinutes?.pngData(),
+            premium: false,
+            rarity: .legendary,
+            profile: profile,
+            requirements: [Requirement(item: threeMinutes, quantity: 1),
+                           Requirement(item: seventeenMinutes, quantity: 1),
+                           Requirement(item: thirtyTwoMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let oneHourTwentyTwoMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Legendary.oneHourTwentyTwoMinutesTitle,
+            descriptionKey: Content.Legendary.oneHourTwentyTwoMinutesDescription,
+            price: 82,
+            image: UIImage.Content.Legendary.oneHourTwentyTwoMinutes?.pngData(),
+            premium: false,
+            rarity: .legendary,
+            profile: profile,
+            requirements: [Requirement(item: threeMinutes, quantity: 1),
+                           Requirement(item: tenMinutes, quantity: 1),
+                           Requirement(item: seventeenMinutes, quantity: 1),
+                           Requirement(item: fiftyTwoMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let legendaryItems = [seventeenMinutes, thirtyTwoMinutes, fiftyTwoMinutes, oneHourTwentyTwoMinutes]
+        
+        let items = commonItems + uncommonItems + rareItems + epicItems + legendaryItems
         
         return items
     }
