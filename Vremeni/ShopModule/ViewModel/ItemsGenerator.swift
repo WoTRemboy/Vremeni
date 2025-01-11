@@ -263,7 +263,69 @@ extension ShopView.ShopViewModel {
         
         let uncommonItems = [twelveMinutes, twentyMinutes, thirtyFiveMinutes, oneHourFifteenMinutes, twoHoursThirtyMinutes, fourHours, tenHours]
         
-        let items = commonItems + uncommonItems
+        // MARK: - Rare Tier
+        
+        let fourteenMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Rare.fourteenMinutesTitle,
+            descriptionKey: Content.Rare.fourteenMinutesDescription,
+            price: 14,
+            image: UIImage.Content.Rare.fourteenMinutes?.pngData(),
+            premium: false,
+            rarity: .rare,
+            profile: profile,
+            requirements: [Requirement(item: fourMinutes, quantity: 1),
+                           Requirement(item: tenMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let thirtyFourMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Rare.thirtyFourMinutesTitle,
+            descriptionKey: Content.Rare.thirtyFourMinutesDescription,
+            price: 34,
+            image: UIImage.Content.Rare.thirtyFourMinutes?.pngData(),
+            premium: false,
+            rarity: .rare,
+            profile: profile,
+            requirements: [Requirement(item: tenMinutes, quantity: 2),
+                           Requirement(item: fourteenMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let oneHourNinteenMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Rare.oneHourNinteenMinutesTitle,
+            descriptionKey: Content.Rare.oneHourNinteenMinutesDescription,
+            price: 79,
+            image: UIImage.Content.Rare.oneHourNinteenMinutes?.pngData(),
+            premium: false,
+            rarity: .rare,
+            profile: profile,
+            requirements: [Requirement(item: threeMinutes, quantity: 1),
+                           Requirement(item: fourteenMinutes, quantity: 3),
+                           Requirement(item: thirtyFourMinutes, quantity: 3)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let twoHoursFourtyNineMinutes = ConsumableItem.itemConfig(
+            nameKey: Content.Rare.twoHoursFourtyNineMinutesTitle,
+            descriptionKey: Content.Rare.twoHoursFourtyNineMinutesDescription,
+            price: 169,
+            image: UIImage.Content.Rare.twoHoursFourtyNineMinutes?.pngData(),
+            premium: false,
+            rarity: .rare,
+            profile: profile,
+            requirements: [Requirement(item: fourteenMinutes, quantity: 4),
+                           Requirement(item: thirtyFourMinutes, quantity: 1),
+                           Requirement(item: oneHourNinteenMinutes, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let rareItems = [fourteenMinutes, thirtyFourMinutes, oneHourNinteenMinutes, twoHoursFourtyNineMinutes]
+        
+        let items = commonItems + uncommonItems + rareItems
         
         return items
     }
