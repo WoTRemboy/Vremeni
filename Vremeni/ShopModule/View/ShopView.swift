@@ -198,12 +198,19 @@ struct ShopView: View {
             count: 2)
         
         return LazyVGrid(columns: columns, spacing: spacing) {
-            ForEach(searchResults.filter { $0.enabled }) { item in
-                // Available item cell
-                ShopItemGridCell(item: item, viewModel: viewModel)
-                    .onTapGesture {
-                        selectedResearched = item
+            ForEach(Rarity.allCases) { rarity in
+                let items = searchResults.filter({ $0.rarity == rarity && $0.enabled  })
+                if !items.isEmpty {
+                    // Rarity Section for available Items
+                    Section(header: SectionHeader(rarity.name)) {
+                        ForEach(items) { item in
+                            ShopItemGridCell(item: item, viewModel: viewModel)
+                                .onTapGesture {
+                                    selectedResearched = item
+                                }
+                        }
                     }
+                }
             }
         }
     }
@@ -214,11 +221,19 @@ struct ShopView: View {
             count: 1)
         
         return LazyVGrid(columns: columns, spacing: spacing) {
-            ForEach(searchResults) { item in
-                ShopItemGridCellLocked(item: item, viewModel: viewModel)
-                    .onTapGesture {
-                        selectedLocked = item
+            ForEach(Rarity.allCases) { rarity in
+                let items = searchResults.filter({ $0.rarity == rarity })
+                if !items.isEmpty {
+                    // Rarity Section for locked Items
+                    Section(header: SectionHeader(rarity.name)) {
+                        ForEach(items) { item in
+                            ShopItemGridCellLocked(item: item, viewModel: viewModel)
+                                .onTapGesture {
+                                    selectedLocked = item
+                                }
+                        }
                     }
+                }
             }
         }
     }
