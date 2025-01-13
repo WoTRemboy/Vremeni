@@ -40,10 +40,20 @@ extension ShopView {
         }
         
         // Active enable filter property with PO for data update
-        internal var enableStatus: Bool {
-            didSet {
-                fetchData(filterReset: true)
-            }
+        internal var enableStatus: Bool //{
+//            didSet {
+//                withAnimation(.easeInOut(duration: 0.3)) {
+//                    fetchData(filterReset: true)
+//                }
+//            }
+//        }
+        
+        internal var enabledItems: [ConsumableItem] {
+            allItems.filter({ $0.enabled })
+        }
+        
+        internal var lockedItems: [ConsumableItem] {
+            allItems.filter({ !$0.enabled })
         }
         
         internal var premium: Bool {

@@ -199,7 +199,7 @@ struct ShopView: View {
         
         return LazyVGrid(columns: columns, spacing: spacing) {
             ForEach(Rarity.allCases) { rarity in
-                let items = searchResults.filter({ $0.rarity == rarity && $0.enabled  })
+                let items = viewModel.enabledItems.filter({ $0.rarity == rarity && $0.enabled  })
                 if !items.isEmpty {
                     // Rarity Section for available Items
                     Section(header: SectionHeader(rarity.name)) {
@@ -222,7 +222,7 @@ struct ShopView: View {
         
         return LazyVGrid(columns: columns, spacing: spacing) {
             ForEach(Rarity.allCases) { rarity in
-                let items = searchResults.filter({ $0.rarity == rarity })
+                let items = viewModel.lockedItems.filter({ $0.rarity == rarity })
                 if !items.isEmpty {
                     // Rarity Section for locked Items
                     Section(header: SectionHeader(rarity.name)) {
