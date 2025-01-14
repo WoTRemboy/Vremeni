@@ -190,8 +190,8 @@ struct ConsumableItemCreate: View {
             Text(Texts.Rarity.epic).tag(Rarity.epic)
             Text(Texts.Rarity.legendary).tag(Rarity.legendary)
             Text(Texts.Rarity.mythic).tag(Rarity.mythic)
-            Text(Texts.Rarity.transcendent).tag(Rarity.transcendent)
             Text(Texts.Rarity.exotic).tag(Rarity.exotic)
+            Text(Texts.Rarity.final).tag(Rarity.final)
         }
     }
     

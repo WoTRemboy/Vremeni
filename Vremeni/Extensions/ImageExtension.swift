@@ -86,7 +86,7 @@ extension Image {
         static let legendary = Image("RarityLegendary")
         static let mythic = Image("RarityMythic")
         static let exotic  = Image("RarityExotic")
-        static let transcendent = Image("RarityTranscendent")
+        static let final = Image("RarityFinal")
     }
     
     enum TabBar {
@@ -169,6 +169,10 @@ extension UIImage {
             static let threeHours = UIImage(named: "300MinutesExotic")
             static let fourHoursThirtyMinutes = UIImage(named: "430MinutesExotic")
             static let sixHours = UIImage(named: "600MinutesExotic")
+        }
+        
+        enum Final {
+            static let twentyFourHours = UIImage(named: "2400MinutesFinal")
         }
     }
 }

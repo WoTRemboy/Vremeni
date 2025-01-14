@@ -763,6 +763,40 @@
         }
       }
     },
+    "ContentFinalTwentyFourHoursDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24 Hours Description"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24 часа описание"
+          }
+        }
+      }
+    },
+    "ContentFinalTwentyFourHoursTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24 Hours"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24 часа"
+          }
+        }
+      }
+    },
     "ContentLegendaryFiftyTwoMinutesDescription" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1404,7 +1438,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "2 часа 30 минут описание"
+            "value" : "2 часа 30 минут"
           }
         }
       }
@@ -3568,6 +3602,23 @@
         }
       }
     },
+    "RarityFinal" : {
+      "comment" : "Final",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Final"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Финальный"
+          }
+        }
+      }
+    },
     "RarityLegendary" : {
       "comment" : "Legendary",
       "localizations" : {
@@ -3615,23 +3666,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Редкий"
-          }
-        }
-      }
-    },
-    "RarityTranscendent" : {
-      "comment" : "Transcendent",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Transcendent"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Превосходный"
           }
         }
       }

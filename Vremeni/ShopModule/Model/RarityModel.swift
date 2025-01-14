@@ -17,8 +17,8 @@ enum Rarity: String, Codable {
     case epic = "Epic"
     case legendary = "Legendary"
     case mythic = "Mythic"
-    case transcendent = "Transcendent"
     case exotic = "Exotic"
+    case final = "Final"
     case all = "All"
 }
 
@@ -29,7 +29,7 @@ extension Rarity: Identifiable {
     
     // Case iterable method, but without .all
     static internal var allCases: [Rarity] {
-        return [.common, .uncommon, .rare, .epic, .legendary, .mythic, .transcendent, .exotic]
+        return [.common, .uncommon, .rare, .epic, .legendary, .mythic, .exotic, .final]
     }
     
     // Rarity name definition
@@ -47,10 +47,10 @@ extension Rarity: Identifiable {
             Texts.Rarity.legendary
         case .mythic:
             Texts.Rarity.mythic
-        case .transcendent:
-            Texts.Rarity.transcendent
         case .exotic:
             Texts.Rarity.exotic
+        case .final:
+            Texts.Rarity.final
         case .all:
             Texts.Rarity.all
         }
@@ -71,10 +71,10 @@ extension Rarity: Identifiable {
             return .Rarity.legendary
         case .mythic:
             return .Rarity.mythic
-        case .transcendent:
-            return .Rarity.transcendent
         case .exotic:
             return .Rarity.exotic
+        case .final:
+            return .Rarity.final
         case .all:
             return Image("")
         }
@@ -95,10 +95,10 @@ extension Rarity: Identifiable {
             Color.RarityColors.legendary
         case .mythic:
             Color.RarityColors.mythic
-        case .transcendent:
-            Color.RarityColors.transcendent
         case .exotic:
             Color.RarityColors.exotic
+        case .final:
+            Color.RarityColors.final
         case .all:
             Color.RarityColors.common
         }

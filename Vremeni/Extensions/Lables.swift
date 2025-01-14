@@ -29,8 +29,8 @@ final class Texts {
         static let epic = NSLocalizedString("RarityEpic", comment: "Epic")
         static let legendary = NSLocalizedString("RarityLegendary", comment: "Legendary")
         static let mythic = NSLocalizedString("RarityMythic", comment: "Mythic")
-        static let transcendent = NSLocalizedString("RarityTranscendent", comment: "Transcendent")
         static let exotic = NSLocalizedString("RarityExotic", comment: "Exotic")
+        static let final = NSLocalizedString("RarityFinal", comment: "Final")
         static let all = NSLocalizedString("RarityAll", comment: "All")
     }
     

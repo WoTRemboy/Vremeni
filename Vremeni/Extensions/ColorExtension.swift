@@ -41,7 +41,7 @@ extension Color {
         static let legendary = Color("RarityLegendary")
         static let mythic = Color("RarityMythic")
         static let exotic  = Color("RarityExotic")
-        static let transcendent = Color("RarityTranscendent")
+        static let final = Color("RarityFinal")
     }
     
     enum IconColors {

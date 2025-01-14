@@ -132,4 +132,9 @@ final class Content {
         static let sixHoursTitle = "ContentExoticSixHoursTitle"
         static let sixHoursDescription = "ContentExoticSixHoursDescription"
     }
+    
+    enum Final {
+        static let twentyFourHoursTitle = "ContentFinalTwentyFourHoursTitle"
+        static let twentyFourHoursDescription = "ContentFinalTwentyFourHoursDescription"
+    }
 }

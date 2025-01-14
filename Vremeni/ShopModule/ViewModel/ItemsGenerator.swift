@@ -567,7 +567,30 @@ extension ShopView.ShopViewModel {
         
         let exoticItems = [oneHourThirtyMinutes, threeHours, fourHoursThirtyHours, sixHours]
         
-        let items = commonItems + uncommonItems + rareItems + epicItems + legendaryItems + mythicItems + exoticItems
+        // MARK: - Final Tier
+        
+        let twentyFourHours = ConsumableItem.itemConfig(
+            nameKey: Content.Final.twentyFourHoursTitle,
+            descriptionKey: Content.Final.twentyFourHoursDescription,
+            price: 1440,
+            image: UIImage.Content.Final.twentyFourHours?.pngData(),
+            premium: false,
+            rarity: .final,
+            profile: profile,
+            requirements: [Requirement(item: tenMinutes, quantity: 1),
+                           Requirement(item: fourtyNineMinutes, quantity: 1),
+                           Requirement(item: oneHour, quantity: 1),
+                           Requirement(item: oneHourTwentyTwoMinutes, quantity: 1),
+                           Requirement(item: twoHoursFourtyNineMinutes, quantity: 1),
+                           Requirement(item: sixHours, quantity: 1),
+                           Requirement(item: tenHours, quantity: 1)],
+            applications: [:],
+            enabled: false
+        )
+        
+        let finalItem = [twentyFourHours]
+        
+        let items = commonItems + uncommonItems + rareItems + epicItems + legendaryItems + mythicItems + exoticItems + finalItem
         
         return items
     }
