@@ -4096,18 +4096,18 @@
       }
     },
     "ShopPagePremiumSubscribe" : {
-      "comment" : "Subscribe for",
+      "comment" : "Subscribe",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Subscribe for"
+            "value" : "Subscribe"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Подписаться за"
+            "value" : "Подписаться"
           }
         }
       }

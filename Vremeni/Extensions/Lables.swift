@@ -89,7 +89,7 @@ final class Texts {
             static let iconTitle = NSLocalizedString("ShopPagePremiumIconTitle", comment: "Icon Selection")
             static let iconDescription = NSLocalizedString("ShopPagePremiumIconDescription", comment: "Select an application icon from the proposed options in Appearance.")
             
-            static let subscribe = NSLocalizedString("ShopPagePremiumSubscribe", comment: "Subscribe for")
+            static let subscribe = NSLocalizedString("ShopPagePremiumSubscribe", comment: "Subscribe")
         }
         
         enum Rule {
