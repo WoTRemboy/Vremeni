@@ -2345,29 +2345,29 @@
       }
     },
     "OnboardingPageThirdDescription" : {
-      "comment" : "Add new slots to the Machine to collect items even faster.",
+      "comment" : "Complete the research conditions to unlock new content.",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add new slots to the Machine to collect items even faster."
+            "value" : "Complete the research conditions to unlock new content."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Добавляйте слоты в Машину,\nчтобы получать предметы быстрее."
+            "value" : "Выполняйте условия исследования и открывайте новый контент."
           }
         }
       }
     },
     "OnboardingPageThirdTitle" : {
-      "comment" : "Upgrade Workshop",
+      "comment" : "Unlock new items",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Upgrade Workshop"
+            "value" : "Unlock new items"
           }
         },
         "ru" : {

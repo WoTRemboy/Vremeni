@@ -43,8 +43,8 @@ final class Texts {
         static let firstDescription = NSLocalizedString("OnboardingPageFirstDescription", comment: "Any purchases and progress are measured in units of Vremeni - real time.")
         static let secondTitle = NSLocalizedString("OnboardingPageSecondTitle", comment: "Get your item")
         static let secondDescription = NSLocalizedString("OnboardingPageSecondDescription", comment: "To obtain an item, you need to process it through the Workshop.")
-        static let thirdTitle = NSLocalizedString("OnboardingPageThirdTitle", comment: "Upgrade Workshop")
-        static let thirdDescription = NSLocalizedString("OnboardingPageThirdDescription", comment: "Add new slots to the Machine to collect items even faster.")
+        static let thirdTitle = NSLocalizedString("OnboardingPageThirdTitle", comment: "Unlock new items")
+        static let thirdDescription = NSLocalizedString("OnboardingPageThirdDescription", comment: "Complete the research conditions to unlock new content.")
         static let fourthTitle = NSLocalizedString("OnboardingPageFourthTitle", comment: "Collect them all!")
         static let fourthDescription = NSLocalizedString("OnboardingPageFourthDescription", comment: "Go through time and earn all the rarities: from common to exotic.")
     }
