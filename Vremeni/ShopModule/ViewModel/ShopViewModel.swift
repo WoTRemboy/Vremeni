@@ -32,6 +32,11 @@ extension ShopView {
         // First appear toggle
         private var firstTime = true
         
+        /// Pages for the onboarding process.
+        internal var pages: [Int] {
+            Array(0..<2)
+        }
+        
         // Active rarity filter property with PO for data update
         internal var rarityFilter: Rarity {
             didSet {

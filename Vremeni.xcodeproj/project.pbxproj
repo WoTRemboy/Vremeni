@@ -85,6 +85,7 @@
 		63A9C1F32CF4A710005D053A /* TurnoverItemListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A9C1F22CF4A6FE005D053A /* TurnoverItemListRow.swift */; };
 		63A9C1F52CF76249005D053A /* ResearchItemListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A9C1F42CF7623D005D053A /* ResearchItemListRow.swift */; };
 		63B822BE2CDECCEC009714FB /* PremiumBuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B822BD2CDECCEC009714FB /* PremiumBuyView.swift */; };
+		63B8B5B52D4692C100BEFEED /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 63B8B5B42D4692C100BEFEED /* SwiftUIPager */; };
 		63C5F1B22CE0D4250043A483 /* SubscriptionTypeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C5F1B12CE0D4250043A483 /* SubscriptionTypeTableCell.swift */; };
 		63C5F1B42CE0D4B70043A483 /* SubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C5F1B32CE0D4AD0043A483 /* SubscriptionModel.swift */; };
 		63C5F1B62CE0F8F30043A483 /* Vremeni.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 63C5F1B52CE0F8F30043A483 /* Vremeni.storekit */; };
@@ -214,6 +215,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63B8B5B52D4692C100BEFEED /* SwiftUIPager in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -765,6 +767,9 @@
 				ru,
 			);
 			mainGroup = 631AF3C42C4FC82B00DFD63C;
+			packageReferences = (
+				63B8B5B32D4692C100BEFEED /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
+			);
 			productRefGroup = 631AF3CE2C4FC82C00DFD63C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1253,6 +1258,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		63B8B5B32D4692C100BEFEED /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fermoya/SwiftUIPager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		63B8B5B42D4692C100BEFEED /* SwiftUIPager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63B8B5B32D4692C100BEFEED /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
+			productName = SwiftUIPager;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 631AF3C52C4FC82B00DFD63C /* Project object */;
 }

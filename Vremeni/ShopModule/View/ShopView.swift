@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import SwiftUIPager
 
 struct ShopView: View {
     
@@ -30,6 +31,9 @@ struct ShopView: View {
     // VGrid item space & count in a row
     private let spacing: CGFloat = 16
     @State private var itemsInRows = 2
+    
+    /// Current page tracker for the pager.
+    @StateObject private var page: Page = .first()
     
     // MARK: - Initialization
     
