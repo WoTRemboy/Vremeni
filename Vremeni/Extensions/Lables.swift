@@ -35,6 +35,7 @@ final class Texts {
     }
     
     enum OnboardingPage {
+        static let splash = "Splash"
         static let skip = NSLocalizedString("OnboardingPageSkip", comment: "Skip")
         static let next = NSLocalizedString("OnboardingPageNext", comment: "Next page")
         static let started = NSLocalizedString("OnboardingPageStarted", comment: "Get started")

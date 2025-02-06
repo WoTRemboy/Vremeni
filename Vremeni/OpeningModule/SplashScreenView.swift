@@ -14,14 +14,24 @@ struct SplashScreenView: View {
     
     // Show splash screen toggle
     @State private var isActive = false
+    @State private var id = 0
     
     // ViewModel property
     private let modelContext: ModelContext
+    private let appIcon: Icon
+    private let texts = [String(), Texts.Common.title]
     
     // MARK: - Initialization
     
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
+        
+        let iconName = UIApplication.shared.alternateIconName
+        if let iconName {
+            appIcon = Icon(rawValue: iconName) ?? Icon.primary
+        } else {
+            appIcon = .primary
+        }
     }
     
     // MARK: - Body view
@@ -36,7 +46,7 @@ struct SplashScreenView: View {
             content
                 .onAppear {
                     // Then hides view after 0.5s
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         withAnimation {
                             self.isActive = true
                         }
@@ -48,16 +58,25 @@ struct SplashScreenView: View {
     // MARK: - Main vontent
     
     private var content: some View {
-        ZStack {
-            // Background color
-            Color.BackColors.backDefault
-                .ignoresSafeArea()
-            
-            // Logo image
-            Image.SplashScreen.logo
+        VStack(spacing: 2) {
+            Image(appIcon.splashName)
                 .resizable()
-                .scaledToFit()
-                .frame(height: 600)
+                .frame(width: 300, height: 300)
+            
+            Text(texts[id])
+                .foregroundStyle(Color(appIcon.splashColor))
+                .font(.system(size: 80, weight: .medium))
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+                .padding(.horizontal, 30)
+        }
+        .contentTransition(.numericText())
+        .onAppear {
+            Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { timer in
+                withAnimation {
+                    id += 1
+                }
+            }
         }
     }
 }

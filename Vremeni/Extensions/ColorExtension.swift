@@ -46,6 +46,7 @@ extension Color {
     
     enum IconColors {
         static let blue = Color("IconBlue")
+        static let orange = Color("IconOrange")
     }
     
     enum Tints {
