@@ -17,19 +17,19 @@ extension OnboardingStep {
     static func stepsSetup() -> [OnboardingStep] {
         let first = OnboardingStep(name: Texts.OnboardingPage.firstTitle,
                                    description: Texts.OnboardingPage.firstDescription,
-                                   image: .ProfilePage.about)
+                                   image: .OnboardingPage.first)
         
         let second = OnboardingStep(name: Texts.OnboardingPage.secondTitle,
                                     description: Texts.OnboardingPage.secondDescription,
-                                    image: .ProfilePage.appearance)
+                                    image: .OnboardingPage.second)
         
         let third = OnboardingStep(name: Texts.OnboardingPage.thirdTitle,
                                    description: Texts.OnboardingPage.thirdDescription,
-                                   image: .ProfilePage.language)
+                                   image: .OnboardingPage.third)
         
         let fourth = OnboardingStep(name: Texts.OnboardingPage.fourthTitle,
                                     description: Texts.OnboardingPage.fourthDescription,
-                                    image: .ProfilePage.balance)
+                                    image: .OnboardingPage.fourth)
         
         return [first, second, third, fourth]
     }

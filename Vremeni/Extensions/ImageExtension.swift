@@ -13,6 +13,13 @@ extension Image {
         static let logo = Image("SplashLogo")
     }
     
+    enum OnboardingPage {
+        static let first = Image("OnboardingFirst")
+        static let second = Image("OnboardingSecond")
+        static let third = Image("OnboardingThird")
+        static let fourth = Image("OnboardingFourth")
+    }
+    
     enum ShopPage {
         static let vCoin = Image("VCoin")
         static let filter = Image(systemName: "line.3.horizontal.decrease.circle")

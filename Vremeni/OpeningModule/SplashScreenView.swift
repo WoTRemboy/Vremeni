@@ -42,10 +42,10 @@ struct SplashScreenView: View {
             OnboardingScreenView(modelContext: modelContext)
                 .environmentObject(OnboardingViewModel())
         } else {
-            // Shows splash screnn
+            // Shows splash screen
             content
                 .onAppear {
-                    // Then hides view after 0.5s
+                    // Then hides view after 1s
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         withAnimation {
                             self.isActive = true

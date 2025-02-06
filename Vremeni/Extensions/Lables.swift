@@ -283,7 +283,7 @@ final class Texts {
     }
     
     enum UserDefaults {
-        static let firstLaunch = "firstLaunch"
+        static let skipOnboarding = "skipOnboarding"
         static let notifications = "notificationsEnabled"
         static let theme = "userTheme"
     }

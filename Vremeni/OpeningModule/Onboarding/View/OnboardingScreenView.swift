@@ -7,10 +7,14 @@
 
 import SwiftUI
 import SwiftData
+import SwiftUIPager
 
 struct OnboardingScreenView: View {
     
-    @EnvironmentObject private var viewModel: OnboardingViewModel
+    @StateObject private var viewModel = OnboardingViewModel()
+    
+    /// Current page tracker for the pager.
+    @StateObject private var page: Page = .first()
     
     private let modelContext: ModelContext
     
@@ -19,14 +23,19 @@ struct OnboardingScreenView: View {
     }
     
     internal var body: some View {
-        if viewModel.firstLaunch {
+        if viewModel.skipOnboarding {
             RootView(modelContext: modelContext)
         } else {
             VStack {
                 skipButton
                 content
                 progressCircles
-                actionButton
+                selectPageButtons
+            }
+            .onChange(of: page.index) { _, newValue in
+                withAnimation {
+                    viewModel.setupCurrentStep(newValue: newValue)
+                }
             }
         }
     }
@@ -41,65 +50,86 @@ struct OnboardingScreenView: View {
                 .padding(.top)
             
                 .onTapGesture {
-                    viewModel.skipSteps()
+                    withAnimation {
+                        page.update(.moveToLast)
+                    }
                 }
         }
         .disabled(viewModel.buttonType == .getStarted)
-        .animation(.easeInOut, value: viewModel.buttonType)
     }
     
     private var content: some View {
-        TabView(selection: $viewModel.currentStep) {
-            ForEach(0 ..< viewModel.stepsCount, id: \.self) { index in
-                VStack(spacing: 16) {
-                    viewModel.steps[index].image
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 250, height: 250)
-                        .clipShape(.buttonBorder)
-                    
-                    Text(viewModel.steps[index].name)
-                        .font(.largeTitle())
-                        .padding(.top)
-                    
-                    Text(viewModel.steps[index].description)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal, 32)
-                }
-                .tag(index)
+        Pager(page: page,
+              data: viewModel.pages,
+              id: \.self) { index in
+            VStack(spacing: 16) {
+                viewModel.steps[index].image
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 250, height: 250)
+                    .clipShape(.buttonBorder)
+                
+                Text(viewModel.steps[index].name)
+                    .font(.largeTitle())
+                    .padding(.top)
+                
+                Text(viewModel.steps[index].description)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 32)
             }
+            .tag(index)
         }
-        .tabViewStyle(.page(indexDisplayMode: .never))
+              .interactive(scale: 0.8)
+              .itemSpacing(10)
+              .itemAspectRatio(1.0)
+        
+              .swipeInteractionArea(.allAvailable)
+              .multiplePagination()
+              .horizontal()
     }
     
     private var progressCircles: some View {
         HStack {
-            ForEach(0 ..< viewModel.stepsCount, id: \.self) { step in
-                if step == viewModel.currentStep {
+            ForEach(viewModel.pages, id: \.self) { step in
+                if step == page.index {
                     Circle()
                         .frame(width: 15, height: 15)
                         .foregroundStyle(Color.Tints.blue)
                         .transition(.scale)
-                        .animation(.easeInOut(duration: 0.3), value: viewModel.currentStep)
                 } else {
                     Circle()
                         .frame(width: 10, height: 10)
                         .foregroundStyle(Color.labelDisable)
                         .transition(.scale)
-                        .animation(.easeInOut(duration: 0.3), value: viewModel.currentStep)
                 }
             }
         }
-        .animation(.easeInOut, value: viewModel.currentStep)
+    }
+    
+    private var selectPageButtons: some View {
+        VStack(spacing: 16) {
+            switch viewModel.buttonType {
+            case .nextPage:
+                actionButton
+                    .transition(.move(edge: .leading).combined(with: .opacity))
+            case .getStarted:
+                actionButton
+                    .transition(.move(edge: .trailing).combined(with: .opacity))
+            }
+        }
     }
     
     private var actionButton: some View {
         Button {
             switch viewModel.buttonType {
             case .nextPage:
-                viewModel.nextStep()
+                withAnimation {
+                    page.update(.next)
+                }
             case .getStarted:
-                viewModel.getStarted()
+                withAnimation {
+                    viewModel.transferToMainPage()
+                }
             }
         } label: {
             switch viewModel.buttonType {
@@ -121,8 +151,6 @@ struct OnboardingScreenView: View {
         
         .padding(.horizontal)
         .padding(.vertical, 30)
-        
-        .animation(.easeInOut, value: viewModel.buttonType)
     }
 }
 
@@ -135,7 +163,7 @@ struct OnboardingScreenView: View {
         
         return OnboardingScreenView(modelContext: modelContext)
             .environmentObject(enviromentObject)
-
+        
     } catch {
         fatalError("Failed to create model container.")
     }

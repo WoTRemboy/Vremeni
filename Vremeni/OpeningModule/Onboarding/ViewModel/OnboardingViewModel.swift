@@ -10,12 +10,15 @@ import SwiftUI
 
 final class OnboardingViewModel: ObservableObject {
     
-    @AppStorage(Texts.UserDefaults.firstLaunch) var firstLaunch: Bool = false
+    @AppStorage(Texts.UserDefaults.skipOnboarding) var skipOnboarding: Bool = false
     @Published internal var steps = OnboardingStep.stepsSetup()
     @Published internal var currentStep = 0
     
-    internal var stepsCount: Int {
-        steps.count
+    // MARK: - Computed Properties
+    
+    /// Pages for the onboarding process.
+    internal var pages: [Int] {
+        Array(0..<steps.count)
     }
     
     internal var buttonType: OnboardingButtonType {
@@ -26,21 +29,11 @@ final class OnboardingViewModel: ObservableObject {
         }
     }
     
-    internal func nextStep() {
-        withAnimation(.easeInOut) {
-            currentStep += 1
-        }
+    internal func setupCurrentStep(newValue: Int) {
+        currentStep = newValue
     }
     
-    internal func skipSteps() {
-        withAnimation(.easeInOut) {
-            currentStep = steps.count - 1
-        }
-    }
-    
-    internal func getStarted() {
-        withAnimation {
-            firstLaunch = true
-        }
+    internal func transferToMainPage() {
+        skipOnboarding.toggle()
     }
 }
