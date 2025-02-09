@@ -12,6 +12,9 @@ struct ShopView: View {
     
     // MARK: - Properties
     
+    @Namespace private var animation
+    @State private var isTabbarShown: Bool = true
+    
     // ViewModel properties
     @State private var viewModel: ShopViewModel
     private let modelContext: ModelContext
@@ -84,7 +87,32 @@ struct ShopView: View {
                     toolBarButtonPremium
                 }
             }
-            
+            .toolbarVisibility(isTabbarShown ? .visible : .hidden,
+                               for: .tabBar)
+            .navigationDestination(item: $selectedResearched) { item in
+                ConsumableItemDetails(
+                    item: item,
+                    viewModel: viewModel,
+                    namespace: animation) {
+                        selectedResearched = nil
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            isTabbarShown = true
+                        }
+                    }
+                .navigationTransition(
+                    .zoom(sourceID: Texts.NavigationTransition.shopResearched,
+                          in: animation))
+                .onAppear {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        isTabbarShown = false
+                    }
+                }
+                .onDisappear {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        isTabbarShown = true
+                    }
+                }
+            }
         }
         .sheet(isPresented: $showingPremiumSheet) {
             PremiumBuyView(viewModel: viewModel) {
@@ -97,14 +125,10 @@ struct ShopView: View {
             }
         }
         // Item details sheet param
-        .sheet(item: $selectedResearched) { item in
-            ConsumableItemDetails(item: item, viewModel: viewModel) {
-                selectedResearched = nil
-            }
-        }
-        // Item details sheet param
         .sheet(item: $selectedLocked) { item in
-            ConsumableItemDetails(item: item, viewModel: viewModel) {
+            ConsumableItemDetails(item: item,
+                                  viewModel: viewModel,
+                                  namespace: animation) {
                 selectedLocked = nil
             }
         }
@@ -204,7 +228,10 @@ struct ShopView: View {
                     // Rarity Section for available Items
                     Section(header: SectionHeader(rarity.name)) {
                         ForEach(items) { item in
-                            ShopItemGridCell(item: item, viewModel: viewModel)
+                            ShopItemGridCell(
+                                item: item,
+                                viewModel: viewModel,
+                                namespace: animation)
                                 .onTapGesture {
                                     selectedResearched = item
                                 }

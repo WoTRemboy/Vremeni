@@ -16,12 +16,16 @@ struct ShopItemGridCell: View {
     
     private let item: ConsumableItem
     private var viewModel: ShopView.ShopViewModel
+    private let namespace: Namespace.ID
     
     // MARK: - Initialization
     
-    init(item: ConsumableItem, viewModel: ShopView.ShopViewModel) {
+    init(item: ConsumableItem,
+         viewModel: ShopView.ShopViewModel,
+         namespace: Namespace.ID) {
         self.item = item
         self.viewModel = viewModel
+        self.namespace = namespace
     }
     
     // MARK: - Body view
@@ -29,12 +33,19 @@ struct ShopItemGridCell: View {
     internal var body: some View {
         GeometryReader { reader in
             VStack(spacing: 5) {
-                itemImage
-                    .frame(width: reader.size.width, height: reader.size.width)
-                itemName
-                    .frame(width: reader.size.width, height: 25, alignment: .leading)
-                priceView
-                    .frame(width: reader.size.width, height: 17, alignment: .leading)
+                VStack(spacing: 5) {
+                    itemImage
+                        .frame(width: reader.size.width, height: reader.size.width)
+                    
+                    itemName
+                        .frame(width: reader.size.width, height: 25, alignment: .leading)
+                    priceView
+                        .frame(width: reader.size.width, height: 17, alignment: .leading)
+                }
+                .matchedTransitionSource(
+                    id: Texts.NavigationTransition.shopResearched,
+                    in: namespace)
+                
                 buttons
                     .frame(width: reader.size.width, height: 40, alignment: .leading)
                     .padding(.top, 8)
@@ -160,7 +171,10 @@ struct ShopItemGridCell: View {
             price: 1, profile: Profile.configMockProfile(),
             enabled: true)
         
-        return ShopItemGridCell(item: example, viewModel: viewModel)
+        return ShopItemGridCell(
+            item: example,
+            viewModel: viewModel,
+            namespace: Namespace().wrappedValue)
             .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")

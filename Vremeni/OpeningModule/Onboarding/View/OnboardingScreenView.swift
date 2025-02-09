@@ -67,7 +67,6 @@ struct OnboardingScreenView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 250, height: 250)
-                    .clipShape(.buttonBorder)
                 
                 Text(viewModel.steps[index].name)
                     .font(.largeTitle())

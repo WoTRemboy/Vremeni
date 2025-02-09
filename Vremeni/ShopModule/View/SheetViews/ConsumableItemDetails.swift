@@ -16,15 +16,18 @@ struct ConsumableItemDetails: View {
     
     private let item: ConsumableItem
     private var viewModel: ShopView.ShopViewModel
+    private let namespace: Namespace.ID
     private var onDismiss: () -> Void
     
     // MARK: - Initialization
     
     init(item: ConsumableItem,
          viewModel: ShopView.ShopViewModel,
+         namespace: Namespace.ID,
          onDismiss: @escaping () -> Void) {
         self.item = item
         self.viewModel = viewModel
+        self.namespace = namespace
         self.onDismiss = onDismiss
     }
     
@@ -52,6 +55,7 @@ struct ConsumableItemDetails: View {
             // Navigation bar params
             .navigationTitle(Texts.ItemCreatePage.details)
             .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden()
             
             // Navigation bar buttons
             .toolbar {
@@ -177,7 +181,11 @@ struct ConsumableItemDetails: View {
                            RuleItem.threeMinutes.nameKey : 3],
             enabled: false)
         
-        return ConsumableItemDetails(item: example, viewModel: viewModel, onDismiss: {})
+        return ConsumableItemDetails(
+            item: example,
+            viewModel: viewModel,
+            namespace: Namespace().wrappedValue,
+            onDismiss: {})
             .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")

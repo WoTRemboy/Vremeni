@@ -283,9 +283,13 @@ final class Texts {
     }
     
     enum UserDefaults {
-        static let skipOnboarding = "skipOnboarding"
-        static let notifications = "notificationsEnabled"
-        static let theme = "userTheme"
+        static let skipOnboarding = "SkipOnboarding"
+        static let notifications = "NotificationsEnabled"
+        static let theme = "UserTheme"
+    }
+    
+    enum NavigationTransition {
+        static let shopResearched = "ShopResearched"
     }
 }
 
