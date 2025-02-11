@@ -35,17 +35,17 @@ struct ShopItemGridCell: View {
             VStack(spacing: 5) {
                 VStack(spacing: 5) {
                     itemImage
+                        .matchedGeometryEffect(
+                            id: "\(Texts.MatchedGeometryEffect.ShopPage.itemImage)\(item.id)",
+                            in: namespace)
                         .frame(width: reader.size.width, height: reader.size.width)
                     
                     itemName
                         .frame(width: reader.size.width, height: 25, alignment: .leading)
+                    
                     priceView
                         .frame(width: reader.size.width, height: 17, alignment: .leading)
                 }
-                .matchedTransitionSource(
-                    id: Texts.NavigationTransition.shopResearched,
-                    in: namespace)
-                
                 buttons
                     .frame(width: reader.size.width, height: 40, alignment: .leading)
                     .padding(.top, 8)
@@ -77,6 +77,9 @@ struct ShopItemGridCell: View {
             item.rarity.image
                 .resizable()
                 .scaledToFit()
+                .matchedGeometryEffect(
+                    id: "\(Texts.MatchedGeometryEffect.ShopPage.itemRarity)\(item.id)",
+                    in: namespace)
                 .frame(width: 25)
             
             Text(item.name)
@@ -99,6 +102,9 @@ struct ShopItemGridCell: View {
                 .font(.headline())
                 .foregroundStyle(Color.labelPrimary)
         }
+        .matchedGeometryEffect(
+            id: "\(Texts.MatchedGeometryEffect.ShopPage.itemPrice)\(item.id)",
+            in: namespace)
     }
     
     // MARK: - Buttons block
@@ -118,6 +124,9 @@ struct ShopItemGridCell: View {
                 Text(Texts.ShopPage.addItem)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
+            .matchedGeometryEffect(
+                id: "\(Texts.MatchedGeometryEffect.ShopPage.itemBuy)\(item.id)",
+                in: namespace)
             .frame(height: 40)
             .minimumScaleFactor(0.4)
             

@@ -35,34 +35,47 @@ struct ConsumableItemDetails: View {
     
     internal var body: some View {
         NavigationStack {
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 5) {
-                    // ConsumableItem image, name & rarity
-                    itemHead
-                    // ConsumableItem descriprion & rules rows
-                    params
-                        .padding(.top, 20)
-                    // ConsumableItem price view
-                    TotalPrice(price: item.price)
-                        .padding(.top, 30)
-                    // Enable context action button
-                    buyButton
-                        .padding([.top, .horizontal])
-                    
-                    Spacer()
+            ZStack {
+                Color.BackColors.backElevated
+                    .ignoresSafeArea(.all)
+                    .frame(maxWidth: .infinity,
+                           maxHeight: .infinity)
+                
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 5) {
+                        // ConsumableItem image, name & rarity
+                        itemHead
+                        // ConsumableItem descriprion & rules rows
+                        params
+                            .padding(.top, 20)
+                        // ConsumableItem price view
+                        TotalPrice(price: item.price)
+                            .matchedGeometryEffect(
+                                id: "\(Texts.MatchedGeometryEffect.ShopPage.itemPrice)\(item.id)",
+                                in: namespace)
+                            .padding(.top, 30)
+                        // Enable context action button
+                        buyButton
+                            .matchedGeometryEffect(
+                                id: "\(Texts.MatchedGeometryEffect.ShopPage.itemBuy)\(item.id)",
+                                in: namespace)
+                            .padding([.top, .horizontal])
+                        
+                        Spacer()
+                    }
                 }
-            }
-            // Navigation bar params
-            .navigationTitle(Texts.ItemCreatePage.details)
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden()
-            
-            // Navigation bar buttons
-            .toolbar {
-                // Dismiss button
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(Texts.ItemCreatePage.cancel) {
-                        onDismiss()
+                // Navigation bar params
+                .navigationTitle(Texts.ItemCreatePage.details)
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarBackButtonHidden()
+                
+                // Navigation bar buttons
+                .toolbar {
+                    // Dismiss button
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(Texts.ItemCreatePage.cancel) {
+                            onDismiss()
+                        }
                     }
                 }
             }
@@ -75,18 +88,14 @@ struct ConsumableItemDetails: View {
     private var itemHead: some View {
         VStack(spacing: 5) {
             // Item image
-            if let imageData = item.image, let uiImage = UIImage(data: imageData) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .clipShape(.buttonBorder)
-                    .frame(width: 200, height: 200)
-            } else {
-                Image.Placeholder.placeholder1to1
-                    .resizable()
-                    .clipShape(.buttonBorder)
-                    .frame(width: 200, height: 200)
-            }
-            
+            itemImage
+                .resizable()
+                .clipShape(.buttonBorder)
+                .matchedGeometryEffect(
+                    id: "\(Texts.MatchedGeometryEffect.ShopPage.itemImage)\(item.id)",
+                    in: namespace)
+                .frame(width: 200, height: 200)
+                
             // Item name
             Text(item.name)
                 .font(.segmentTitle())
@@ -98,11 +107,23 @@ struct ConsumableItemDetails: View {
                 item.rarity.image
                     .resizable()
                     .scaledToFit()
+                    .matchedGeometryEffect(
+                        id: "\(Texts.MatchedGeometryEffect.ShopPage.itemRarity)\(item.id)",
+                        in: namespace)
                     .frame(width: 25)
                 // Rarity name
                 Text(item.rarity.name)
                     .font(.body())
             }
+        }
+        .padding(.top)
+    }
+    
+    private var itemImage: Image {
+        if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+            Image(uiImage: uiImage)
+        } else {
+            Image.Placeholder.placeholder1to1
         }
     }
     

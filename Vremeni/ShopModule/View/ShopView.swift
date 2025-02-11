@@ -47,10 +47,14 @@ struct ShopView: View {
     internal var body: some View {
         NavigationStack {
             ZStack {
-                content
-                    .onAppear {
-                        viewModel.updateOnAppear()
-                    }
+                if let item = selectedResearched {
+                    reserchedItemDetails(for: item)
+                } else {
+                    content
+                        .onAppear {
+                            viewModel.updateOnAppear()
+                        }
+                }
                 // In case of items absence
                 if viewModel.items.isEmpty {
                     placeholder
@@ -77,42 +81,12 @@ struct ShopView: View {
             
             // ToolBar items
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    toolBarMenuFilter
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    toolBarButtonPlus
-                }
                 ToolbarItem(placement: .topBarTrailing) {
                     toolBarButtonPremium
                 }
             }
             .toolbarVisibility(isTabbarShown ? .visible : .hidden,
                                for: .tabBar)
-            .navigationDestination(item: $selectedResearched) { item in
-                ConsumableItemDetails(
-                    item: item,
-                    viewModel: viewModel,
-                    namespace: animation) {
-                        selectedResearched = nil
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            isTabbarShown = true
-                        }
-                    }
-                .navigationTransition(
-                    .zoom(sourceID: Texts.NavigationTransition.shopResearched,
-                          in: animation))
-                .onAppear {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        isTabbarShown = false
-                    }
-                }
-                .onDisappear {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        isTabbarShown = true
-                    }
-                }
-            }
         }
         .sheet(isPresented: $showingPremiumSheet) {
             PremiumBuyView(viewModel: viewModel) {
@@ -136,8 +110,6 @@ struct ShopView: View {
     
     private var content: some View {
         ScrollView {
-            enableSegmentedPicker
-                .padding(.horizontal)
             if viewModel.enableStatus {
                 // Collecion with available items
                 availableCollection
@@ -150,6 +122,28 @@ struct ShopView: View {
                     .padding([.horizontal, .bottom])
                     .padding(.top, 8)
                     .transition(.move(edge: .trailing))
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func reserchedItemDetails(for item: ConsumableItem) -> some View {
+        ConsumableItemDetails(
+            item: item,
+            viewModel: viewModel,
+            namespace: animation) {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    selectedResearched = nil
+                }
+            }
+        .onAppear {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                isTabbarShown = false
+            }
+        }
+        .onDisappear {
+            withAnimation(.easeInOut(duration: 0.1)) {
+                isTabbarShown = true
             }
         }
     }
@@ -233,7 +227,9 @@ struct ShopView: View {
                                 viewModel: viewModel,
                                 namespace: animation)
                                 .onTapGesture {
-                                    selectedResearched = item
+                                    withAnimation {
+                                        selectedResearched = item
+                                    }
                                 }
                         }
                     }

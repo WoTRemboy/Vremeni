@@ -291,6 +291,15 @@ final class Texts {
     enum NavigationTransition {
         static let shopResearched = "ShopResearched"
     }
+    
+    enum MatchedGeometryEffect {
+        enum ShopPage {
+            static let itemImage = "ShopPageItemImage"
+            static let itemRarity = "ShopPageItemRariry"
+            static let itemPrice = "ShopPageItemPrice"
+            static let itemBuy = "ShopPageItemBuy"
+        }
+    }
 }
 
 extension Notification.Name {
