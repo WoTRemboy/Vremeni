@@ -13,7 +13,6 @@ struct ShopView: View {
     // MARK: - Properties
     
     @Namespace private var animation
-    @State private var isTabbarShown: Bool = true
     
     // ViewModel properties
     @State private var viewModel: ShopViewModel
@@ -47,14 +46,10 @@ struct ShopView: View {
     internal var body: some View {
         NavigationStack {
             ZStack {
-                if let item = selectedResearched {
-                    reserchedItemDetails(for: item)
-                } else {
-                    content
-                        .onAppear {
-                            viewModel.updateOnAppear()
-                        }
-                }
+                content
+                    .onAppear {
+                        viewModel.updateOnAppear()
+                    }
                 // In case of items absence
                 if viewModel.items.isEmpty {
                     placeholder
@@ -81,12 +76,16 @@ struct ShopView: View {
             
             // ToolBar items
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    toolBarMenuFilter
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    toolBarButtonPlus
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     toolBarButtonPremium
                 }
             }
-            .toolbarVisibility(isTabbarShown ? .visible : .hidden,
-                               for: .tabBar)
         }
         .sheet(isPresented: $showingPremiumSheet) {
             PremiumBuyView(viewModel: viewModel) {
@@ -97,6 +96,14 @@ struct ShopView: View {
             ConsumableItemCreate(viewModel: viewModel) {
                 showingAddItemSheet.toggle()
             }
+        }
+        .sheet(item: $selectedResearched) { item in
+            ConsumableItemDetails(
+                item: item,
+                viewModel: viewModel,
+                namespace: animation) {
+                    selectedResearched = nil
+                }
         }
         // Item details sheet param
         .sheet(item: $selectedLocked) { item in
@@ -122,28 +129,6 @@ struct ShopView: View {
                     .padding([.horizontal, .bottom])
                     .padding(.top, 8)
                     .transition(.move(edge: .trailing))
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private func reserchedItemDetails(for item: ConsumableItem) -> some View {
-        ConsumableItemDetails(
-            item: item,
-            viewModel: viewModel,
-            namespace: animation) {
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    selectedResearched = nil
-                }
-            }
-        .onAppear {
-            withAnimation(.easeInOut(duration: 0.2)) {
-                isTabbarShown = false
-            }
-        }
-        .onDisappear {
-            withAnimation(.easeInOut(duration: 0.1)) {
-                isTabbarShown = true
             }
         }
     }
@@ -227,10 +212,11 @@ struct ShopView: View {
                                 viewModel: viewModel,
                                 namespace: animation)
                                 .onTapGesture {
-                                    withAnimation {
-                                        selectedResearched = item
-                                    }
+                                    selectedResearched = item
                                 }
+                                .matchedTransitionSource(
+                                    id: "\(Texts.NavigationTransition.shopResearched)\(item.id)",
+                                    in: animation)
                         }
                     }
                 }

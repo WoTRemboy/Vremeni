@@ -50,15 +50,9 @@ struct ConsumableItemDetails: View {
                             .padding(.top, 20)
                         // ConsumableItem price view
                         TotalPrice(price: item.price)
-                            .matchedGeometryEffect(
-                                id: "\(Texts.MatchedGeometryEffect.ShopPage.itemPrice)\(item.id)",
-                                in: namespace)
                             .padding(.top, 30)
                         // Enable context action button
                         buyButton
-                            .matchedGeometryEffect(
-                                id: "\(Texts.MatchedGeometryEffect.ShopPage.itemBuy)\(item.id)",
-                                in: namespace)
                             .padding([.top, .horizontal])
                         
                         Spacer()
@@ -78,8 +72,13 @@ struct ConsumableItemDetails: View {
                         }
                     }
                 }
+                .toolbarVisibility(.hidden, for: .tabBar)
             }
+            
         }
+        .navigationTransition(
+            .zoom(sourceID: "\(Texts.NavigationTransition.shopResearched)\(item.id)",
+                  in: namespace))
     }
     
     // MARK: - Support views
@@ -91,9 +90,6 @@ struct ConsumableItemDetails: View {
             itemImage
                 .resizable()
                 .clipShape(.buttonBorder)
-                .matchedGeometryEffect(
-                    id: "\(Texts.MatchedGeometryEffect.ShopPage.itemImage)\(item.id)",
-                    in: namespace)
                 .frame(width: 200, height: 200)
                 
             // Item name
@@ -107,9 +103,6 @@ struct ConsumableItemDetails: View {
                 item.rarity.image
                     .resizable()
                     .scaledToFit()
-                    .matchedGeometryEffect(
-                        id: "\(Texts.MatchedGeometryEffect.ShopPage.itemRarity)\(item.id)",
-                        in: namespace)
                     .frame(width: 25)
                 // Rarity name
                 Text(item.rarity.name)

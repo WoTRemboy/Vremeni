@@ -35,9 +35,6 @@ struct ShopItemGridCell: View {
             VStack(spacing: 5) {
                 VStack(spacing: 5) {
                     itemImage
-                        .matchedGeometryEffect(
-                            id: "\(Texts.MatchedGeometryEffect.ShopPage.itemImage)\(item.id)",
-                            in: namespace)
                         .frame(width: reader.size.width, height: reader.size.width)
                     
                     itemName
@@ -58,7 +55,8 @@ struct ShopItemGridCell: View {
     
     // ConsumableItem image
     private var itemImage: some View {
-        if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+        if let imageData = item.image,
+           let uiImage = UIImage(data: imageData) {
             Image(uiImage: uiImage)
                 .resizable()
                 .scaledToFit()
@@ -77,9 +75,6 @@ struct ShopItemGridCell: View {
             item.rarity.image
                 .resizable()
                 .scaledToFit()
-                .matchedGeometryEffect(
-                    id: "\(Texts.MatchedGeometryEffect.ShopPage.itemRarity)\(item.id)",
-                    in: namespace)
                 .frame(width: 25)
             
             Text(item.name)
@@ -102,9 +97,6 @@ struct ShopItemGridCell: View {
                 .font(.headline())
                 .foregroundStyle(Color.labelPrimary)
         }
-        .matchedGeometryEffect(
-            id: "\(Texts.MatchedGeometryEffect.ShopPage.itemPrice)\(item.id)",
-            in: namespace)
     }
     
     // MARK: - Buttons block
@@ -123,12 +115,9 @@ struct ShopItemGridCell: View {
             }) {
                 Text(Texts.ShopPage.addItem)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .minimumScaleFactor(0.4)
             }
-            .matchedGeometryEffect(
-                id: "\(Texts.MatchedGeometryEffect.ShopPage.itemBuy)\(item.id)",
-                in: namespace)
             .frame(height: 40)
-            .minimumScaleFactor(0.4)
             
             // Button layout params
             .foregroundStyle(Color.orange)
