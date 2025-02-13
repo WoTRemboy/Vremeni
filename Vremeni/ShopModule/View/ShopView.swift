@@ -62,7 +62,6 @@ struct ShopView: View {
             }
             .animation(.easeInOut, value: viewModel.enableStatus)
             .animation(.easeInOut, value: searchText)
-            .animation(.easeInOut, value: viewModel.rarityFilter)
             
             // ScrollView params
             .scrollDisabled(viewModel.items.isEmpty)
@@ -72,16 +71,11 @@ struct ShopView: View {
             // Navigation title params
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
-            .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
+            .toolbarBackgroundVisibility(.visible, for: .navigationBar)
             
+            .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
             // ToolBar items
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    toolBarMenuFilter
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    toolBarButtonPlus
-                }
                 ToolbarItem(placement: .topBarTrailing) {
                     toolBarButtonPremium
                 }
@@ -117,18 +111,15 @@ struct ShopView: View {
     
     private var content: some View {
         ScrollView {
-            if viewModel.enableStatus {
-                // Collecion with available items
-                availableCollection
-                    .padding([.horizontal, .bottom])
-                    .padding(.top, 8)
-                    .transition(.move(edge: .leading))
-            } else {
-                // Collecion with locked items
-                researchCollection
-                    .padding([.horizontal, .bottom])
-                    .padding(.top, 8)
-                    .transition(.move(edge: .trailing))
+            LazyVStack(spacing: 16, pinnedViews: [.sectionHeaders]) {
+                Section {
+                    availableCollection
+                        .padding([.horizontal, .bottom])
+                        .padding(.top, 8)
+                        .transition(.move(edge: .leading))
+                } header: {
+                    FilterScrollableView(viewModel: viewModel)
+                }
             }
         }
     }
@@ -148,35 +139,6 @@ struct ShopView: View {
             showingAddItemSheet.toggle()
         } label: {
             Image.ShopPage.plus
-        }
-    }
-    
-    private var toolBarMenuFilter: some View {
-        // Menu with two pickers to display Sections
-        Menu {
-            // .all rarity case
-            Picker(Texts.ShopPage.filterItems, selection: $viewModel.rarityFilter) {
-                Text(Rarity.all.name)
-                    .tag(Rarity.all)
-            }
-            Section {
-                // Other rarity case
-                Picker(Texts.ShopPage.filterItems, selection: $viewModel.rarityFilter) {
-                    ForEach(Rarity.allCases) { rarity in
-                        // Shows label only when there are items
-                        if !viewModel.filterItems(for: rarity).isEmpty {
-                            Label(
-                                title: { Text(rarity.name) },
-                                icon: { rarity.image }
-                            )
-                            .tag(rarity)
-                        }
-                    }
-                }
-            }
-        } label: {
-            // Image filling to demonstrate filter activity
-            viewModel.rarityFilter == .all ? Image.ShopPage.filter : Image.ShopPage.filledFilter
         }
     }
     
@@ -202,7 +164,7 @@ struct ShopView: View {
         
         return LazyVGrid(columns: columns, spacing: spacing) {
             ForEach(Rarity.allCases) { rarity in
-                let items = viewModel.enabledItems.filter({ $0.rarity == rarity && $0.enabled  })
+                let items = viewModel.enabledItems.filter({ $0.rarity == rarity  })
                 if !items.isEmpty {
                     // Rarity Section for available Items
                     Section(header: SectionHeader(rarity.name)) {

@@ -19,7 +19,6 @@ enum Rarity: String, Codable {
     case mythic = "Mythic"
     case exotic = "Exotic"
     case final = "Final"
-    case all = "All"
 }
 
 // MARK: - Rarity Methods
@@ -51,8 +50,6 @@ extension Rarity: Identifiable {
             Texts.Rarity.exotic
         case .final:
             Texts.Rarity.final
-        case .all:
-            Texts.Rarity.all
         }
     }
     
@@ -75,8 +72,6 @@ extension Rarity: Identifiable {
             return .Rarity.exotic
         case .final:
             return .Rarity.final
-        case .all:
-            return Image("")
         }
     }
     
@@ -99,8 +94,27 @@ extension Rarity: Identifiable {
             Color.RarityColors.exotic
         case .final:
             Color.RarityColors.final
-        case .all:
-            Color.RarityColors.common
+        }
+    }
+    
+    internal func compareRarity(for filter: Self) -> Bool {
+        switch self {
+        case .common:
+            filter == .common
+        case .uncommon:
+            filter == .uncommon
+        case .rare:
+            filter == .rare
+        case .epic:
+            filter == .epic
+        case .legendary:
+            filter == .legendary
+        case .mythic:
+            filter == .mythic
+        case .exotic:
+            filter == .exotic
+        case .final:
+            filter == .final
         }
     }
 }

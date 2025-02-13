@@ -69,8 +69,10 @@ extension ProfileView {
             fetchActualRariries()
         }
         
-        internal func rarityCount(for rarity: Rarity, all: Bool = false) -> Int {
-            guard rarity != .all else { return unlockedItems.count }
+        internal func rarityCount(for rarity: Rarity,
+                                  all: Bool = false,
+                                  allContent: Bool = false) -> Int {
+            guard !allContent else { return unlockedItems.count }
             if all {
                 return items.filter({ $0.rarity == rarity }).count
             } else {

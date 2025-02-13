@@ -28,7 +28,7 @@ extension InventoryView {
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
-            self.rarityFilter = .all
+            self.rarityFilter = .common
             NotificationCenter.default.addObserver(self, selector: #selector(handleDataUpdate), name: .inventoryUpdateNotification, object: nil)
         }
         
@@ -133,16 +133,6 @@ extension InventoryView {
             do {
                 let descriptor = FetchDescriptor<ConsumableItem>(predicate: #Predicate { $0.ready }, sortBy: [SortDescriptor(\.price)])
                 items = try modelContext.fetch(descriptor)
-                
-                if rarityFilter != .all {
-                    items = items.filter { $0.rarity == rarityFilter }
-                } else {
-                    unfilteredItems = items
-                    
-                    if rarityFilter != .all {
-                        rarityFilter = .all
-                    }
-                }
             } catch {
                 print("ConsumableItem fetch for Inventory viewModel failed")
             }

@@ -51,9 +51,6 @@ struct InventoryView: View {
             .background(Color.BackColors.backDefault)
             .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    toolBarMenuFilter
-                }
                 ToolbarItem(placement: .topBarTrailing) {
                     toolBarProgressView
                 }
@@ -108,30 +105,6 @@ struct InventoryView: View {
                     SectionHeader(Texts.InventoryPage.result)
                 }
             }
-        }
-    }
-    
-    private var toolBarMenuFilter: some View {
-        Menu {
-            Picker(Texts.InventoryPage.filter, selection: $viewModel.rarityFilter) {
-                Text(Rarity.all.name)
-                    .tag(Rarity.all)
-            }
-            Section {
-                Picker(Texts.InventoryPage.filter, selection: $viewModel.rarityFilter) {
-                    ForEach(Rarity.allCases) { rarity in
-                        if !viewModel.filterItems(for: rarity).isEmpty {
-                            Label(
-                                title: { Text(rarity.name) },
-                                icon: { rarity.image }
-                            )
-                            .tag(rarity)
-                        }
-                    }
-                }
-            }
-        } label: {
-            viewModel.rarityFilter == .all ? Image.ShopPage.filter : Image.ShopPage.filledFilter
         }
     }
     

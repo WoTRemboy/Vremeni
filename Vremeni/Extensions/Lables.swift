@@ -288,17 +288,12 @@ final class Texts {
         static let theme = "UserTheme"
     }
     
-    enum NavigationTransition {
-        static let shopResearched = "ShopResearched"
+    enum NamespaceID {
+        static let selectedTab = "SelectedTab"
     }
     
-    enum MatchedGeometryEffect {
-        enum ShopPage {
-            static let itemImage = "ShopPageItemImage"
-            static let itemRarity = "ShopPageItemRariry"
-            static let itemPrice = "ShopPageItemPrice"
-            static let itemBuy = "ShopPageItemBuy"
-        }
+    enum NavigationTransition {
+        static let shopResearched = "ShopResearched"
     }
 }
 

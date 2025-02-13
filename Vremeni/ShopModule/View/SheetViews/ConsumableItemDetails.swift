@@ -148,6 +148,9 @@ struct ConsumableItemDetails: View {
                     bannerService.setBanner(banner: .added(message: Texts.Banner.added))
                 }
             }
+            // Medium haptic feedback
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.impactOccurred()
             onDismiss()
         }) {
             // Button definition depending on enable status

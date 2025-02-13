@@ -38,20 +38,11 @@ extension ShopView {
         }
         
         // Active rarity filter property with PO for data update
-        internal var rarityFilter: Rarity {
-            didSet {
-                fetchData()
-            }
-        }
+        internal var selectedFilter: Rarity = .common
         
         // Active enable filter property with PO for data update
-        internal var enableStatus: Bool //{
-//            didSet {
-//                withAnimation(.easeInOut(duration: 0.3)) {
-//                    fetchData(filterReset: true)
-//                }
-//            }
-//        }
+        internal var enableStatus: Bool
+
         
         internal var enabledItems: [ConsumableItem] {
             allItems.filter({ $0.enabled })
@@ -72,7 +63,6 @@ extension ShopView {
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
             self.enableStatus = true
-            self.rarityFilter = .all
         }
         
         // MARK: - ConsumableItem status management methods
@@ -200,6 +190,12 @@ extension ShopView {
             unfilteredItems.filter({ $0.rarity == rarity })
         }
         
+        internal func setFilter(to newValue: Rarity) {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                selectedFilter = newValue
+            }
+        }
+        
         // Returns the grid width depending on the enable filter value
         internal func changeRowItems(enabled: Bool) -> Int {
             enabled ? 2 : 1
@@ -272,20 +268,6 @@ extension ShopView {
                 allItems = try modelContext.fetch(descriptor)
                 items = allItems.filter { $0.enabled == enableStatus && !$0.archived }
                 items.sort { ($0.price < $1.price) && ($0.name < $1.name) }
-                
-                // Check for .all tag selection or enable status changes (filterReset)
-                if rarityFilter != .all && !filterReset {
-                    // Filters items by rarity tag
-                    items = items.filter { $0.rarity == rarityFilter }
-                } else {
-                    // Unfiltered items are current enable status items now
-                    unfilteredItems = items
-                    
-                    // Changes tag to .all manually
-                    if rarityFilter != .all {
-                        rarityFilter = .all
-                    }
-                }
             } catch {
                 print("ConsumableItem fetch for Shop viewModel failed")
             }

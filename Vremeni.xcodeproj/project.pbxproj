@@ -89,6 +89,8 @@
 		63C5F1B22CE0D4250043A483 /* SubscriptionTypeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C5F1B12CE0D4250043A483 /* SubscriptionTypeTableCell.swift */; };
 		63C5F1B42CE0D4B70043A483 /* SubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C5F1B32CE0D4AD0043A483 /* SubscriptionModel.swift */; };
 		63C5F1B62CE0F8F30043A483 /* Vremeni.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 63C5F1B52CE0F8F30043A483 /* Vremeni.storekit */; };
+		63DBCA2D2D5CF62F0032230E /* FilterScrollableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DBCA2C2D5CF62F0032230E /* FilterScrollableView.swift */; };
+		63DBCA2F2D5CF6670032230E /* FilterScrollableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DBCA2E2D5CF6620032230E /* FilterScrollableCell.swift */; };
 		63E31F4A2C8B44D4005275EF /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E31F492C8B44D4005275EF /* StoreKitManager.swift */; };
 		63F0090E2C6CCA3600DDF6E3 /* StatisticsChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F0090D2C6CCA3600DDF6E3 /* StatisticsChartCell.swift */; };
 		63F009102C6D167C00DDF6E3 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F0090F2C6D167C00DDF6E3 /* SplashScreenView.swift */; };
@@ -201,6 +203,8 @@
 		63C5F1B12CE0D4250043A483 /* SubscriptionTypeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTypeTableCell.swift; sourceTree = "<group>"; };
 		63C5F1B32CE0D4AD0043A483 /* SubscriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionModel.swift; sourceTree = "<group>"; };
 		63C5F1B52CE0F8F30043A483 /* Vremeni.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Vremeni.storekit; sourceTree = "<group>"; };
+		63DBCA2C2D5CF62F0032230E /* FilterScrollableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScrollableView.swift; sourceTree = "<group>"; };
+		63DBCA2E2D5CF6620032230E /* FilterScrollableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScrollableCell.swift; sourceTree = "<group>"; };
 		63E31F492C8B44D4005275EF /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		63F0090D2C6CCA3600DDF6E3 /* StatisticsChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsChartCell.swift; sourceTree = "<group>"; };
 		63F0090F2C6D167C00DDF6E3 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
@@ -360,6 +364,7 @@
 				631F265F2C67B39F00FEAD1A /* GridCells */,
 				63038F722CE0D3D40003A602 /* TableCells */,
 				631F26602C67B3F700FEAD1A /* SheetViews */,
+				63DBCA2B2D5CF5E90032230E /* FilerView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -642,6 +647,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		63DBCA2B2D5CF5E90032230E /* FilerView */ = {
+			isa = PBXGroup;
+			children = (
+				63DBCA2C2D5CF62F0032230E /* FilterScrollableView.swift */,
+				63DBCA2E2D5CF6620032230E /* FilterScrollableCell.swift */,
+			);
+			path = FilerView;
+			sourceTree = "<group>";
+		};
 		63E31F482C8B4380005275EF /* StoreKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -856,6 +870,7 @@
 				635D59372C7E668700EA2550 /* ContentLabels.swift in Sources */,
 				638620B52C60D11B00453944 /* MachineItemDetailsView.swift in Sources */,
 				63973AE12C70B3D700F734FE /* BannerView.swift in Sources */,
+				63DBCA2D2D5CF62F0032230E /* FilterScrollableView.swift in Sources */,
 				631F26562C66185900FEAD1A /* RarityModel.swift in Sources */,
 				634C03EB2CF880EE00CFF706 /* IconChooserModel.swift in Sources */,
 				6340B2C12D31718C00CCD6B6 /* TabItems.swift in Sources */,
@@ -892,6 +907,7 @@
 				631AF4152C5176D400DFD63C /* ShopView.swift in Sources */,
 				6340B2C52D3173F300CCD6B6 /* RootView.swift in Sources */,
 				631AF4302C5273B300DFD63C /* ProgressBar.swift in Sources */,
+				63DBCA2F2D5CF6670032230E /* FilterScrollableCell.swift in Sources */,
 				631AF3D12C4FC82C00DFD63C /* VremeniApp.swift in Sources */,
 				63552F7C2CE01A1700DE9944 /* ViewExtension.swift in Sources */,
 				6340B2C72D317BD700CCD6B6 /* ItemsGenerator.swift in Sources */,
