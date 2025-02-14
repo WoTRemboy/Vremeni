@@ -23,7 +23,6 @@ struct FilterScrollableView: View {
             }
         }
         .scrollIndicators(.hidden)
-        .background(.thinMaterial)
     }
     
     @ViewBuilder
@@ -31,10 +30,10 @@ struct FilterScrollableView: View {
         HStack(spacing: 8) {
             ForEach(Rarity.allCases, id: \.self) { rarity in
                 FilterScrollableCell(
-                    name: rarity.name,
-                    selected: rarity.compareRarity(for: viewModel.selectedFilter),
+                    rarity: rarity,
+                    selected: rarity.compareRarity(
+                        for: viewModel.selectedFilter),
                     namespace: animation)
-                .frame(height: 35)
                 .id(rarity)
                 .onTapGesture {
                     viewModel.setFilter(to: rarity)

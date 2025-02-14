@@ -71,7 +71,6 @@ struct ShopView: View {
             // Navigation title params
             .navigationTitle(Texts.Common.title)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackgroundVisibility(.visible, for: .navigationBar)
             
             .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
             // ToolBar items
@@ -111,12 +110,10 @@ struct ShopView: View {
     
     private var content: some View {
         ScrollView {
-            LazyVStack(spacing: 16, pinnedViews: [.sectionHeaders]) {
+            LazyVStack(spacing: 16) {
                 Section {
                     availableCollection
                         .padding([.horizontal, .bottom])
-                        .padding(.top, 8)
-                        .transition(.move(edge: .leading))
                 } header: {
                     FilterScrollableView(viewModel: viewModel)
                 }
@@ -163,23 +160,21 @@ struct ShopView: View {
             count: 2)
         
         return LazyVGrid(columns: columns, spacing: spacing) {
-            ForEach(Rarity.allCases) { rarity in
-                let items = viewModel.enabledItems.filter({ $0.rarity == rarity  })
-                if !items.isEmpty {
-                    // Rarity Section for available Items
-                    Section(header: SectionHeader(rarity.name)) {
-                        ForEach(items) { item in
-                            ShopItemGridCell(
-                                item: item,
-                                viewModel: viewModel,
-                                namespace: animation)
-                                .onTapGesture {
-                                    selectedResearched = item
-                                }
-                                .matchedTransitionSource(
-                                    id: "\(Texts.NavigationTransition.shopResearched)\(item.id)",
-                                    in: animation)
+            let items = viewModel.enabledItems.filter({ $0.rarity == viewModel.selectedFilter })
+            if !items.isEmpty {
+                // Rarity Section for available Items
+                Section {
+                    ForEach(items) { item in
+                        ShopItemGridCell(
+                            item: item,
+                            viewModel: viewModel,
+                            namespace: animation)
+                        .onTapGesture {
+                            selectedResearched = item
                         }
+                        .matchedTransitionSource(
+                            id: "\(Texts.NavigationTransition.shopResearched)\(item.id)",
+                            in: animation)
                     }
                 }
             }

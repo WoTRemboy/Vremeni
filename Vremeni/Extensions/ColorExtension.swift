@@ -16,6 +16,7 @@ extension Color {
         static let backSplash = Color("BackSplash")
         static let backPopup = Color("BackPopup")
         static let backDefault = Color("BackDefault")
+        static let backSystem = Color("BackSystem")
     }
     
     enum LabelColors {
@@ -24,6 +25,7 @@ extension Color {
         static let labelPrimary = Color("LabelPrimary")
         static let labelSecondary = Color("LabelSecondary")
         static let labelTertiary = Color("LabelTertiary")
+        static let labelWhite = Color("LabelWhite")
     }
     
     enum SupportColors {
