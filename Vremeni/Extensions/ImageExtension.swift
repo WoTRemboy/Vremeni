@@ -94,6 +94,17 @@ extension Image {
         static let mythic = Image("RarityMythic")
         static let exotic  = Image("RarityExotic")
         static let final = Image("RarityFinal")
+        
+        enum White {
+            static let common = Image("RarityCommonWhite")
+            static let uncommon = Image("RarityUncommonWhite")
+            static let rare = Image("RarityRareWhite")
+            static let epic = Image("RarityEpicWhite")
+            static let legendary = Image("RarityLegendaryWhite")
+            static let mythic = Image("RarityMythicWhite")
+            static let exotic  = Image("RarityExoticWhite")
+            static let final = Image("RarityFinalWhite")
+        }
     }
     
     enum TabBar {

@@ -75,6 +75,27 @@ extension Rarity: Identifiable {
         }
     }
     
+    internal var whiteImage: Image {
+        switch self {
+        case .common:
+            return .Rarity.White.common
+        case .uncommon:
+            return .Rarity.White.uncommon
+        case .rare:
+            return .Rarity.White.rare
+        case .epic:
+            return .Rarity.White.epic
+        case .legendary:
+            return .Rarity.White.legendary
+        case .mythic:
+            return .Rarity.White.mythic
+        case .exotic:
+            return .Rarity.White.exotic
+        case .final:
+            return .Rarity.White.final
+        }
+    }
+    
     // Rarity color definition
     internal var color: Color {
         switch self {

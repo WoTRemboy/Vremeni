@@ -60,7 +60,7 @@ struct FilterScrollableCell: View {
     
     private var selectedCellContent: some View {
         HStack(spacing: 6) {
-            rarity.image
+            rarity.whiteImage
                 .resizable()
                 .scaledToFit()
                 .frame(width: 17, height: 17)

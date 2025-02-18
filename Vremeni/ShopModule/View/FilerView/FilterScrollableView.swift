@@ -36,8 +36,8 @@ struct FilterScrollableView: View {
                     namespace: animation)
                 .id(rarity)
                 .onTapGesture {
-                    viewModel.setFilter(to: rarity)
-                    withAnimation {
+                    withAnimation(.easeInOut(duration: 1)) {
+                        viewModel.setFilter(to: rarity)
                         proxy.scrollTo(rarity, anchor: .center)
                     }
                 }
