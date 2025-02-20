@@ -8,8 +8,7 @@
 import UIKit
 
 extension ProfileView.ProfileViewModel {
-    internal func itemGenerator() -> [ConsumableItem] {
-        
+    internal func itemGenerator(allUnlocked: Bool) -> [ConsumableItem] {
         // MARK: - Common Tier
         
         let oneMinute = ConsumableItem.itemConfig(
@@ -36,7 +35,7 @@ extension ProfileView.ProfileViewModel {
             applications: [RuleItem.threeMinutes.nameKey : 3,
                            RuleItem.fourMinutes.nameKey : 4,
                            RuleItem.fiveMinutes.nameKey : 5],
-            enabled: false
+            enabled: allUnlocked
         )
 
         let threeMinutes = ConsumableItem.itemConfig(
@@ -52,7 +51,7 @@ extension ProfileView.ProfileViewModel {
             applications: [RuleItem.fiveMinutes.nameKey : 5,
                            RuleItem.sixMinutes.nameKey : 6,
                            RuleItem.sevenMinutes.nameKey : 7],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let fourMinutes = ConsumableItem.itemConfig(
@@ -67,7 +66,7 @@ extension ProfileView.ProfileViewModel {
             applications: [RuleItem.sevenMinutes.nameKey : 7,
                            RuleItem.eightMinutes.nameKey : 8,
                            RuleItem.nineMinutes.nameKey : 9],
-            enabled: false
+            enabled: allUnlocked
         )
 
         let fiveMinutes = ConsumableItem.itemConfig(
@@ -82,7 +81,7 @@ extension ProfileView.ProfileViewModel {
                            Requirement(item: threeMinutes, quantity: 1)],
             applications: [RuleItem.nineMinutes.nameKey : 9,
                            RuleItem.tenMinutes.nameKey : 10],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let sixMinutes = ConsumableItem.itemConfig(
@@ -95,7 +94,7 @@ extension ProfileView.ProfileViewModel {
             profile: profile,
             requirements: [Requirement(item: threeMinutes, quantity: 2)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
 
         let sevenMinutes = ConsumableItem.itemConfig(
@@ -109,7 +108,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: threeMinutes, quantity: 1),
                            Requirement(item: fourMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let eightMinutes = ConsumableItem.itemConfig(
@@ -122,7 +121,7 @@ extension ProfileView.ProfileViewModel {
             profile: profile,
             requirements: [Requirement(item: fourMinutes, quantity: 2)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let nineMinutes = ConsumableItem.itemConfig(
@@ -136,7 +135,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: fourMinutes, quantity: 1),
                            Requirement(item: fiveMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
 
         let tenMinutes = ConsumableItem.itemConfig(
@@ -149,7 +148,7 @@ extension ProfileView.ProfileViewModel {
             profile: profile,
             requirements: [Requirement(item: fiveMinutes, quantity: 2)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
 
         let commonItems = [oneMinute, twoMinutes, threeMinutes, fourMinutes, fiveMinutes, sixMinutes, sevenMinutes, eightMinutes, nineMinutes, tenMinutes]
@@ -167,7 +166,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: twoMinutes, quantity: 1),
                            Requirement(item: tenMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let twentyMinutes = ConsumableItem.itemConfig(
@@ -181,7 +180,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: eightMinutes, quantity: 1),
                            Requirement(item: twelveMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let thirtyFiveMinutes = ConsumableItem.itemConfig(
@@ -196,7 +195,7 @@ extension ProfileView.ProfileViewModel {
                            Requirement(item: twentyMinutes, quantity: 1),
                            Requirement(item: twelveMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let oneHourFifteenMinutes = ConsumableItem.itemConfig(
@@ -212,7 +211,7 @@ extension ProfileView.ProfileViewModel {
                            Requirement(item: twentyMinutes, quantity: 1),
                            Requirement(item: thirtyFiveMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let twoHoursThirtyMinutes = ConsumableItem.itemConfig(
@@ -225,7 +224,7 @@ extension ProfileView.ProfileViewModel {
             profile: profile,
             requirements: [Requirement(item: oneHourFifteenMinutes, quantity: 2)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let fourHours = ConsumableItem.itemConfig(
@@ -241,7 +240,7 @@ extension ProfileView.ProfileViewModel {
                            Requirement(item: oneHourFifteenMinutes, quantity: 1),
                            Requirement(item: twoHoursThirtyMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let tenHours = ConsumableItem.itemConfig(
@@ -258,7 +257,7 @@ extension ProfileView.ProfileViewModel {
                            Requirement(item: twoHoursThirtyMinutes, quantity: 2),
                            Requirement(item: fourHours, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let uncommonItems = [twelveMinutes, twentyMinutes, thirtyFiveMinutes, oneHourFifteenMinutes, twoHoursThirtyMinutes, fourHours, tenHours]
@@ -276,7 +275,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: fourMinutes, quantity: 1),
                            Requirement(item: tenMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let thirtyFourMinutes = ConsumableItem.itemConfig(
@@ -290,7 +289,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: tenMinutes, quantity: 2),
                            Requirement(item: fourteenMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let oneHourNinteenMinutes = ConsumableItem.itemConfig(
@@ -305,7 +304,7 @@ extension ProfileView.ProfileViewModel {
                            Requirement(item: fourteenMinutes, quantity: 3),
                            Requirement(item: thirtyFourMinutes, quantity: 3)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let twoHoursFourtyNineMinutes = ConsumableItem.itemConfig(
@@ -320,7 +319,7 @@ extension ProfileView.ProfileViewModel {
                            Requirement(item: thirtyFourMinutes, quantity: 1),
                            Requirement(item: oneHourNinteenMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let rareItems = [fourteenMinutes, thirtyFourMinutes, oneHourNinteenMinutes, twoHoursFourtyNineMinutes]
@@ -338,7 +337,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: fiveMinutes, quantity: 1),
                            Requirement(item: tenMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let thirtyMinutes = ConsumableItem.itemConfig(
@@ -351,7 +350,7 @@ extension ProfileView.ProfileViewModel {
             profile: profile,
             requirements: [Requirement(item: fifteenMinutes, quantity: 2)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let fourtyFiveMinutes = ConsumableItem.itemConfig(
@@ -365,7 +364,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: fifteenMinutes, quantity: 1),
                            Requirement(item: thirtyMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let oneHour = ConsumableItem.itemConfig(
@@ -379,7 +378,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: fifteenMinutes, quantity: 1),
                            Requirement(item: fourtyFiveMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let epicItems = [fifteenMinutes, thirtyMinutes, fourtyFiveMinutes, oneHour]
@@ -397,7 +396,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: sevenMinutes, quantity: 1),
                            Requirement(item: tenMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let thirtyTwoMinutes = ConsumableItem.itemConfig(
@@ -412,7 +411,7 @@ extension ProfileView.ProfileViewModel {
                            Requirement(item: tenMinutes, quantity: 1),
                            Requirement(item: seventeenMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let fiftyTwoMinutes = ConsumableItem.itemConfig(
@@ -427,7 +426,7 @@ extension ProfileView.ProfileViewModel {
                            Requirement(item: seventeenMinutes, quantity: 1),
                            Requirement(item: thirtyTwoMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let oneHourTwentyTwoMinutes = ConsumableItem.itemConfig(
@@ -443,7 +442,7 @@ extension ProfileView.ProfileViewModel {
                            Requirement(item: seventeenMinutes, quantity: 1),
                            Requirement(item: fiftyTwoMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let legendaryItems = [seventeenMinutes, thirtyTwoMinutes, fiftyTwoMinutes, oneHourTwentyTwoMinutes]
@@ -461,7 +460,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: nineMinutes, quantity: 1),
                            Requirement(item: tenMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let twentyNineMinutes = ConsumableItem.itemConfig(
@@ -475,7 +474,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: tenMinutes, quantity: 1),
                            Requirement(item: ninteenMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let thirtyNineMinutes = ConsumableItem.itemConfig(
@@ -489,7 +488,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: tenMinutes, quantity: 1),
                            Requirement(item: twentyNineMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let fourtyNineMinutes = ConsumableItem.itemConfig(
@@ -503,7 +502,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: tenMinutes, quantity: 1),
                            Requirement(item: thirtyNineMinutes, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let mythicItems = [ninteenMinutes, twentyNineMinutes, thirtyNineMinutes, fourtyNineMinutes]
@@ -521,7 +520,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: thirtyMinutes, quantity: 1),
                            Requirement(item: oneHour, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let threeHours = ConsumableItem.itemConfig(
@@ -534,7 +533,7 @@ extension ProfileView.ProfileViewModel {
             profile: profile,
             requirements: [Requirement(item: oneHourThirtyMinutes, quantity: 2)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let fourHoursThirtyHours = ConsumableItem.itemConfig(
@@ -548,7 +547,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: oneHourThirtyMinutes, quantity: 1),
                            Requirement(item: threeHours, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let sixHours = ConsumableItem.itemConfig(
@@ -562,7 +561,7 @@ extension ProfileView.ProfileViewModel {
             requirements: [Requirement(item: oneHourThirtyMinutes, quantity: 1),
                            Requirement(item: fourHoursThirtyHours, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let exoticItems = [oneHourThirtyMinutes, threeHours, fourHoursThirtyHours, sixHours]
@@ -585,7 +584,7 @@ extension ProfileView.ProfileViewModel {
                            Requirement(item: sixHours, quantity: 1),
                            Requirement(item: tenHours, quantity: 1)],
             applications: [:],
-            enabled: false
+            enabled: allUnlocked
         )
         
         let finalItem = [twentyFourHours]

@@ -236,7 +236,7 @@ extension ProfileView {
         }
         
         internal func addSamples() {
-            let items = itemGenerator()
+            let items = itemGenerator(allUnlocked: true)
             for item in items {
                 modelContext.insert(item)
             }
