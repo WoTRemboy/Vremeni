@@ -51,20 +51,17 @@ struct ShopView: View {
                         viewModel.updateOnAppear()
                     }
                 // In case of items absence
-                if viewModel.items.isEmpty {
+                if viewModel.filteredResearchedItems.isEmpty {
                     placeholder
                         .frame(maxWidth: .infinity, alignment: .center)
-                    // No available <-, but No Locked ->
-                        .transition(.move(edge: viewModel.enableStatus ? .leading : .trailing))
                 } else if searchResults.isEmpty {
                     searchPlaceholder
                 }
             }
-            .animation(.easeInOut, value: viewModel.enableStatus)
             .animation(.easeInOut, value: searchText)
             
             // ScrollView params
-            .scrollDisabled(viewModel.items.isEmpty)
+            .scrollDisabled(viewModel.filteredResearchedItems.isEmpty)
             .scrollDismissesKeyboard(.immediately)
             .background(Color.BackColors.backDefault)
             
@@ -141,64 +138,26 @@ struct ShopView: View {
     
     // MARK: - Content views
     
-    // Available/Locked items picker (changes enabledStatus)
-    private var enableSegmentedPicker: some View {
-        Picker(Texts.ShopPage.status, selection: $viewModel.enableStatus.animation()) {
-            Text(Texts.ShopPage.available).tag(true)
-            Text(Texts.ShopPage.locked).tag(false)
-        }
-        .pickerStyle(.segmented)
-        .onChange(of: viewModel.enableStatus) {
-            // Changes items count in a row
-            itemsInRows = viewModel.changeRowItems(enabled: viewModel.enableStatus)
-        }
-    }
-    
     private var availableCollection: some View {
         let columns = Array(
             repeating: GridItem(.flexible(), spacing: spacing),
             count: 2)
         
         return LazyVGrid(columns: columns, spacing: spacing) {
-            let items = viewModel.enabledItems.filter({ $0.rarity == viewModel.selectedFilter })
+            let items = viewModel.filteredResearchedItems
             if !items.isEmpty {
                 // Rarity Section for available Items
-                Section {
-                    ForEach(items) { item in
-                        ShopItemGridCell(
-                            item: item,
-                            viewModel: viewModel,
-                            namespace: animation)
-                        .onTapGesture {
-                            selectedResearched = item
-                        }
-                        .matchedTransitionSource(
-                            id: "\(Texts.NavigationTransition.shopResearched)\(item.id)",
-                            in: animation)
+                ForEach(searchResults) { item in
+                    ShopItemGridCell(
+                        item: item,
+                        viewModel: viewModel,
+                        namespace: animation)
+                    .onTapGesture {
+                        selectedResearched = item
                     }
-                }
-            }
-        }
-    }
-    
-    private var researchCollection: some View {
-        let columns = Array(
-            repeating: GridItem(.flexible(), spacing: spacing),
-            count: 1)
-        
-        return LazyVGrid(columns: columns, spacing: spacing) {
-            ForEach(Rarity.allCases) { rarity in
-                let items = viewModel.lockedItems.filter({ $0.rarity == rarity })
-                if !items.isEmpty {
-                    // Rarity Section for locked Items
-                    Section(header: SectionHeader(rarity.name)) {
-                        ForEach(items) { item in
-                            ShopItemGridCellLocked(item: item, viewModel: viewModel)
-                                .onTapGesture {
-                                    selectedLocked = item
-                                }
-                        }
-                    }
+                    .matchedTransitionSource(
+                        id: "\(Texts.NavigationTransition.shopResearched)\(item.id)",
+                        in: animation)
                 }
             }
         }
@@ -207,7 +166,7 @@ struct ShopView: View {
     // MARK: - Empty status views
     
     private var placeholder: some View {
-        if viewModel.enableStatus {
+        if viewModel.filteredResearchedItems.isEmpty {
             // No available items
             PlaceholderView(title: Texts.ShopPage.placeholderTitle,
                             description: Texts.ShopPage.placeholderSubtitle,
@@ -230,10 +189,9 @@ struct ShopView: View {
     
     private var searchResults: [ConsumableItem] {
         if searchText.isEmpty {
-            return viewModel.items
+            return viewModel.filteredResearchedItems
         } else {
-            // Unfiltered to show results regardless of rarity
-            return viewModel.unfilteredItems.filter { $0.name.contains(searchText) }
+            return viewModel.filteredResearchedItems.filter { $0.name.contains(searchText) }
         }
     }
 }

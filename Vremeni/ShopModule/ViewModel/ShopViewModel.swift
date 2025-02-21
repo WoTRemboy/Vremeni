@@ -20,9 +20,11 @@ extension ShopView {
         // MARK: - Properties
         
         private(set) var modelContext: ModelContext
-        private(set) var items = [ConsumableItem]()
-        private(set) var allItems = [ConsumableItem]()
         private(set) var profile = Profile.configMockProfile()
+        
+        private(set) var allItems: [ConsumableItem] = []
+        private(set) var researchedItems: [Rarity : [ConsumableItem]] = [:]
+        private(set) var lockedItems: [Rarity: [ConsumableItem]] = [:]
         
         private(set) var currentSubType: SubscriptionType = .annual
         
@@ -38,18 +40,14 @@ extension ShopView {
         }
         
         // Active rarity filter property with PO for data update
-        internal var selectedFilter: Rarity = .common
-        
-        // Active enable filter property with PO for data update
-        internal var enableStatus: Bool
-
-        
-        internal var enabledItems: [ConsumableItem] {
-            allItems.filter({ $0.enabled })
+        internal var selectedFilter: Rarity = .common {
+            didSet {
+                filterItems(for: selectedFilter)
+            }
         }
         
-        internal var lockedItems: [ConsumableItem] {
-            allItems.filter({ !$0.enabled })
+        internal var filteredResearchedItems: [ConsumableItem] {
+            return researchedItems[selectedFilter] ?? []
         }
         
         internal var premium: Bool {
@@ -62,7 +60,6 @@ extension ShopView {
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
-            self.enableStatus = true
         }
         
         // MARK: - ConsumableItem status management methods
@@ -186,19 +183,14 @@ extension ShopView {
         // MARK: - Calculation methods
         
         // Returns filtered elements by rarity
-        internal func filterItems(for rarity: Rarity) -> [ConsumableItem] {
-            unfilteredItems.filter({ $0.rarity == rarity })
+        private func filterItems(for rarity: Rarity) -> [ConsumableItem] {
+            researchedItems[rarity] ?? []
         }
         
         internal func setFilter(to newValue: Rarity) {
-            withAnimation(.easeInOut(duration: 0.2)) {
+            withAnimation(.easeInOut(duration: 0.3)) {
                 selectedFilter = newValue
             }
-        }
-        
-        // Returns the grid width depending on the enable filter value
-        internal func changeRowItems(enabled: Bool) -> Int {
-            enabled ? 2 : 1
         }
         
         internal func inventoryItemCount(for name: String) -> Int {
@@ -264,10 +256,25 @@ extension ShopView {
         internal func fetchData(filterReset: Bool = false) {
             do {
                 // Gets items from SwiftData DB for current enable status
-                let descriptor = FetchDescriptor<ConsumableItem>(sortBy: [SortDescriptor(\.price)])
+                let descriptor = FetchDescriptor<ConsumableItem>(
+                    predicate: #Predicate { item in
+                        !item.archived
+                    },
+                    sortBy: [SortDescriptor(\.price)]
+                )
                 allItems = try modelContext.fetch(descriptor)
-                items = allItems.filter { $0.enabled == enableStatus && !$0.archived }
-                items.sort { ($0.price < $1.price) && ($0.name < $1.name) }
+                
+                let researchedItems = allItems.filter { $0.enabled }
+                self.researchedItems = Dictionary(
+                    grouping: researchedItems,
+                    by: \.rarity
+                )
+                
+                let lockedItems = allItems.filter { $0.enabled }
+                self.lockedItems = Dictionary(
+                    grouping: lockedItems,
+                    by: \.rarity
+                )
             } catch {
                 print("ConsumableItem fetch for Shop viewModel failed")
             }
@@ -277,7 +284,7 @@ extension ShopView {
         
         // First app launch case
         private func createProfile() {
-            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, premium: false, items: items)
+            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, premium: false, items: allItems)
             modelContext.insert(profile)
             fetchProfileData()
         }
