@@ -58,6 +58,9 @@ struct ShopView: View {
                     searchPlaceholder
                 }
             }
+            .overlay(alignment: .bottomTrailing) {
+                floatingButton
+            }
             .animation(.easeInOut, value: searchText)
             
             // ScrollView params
@@ -116,6 +119,18 @@ struct ShopView: View {
                 }
             }
         }
+    }
+    
+    private var floatingButton: some View {
+        Button {
+            // Show Locked Items Action
+        } label: {
+            Image.ShopPage.plusButton
+                .resizable()
+                .scaledToFit()
+                .frame(width: 70, height: 70)
+        }
+        .padding()
     }
     
     // MARK: - Toolbar views

@@ -22,6 +22,7 @@ extension Image {
     
     enum ShopPage {
         static let vCoin = Image("VCoin")
+        static let plusButton = Image("AddPlusIcon")
         static let filter = Image(systemName: "line.3.horizontal.decrease.circle")
         static let filledFilter = Image(systemName: "line.3.horizontal.decrease.circle.fill")
         static let plus = Image(systemName: "plus")
