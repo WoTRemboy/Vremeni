@@ -40,11 +40,7 @@ extension ShopView {
         }
         
         // Active rarity filter property with PO for data update
-        internal var selectedFilter: Rarity = .common {
-            didSet {
-                filterItems(for: selectedFilter)
-            }
-        }
+        internal var selectedFilter: Rarity = .common
         
         internal var filteredResearchedItems: [ConsumableItem] {
             return researchedItems[selectedFilter] ?? []
@@ -182,11 +178,6 @@ extension ShopView {
         
         // MARK: - Calculation methods
         
-        // Returns filtered elements by rarity
-        private func filterItems(for rarity: Rarity) -> [ConsumableItem] {
-            researchedItems[rarity] ?? []
-        }
-        
         internal func setFilter(to newValue: Rarity) {
             withAnimation(.easeInOut(duration: 0.3)) {
                 selectedFilter = newValue
@@ -270,7 +261,7 @@ extension ShopView {
                     by: \.rarity
                 )
                 
-                let lockedItems = allItems.filter { $0.enabled }
+                let lockedItems = allItems.filter { !$0.enabled }
                 self.lockedItems = Dictionary(
                     grouping: lockedItems,
                     by: \.rarity
