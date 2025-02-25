@@ -24,7 +24,7 @@ extension ShopView {
         
         private(set) var allItems: [ConsumableItem] = []
         private(set) var researchedItems: [Rarity : [ConsumableItem]] = [:]
-        private(set) var lockedItems: [Rarity: [ConsumableItem]] = [:]
+        private(set) var lockedItems: [Rarity : [ConsumableItem]] = [:]
         
         private(set) var currentSubType: SubscriptionType = .annual
         

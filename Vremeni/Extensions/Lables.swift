@@ -68,6 +68,10 @@ final class Texts {
         static let placeholderTitleLocked = NSLocalizedString("ShopPagePlaceholderTitleLocked", comment: "Congratulations!")
         static let placeholderSubtitleLocked = NSLocalizedString("ShopPagePlaceholderSubtitleLocked", comment: "You have unlocked all Items")
         
+        enum Locked {
+            static let title = NSLocalizedString("ShopPageTitleLocked", comment: "Locked")
+        }
+        
         enum Premium {
             static let title = NSLocalizedString("ShopPagePremiumTitle", comment: "Subscriprion")
             static let premium = NSLocalizedString("ShopPageVremeniPremium", comment: "Vremeni Premium")
@@ -294,6 +298,10 @@ final class Texts {
     
     enum NavigationTransition {
         static let shopResearched = "ShopResearched"
+    }
+    
+    enum PreferenceKey {
+        static let cardRect = "CardRect"
     }
 }
 
