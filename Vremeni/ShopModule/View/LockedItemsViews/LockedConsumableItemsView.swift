@@ -26,6 +26,13 @@ struct LockedConsumableItemsView: View {
             // Navigation title params
             .navigationTitle(Texts.ShopPage.Locked.title)
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(Texts.ItemCreatePage.cancel) {
+                        onDismiss()
+                    }
+                }
+            }
             
             .overlayPreferenceValue(
                 RarityCardRectKey.self) { preferences in

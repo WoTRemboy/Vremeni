@@ -26,6 +26,7 @@ struct ShopView: View {
     // Show and dismiss add item sheet page
     @State private var showingAddItemSheet = false
     @State private var showingPremiumSheet = false
+    @State private var showingLockedSheet = false
     // Search bar result property
     @State private var searchText = String()
     
@@ -90,6 +91,11 @@ struct ShopView: View {
                 showingAddItemSheet.toggle()
             }
         }
+        .sheet(isPresented: $showingLockedSheet) {
+            LockedConsumableItemsView(viewModel: viewModel) {
+                showingLockedSheet.toggle()
+            }
+        }
         .sheet(item: $selectedResearched) { item in
             ConsumableItemDetails(
                 item: item,
@@ -123,7 +129,7 @@ struct ShopView: View {
     
     private var floatingButton: some View {
         Button {
-            // Show Locked Items Action
+            showingLockedSheet.toggle()
         } label: {
             Image.ShopPage.plusButton
                 .resizable()
