@@ -91,7 +91,7 @@ struct ShopView: View {
                 showingAddItemSheet.toggle()
             }
         }
-        .sheet(isPresented: $showingLockedSheet) {
+        .fullScreenCover(isPresented: $showingLockedSheet) {
             LockedConsumableItemsView(viewModel: viewModel) {
                 showingLockedSheet.toggle()
             }

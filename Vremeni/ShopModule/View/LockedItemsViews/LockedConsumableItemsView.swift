@@ -53,11 +53,21 @@ struct LockedConsumableItemsView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 0) {
                 ForEach(Rarity.allCases) { rarity in
+                    let index = CGFloat(indexOf(rarity))
                     cardView(for: rarity)
                         .frame(height: 200)
+                        .offset(y: index * -70)
                 }
             }
+            .padding(.top)
+            .padding(.bottom, CGFloat(Rarity.allCases.count - 1) * -70)
         }
+    }
+    
+    private func indexOf(_ rarity: Rarity) -> Int {
+        return Rarity.allCases.firstIndex {
+            rarity.id == $0.id
+        } ?? 0
     }
     
     @ViewBuilder
@@ -67,18 +77,29 @@ struct LockedConsumableItemsView: View {
             
             VStack(spacing: 0) {
                 Rectangle()
-                    .fill(rarity.color.gradient)
+                    .fill(
+                        LinearGradient(
+                            gradient: Gradient(
+                                colors: [rarity.color.opacity(0.6),
+                                         Color.BackColors.backPopup]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
                     .overlay(alignment: .topLeading) {
                         overlayCellContent(for: rarity)
                     }
+                    .background(Color.BackColors.backDefault)
             }
+            .clipShape(.buttonBorder)
+            .padding(.horizontal, 6)
         }
     }
     
     @ViewBuilder
     private func overlayCellContent(for rarity: Rarity) -> some View {
         HStack(spacing: 0) {
-            rarity.whiteImage
+            rarity.image
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100, height: 100)
@@ -86,7 +107,7 @@ struct LockedConsumableItemsView: View {
             
             Text(rarity.name)
                 .font(.system(size: 40, weight: .semibold))
-                .foregroundStyle(Color.LabelColors.labelWhite)
+                .foregroundStyle(rarity.color)
             
         }
     }

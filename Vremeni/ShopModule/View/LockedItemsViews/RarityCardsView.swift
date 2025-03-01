@@ -15,7 +15,7 @@ struct RarityCardsView: View {
     private var content: some View {
         Rectangle()
             .foregroundStyle(Color.clear)
-            .frame(height: 245)
+            .frame(maxHeight: .infinity)
             .anchorPreference(
                 key: RarityCardRectKey.self,
                 value: .bounds) { anchor in
