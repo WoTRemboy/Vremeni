@@ -3,6 +3,16 @@
     {
       "filename" : "MythicRarityIcon.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "MythicRarityIconDark.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

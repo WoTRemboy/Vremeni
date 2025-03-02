@@ -3,6 +3,16 @@
     {
       "filename" : "Group 845.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "CommonRarityIconDark.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

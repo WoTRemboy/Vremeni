@@ -3,6 +3,16 @@
     {
       "filename" : "Group 849.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "RareRarityIconDark.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

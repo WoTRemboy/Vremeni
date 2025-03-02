@@ -3,6 +3,16 @@
     {
       "filename" : "Group 844.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "EpicRarityIconDark.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {
