@@ -16,15 +16,18 @@ struct ConsumableItemDetails: View {
     
     private let item: ConsumableItem
     private var viewModel: ShopView.ShopViewModel
+    private let namespace: Namespace.ID
     private var onDismiss: () -> Void
     
     // MARK: - Initialization
     
     init(item: ConsumableItem,
          viewModel: ShopView.ShopViewModel,
+         namespace: Namespace.ID,
          onDismiss: @escaping () -> Void) {
         self.item = item
         self.viewModel = viewModel
+        self.namespace = namespace
         self.onDismiss = onDismiss
     }
     
@@ -32,37 +35,50 @@ struct ConsumableItemDetails: View {
     
     internal var body: some View {
         NavigationStack {
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(spacing: 5) {
-                    // ConsumableItem image, name & rarity
-                    itemHead
-                    // ConsumableItem descriprion & rules rows
-                    params
-                        .padding(.top, 20)
-                    // ConsumableItem price view
-                    TotalPrice(price: item.price)
-                        .padding(.top, 30)
-                    // Enable context action button
-                    buyButton
-                        .padding([.top, .horizontal])
-                    
-                    Spacer()
-                }
-            }
-            // Navigation bar params
-            .navigationTitle(Texts.ItemCreatePage.details)
-            .navigationBarTitleDisplayMode(.inline)
-            
-            // Navigation bar buttons
-            .toolbar {
-                // Dismiss button
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(Texts.ItemCreatePage.cancel) {
-                        onDismiss()
+            ZStack {
+                Color.BackColors.backElevated
+                    .ignoresSafeArea(.all)
+                    .frame(maxWidth: .infinity,
+                           maxHeight: .infinity)
+                
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 5) {
+                        // ConsumableItem image, name & rarity
+                        itemHead
+                        // ConsumableItem descriprion & rules rows
+                        params
+                            .padding(.top, 20)
+                        // ConsumableItem price view
+                        TotalPrice(price: item.price)
+                            .padding(.top, 30)
+                        // Enable context action button
+                        buyButton
+                            .padding([.top, .horizontal])
+                        
+                        Spacer()
                     }
                 }
+                // Navigation bar params
+                .navigationTitle(Texts.ItemCreatePage.details)
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarBackButtonHidden()
+                
+                // Navigation bar buttons
+                .toolbar {
+                    // Dismiss button
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(Texts.ItemCreatePage.cancel) {
+                            onDismiss()
+                        }
+                    }
+                }
+                .toolbarVisibility(.hidden, for: .tabBar)
             }
+            
         }
+        .navigationTransition(
+            .zoom(sourceID: "\(Texts.NavigationTransition.shopResearched)\(item.id)",
+                  in: namespace))
     }
     
     // MARK: - Support views
@@ -71,18 +87,11 @@ struct ConsumableItemDetails: View {
     private var itemHead: some View {
         VStack(spacing: 5) {
             // Item image
-            if let imageData = item.image, let uiImage = UIImage(data: imageData) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .clipShape(.buttonBorder)
-                    .frame(width: 200, height: 200)
-            } else {
-                Image.Placeholder.placeholder1to1
-                    .resizable()
-                    .clipShape(.buttonBorder)
-                    .frame(width: 200, height: 200)
-            }
-            
+            itemImage
+                .resizable()
+                .clipShape(.buttonBorder)
+                .frame(width: 200, height: 200)
+                
             // Item name
             Text(item.name)
                 .font(.segmentTitle())
@@ -99,6 +108,15 @@ struct ConsumableItemDetails: View {
                 Text(item.rarity.name)
                     .font(.body())
             }
+        }
+        .padding(.top)
+    }
+    
+    private var itemImage: Image {
+        if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+            Image(uiImage: uiImage)
+        } else {
+            Image.Placeholder.placeholder1to1
         }
     }
     
@@ -130,6 +148,9 @@ struct ConsumableItemDetails: View {
                     bannerService.setBanner(banner: .added(message: Texts.Banner.added))
                 }
             }
+            // Medium haptic feedback
+            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+            impactMed.impactOccurred()
             onDismiss()
         }) {
             // Button definition depending on enable status
@@ -177,7 +198,11 @@ struct ConsumableItemDetails: View {
                            RuleItem.threeMinutes.nameKey : 3],
             enabled: false)
         
-        return ConsumableItemDetails(item: example, viewModel: viewModel, onDismiss: {})
+        return ConsumableItemDetails(
+            item: example,
+            viewModel: viewModel,
+            namespace: Namespace().wrappedValue,
+            onDismiss: {})
             .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")

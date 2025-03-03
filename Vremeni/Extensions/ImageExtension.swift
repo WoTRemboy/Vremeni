@@ -13,8 +13,16 @@ extension Image {
         static let logo = Image("SplashLogo")
     }
     
+    enum OnboardingPage {
+        static let first = Image("OnboardingFirst")
+        static let second = Image("OnboardingSecond")
+        static let third = Image("OnboardingThird")
+        static let fourth = Image("OnboardingFourth")
+    }
+    
     enum ShopPage {
         static let vCoin = Image("VCoin")
+        static let plusButton = Image("AddPlusIcon")
         static let filter = Image(systemName: "line.3.horizontal.decrease.circle")
         static let filledFilter = Image(systemName: "line.3.horizontal.decrease.circle.fill")
         static let plus = Image(systemName: "plus")
@@ -86,7 +94,18 @@ extension Image {
         static let legendary = Image("RarityLegendary")
         static let mythic = Image("RarityMythic")
         static let exotic  = Image("RarityExotic")
-        static let transcendent = Image("RarityTranscendent")
+        static let final = Image("RarityFinal")
+        
+        enum White {
+            static let common = Image("RarityCommonWhite")
+            static let uncommon = Image("RarityUncommonWhite")
+            static let rare = Image("RarityRareWhite")
+            static let epic = Image("RarityEpicWhite")
+            static let legendary = Image("RarityLegendaryWhite")
+            static let mythic = Image("RarityMythicWhite")
+            static let exotic  = Image("RarityExoticWhite")
+            static let final = Image("RarityFinalWhite")
+        }
     }
     
     enum TabBar {
@@ -169,6 +188,10 @@ extension UIImage {
             static let threeHours = UIImage(named: "300MinutesExotic")
             static let fourHoursThirtyMinutes = UIImage(named: "430MinutesExotic")
             static let sixHours = UIImage(named: "600MinutesExotic")
+        }
+        
+        enum Final {
+            static let twentyFourHours = UIImage(named: "2400MinutesFinal")
         }
     }
 }

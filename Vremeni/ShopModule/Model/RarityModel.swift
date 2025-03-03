@@ -17,9 +17,8 @@ enum Rarity: String, Codable {
     case epic = "Epic"
     case legendary = "Legendary"
     case mythic = "Mythic"
-    case transcendent = "Transcendent"
     case exotic = "Exotic"
-    case all = "All"
+    case final = "Final"
 }
 
 // MARK: - Rarity Methods
@@ -29,7 +28,7 @@ extension Rarity: Identifiable {
     
     // Case iterable method, but without .all
     static internal var allCases: [Rarity] {
-        return [.common, .uncommon, .rare, .epic, .legendary, .mythic, .transcendent, .exotic]
+        return [.common, .uncommon, .rare, .epic, .legendary, .mythic, .exotic, .final]
     }
     
     // Rarity name definition
@@ -47,12 +46,10 @@ extension Rarity: Identifiable {
             Texts.Rarity.legendary
         case .mythic:
             Texts.Rarity.mythic
-        case .transcendent:
-            Texts.Rarity.transcendent
         case .exotic:
             Texts.Rarity.exotic
-        case .all:
-            Texts.Rarity.all
+        case .final:
+            Texts.Rarity.final
         }
     }
     
@@ -71,12 +68,31 @@ extension Rarity: Identifiable {
             return .Rarity.legendary
         case .mythic:
             return .Rarity.mythic
-        case .transcendent:
-            return .Rarity.transcendent
         case .exotic:
             return .Rarity.exotic
-        case .all:
-            return Image("")
+        case .final:
+            return .Rarity.final
+        }
+    }
+    
+    internal var whiteImage: Image {
+        switch self {
+        case .common:
+            return .Rarity.White.common
+        case .uncommon:
+            return .Rarity.White.uncommon
+        case .rare:
+            return .Rarity.White.rare
+        case .epic:
+            return .Rarity.White.epic
+        case .legendary:
+            return .Rarity.White.legendary
+        case .mythic:
+            return .Rarity.White.mythic
+        case .exotic:
+            return .Rarity.White.exotic
+        case .final:
+            return .Rarity.White.final
         }
     }
     
@@ -95,12 +111,31 @@ extension Rarity: Identifiable {
             Color.RarityColors.legendary
         case .mythic:
             Color.RarityColors.mythic
-        case .transcendent:
-            Color.RarityColors.transcendent
         case .exotic:
             Color.RarityColors.exotic
-        case .all:
-            Color.RarityColors.common
+        case .final:
+            Color.RarityColors.final
+        }
+    }
+    
+    internal func compareRarity(for filter: Self) -> Bool {
+        switch self {
+        case .common:
+            filter == .common
+        case .uncommon:
+            filter == .uncommon
+        case .rare:
+            filter == .rare
+        case .epic:
+            filter == .epic
+        case .legendary:
+            filter == .legendary
+        case .mythic:
+            filter == .mythic
+        case .exotic:
+            filter == .exotic
+        case .final:
+            filter == .final
         }
     }
 }

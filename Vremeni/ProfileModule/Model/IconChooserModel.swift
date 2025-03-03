@@ -22,4 +22,12 @@ enum Icon: String, CaseIterable, Identifiable {
             Texts.ProfilePage.premium
         }
     }
+    
+    internal var splashName: String {
+        self.rawValue + Texts.OnboardingPage.splash
+    }
+    
+    internal var splashColor: String {
+        Texts.OnboardingPage.splash + self.rawValue
+    }
 }

@@ -49,7 +49,8 @@ struct StatisticsChartView: View {
                 .font(.callout)
                 .foregroundStyle(.secondary)
             
-            Text(String(viewModel.rarityCount(for: .all)))
+            Text(String(viewModel.rarityCount(for: .common,
+                                              allContent: true)))
                 .font(.title2.bold())
                 .foregroundColor(.primary)
             

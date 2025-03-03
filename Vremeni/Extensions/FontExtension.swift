@@ -44,6 +44,10 @@ extension Font {
         Font.system(size: 17, weight: .medium)
     }
     
+    static func mediumBody() -> Font? {
+        Font.system(size: 17, weight: .medium)
+    }
+    
     static func regularBody() -> Font? {
         Font.system(size: 17, weight: .regular)
     }

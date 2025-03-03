@@ -20,9 +20,11 @@ extension ShopView {
         // MARK: - Properties
         
         private(set) var modelContext: ModelContext
-        private(set) var items = [ConsumableItem]()
-        private(set) var allItems = [ConsumableItem]()
         private(set) var profile = Profile.configMockProfile()
+        
+        private(set) var allItems: [ConsumableItem] = []
+        private(set) var researchedItems: [Rarity : [ConsumableItem]] = [:]
+        private(set) var lockedItems: [Rarity : [ConsumableItem]] = [:]
         
         private(set) var currentSubType: SubscriptionType = .annual
         
@@ -32,18 +34,16 @@ extension ShopView {
         // First appear toggle
         private var firstTime = true
         
-        // Active rarity filter property with PO for data update
-        internal var rarityFilter: Rarity {
-            didSet {
-                fetchData()
-            }
+        /// Pages for the onboarding process.
+        internal var pages: [Int] {
+            Array(0..<2)
         }
         
-        // Active enable filter property with PO for data update
-        internal var enableStatus: Bool {
-            didSet {
-                fetchData(filterReset: true)
-            }
+        // Active rarity filter property with PO for data update
+        internal var selectedFilter: Rarity = .common
+        
+        internal var filteredResearchedItems: [ConsumableItem] {
+            return researchedItems[selectedFilter] ?? []
         }
         
         internal var premium: Bool {
@@ -56,8 +56,6 @@ extension ShopView {
         
         init(modelContext: ModelContext) {
             self.modelContext = modelContext
-            self.enableStatus = true
-            self.rarityFilter = .all
         }
         
         // MARK: - ConsumableItem status management methods
@@ -180,14 +178,10 @@ extension ShopView {
         
         // MARK: - Calculation methods
         
-        // Returns filtered elements by rarity
-        internal func filterItems(for rarity: Rarity) -> [ConsumableItem] {
-            unfilteredItems.filter({ $0.rarity == rarity })
-        }
-        
-        // Returns the grid width depending on the enable filter value
-        internal func changeRowItems(enabled: Bool) -> Int {
-            enabled ? 2 : 1
+        internal func setFilter(to newValue: Rarity) {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                selectedFilter = newValue
+            }
         }
         
         internal func inventoryItemCount(for name: String) -> Int {
@@ -253,24 +247,25 @@ extension ShopView {
         internal func fetchData(filterReset: Bool = false) {
             do {
                 // Gets items from SwiftData DB for current enable status
-                let descriptor = FetchDescriptor<ConsumableItem>(sortBy: [SortDescriptor(\.price)])
+                let descriptor = FetchDescriptor<ConsumableItem>(
+                    predicate: #Predicate { item in
+                        !item.archived
+                    },
+                    sortBy: [SortDescriptor(\.price)]
+                )
                 allItems = try modelContext.fetch(descriptor)
-                items = allItems.filter { $0.enabled == enableStatus && !$0.archived }
-                items.sort { ($0.price < $1.price) && ($0.name < $1.name) }
                 
-                // Check for .all tag selection or enable status changes (filterReset)
-                if rarityFilter != .all && !filterReset {
-                    // Filters items by rarity tag
-                    items = items.filter { $0.rarity == rarityFilter }
-                } else {
-                    // Unfiltered items are current enable status items now
-                    unfilteredItems = items
-                    
-                    // Changes tag to .all manually
-                    if rarityFilter != .all {
-                        rarityFilter = .all
-                    }
-                }
+                let researchedItems = allItems.filter { $0.enabled }
+                self.researchedItems = Dictionary(
+                    grouping: researchedItems,
+                    by: \.rarity
+                )
+                
+                let lockedItems = allItems.filter { !$0.enabled }
+                self.lockedItems = Dictionary(
+                    grouping: lockedItems,
+                    by: \.rarity
+                )
             } catch {
                 print("ConsumableItem fetch for Shop viewModel failed")
             }
@@ -280,7 +275,7 @@ extension ShopView {
         
         // First app launch case
         private func createProfile() {
-            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, premium: false, items: items)
+            let profile = Profile(name: Texts.ProfilePage.user, balance: 0, premium: false, items: allItems)
             modelContext.insert(profile)
             fetchProfileData()
         }
