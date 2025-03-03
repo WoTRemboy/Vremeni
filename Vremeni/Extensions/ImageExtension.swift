@@ -13,8 +13,16 @@ extension Image {
         static let logo = Image("SplashLogo")
     }
     
+    enum OnboardingPage {
+        static let first = Image("OnboardingFirst")
+        static let second = Image("OnboardingSecond")
+        static let third = Image("OnboardingThird")
+        static let fourth = Image("OnboardingFourth")
+    }
+    
     enum ShopPage {
         static let vCoin = Image("VCoin")
+        static let plusButton = Image("AddPlusIcon")
         static let filter = Image(systemName: "line.3.horizontal.decrease.circle")
         static let filledFilter = Image(systemName: "line.3.horizontal.decrease.circle.fill")
         static let plus = Image(systemName: "plus")
@@ -86,7 +94,18 @@ extension Image {
         static let legendary = Image("RarityLegendary")
         static let mythic = Image("RarityMythic")
         static let exotic  = Image("RarityExotic")
-        static let transcendent = Image("RarityTranscendent")
+        static let final = Image("RarityFinal")
+        
+        enum White {
+            static let common = Image("RarityCommonWhite")
+            static let uncommon = Image("RarityUncommonWhite")
+            static let rare = Image("RarityRareWhite")
+            static let epic = Image("RarityEpicWhite")
+            static let legendary = Image("RarityLegendaryWhite")
+            static let mythic = Image("RarityMythicWhite")
+            static let exotic  = Image("RarityExoticWhite")
+            static let final = Image("RarityFinalWhite")
+        }
     }
     
     enum TabBar {
@@ -111,4 +130,68 @@ extension Image {
 
 extension UIImage {
     static let placeholder = UIImage(named: "Placeholder1to1")
+    
+    enum Content {
+        enum Common {
+            static let oneMinute = UIImage(named: "OneMinuteCommon")
+            static let twoMinutes = UIImage(named: "TwoMinutesCommon")
+            static let threeMinutes = UIImage(named: "ThreeMinutesCommon")
+            static let fourMinutes = UIImage(named: "FourMinutesCommon")
+            static let fiveMinutes = UIImage(named: "FiveMinutesCommon")
+            static let sixMinutes = UIImage(named: "SixMinutesCommon")
+            static let sevenMinutes = UIImage(named: "SevenMinutesCommon")
+            static let eightMinutes = UIImage(named: "EightMinutesCommon")
+            static let nineMinutes = UIImage(named: "NineMinutesCommon")
+            static let tenMinutes = UIImage(named: "TenMinutesCommon")
+        }
+        
+        enum Uncommon {
+            static let twelveMinutes = UIImage(named: "12MinutesUncommon")
+            static let twentyMinutes = UIImage(named: "20MinutesUncommon")
+            static let thirtyFiveMinutes = UIImage(named: "35MinutesUncommon")
+            static let oneHourFifteenMinutes = UIImage(named: "115MinutesUncommon")
+            static let twoHoursThirtyMinutes = UIImage(named: "230MinutesUncommon")
+            static let fourHours = UIImage(named: "400MinutesUncommon")
+            static let tenHours = UIImage(named: "1000MinutesUncommon")
+        }
+        
+        enum Rare {
+            static let fourteenMinutes = UIImage(named: "14MinutesRare")
+            static let thirtyFourMinutes = UIImage(named: "34MinutesRare")
+            static let oneHourNinteenMinutes = UIImage(named: "119MinutesRare")
+            static let twoHoursFourtyNineMinutes = UIImage(named: "249MinutesRare")
+        }
+        
+        enum Epic {
+            static let fifteenMinutes = UIImage(named: "15MinutesEpic")
+            static let thirtyMinutes = UIImage(named: "30MinutesEpic")
+            static let fourtyFiveMinutes = UIImage(named: "45MinutesEpic")
+            static let oneHour = UIImage(named: "100MinutesEpic")
+        }
+        
+        enum Legendary {
+            static let seventeenMinutes = UIImage(named: "17MinutesLegendary")
+            static let thirtyTwoMinutes = UIImage(named: "32MinutesLegendary")
+            static let fiftyTwoMinutes = UIImage(named: "52MinutesLegendary")
+            static let oneHourTwentyTwoMinutes = UIImage(named: "122MinutesLegendary")
+        }
+        
+        enum Mythic {
+            static let ninteenMinutes = UIImage(named: "19MinutesMythic")
+            static let twentyNineMinutes = UIImage(named: "29MinutesMythic")
+            static let thirtyNineMinutes = UIImage(named: "39MinutesMythic")
+            static let fourtyNineMinutes = UIImage(named: "49MinutesMythic")
+        }
+        
+        enum Exotic {
+            static let oneHourThirtyMinutes = UIImage(named: "130MinutesExotic")
+            static let threeHours = UIImage(named: "300MinutesExotic")
+            static let fourHoursThirtyMinutes = UIImage(named: "430MinutesExotic")
+            static let sixHours = UIImage(named: "600MinutesExotic")
+        }
+        
+        enum Final {
+            static let twentyFourHours = UIImage(named: "2400MinutesFinal")
+        }
+    }
 }

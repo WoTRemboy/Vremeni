@@ -12,6 +12,8 @@ struct ShopView: View {
     
     // MARK: - Properties
     
+    @Namespace private var animation
+    
     // ViewModel properties
     @State private var viewModel: ShopViewModel
     private let modelContext: ModelContext
@@ -24,6 +26,7 @@ struct ShopView: View {
     // Show and dismiss add item sheet page
     @State private var showingAddItemSheet = false
     @State private var showingPremiumSheet = false
+    @State private var showingLockedSheet = false
     // Search bar result property
     @State private var searchText = String()
     
@@ -42,114 +45,99 @@ struct ShopView: View {
     // MARK: - Body view
     
     internal var body: some View {
-        TabView {
-            NavigationStack {
-                ZStack {
-                    ScrollView {
-                        enableSegmentedPicker
-                            .padding(.horizontal)
-                        if viewModel.enableStatus {
-                            // Collecion with available items
-                            availableCollection
-                                .padding([.horizontal, .bottom])
-                                .padding(.top, 8)
-                                .transition(.move(edge: .leading))
-                        } else {
-                            // Collecion with locked items
-                            researchCollection
-                                .padding([.horizontal, .bottom])
-                                .padding(.top, 8)
-                                .transition(.move(edge: .trailing))
-                        }
-                    }
+        NavigationStack {
+            ZStack {
+                content
                     .onAppear {
                         viewModel.updateOnAppear()
                     }
-                    // In case of items absence
-                    if viewModel.items.isEmpty {
-                        placeholder
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        // No available <-, but No Locked ->
-                            .transition(.move(edge: viewModel.enableStatus ? .leading : .trailing))
-                    } else if searchResults.isEmpty {
-                        searchPlaceholder
-                    }
-                }
-                .animation(.easeInOut, value: viewModel.enableStatus)
-                .animation(.easeInOut, value: searchText)
-                .animation(.easeInOut, value: viewModel.rarityFilter)
-                // ScrollView params
-                .scrollDisabled(viewModel.items.isEmpty)
-                .scrollDismissesKeyboard(.immediately)
-                .background(Color.BackColors.backDefault)
-                
-                // Navigation title params
-                .navigationTitle(Texts.Common.title)
-                .navigationBarTitleDisplayMode(.inline)
-                .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
-                
-                // ToolBar items
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        toolBarMenuFilter
-                    }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        toolBarButtonPlus
-                    }
-                    ToolbarItem(placement: .topBarTrailing) {
-                        toolBarButtonPremium
-                    }
-                }
-                
-            }
-            .sheet(isPresented: $showingPremiumSheet) {
-                PremiumBuyView(viewModel: viewModel) {
-                    showingPremiumSheet.toggle()
+                // In case of items absence
+                if viewModel.filteredResearchedItems.isEmpty {
+                    placeholder
+                        .frame(maxWidth: .infinity, alignment: .center)
+                } else if searchResults.isEmpty {
+                    searchPlaceholder
                 }
             }
-            .sheet(isPresented: $showingAddItemSheet) {
-                ConsumableItemCreate(viewModel: viewModel) {
-                    showingAddItemSheet.toggle()
+            .overlay(alignment: .bottomTrailing) {
+                floatingButton
+            }
+            .animation(.easeInOut, value: searchText)
+            
+            // ScrollView params
+            .scrollDisabled(viewModel.filteredResearchedItems.isEmpty)
+            .scrollDismissesKeyboard(.immediately)
+            .background(Color.BackColors.backDefault)
+            
+            // Navigation title params
+            .navigationTitle(Texts.Common.title)
+            .navigationBarTitleDisplayMode(.inline)
+            
+            .searchable(text: $searchText, prompt: Texts.ShopPage.searchItems)
+            // ToolBar items
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    toolBarButtonPremium
                 }
             }
-            // Item details sheet param
-            .sheet(item: $selectedResearched) { item in
-                ConsumableItemDetails(item: item, viewModel: viewModel) {
+        }
+        .sheet(isPresented: $showingPremiumSheet) {
+            PremiumBuyView(viewModel: viewModel) {
+                showingPremiumSheet.toggle()
+            }
+        }
+        .sheet(isPresented: $showingAddItemSheet) {
+            ConsumableItemCreate(viewModel: viewModel) {
+                showingAddItemSheet.toggle()
+            }
+        }
+        .fullScreenCover(isPresented: $showingLockedSheet) {
+            LockedConsumableItemsView(viewModel: viewModel) {
+                showingLockedSheet.toggle()
+            }
+        }
+        .sheet(item: $selectedResearched) { item in
+            ConsumableItemDetails(
+                item: item,
+                viewModel: viewModel,
+                namespace: animation) {
                     selectedResearched = nil
                 }
-            }
-            // Item details sheet param
-            .sheet(item: $selectedLocked) { item in
-                ConsumableItemDetails(item: item, viewModel: viewModel) {
-                    selectedLocked = nil
-                }
-            }
-            
-            
-            // TabBar params & navigation
-            .tabItem {
-                Image.TabBar.shop
-                Text(Texts.ShopPage.title)
-            }
-            
-            MachineView(modelContext: modelContext)
-                .tabItem {
-                    Image.TabBar.machine
-                    Text(Texts.MachinePage.title)
-                }
-            
-            InventoryView(modelContext: modelContext)
-                .tabItem {
-                    Image.TabBar.inventory
-                    Text(Texts.InventoryPage.title)
-                }
-            
-            ProfileView(modelContext: modelContext)
-                .tabItem {
-                    Image.TabBar.profile
-                    Text(Texts.ProfilePage.title)
-                }
         }
+        // Item details sheet param
+        .sheet(item: $selectedLocked) { item in
+            ConsumableItemDetails(item: item,
+                                  viewModel: viewModel,
+                                  namespace: animation) {
+                selectedLocked = nil
+            }
+        }
+    }
+    
+    private var content: some View {
+        ScrollView {
+            LazyVStack(spacing: 16) {
+                Section {
+                    availableCollection
+                        .padding([.horizontal, .bottom])
+                } header: {
+                    FilterScrollableView(viewModel: viewModel)
+                }
+            }
+        }
+    }
+    
+    private var floatingButton: some View {
+        Button {
+            showingLockedSheet.toggle()
+        } label: {
+            Image.ShopPage.plusButton
+                .resizable()
+                .scaledToFit()
+                .frame(width: 70, height: 70)
+                .shadow(color: Color.black.opacity(0.25), radius: 4, x: 2, y: 2)
+        }
+        .padding()
     }
     
     // MARK: - Toolbar views
@@ -170,49 +158,7 @@ struct ShopView: View {
         }
     }
     
-    private var toolBarMenuFilter: some View {
-        // Menu with two pickers to display Sections
-        Menu {
-            // .all rarity case
-            Picker(Texts.ShopPage.filterItems, selection: $viewModel.rarityFilter) {
-                Text(Rarity.all.name)
-                    .tag(Rarity.all)
-            }
-            Section {
-                // Other rarity case
-                Picker(Texts.ShopPage.filterItems, selection: $viewModel.rarityFilter) {
-                    ForEach(Rarity.allCases) { rarity in
-                        // Shows label only when there are items
-                        if !viewModel.filterItems(for: rarity).isEmpty {
-                            Label(
-                                title: { Text(rarity.name) },
-                                icon: { rarity.image }
-                            )
-                            .tag(rarity)
-                        }
-                    }
-                }
-            }
-        } label: {
-            // Image filling to demonstrate filter activity
-            viewModel.rarityFilter == .all ? Image.ShopPage.filter : Image.ShopPage.filledFilter
-        }
-    }
-    
     // MARK: - Content views
-    
-    // Available/Locked items picker (changes enabledStatus)
-    private var enableSegmentedPicker: some View {
-        Picker(Texts.ShopPage.status, selection: $viewModel.enableStatus.animation()) {
-            Text(Texts.ShopPage.available).tag(true)
-            Text(Texts.ShopPage.locked).tag(false)
-        }
-        .pickerStyle(.segmented)
-        .onChange(of: viewModel.enableStatus) {
-            // Changes items count in a row
-            itemsInRows = viewModel.changeRowItems(enabled: viewModel.enableStatus)
-        }
-    }
     
     private var availableCollection: some View {
         let columns = Array(
@@ -220,27 +166,21 @@ struct ShopView: View {
             count: 2)
         
         return LazyVGrid(columns: columns, spacing: spacing) {
-            ForEach(searchResults.filter { $0.enabled }) { item in
-                // Available item cell
-                ShopItemGridCell(item: item, viewModel: viewModel)
+            let items = viewModel.filteredResearchedItems
+            if !items.isEmpty {
+                // Rarity Section for available Items
+                ForEach(searchResults) { item in
+                    ShopItemGridCell(
+                        item: item,
+                        viewModel: viewModel,
+                        namespace: animation)
                     .onTapGesture {
                         selectedResearched = item
                     }
-            }
-        }
-    }
-    
-    private var researchCollection: some View {
-        let columns = Array(
-            repeating: GridItem(.flexible(), spacing: spacing),
-            count: 1)
-        
-        return LazyVGrid(columns: columns, spacing: spacing) {
-            ForEach(searchResults) { item in
-                ShopItemGridCellLocked(item: item, viewModel: viewModel)
-                    .onTapGesture {
-                        selectedLocked = item
-                    }
+                    .matchedTransitionSource(
+                        id: "\(Texts.NavigationTransition.shopResearched)\(item.id)",
+                        in: animation)
+                }
             }
         }
     }
@@ -248,7 +188,7 @@ struct ShopView: View {
     // MARK: - Empty status views
     
     private var placeholder: some View {
-        if viewModel.enableStatus {
+        if viewModel.filteredResearchedItems.isEmpty {
             // No available items
             PlaceholderView(title: Texts.ShopPage.placeholderTitle,
                             description: Texts.ShopPage.placeholderSubtitle,
@@ -271,10 +211,9 @@ struct ShopView: View {
     
     private var searchResults: [ConsumableItem] {
         if searchText.isEmpty {
-            return viewModel.items
+            return viewModel.filteredResearchedItems
         } else {
-            // Unfiltered to show results regardless of rarity
-            return viewModel.unfilteredItems.filter { $0.name.contains(searchText) }
+            return viewModel.filteredResearchedItems.filter { $0.name.contains(searchText) }
         }
     }
 }

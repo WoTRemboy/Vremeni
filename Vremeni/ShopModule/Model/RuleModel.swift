@@ -31,13 +31,13 @@ extension Rule {
         let price: Float = 5
         
         var requirement = [String: Int]()
-        let one = ConsumableItem.itemMockConfig(nameKey: Content.Common.oneMinuteTitle, price: 1, profile: Profile.configMockProfile())
-        let two = ConsumableItem.itemMockConfig(nameKey: Content.Common.threeMinutesTitle, price: 2, profile: Profile.configMockProfile())
+        let one = ConsumableItem.itemConfig(nameKey: Content.Common.oneMinuteTitle, price: 1, profile: Profile.configMockProfile())
+        let two = ConsumableItem.itemConfig(nameKey: Content.Common.threeMinutesTitle, price: 2, profile: Profile.configMockProfile())
         
         requirement[one.nameKey] = 1
         requirement[two.nameKey] = 2
         
-        let result = ConsumableItem.itemMockConfig(nameKey: Content.Uncommon.fiveMinutesTitle, price: 5, profile: Profile.configMockProfile())
+        let result = ConsumableItem.itemConfig(nameKey: Content.Common.fiveMinutesTitle, price: 5, profile: Profile.configMockProfile())
         
         return Rule(price: price, requirement: requirement, result: result)
     }
@@ -50,10 +50,40 @@ extension Rule {
 }
 
 
-enum RuleItem: String {
-    case oneHour = "ContentCommonOneMinuteTitle"
-    case threeHours = "ContentCommonThreeMinutesTitle"
-    case fiveHours = "ContentCommonFiveMinutesTitle"
-    case sevenHours = "ContentCommonSevenMinutesTitle"
-    case tenHours = "ContentCommonTenMinutesTitle"
+enum RuleItem {
+    case oneMinute
+    case twoMinutes
+    case threeMinutes
+    case fourMinutes
+    case fiveMinutes
+    case sixMinutes
+    case sevenMinutes
+    case eightMinutes
+    case nineMinutes
+    case tenMinutes
+    
+    internal var nameKey: String {
+        switch self {
+        case .oneMinute:
+            Content.Common.oneMinuteTitle
+        case .twoMinutes:
+            Content.Common.twoMinutesTitle
+        case .threeMinutes:
+            Content.Common.threeMinutesTitle
+        case .fourMinutes:
+            Content.Common.fourMinutesTitle
+        case .fiveMinutes:
+            Content.Common.fiveMinutesTitle
+        case .sixMinutes:
+            Content.Common.sixMinutesTitle
+        case .sevenMinutes:
+            Content.Common.sevenMinutesTitle
+        case .eightMinutes:
+            Content.Common.eightMinutesTitle
+        case .nineMinutes:
+            Content.Common.nineMinutesTitle
+        case .tenMinutes:
+            Content.Common.tenMinutesTitle
+        }
+    }
 }

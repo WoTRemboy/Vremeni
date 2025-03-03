@@ -26,7 +26,7 @@ struct ConsumableItemCreate: View {
     
     init(viewModel: ShopView.ShopViewModel, onDismiss: @escaping () -> Void) {
         self.viewModel = viewModel
-        self.item = ConsumableItem.itemMockConfig(
+        self.item = ConsumableItem.itemConfig(
             nameKey: String(), price: 1,
             profile: viewModel.profile, enabled: false)
         self.onDismiss = onDismiss
@@ -190,8 +190,8 @@ struct ConsumableItemCreate: View {
             Text(Texts.Rarity.epic).tag(Rarity.epic)
             Text(Texts.Rarity.legendary).tag(Rarity.legendary)
             Text(Texts.Rarity.mythic).tag(Rarity.mythic)
-            Text(Texts.Rarity.transcendent).tag(Rarity.transcendent)
             Text(Texts.Rarity.exotic).tag(Rarity.exotic)
+            Text(Texts.Rarity.final).tag(Rarity.final)
         }
     }
     

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "CommonRarity.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

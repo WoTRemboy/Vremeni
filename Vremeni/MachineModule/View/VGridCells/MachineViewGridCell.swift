@@ -70,6 +70,7 @@ struct MachineViewGridCell: View {
                 .lineLimit(1)
                 .font(.ruleTitle())
                 .foregroundStyle(Color.LabelColors.labelPrimary)
+                .minimumScaleFactor(0.4)
             
             Text(item.itemDescription)
                 .multilineTextAlignment(.center)

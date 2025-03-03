@@ -14,32 +14,15 @@
 
   ],
   "products" : [
-    {
-      "displayPrice" : "1.99",
-      "familyShareable" : false,
-      "internalID" : "6670616586",
-      "localizations" : [
-        {
-          "description" : "Adds one Workshop slot",
-          "displayName" : "Machine upgrade",
-          "locale" : "en_US"
-        },
-        {
-          "description" : "Добавляет один слот в Машину",
-          "displayName" : "Улучшение Мастерской",
-          "locale" : "ru"
-        }
-      ],
-      "productID" : "Vremeni_Machine_Slot_Upgrade",
-      "referenceName" : "Machine slot",
-      "type" : "Consumable"
-    }
+
   ],
   "settings" : {
     "_applicationInternalID" : "6569246089",
     "_developerTeamID" : "ZFH6DW7S4P",
     "_failTransactionsEnabled" : false,
-    "_lastSynchronizedDate" : 753808211.73040295,
+    "_lastSynchronizedDate" : 759596439.70510602,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
     "_storeKitErrors" : [
       {
         "current" : null,
@@ -108,7 +91,7 @@
           "groupNumber" : 1,
           "internalID" : "6738024547",
           "introductoryOffer" : {
-            "internalID" : "70C1B31E",
+            "internalID" : "19C55D4C",
             "numberOfPeriods" : 1,
             "paymentMode" : "free",
             "subscriptionPeriod" : "P3D"

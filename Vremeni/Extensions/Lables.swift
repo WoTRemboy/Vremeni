@@ -29,12 +29,13 @@ final class Texts {
         static let epic = NSLocalizedString("RarityEpic", comment: "Epic")
         static let legendary = NSLocalizedString("RarityLegendary", comment: "Legendary")
         static let mythic = NSLocalizedString("RarityMythic", comment: "Mythic")
-        static let transcendent = NSLocalizedString("RarityTranscendent", comment: "Transcendent")
         static let exotic = NSLocalizedString("RarityExotic", comment: "Exotic")
+        static let final = NSLocalizedString("RarityFinal", comment: "Final")
         static let all = NSLocalizedString("RarityAll", comment: "All")
     }
     
     enum OnboardingPage {
+        static let splash = "Splash"
         static let skip = NSLocalizedString("OnboardingPageSkip", comment: "Skip")
         static let next = NSLocalizedString("OnboardingPageNext", comment: "Next page")
         static let started = NSLocalizedString("OnboardingPageStarted", comment: "Get started")
@@ -43,8 +44,8 @@ final class Texts {
         static let firstDescription = NSLocalizedString("OnboardingPageFirstDescription", comment: "Any purchases and progress are measured in units of Vremeni - real time.")
         static let secondTitle = NSLocalizedString("OnboardingPageSecondTitle", comment: "Get your item")
         static let secondDescription = NSLocalizedString("OnboardingPageSecondDescription", comment: "To obtain an item, you need to process it through the Workshop.")
-        static let thirdTitle = NSLocalizedString("OnboardingPageThirdTitle", comment: "Upgrade Workshop")
-        static let thirdDescription = NSLocalizedString("OnboardingPageThirdDescription", comment: "Add new slots to the Machine to collect items even faster.")
+        static let thirdTitle = NSLocalizedString("OnboardingPageThirdTitle", comment: "Unlock new items")
+        static let thirdDescription = NSLocalizedString("OnboardingPageThirdDescription", comment: "Complete the research conditions to unlock new content.")
         static let fourthTitle = NSLocalizedString("OnboardingPageFourthTitle", comment: "Collect them all!")
         static let fourthDescription = NSLocalizedString("OnboardingPageFourthDescription", comment: "Go through time and earn all the rarities: from common to exotic.")
     }
@@ -66,6 +67,10 @@ final class Texts {
         static let placeholderSubtitle = NSLocalizedString("ShopPagePlaceholderSubtitle", comment: "Unlock some Items or restore from Archive")
         static let placeholderTitleLocked = NSLocalizedString("ShopPagePlaceholderTitleLocked", comment: "Congratulations!")
         static let placeholderSubtitleLocked = NSLocalizedString("ShopPagePlaceholderSubtitleLocked", comment: "You have unlocked all Items")
+        
+        enum Locked {
+            static let title = NSLocalizedString("ShopPageTitleLocked", comment: "Locked")
+        }
         
         enum Premium {
             static let title = NSLocalizedString("ShopPagePremiumTitle", comment: "Subscriprion")
@@ -89,7 +94,7 @@ final class Texts {
             static let iconTitle = NSLocalizedString("ShopPagePremiumIconTitle", comment: "Icon Selection")
             static let iconDescription = NSLocalizedString("ShopPagePremiumIconDescription", comment: "Select an application icon from the proposed options in Appearance.")
             
-            static let subscribe = NSLocalizedString("ShopPagePremiumSubscribe", comment: "Subscribe for")
+            static let subscribe = NSLocalizedString("ShopPagePremiumSubscribe", comment: "Subscribe")
         }
         
         enum Rule {
@@ -282,9 +287,21 @@ final class Texts {
     }
     
     enum UserDefaults {
-        static let firstLaunch = "firstLaunch"
-        static let notifications = "notificationsEnabled"
-        static let theme = "userTheme"
+        static let skipOnboarding = "SkipOnboarding"
+        static let notifications = "NotificationsEnabled"
+        static let theme = "UserTheme"
+    }
+    
+    enum NamespaceID {
+        static let selectedTab = "SelectedTab"
+    }
+    
+    enum NavigationTransition {
+        static let shopResearched = "ShopResearched"
+    }
+    
+    enum PreferenceKey {
+        static let cardRect = "CardRect"
     }
 }
 

@@ -11,16 +11,20 @@ import SwiftData
 struct RuleView: View {
     
     @EnvironmentObject private var bannerService: BannerViewModel
-    @Environment(\.dismiss) var dismiss
     
     private var viewModel: ShopView.ShopViewModel
     private let item: ConsumableItem
     private let fromDetails: Bool
+    private let onDismiss: () -> Void
     
-    init(item: ConsumableItem, viewModel: ShopView.ShopViewModel, details: Bool = false) {
+    init(item: ConsumableItem,
+         viewModel: ShopView.ShopViewModel,
+         details: Bool = false,
+         onDismiss: @escaping () -> Void) {
         self.item = item
         self.viewModel = viewModel
         self.fromDetails = details
+        self.onDismiss = onDismiss
     }
     
     internal var body: some View {
@@ -42,7 +46,7 @@ struct RuleView: View {
     
     private var cancelButton: some View {
         Button(Texts.ItemCreatePage.cancel) {
-            dismiss()
+            onDismiss()
         }
         .foregroundStyle(Color.blue)
     }
@@ -121,7 +125,7 @@ struct RuleView: View {
                 viewModel.unlockItem(item: item)
                 bannerService.setBanner(banner: .unlocked(message: "\(Texts.Banner.unlocked): \(item.name)."))
                 
-                dismiss()
+                onDismiss()
             }
         }) {
             Text(Texts.ShopPage.Rule.unlock)
@@ -150,13 +154,13 @@ struct RuleView: View {
         
         let requirements: [Requirement] = []
         
-        let example = ConsumableItem.itemMockConfig(
-            nameKey: Content.Uncommon.fiveMinutesTitle,
-            descriptionKey: Content.Uncommon.fiveMinutesDescription,
+        let example = ConsumableItem.itemConfig(
+            nameKey: Content.Common.fiveMinutesTitle,
+            descriptionKey: Content.Common.fiveMinutesDescription,
             price: 5, rarity: .uncommon,
             profile: Profile.configMockProfile(), requirements: requirements)
         
-        return RuleView(item: example, viewModel: viewModel)
+        return RuleView(item: example, viewModel: viewModel) {}
     } catch {
         fatalError("Failed to create model container.")
     }

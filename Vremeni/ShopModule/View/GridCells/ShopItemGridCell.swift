@@ -16,12 +16,16 @@ struct ShopItemGridCell: View {
     
     private let item: ConsumableItem
     private var viewModel: ShopView.ShopViewModel
+    private let namespace: Namespace.ID
     
     // MARK: - Initialization
     
-    init(item: ConsumableItem, viewModel: ShopView.ShopViewModel) {
+    init(item: ConsumableItem,
+         viewModel: ShopView.ShopViewModel,
+         namespace: Namespace.ID) {
         self.item = item
         self.viewModel = viewModel
+        self.namespace = namespace
     }
     
     // MARK: - Body view
@@ -29,12 +33,16 @@ struct ShopItemGridCell: View {
     internal var body: some View {
         GeometryReader { reader in
             VStack(spacing: 5) {
-                itemImage
-                    .frame(width: reader.size.width, height: reader.size.width)
-                itemName
-                    .frame(width: reader.size.width, height: 25, alignment: .leading)
-                priceView
-                    .frame(width: reader.size.width, height: 17, alignment: .leading)
+                VStack(spacing: 5) {
+                    itemImage
+                        .frame(width: reader.size.width, height: reader.size.width)
+                    
+                    itemName
+                        .frame(width: reader.size.width, height: 25, alignment: .leading)
+                    
+                    priceView
+                        .frame(width: reader.size.width, height: 17, alignment: .leading)
+                }
                 buttons
                     .frame(width: reader.size.width, height: 40, alignment: .leading)
                     .padding(.top, 8)
@@ -47,7 +55,8 @@ struct ShopItemGridCell: View {
     
     // ConsumableItem image
     private var itemImage: some View {
-        if let imageData = item.image, let uiImage = UIImage(data: imageData) {
+        if let imageData = item.image,
+           let uiImage = UIImage(data: imageData) {
             Image(uiImage: uiImage)
                 .resizable()
                 .scaledToFit()
@@ -106,9 +115,9 @@ struct ShopItemGridCell: View {
             }) {
                 Text(Texts.ShopPage.addItem)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .minimumScaleFactor(0.4)
             }
             .frame(height: 40)
-            .minimumScaleFactor(0.4)
             
             // Button layout params
             .foregroundStyle(Color.orange)
@@ -155,12 +164,15 @@ struct ShopItemGridCell: View {
         let viewModel = ShopView.ShopViewModel(modelContext: modelContext)
         let environmentObject = BannerViewModel()
         
-        let example = ConsumableItem.itemMockConfig(
+        let example = ConsumableItem.itemConfig(
             nameKey: Content.Common.oneMinuteTitle,
             price: 1, profile: Profile.configMockProfile(),
             enabled: true)
         
-        return ShopItemGridCell(item: example, viewModel: viewModel)
+        return ShopItemGridCell(
+            item: example,
+            viewModel: viewModel,
+            namespace: Namespace().wrappedValue)
             .environmentObject(environmentObject)
     } catch {
         fatalError("Failed to create model container.")
